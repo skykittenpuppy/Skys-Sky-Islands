@@ -15,6 +15,7 @@ import java.util.function.Function;
 
 public class ModItem {
     public static final Item ZONAITE = registerItem("zonaite", Item::new, new Item.Properties());
+    public static final Item BLUE_ZONAITE = registerItem("blue_zonaite", Item::new, new Item.Properties());
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function, Item.Properties properties) {
         ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, name));
@@ -27,6 +28,7 @@ public class ModItem {
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
             entries.accept(ZONAITE);
+            entries.accept(BLUE_ZONAITE);
         });
     }
 }
