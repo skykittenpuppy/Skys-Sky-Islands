@@ -1,5 +1,7 @@
 package gay.beegirl;
 
+import gay.beegirl.block.ModBlock;
+import gay.beegirl.item.ModCreativeModeTab;
 import gay.beegirl.item.ModItem;
 import net.fabricmc.api.ModInitializer;
 
@@ -12,6 +14,8 @@ public class SkysSkyIslands implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+        ModBlock.registerModBlocks();
+        ModCreativeModeTab.registerCreativeModeTabs();
         ModItem.registerModItems();
 	}
 }

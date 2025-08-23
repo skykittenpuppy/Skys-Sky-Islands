@@ -1,4 +1,12 @@
 {
-  "item.sky-islands.zonaite": "Zonaite",
-  "item.sky-islands.blue_zonaite": "Blue Zonaite"
+  "block.sky-islands.raw_zonaite_block": "Raw Zonaite Block",
+  "block.sky-islands.refined_zonaite_block": "Refined Zonaite Block",
+  "block.sky-islands.stone_zonaite_ore": "Zonaite Ore",
+  "block.sky-islands.deepslate_zonaite_ore": "Deepslate Zonaite Ore",
+  "block.sky-islands.skystone_zonaite_ore": "Skystone Zonaite Ore",
+
+  "itemGroup.sky-islands.sky_islands": "Sky's Sky Islands",
+
+  "item.sky-islands.raw_zonaite": "Raw Zonaite",
+  "item.sky-islands.refined_zonaite": "Refined Zonaite"
 }
