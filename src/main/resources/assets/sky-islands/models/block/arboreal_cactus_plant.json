@@ -1,0 +1,24 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"cactus_top": "sky-islands:block/arboreal_cactus_stem_top",
+		"particle": "sky-islands:block/arboreal_cactus_stem",
+		"cactus": "sky-islands:block/arboreal_cactus_stem"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 10, 12],
+			"faces": {
+				"north": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
+				"east": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
+				"south": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
+				"west": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#cactus_top", "cullface": "up"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#cactus_top"}
+			}
+		}
+	]
+}

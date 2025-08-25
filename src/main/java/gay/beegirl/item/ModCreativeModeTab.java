@@ -14,16 +14,28 @@ public class ModCreativeModeTab {
     public static final CreativeModeTab SKY_ISLANDS = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
             ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "sky_islands"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModItem.REFINED_ZONAITE))
+                    .icon(() -> new ItemStack(ModItem.ALEXANDRITE))
                     .title(Component.translatable("itemGroup.sky-islands.sky_islands"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModBlock.RAW_ZONAITE_BLOCK);
-                        output.accept(ModBlock.REFINED_ZONAITE_BLOCK);
-                        output.accept(ModBlock.STONE_ZONAITE_ORE);
-                        output.accept(ModBlock.DEEPSLATE_ZONAITE_ORE);
-                        output.accept(ModBlock.SKYSTONE_ZONAITE_ORE);
-                        output.accept(ModItem.RAW_ZONAITE);
-                        output.accept(ModItem.REFINED_ZONAITE);
+                        output.accept(ModBlock.CLOUDSHALE_GRASS);
+                        output.accept(ModBlock.CLOUDSHALE_CHERRY_GRASS);
+                        output.accept(ModBlock.CLOUDSHALE);
+                        output.accept(ModBlock.COBBLED_CLOUDSHALE);
+                        output.accept(ModBlock.MOSSY_COBBLED_CLOUDSHALE);
+                        output.accept(ModBlock.CHERRY_COBBLED_CLOUDSHALE);
+                        output.accept(ModBlock.STONE_ALEXANDRITE_ORE);
+                        output.accept(ModBlock.DEEPSLATE_ALEXANDRITE_ORE);
+                        output.accept(ModBlock.CLOUDSHALE_ALEXANDRITE_ORE);
+                        output.accept(ModBlock.RAW_ALEXANDRITE_BLOCK);
+                        output.accept(ModBlock.ALEXANDRITE_BLOCK);
+                        output.accept(ModBlock.GOLDENLEAF_LOG);
+                        output.accept(ModBlock.SAKURA_LOG);
+                        output.accept(ModBlock.FRIGID_LOG);
+                        output.accept(ModBlock.ARBOREAL_CACTUS_STEM);
+                        output.accept(ModBlock.ARBOREAL_CACTUS_FRUIT);
+                        output.accept(ModItem.RAW_ALEXANDRITE);
+                        output.accept(ModItem.ALEXANDRITE);
+                        output.accept(ModItem.GLIDER);
                     }).build());
 
     public static void registerCreativeModeTabs() {

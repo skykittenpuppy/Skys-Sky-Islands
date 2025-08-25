@@ -15,10 +15,24 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        dropSelf(ModBlock.RAW_ZONAITE_BLOCK);
-        dropSelf(ModBlock.REFINED_ZONAITE_BLOCK);
-        add(ModBlock.STONE_ZONAITE_ORE, createOreDrop(ModBlock.STONE_ZONAITE_ORE, ModItem.RAW_ZONAITE));
-        add(ModBlock.DEEPSLATE_ZONAITE_ORE, createOreDrop(ModBlock.DEEPSLATE_ZONAITE_ORE, ModItem.RAW_ZONAITE));
-        add(ModBlock.SKYSTONE_ZONAITE_ORE, createOreDrop(ModBlock.SKYSTONE_ZONAITE_ORE, ModItem.RAW_ZONAITE));
+        dropSelf(ModBlock.RAW_ALEXANDRITE_BLOCK);
+        dropSelf(ModBlock.ALEXANDRITE_BLOCK);
+        add(ModBlock.STONE_ALEXANDRITE_ORE, createOreDrop(ModBlock.STONE_ALEXANDRITE_ORE, ModItem.RAW_ALEXANDRITE));
+        add(ModBlock.DEEPSLATE_ALEXANDRITE_ORE, createOreDrop(ModBlock.DEEPSLATE_ALEXANDRITE_ORE, ModItem.RAW_ALEXANDRITE));
+        add(ModBlock.CLOUDSHALE_ALEXANDRITE_ORE, createOreDrop(ModBlock.CLOUDSHALE_ALEXANDRITE_ORE, ModItem.RAW_ALEXANDRITE));
+
+        add(ModBlock.CLOUDSHALE_GRASS, block -> createSingleItemTableWithSilkTouch(block, ModBlock.COBBLED_CLOUDSHALE));
+        add(ModBlock.CLOUDSHALE_CHERRY_GRASS, block -> createSingleItemTableWithSilkTouch(block, ModBlock.COBBLED_CLOUDSHALE));
+        add(ModBlock.CLOUDSHALE, block -> createSingleItemTableWithSilkTouch(block, ModBlock.COBBLED_CLOUDSHALE));
+        dropSelf(ModBlock.COBBLED_CLOUDSHALE);
+        dropSelf(ModBlock.MOSSY_COBBLED_CLOUDSHALE);
+        dropSelf(ModBlock.CHERRY_COBBLED_CLOUDSHALE);
+
+        dropSelf(ModBlock.GOLDENLEAF_LOG);
+        dropSelf(ModBlock.SAKURA_LOG);
+        dropSelf(ModBlock.FRIGID_LOG);
+        dropSelf(ModBlock.ARBOREAL_CACTUS_STEM);
+        //add(ModBlock.ARBOREAL_CACTUS_FRUIT, createCropDrops(ModBlock.ARBOREAL_CACTUS_FRUIT, ModBlock.ARBOREAL_CACTUS_FRUIT.asItem(), ModBlock.ARBOREAL_CACTUS_FRUIT.asItem(), LootItemCondition.DIRECT_CODEC.));
+        add(ModBlock.POTTED_ARBOREAL_CACTUS, createPotFlowerItemTable(ModBlock.ARBOREAL_CACTUS_FRUIT.asItem()));
     }
 }

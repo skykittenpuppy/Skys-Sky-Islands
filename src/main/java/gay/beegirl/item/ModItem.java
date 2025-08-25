@@ -12,8 +12,11 @@ import java.util.function.Function;
 
 
 public class ModItem {
-    public static final Item RAW_ZONAITE = registerItem("raw_zonaite", properties -> new Item(properties));
-    public static final Item REFINED_ZONAITE = registerItem("refined_zonaite", properties -> new Item(properties));
+    public static final Item RAW_ALEXANDRITE = registerItem("raw_alexandrite", properties -> new Item(properties));
+
+    public static final Item ALEXANDRITE = registerItem("alexandrite", properties -> new Item(properties));
+
+    public static final Item GLIDER = registerItem("glider", properties -> new ModGliderItem(properties));
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {
         ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, name);

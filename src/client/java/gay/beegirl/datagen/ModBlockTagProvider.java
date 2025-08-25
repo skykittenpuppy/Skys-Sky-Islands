@@ -16,7 +16,15 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlock.RAW_ZONAITE_BLOCK, ModBlock.REFINED_ZONAITE_BLOCK)
-                .add(ModBlock.STONE_ZONAITE_ORE, ModBlock.DEEPSLATE_ZONAITE_ORE, ModBlock.SKYSTONE_ZONAITE_ORE);
+                .add(ModBlock.RAW_ALEXANDRITE_BLOCK, ModBlock.ALEXANDRITE_BLOCK)
+                .add(ModBlock.STONE_ALEXANDRITE_ORE, ModBlock.DEEPSLATE_ALEXANDRITE_ORE, ModBlock.CLOUDSHALE_ALEXANDRITE_ORE);
+
+        valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
+                .add(ModBlock.GOLDENLEAF_LOG)
+                .add(ModBlock.SAKURA_LOG)
+                .add(ModBlock.FRIGID_LOG);
+
+        valueLookupBuilder(BlockTags.FLOWER_POTS)
+                .add(ModBlock.POTTED_ARBOREAL_CACTUS);
     }
 }

@@ -1,0 +1,37 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "sky-islands:block/arboreal_cactus_plant"
+    },
+    "hanging=true,stage=0,facing=south": {
+      "model": "sky-islands:block/arboreal_cactus_fruit0"
+    },
+    "hanging=true,stage=0,facing=west": {
+      "model": "sky-islands:block/arboreal_cactus_fruit0",
+      "y": 90
+    },
+    "hanging=true,stage=0,facing=north": {
+      "model": "sky-islands:block/arboreal_cactus_fruit0",
+      "y": 180
+    },
+    "hanging=true,stage=0,facing=east": {
+      "model": "sky-islands:block/arboreal_cactus_fruit0",
+      "y": 270
+    },
+    "hanging=true,stage=1,facing=south": {
+      "model": "sky-islands:block/arboreal_cactus_fruit1"
+    },
+    "hanging=true,stage=1,facing=west": {
+      "model": "sky-islands:block/arboreal_cactus_fruit1",
+      "y": 90
+    },
+    "hanging=true,stage=1,facing=north": {
+      "model": "sky-islands:block/arboreal_cactus_fruit1",
+      "y": 180
+    },
+    "hanging=true,stage=1,facing=east": {
+      "model": "sky-islands:block/arboreal_cactus_fruit1",
+      "y": 270
+    }
+  }
+}
