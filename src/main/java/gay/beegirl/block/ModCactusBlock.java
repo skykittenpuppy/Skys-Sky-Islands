@@ -54,11 +54,11 @@ public class ModCactusBlock extends RotatedPillarBlock {
 
             boolean grewFruit = false;
             for(Direction direction : Direction.Plane.HORIZONTAL) {
-                ModCactusBlock fruit = (ModCactusBlock)ModBlock.ARBOREAL_CACTUS_FRUIT;
+                ModCactusFruitBlock fruit = (ModCactusFruitBlock)ModBlock.ARBOREAL_CACTUS_FRUIT;
                 if (j >= ATTEMPT_GROW_CACTUS_FRUIT_AGE && fruit.canSurvive(fruit.defaultBlockState(), serverLevel, blockPos.relative(direction))) {
                     double d = i >= MAX_CACTUS_GROWING_HEIGHT ? ATTEMPT_GROW_CACTUS_FRUIT_TALL_CACTUS_CHANCE : ATTEMPT_GROW_CACTUS_FRUIT_SMALL_CACTUS_CHANCE;
                     if (randomSource.nextDouble() <= d) {
-                        serverLevel.setBlockAndUpdate(blockPos.relative(direction), fruit.defaultBlockState());
+                        serverLevel.setBlockAndUpdate(blockPos.relative(direction), fruit.defaultBlockState().setValue(ModCactusFruitBlock.HANGING, true).setValue(ModCactusFruitBlock.FACING, direction.getOpposite()));
                         grewFruit = true;
                         break;
                     }
@@ -87,7 +87,7 @@ public class ModCactusBlock extends RotatedPillarBlock {
     }
 
     protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
-        entity.hurt(level.damageSources().cactus(), 1.0F); // TODO: figure out the new version of this
+        entity.hurt(level.damageSources().cactus(), 1.0F); // TODO: figure out the new version of hurt(), hurtServer()
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

@@ -13,7 +13,12 @@
   "block.sky-islands.goldenleaf_log": "Goldenleaf Log",
   "block.sky-islands.sakura_log": "Sakura Log",
   "block.sky-islands.frigid_log": "Frigid Log",
+
   "block.sky-islands.arboreal_cactus_stem": "Arboreal Cactus Stem",
+  "block.sky-islands.arboreal_cactus_hyphae": "Arboreal Cactus Hyphae",
+  "block.sky-islands.stripped_arboreal_cactus_stem": "Stripped Arboreal Cactus Stem",
+  "block.sky-islands.stripped_arboreal_cactus_hyphae": "Stripped Arboreal Cactus Hyphae",
+  "block.sky-islands.arboreal_cactus_planks": "Arboreal Cactus Planks",
   "block.sky-islands.arboreal_cactus_fruit": "Arboreal Cactus Fruit",
 
   "itemGroup.sky-islands.sky_islands": "Sky's Sky Islands",

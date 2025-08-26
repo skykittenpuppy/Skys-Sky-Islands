@@ -3,7 +3,7 @@
 	"package": "gay.beegirl.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+      "EntityRenderersMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
