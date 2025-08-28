@@ -19,13 +19,13 @@ public class SkysSkyIslands implements ModInitializer {
         ModCreativeModeTab.registerCreativeModeTabs();
         ModItem.registerModItems();
 
-        StrippableBlockRegistry.register(ModBlock.GOLDENLEAF_LOG, ModBlock.STRIPPED_GOLDENLEAF_LOG);
-        StrippableBlockRegistry.register(ModBlock.GOLDENLEAF_WOOD, ModBlock.STRIPPED_GOLDENLEAF_WOOD);
-        StrippableBlockRegistry.register(ModBlock.SAKURA_LOG, ModBlock.STRIPPED_SAKURA_LOG);
-        StrippableBlockRegistry.register(ModBlock.SAKURA_WOOD, ModBlock.STRIPPED_SAKURA_WOOD);
-        StrippableBlockRegistry.register(ModBlock.FRIGID_LOG, ModBlock.STRIPPED_FRIGID_LOG);
-        StrippableBlockRegistry.register(ModBlock.FRIGID_WOOD, ModBlock.STRIPPED_FRIGID_WOOD);
-        StrippableBlockRegistry.register(ModBlock.ARBOREAL_CACTUS_STEM, ModBlock.STRIPPED_ARBOREAL_CACTUS_STEM);
-        StrippableBlockRegistry.register(ModBlock.ARBOREAL_CACTUS_HYPHAE, ModBlock.STRIPPED_ARBOREAL_CACTUS_HYPHAE);
+        StrippableBlockRegistry.register(ModBlock.GOLDENLEAF_PLANKS.log(), ModBlock.GOLDENLEAF_PLANKS.strippedLog());
+        StrippableBlockRegistry.register(ModBlock.GOLDENLEAF_PLANKS.wood(), ModBlock.GOLDENLEAF_PLANKS.strippedWood());
+        StrippableBlockRegistry.register(ModBlock.SAKURA_PLANKS.log(), ModBlock.SAKURA_PLANKS.strippedLog());
+        StrippableBlockRegistry.register(ModBlock.SAKURA_PLANKS.wood(), ModBlock.SAKURA_PLANKS.strippedWood());
+        StrippableBlockRegistry.register(ModBlock.FRIGID_PLANKS.log(), ModBlock.FRIGID_PLANKS.strippedLog());
+        StrippableBlockRegistry.register(ModBlock.FRIGID_PLANKS.wood(), ModBlock.FRIGID_PLANKS.strippedWood());
+        StrippableBlockRegistry.register(ModBlock.ARBOREAL_CACTUS_PLANKS.log(), ModBlock.ARBOREAL_CACTUS_PLANKS.strippedLog());
+        StrippableBlockRegistry.register(ModBlock.ARBOREAL_CACTUS_PLANKS.wood(), ModBlock.ARBOREAL_CACTUS_PLANKS.strippedWood());
 	}
 }

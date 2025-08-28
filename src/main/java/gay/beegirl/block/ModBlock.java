@@ -6,8 +6,11 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -23,20 +26,13 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Function;
 
 public class ModBlock {
+    public record StoneSetBlocks(Block base, Block button, Block wall, Block slab, Block stairs, Block pressurePlate) {}
+    public record WoodSetBlocks(Block log, Block wood, Block strippedLog, Block strippedWood, Block planks, Block button, Block door, Block fence, Block fenceGate, Block standingSign, Block wallSign, Block hangingSign, Block hangingWallSign, Block slab, Block stairs, Block pressurePlate, Block trapdoor) {}
+
     private static Block registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, Block> function) {
         ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, name);
         ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, resourceLocation);
         Block block = function.apply(BlockBehaviour.Properties.of().setId(resourceKey));
-        return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
-    }
-    private static Block registerBlockWithUniqueItem(String name, String itemName, Function<BlockBehaviour.Properties, Block> function) {
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, name));
-        Block block = function.apply(BlockBehaviour.Properties.of().setId(resourceKey));
-        item: {
-            Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, itemName),
-                    new BlockItem(block, new Item.Properties()
-                            .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, itemName)))));
-        }
         return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
     }
     private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
@@ -50,6 +46,213 @@ public class ModBlock {
                             .useBlockDescriptionPrefix()));
         }
         return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
+    }
+    private static StoneSetBlocks registerStoneSetBlocks(String name, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor) {
+        Block BASE = registerBlock(name, properties -> new Block(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.5F, 3.0F)
+                        .sound(soundType)
+        ));
+        Block BUTTON = registerBlock(name+"_button", properties -> new ButtonBlock(blockSetType, 20,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.5F, 3.0F)
+                        .sound(soundType)
+                        .noCollission()
+        ));
+        Block WALL = registerBlock(name+"_wall", properties -> new WallBlock(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.5F, 3.0F)
+                        .sound(soundType)
+        ));
+        Block SLAB = registerBlock(name+"_slab", properties -> new SlabBlock(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.5F, 3.0F)
+                        .sound(soundType)
+        ));
+        Block STAIRS = registerBlock(name+"_stairs", properties -> new StairBlock(BASE.defaultBlockState(),
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.5F, 3.0F)
+                        .sound(soundType)
+        ));
+        Block PRESSURE_PLATE = registerBlock(name+"_pressure_plate", properties -> new PressurePlateBlock(blockSetType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.5F, 3.0F)
+                        .sound(soundType)
+                        .noCollission()
+        ));
+        return new StoneSetBlocks(BASE, BUTTON, WALL, SLAB, STAIRS, PRESSURE_PLATE);
+    }
+    private static WoodSetBlocks registerWoodSetBlocks(Block log, Block wood, Block strippedLog, Block strippedWood, WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
+        String name = woodType.name();
+        Block PLANKS = registerBlock(name+"_planks", properties -> new Block(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block BUTTON = registerBlock(name+"_button", properties -> new ButtonBlock(blockSetType, 30,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noCollission()
+        ));
+        Block DOOR = registerBlock(name+"_door", properties -> new DoorBlock(blockSetType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noOcclusion()
+        ));
+        Block FENCE = registerBlock(name+"_fence", properties -> new FenceBlock(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block FENCE_GATE = registerBlock(name+"_fence_gate", properties -> new FenceGateBlock(woodType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block STANDING_SIGN = registerBlock(name+"_sign", properties -> new StandingSignBlock(woodType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.0f)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noCollission()
+                        .forceSolidOn()
+        ));
+        Block WALL_SIGN = registerBlockWithoutItem(name+"_wall_sign", properties -> new WallSignBlock(woodType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.0f)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noCollission()
+                        .forceSolidOn()
+                        .overrideLootTable(STANDING_SIGN.getLootTable())
+                        .overrideDescription(STANDING_SIGN.getDescriptionId())
+        ));
+        Block HANGING_SIGN = registerBlock(name+"_hanging_sign", properties -> new CeilingHangingSignBlock(woodType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.0f)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noCollission()
+                        .forceSolidOn()
+        ));
+        Block WALL_HANGING_SIGN = registerBlockWithoutItem(name+"_wall_hanging_sign", properties -> new WallHangingSignBlock(woodType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(1.0f)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noCollission()
+                        .forceSolidOn()
+                        .overrideLootTable(HANGING_SIGN.getLootTable())
+                        .overrideDescription(HANGING_SIGN.getDescriptionId())
+        ));
+        Block SLAB = registerBlock(name+"_slab", properties -> new SlabBlock(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block STAIRS = registerBlock(name+"_stairs", properties -> new StairBlock(PLANKS.defaultBlockState(),
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block PRESSURE_PLATE = registerBlock(name+"_pressure_plate", properties -> new PressurePlateBlock(blockSetType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noCollission()
+        ));
+        Block TRAPDOOR = registerBlock(name+"_trapdoor", properties -> new TrapDoorBlock(blockSetType,
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F, 3.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+                        .noOcclusion()
+        ));
+        return new WoodSetBlocks(log, wood, strippedLog, strippedWood, PLANKS, BUTTON, DOOR, FENCE, FENCE_GATE, STANDING_SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN, SLAB, STAIRS, PRESSURE_PLATE, TRAPDOOR);
+    }
+    private static WoodSetBlocks registerWoodSetBlocks(WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
+        String name = woodType.name();
+        Block LOG = registerBlock(name+"_log", properties -> new RotatedPillarBlock(
+                properties
+                        .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block WOOD = registerBlock(name+"_wood", properties -> new RotatedPillarBlock(
+                properties
+                        .mapColor(mapColor2)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block STRIPPED_LOG = registerBlock("stripped_"+name+"_log", properties -> new RotatedPillarBlock(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        Block STRIPPED_WOOD = registerBlock("stripped_"+name+"_wood", properties -> new RotatedPillarBlock(
+                properties
+                        .mapColor(mapColor)
+                        .instrument(noteBlockInstrument)
+                        .strength(2.0F)
+                        .sound(soundType)
+                        .ignitedByLava()
+        ));
+        return registerWoodSetBlocks(LOG, WOOD, STRIPPED_LOG, STRIPPED_WOOD, woodType, blockSetType, noteBlockInstrument, soundType, mapColor, mapColor2);
     }
 
     public static  void registerModBlocks() {
@@ -72,38 +275,39 @@ public class ModBlock {
                     .strength(1.5F, 3.0F)
                     .sound(SoundType.GRASS)
     ));
-    public static final Block CLOUDSHALE = registerBlock("cloudshale", properties -> new Block(
-            properties
-                    .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(1.0F, 3.0F)
-                    .sound(SoundType.STONE) //TODO
-    ));
-    public static final Block COBBLED_CLOUDSHALE = registerBlock("cobbled_cloudshale", properties -> new Block(
-            properties
-                    .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(1.5F, 3.0F)
-                    .sound(SoundType.STONE) //TODO
-    ));
-    public static final Block MOSSY_COBBLED_CLOUDSHALE = registerBlock("mossy_cobbled_cloudshale", properties -> new Block(
-            properties
-                    .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(1.5F, 3.0F)
-                    .sound(SoundType.STONE) //TODO
-    ));
-    public static final Block CHERRY_COBBLED_CLOUDSHALE = registerBlock("cherry_cobbled_cloudshale", properties -> new Block(
-            properties
-                    .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(1.5F, 3.0F)
-                    .sound(SoundType.STONE) //TODO
-    ));
+    public static final StoneSetBlocks CLOUDSHALE = registerStoneSetBlocks("cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final BlockFamily CLOUDSHALE_FAMILY = new BlockFamily.Builder(CLOUDSHALE.base)
+            .button(CLOUDSHALE.button)
+            .wall(CLOUDSHALE.wall)
+            .slab(CLOUDSHALE.slab)
+            .stairs(CLOUDSHALE.stairs)
+            .pressurePlate(CLOUDSHALE.pressurePlate)
+            .getFamily();
+    public static final StoneSetBlocks COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final BlockFamily COBBLED_CLOUDSHALE_FAMILY = new BlockFamily.Builder(COBBLED_CLOUDSHALE.base)
+            .button(COBBLED_CLOUDSHALE.button)
+            .wall(COBBLED_CLOUDSHALE.wall)
+            .slab(COBBLED_CLOUDSHALE.slab)
+            .stairs(COBBLED_CLOUDSHALE.stairs)
+            .pressurePlate(COBBLED_CLOUDSHALE.pressurePlate)
+            .getFamily();
+    public static final StoneSetBlocks MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final BlockFamily MOSSY_COBBLED_CLOUDSHALE_FAMILY = new BlockFamily.Builder(MOSSY_COBBLED_CLOUDSHALE.base)
+            .button(MOSSY_COBBLED_CLOUDSHALE.button)
+            .wall(MOSSY_COBBLED_CLOUDSHALE.wall)
+            .slab(MOSSY_COBBLED_CLOUDSHALE.slab)
+            .stairs(MOSSY_COBBLED_CLOUDSHALE.stairs)
+            .pressurePlate(MOSSY_COBBLED_CLOUDSHALE.pressurePlate)
+            .getFamily();
+    public static final StoneSetBlocks CHERRY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("cherry_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final BlockFamily CHERRY_COBBLED_CLOUDSHALE_FAMILY = new BlockFamily.Builder(CHERRY_COBBLED_CLOUDSHALE.base)
+            .button(CHERRY_COBBLED_CLOUDSHALE.button)
+            .wall(CHERRY_COBBLED_CLOUDSHALE.wall)
+            .slab(CHERRY_COBBLED_CLOUDSHALE.slab)
+            .stairs(CHERRY_COBBLED_CLOUDSHALE.stairs)
+            .pressurePlate(CHERRY_COBBLED_CLOUDSHALE.pressurePlate)
+            .getFamily();
+
     public static final Block STONE_ALEXANDRITE_ORE = registerBlock("stone_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
                     .requiresCorrectToolForDrops()
@@ -145,113 +349,20 @@ public class ModBlock {
                     .sound(SoundType.METAL)
     ));
 
-    public static final Block GOLDENLEAF_LOG = registerBlock("goldenleaf_log", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_YELLOW : MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_WOOD = registerBlock("goldenleaf_wood", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block STRIPPED_GOLDENLEAF_LOG = registerBlock("stripped_goldenleaf_log", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_YELLOW) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block STRIPPED_GOLDENLEAF_WOOD = registerBlock("stripped_goldenleaf_wood", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_YELLOW) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_PLANKS = registerBlock("goldenleaf_planks", properties -> new Block(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_STAIRS = registerBlock("goldenleaf_stairs", properties -> new StairBlock(GOLDENLEAF_PLANKS.defaultBlockState(),
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_SLAB = registerBlock("goldenleaf_slab", properties -> new SlabBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_BUTTON = registerBlock("goldenleaf_button", properties -> new ButtonBlock(ModBlockSetType.GOLDENLEAF, 30,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noCollission()
-    ));
-    public static final Block GOLDENLEAF_PRESSURE_PLATE = registerBlock("goldenleaf_pressure_plate", properties -> new PressurePlateBlock(ModBlockSetType.GOLDENLEAF,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_FENCE = registerBlock("goldenleaf_fence", properties -> new FenceBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_FENCE_GATE = registerBlock("goldenleaf_fence_gate", properties -> new FenceGateBlock(ModWoodType.GOLDENLEAF,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block GOLDENLEAF_DOOR = registerBlock("goldenleaf_door", properties -> new DoorBlock(ModBlockSetType.GOLDENLEAF,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
-    public static final Block GOLDENLEAF_TRAPDOOR = registerBlock("goldenleaf_trapdoor", properties -> new TrapDoorBlock(ModBlockSetType.GOLDENLEAF,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
+    public static final WoodSetBlocks GOLDENLEAF_PLANKS = registerWoodSetBlocks(ModWoodType.GOLDENLEAF, ModBlockSetType.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW, MapColor.COLOR_GREEN); //TODO
+    public static final BlockFamily GOLDENLEAF_PLANKS_FAMILY = new BlockFamily.Builder(GOLDENLEAF_PLANKS.planks)
+            .button(GOLDENLEAF_PLANKS.button)
+            .door(GOLDENLEAF_PLANKS.door)
+            .fence(GOLDENLEAF_PLANKS.fence)
+            .fenceGate(GOLDENLEAF_PLANKS.fenceGate)
+            .sign(GOLDENLEAF_PLANKS.standingSign, GOLDENLEAF_PLANKS.wallSign)
+            .slab(GOLDENLEAF_PLANKS.slab)
+            .stairs(GOLDENLEAF_PLANKS.stairs)
+            .pressurePlate(GOLDENLEAF_PLANKS.pressurePlate)
+            .trapdoor(GOLDENLEAF_PLANKS.trapdoor)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
     public static final Block GOLDENLEAF_LEAVES = registerBlock("goldenleaf_leaves", properties -> new TintedParticleLeavesBlock(0.1F,
             properties
                     .mapColor(MapColor.PLANT) //TODO
@@ -284,113 +395,20 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final Block SAKURA_LOG = registerBlock("sakura_log", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_YELLOW : MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_WOOD = registerBlock("sakura_wood", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block STRIPPED_SAKURA_LOG = registerBlock("stripped_sakura_log", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_YELLOW) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block STRIPPED_SAKURA_WOOD = registerBlock("stripped_sakura_wood", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_YELLOW) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_PLANKS = registerBlock("sakura_planks", properties -> new Block(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_STAIRS = registerBlock("sakura_stairs", properties -> new StairBlock(SAKURA_PLANKS.defaultBlockState(),
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_SLAB = registerBlock("sakura_slab", properties -> new SlabBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_BUTTON = registerBlock("sakura_button", properties -> new ButtonBlock(ModBlockSetType.SAKURA, 30,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noCollission()
-    ));
-    public static final Block SAKURA_PRESSURE_PLATE = registerBlock("sakura_pressure_plate", properties -> new PressurePlateBlock(ModBlockSetType.SAKURA,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_FENCE = registerBlock("sakura_fence", properties -> new FenceBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_FENCE_GATE = registerBlock("sakura_fence_gate", properties -> new FenceGateBlock(ModWoodType.SAKURA,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block SAKURA_DOOR = registerBlock("sakura_door", properties -> new DoorBlock(ModBlockSetType.SAKURA,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
-    public static final Block SAKURA_TRAPDOOR = registerBlock("sakura_trapdoor", properties -> new TrapDoorBlock(ModBlockSetType.SAKURA,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
+    public static final WoodSetBlocks SAKURA_PLANKS = registerWoodSetBlocks(ModWoodType.SAKURA, ModBlockSetType.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY); //TODO
+    public static final BlockFamily SAKURA_PLANKS_FAMILY = new BlockFamily.Builder(SAKURA_PLANKS.planks)
+            .button(SAKURA_PLANKS.button)
+            .door(SAKURA_PLANKS.door)
+            .fence(SAKURA_PLANKS.fence)
+            .fenceGate(SAKURA_PLANKS.fenceGate)
+            .sign(SAKURA_PLANKS.standingSign, SAKURA_PLANKS.wallSign)
+            .slab(SAKURA_PLANKS.slab)
+            .stairs(SAKURA_PLANKS.stairs)
+            .pressurePlate(SAKURA_PLANKS.pressurePlate)
+            .trapdoor(SAKURA_PLANKS.trapdoor)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
     public static final Block SAKURA_LEAVES = registerBlock("sakura_leaves", properties -> new UntintedParticleLeavesBlock(0.1F, ParticleTypes.CHERRY_LEAVES,
             properties
                     .mapColor(MapColor.PLANT) //TODO
@@ -423,113 +441,20 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final Block FRIGID_LOG = registerBlock("frigid_log", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_YELLOW : MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_WOOD = registerBlock("frigid_wood", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block STRIPPED_FRIGID_LOG = registerBlock("stripped_frigid_log", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_YELLOW) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block STRIPPED_FRIGID_WOOD = registerBlock("stripped_frigid_wood", properties -> new RotatedPillarBlock(
-            properties
-                    .mapColor(MapColor.COLOR_YELLOW) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_PLANKS = registerBlock("frigid_planks", properties -> new Block(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_STAIRS = registerBlock("frigid_stairs", properties -> new StairBlock(FRIGID_PLANKS.defaultBlockState(),
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_SLAB = registerBlock("frigid_slab", properties -> new SlabBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_BUTTON = registerBlock("frigid_button", properties -> new ButtonBlock(ModBlockSetType.FRIGID, 30,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noCollission()
-    ));
-    public static final Block FRIGID_PRESSURE_PLATE = registerBlock("frigid_pressure_plate", properties -> new PressurePlateBlock(ModBlockSetType.FRIGID,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_FENCE = registerBlock("frigid_fence", properties -> new FenceBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_FENCE_GATE = registerBlock("frigid_fence_gate", properties -> new FenceGateBlock(ModWoodType.FRIGID,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block FRIGID_DOOR = registerBlock("frigid_door", properties -> new DoorBlock(ModBlockSetType.FRIGID,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
-    public static final Block FRIGID_TRAPDOOR = registerBlock("frigid_trapdoor", properties -> new TrapDoorBlock(ModBlockSetType.FRIGID,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
+    public static final WoodSetBlocks FRIGID_PLANKS = registerWoodSetBlocks(ModWoodType.FRIGID, ModBlockSetType.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO
+    public static final BlockFamily FRIGID_PLANKS_FAMILY = new BlockFamily.Builder(FRIGID_PLANKS.planks)
+            .button(FRIGID_PLANKS.button)
+            .door(FRIGID_PLANKS.door)
+            .fence(FRIGID_PLANKS.fence)
+            .fenceGate(FRIGID_PLANKS.fenceGate)
+            .sign(FRIGID_PLANKS.standingSign, FRIGID_PLANKS.wallSign)
+            .slab(FRIGID_PLANKS.slab)
+            .stairs(FRIGID_PLANKS.stairs)
+            .pressurePlate(FRIGID_PLANKS.pressurePlate)
+            .trapdoor(FRIGID_PLANKS.trapdoor)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
     public static final Block FRIGID_LEAVES = registerBlock("frigid_leaves", properties -> new TintedParticleLeavesBlock(0.1F,
             properties
                     .mapColor(MapColor.PLANT) //TODO
@@ -562,7 +487,7 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final Block ARBOREAL_CACTUS_STEM = registerBlock("arboreal_cactus_stem", properties -> new RotatedPillarBlock(
+    private static final Block ARBOREAL_CACTUS_STEM = registerBlock("arboreal_cactus_stem", properties -> new RotatedPillarBlock(
             properties
                     .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLACK : MapColor.COLOR_MAGENTA) //TODO
                     .instrument(NoteBlockInstrument.BASS)
@@ -571,7 +496,7 @@ public class ModBlock {
                     .randomTicks()
                     .ignitedByLava()
     )); //TODO: Fix this to use ModCactusBlock
-    public static final Block ARBOREAL_CACTUS_HYPHAE = registerBlock("arboreal_cactus_hyphae", properties -> new RotatedPillarBlock(
+    private static final Block ARBOREAL_CACTUS_HYPHAE = registerBlock("arboreal_cactus_hyphae", properties -> new RotatedPillarBlock(
             properties
                     .mapColor(MapColor.COLOR_MAGENTA) //TODO
                     .instrument(NoteBlockInstrument.BASS)
@@ -579,7 +504,7 @@ public class ModBlock {
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
     )); //TODO: Fix this to use ModCactusBlock
-    public static final Block STRIPPED_ARBOREAL_CACTUS_STEM = registerBlock("stripped_arboreal_cactus_stem", properties -> new RotatedPillarBlock(
+    private static final Block STRIPPED_ARBOREAL_CACTUS_STEM = registerBlock("stripped_arboreal_cactus_stem", properties -> new RotatedPillarBlock(
             properties
                     .mapColor(MapColor.COLOR_BLACK) //TODO
                     .instrument(NoteBlockInstrument.BASS)
@@ -587,7 +512,7 @@ public class ModBlock {
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
     ));
-    public static final Block STRIPPED_ARBOREAL_CACTUS_HYPHAE = registerBlock("stripped_arboreal_cactus_hyphae", properties -> new RotatedPillarBlock(
+    private static final Block STRIPPED_ARBOREAL_CACTUS_HYPHAE = registerBlock("stripped_arboreal_cactus_hyphae", properties -> new RotatedPillarBlock(
             properties
                     .mapColor(MapColor.COLOR_BLACK) //TODO
                     .instrument(NoteBlockInstrument.BASS)
@@ -595,81 +520,20 @@ public class ModBlock {
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
     ));
-    public static final Block ARBOREAL_CACTUS_PLANKS = registerBlock("arboreal_cactus_planks", properties -> new Block(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block ARBOREAL_CACTUS_STAIRS = registerBlock("arboreal_cactus_stairs", properties -> new StairBlock(ARBOREAL_CACTUS_PLANKS.defaultBlockState(),
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block ARBOREAL_CACTUS_SLAB = registerBlock("arboreal_cactus_slab", properties -> new SlabBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block ARBOREAL_CACTUS_BUTTON = registerBlock("arboreal_cactus_button", properties -> new ButtonBlock(ModBlockSetType.ARBOREAL_CACTUS, 30,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noCollission()
-    ));
-    public static final Block ARBOREAL_CACTUS_PRESSURE_PLATE = registerBlock("arboreal_cactus_pressure_plate", properties -> new PressurePlateBlock(ModBlockSetType.ARBOREAL_CACTUS,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block ARBOREAL_CACTUS_FENCE = registerBlock("arboreal_cactus_fence", properties -> new FenceBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block ARBOREAL_CACTUS_FENCE_GATE = registerBlock("arboreal_cactus_fence_gate", properties -> new FenceGateBlock(ModWoodType.ARBOREAL_CACTUS,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    public static final Block ARBOREAL_CACTUS_DOOR = registerBlock("arboreal_cactus_door", properties -> new DoorBlock(ModBlockSetType.ARBOREAL_CACTUS,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
-    public static final Block ARBOREAL_CACTUS_TRAPDOOR = registerBlock("arboreal_cactus_trapdoor", properties -> new TrapDoorBlock(ModBlockSetType.ARBOREAL_CACTUS,
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F, 3.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()
-    ));
+    public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks(ARBOREAL_CACTUS_STEM, ARBOREAL_CACTUS_HYPHAE, STRIPPED_ARBOREAL_CACTUS_STEM, STRIPPED_ARBOREAL_CACTUS_HYPHAE, ModWoodType.ARBOREAL_CACTUS, ModBlockSetType.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_BLACK, MapColor.COLOR_LIGHT_GREEN); //TODO
+    public static final BlockFamily ARBOREAL_CACTUS_PLANKS_FAMILY = new BlockFamily.Builder(ARBOREAL_CACTUS_PLANKS.planks)
+            .button(ARBOREAL_CACTUS_PLANKS.button)
+            .door(ARBOREAL_CACTUS_PLANKS.door)
+            .fence(ARBOREAL_CACTUS_PLANKS.fence)
+            .fenceGate(ARBOREAL_CACTUS_PLANKS.fenceGate)
+            .sign(ARBOREAL_CACTUS_PLANKS.standingSign, ARBOREAL_CACTUS_PLANKS.wallSign)
+            .slab(ARBOREAL_CACTUS_PLANKS.slab)
+            .stairs(ARBOREAL_CACTUS_PLANKS.stairs)
+            .pressurePlate(ARBOREAL_CACTUS_PLANKS.pressurePlate)
+            .trapdoor(ARBOREAL_CACTUS_PLANKS.trapdoor)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
     public static final Block ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new ModCactusFruitBlock(TreeGrower.OAK,
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
@@ -686,4 +550,18 @@ public class ModBlock {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
+
+    public static class ModBlockSetType {
+        public static final BlockSetType CLOUDSHALE = BlockSetType.register(new BlockSetType("cloudshale", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+        public static final BlockSetType GOLDENLEAF = BlockSetType.register(new BlockSetType("goldenleaf"));
+        public static final BlockSetType SAKURA = BlockSetType.register(new BlockSetType("sakura", true, true, true, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.CHERRY_WOOD, SoundEvents.CHERRY_WOOD_DOOR_CLOSE, SoundEvents.CHERRY_WOOD_DOOR_OPEN, SoundEvents.CHERRY_WOOD_TRAPDOOR_CLOSE, SoundEvents.CHERRY_WOOD_TRAPDOOR_OPEN, SoundEvents.CHERRY_WOOD_PRESSURE_PLATE_CLICK_OFF, SoundEvents.CHERRY_WOOD_PRESSURE_PLATE_CLICK_ON, SoundEvents.CHERRY_WOOD_BUTTON_CLICK_OFF, SoundEvents.CHERRY_WOOD_BUTTON_CLICK_ON));
+        public static final BlockSetType FRIGID = BlockSetType.register(new BlockSetType("frigid"));
+        public static final BlockSetType ARBOREAL_CACTUS = BlockSetType.register(new BlockSetType("arboreal_cactus"));
+    }
+    public static class ModWoodType {
+        public static final WoodType GOLDENLEAF = WoodType.register(new WoodType("goldenleaf", ModBlockSetType.GOLDENLEAF));
+        public static final WoodType SAKURA = WoodType.register(new WoodType("sakura", ModBlockSetType.SAKURA, SoundType.CHERRY_WOOD, SoundType.CHERRY_WOOD_HANGING_SIGN, SoundEvents.CHERRY_WOOD_FENCE_GATE_CLOSE, SoundEvents.CHERRY_WOOD_FENCE_GATE_OPEN));
+        public static final WoodType FRIGID = WoodType.register(new WoodType("frigid", ModBlockSetType.FRIGID));
+        public static final WoodType ARBOREAL_CACTUS = WoodType.register(new WoodType("arboreal_cactus", ModBlockSetType.ARBOREAL_CACTUS));
+    }
 }

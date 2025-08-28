@@ -87,7 +87,9 @@ public class ModCactusBlock extends RotatedPillarBlock {
     }
 
     protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
-        entity.hurt(level.damageSources().cactus(), 1.0F); // TODO: figure out the new version of hurt(), hurtServer()
+        if (level instanceof ServerLevel serverLevel) {
+            entity.hurtServer(serverLevel, serverLevel.damageSources().cactus(), 1.0F);
+        }
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

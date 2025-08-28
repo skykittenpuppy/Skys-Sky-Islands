@@ -1,6 +1,8 @@
 package gay.beegirl.entity;
 
 import gay.beegirl.SkysSkyIslands;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
@@ -16,5 +18,16 @@ public class ModModelLayers {
 
     private static ModelLayerLocation register(String string) {
         return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, string), "main");
+    }
+
+    public static void registerModModelLayers() {
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GOLDENLEAF_BOAT, BoatModel::createBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GOLDENLEAF_CHEST_BOAT, BoatModel::createChestBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SAKURA_BOAT, BoatModel::createBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SAKURA_CHEST_BOAT, BoatModel::createChestBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FRIGID_BOAT, BoatModel::createBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FRIGID_CHEST_BOAT, BoatModel::createChestBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ARBOREAL_CACTUS_BOAT, BoatModel::createBoatModel);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ARBOREAL_CACTUS_CHEST_BOAT, BoatModel::createChestBoatModel);
     }
 }

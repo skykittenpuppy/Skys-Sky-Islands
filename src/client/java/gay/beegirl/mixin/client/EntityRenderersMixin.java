@@ -23,14 +23,13 @@ public class EntityRenderersMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void injected(CallbackInfo ci) {
-        register(ModEntityType.GOLDENLEAF_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_BOAT));
-        register(ModEntityType.GOLDENLEAF_CHEST_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_CHEST_BOAT));
-        register(ModEntityType.SAKURA_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_BOAT));
-        register(ModEntityType.SAKURA_CHEST_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_CHEST_BOAT));
-        register(ModEntityType.FRIGID_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_BOAT));
-        register(ModEntityType.FRIGID_CHEST_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_CHEST_BOAT));
-        register(ModEntityType.ARBOREAL_CACTUS_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_BOAT));
-        register(ModEntityType.ARBOREAL_CACTUS_CHEST_BOAT, (context) -> new BoatRenderer(context, ModelLayers.ACACIA_CHEST_BOAT));
-        //TODO: This.
+        register(ModEntityType.GOLDENLEAF_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.GOLDENLEAF_BOAT));
+        register(ModEntityType.GOLDENLEAF_CHEST_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.GOLDENLEAF_CHEST_BOAT));
+        register(ModEntityType.SAKURA_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.SAKURA_BOAT));
+        register(ModEntityType.SAKURA_CHEST_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.SAKURA_CHEST_BOAT));
+        register(ModEntityType.FRIGID_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.FRIGID_BOAT));
+        register(ModEntityType.FRIGID_CHEST_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.FRIGID_CHEST_BOAT));
+        register(ModEntityType.ARBOREAL_CACTUS_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.ARBOREAL_CACTUS_BOAT));
+        register(ModEntityType.ARBOREAL_CACTUS_CHEST_BOAT, (context) -> new BoatRenderer(context, ModModelLayers.ARBOREAL_CACTUS_CHEST_BOAT));
     }
 }
