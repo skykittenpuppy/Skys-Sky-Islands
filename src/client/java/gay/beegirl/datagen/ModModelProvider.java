@@ -4,14 +4,22 @@ import gay.beegirl.block.ModBlock;
 import gay.beegirl.item.ModItem;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.impl.renderer.VanillaBlockModelPartEncoder;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -27,6 +35,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialCube(ModBlock.CLOUDSHALE_ALEXANDRITE_ORE);
         createCloudshaleGrassBlock(blockModelGenerators, ModBlock.CLOUDSHALE_GRASS);
         createCloudshaleGrassBlock(blockModelGenerators, ModBlock.CLOUDSHALE_CHERRY_GRASS);
+        createPointedBlock(blockModelGenerators, ModBlock.POINTED_CLOUDSHALE);
         blockModelGenerators.family(ModBlock.CLOUDSHALE.base()).generateFor(ModBlock.CLOUDSHALE_FAMILY);
         blockModelGenerators.family(ModBlock.COBBLED_CLOUDSHALE.base()).generateFor(ModBlock.COBBLED_CLOUDSHALE_FAMILY);
         blockModelGenerators.family(ModBlock.MOSSY_COBBLED_CLOUDSHALE.base()).generateFor(ModBlock.MOSSY_COBBLED_CLOUDSHALE_FAMILY);
@@ -54,6 +63,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModItem.ALEXANDRITE, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.declareCustomModelItem(ModItem.GLIDER);
 
+        itemModelGenerators.declareCustomModelItem(ModBlock.POINTED_CLOUDSHALE.asItem());
         itemModelGenerators.generateFlatItem(ModItem.GOLDENLEAF_BOAT.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItem.GOLDENLEAF_CHEST_BOAT.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItem.SAKURA_BOAT.asItem(), ModelTemplates.FLAT_ITEM);
@@ -70,6 +80,26 @@ public class ModModelProvider extends FabricModelProvider {
     public final void createCloudshaleGrassBlock(BlockModelGenerators blockModelGenerators, Block block) {
         TextureMapping textureMapping = (new TextureMapping()).put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlock.CLOUDSHALE.base())).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block)).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
         blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, textureMapping, blockModelGenerators.modelOutput))));
+    }
+
+    private void createPointedBlock(BlockModelGenerators blockModelGenerators, Block block) {
+        PropertyDispatch.C2<MultiVariant, Direction, DripstoneThickness> c2 = PropertyDispatch.initial(BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS);
+
+        for(DripstoneThickness dripstoneThickness : DripstoneThickness.values()) {
+            c2.select(Direction.UP, dripstoneThickness, createPointedBlockVariant(blockModelGenerators, block, Direction.UP, dripstoneThickness));
+        }
+
+        for(DripstoneThickness dripstoneThickness : DripstoneThickness.values()) {
+            c2.select(Direction.DOWN, dripstoneThickness, createPointedBlockVariant(blockModelGenerators, block, Direction.DOWN, dripstoneThickness));
+        }
+
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(c2));
+    }
+    public final MultiVariant createPointedBlockVariant(BlockModelGenerators blockModelGenerators, Block block, Direction direction, DripstoneThickness dripstoneThickness) {
+        String var10000 = direction.getSerializedName();
+        String string = "_" + var10000 + "_" + dripstoneThickness.getSerializedName();
+        TextureMapping textureMapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, string));
+        return BlockModelGenerators.plainVariant(ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, string, textureMapping, blockModelGenerators.modelOutput));
     }
 
     private void createWoodTypeModels(BlockModelGenerators blockModelGenerators, ModBlock.WoodSetBlocks woodSetBlocks, BlockFamily family) {

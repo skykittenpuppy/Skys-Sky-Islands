@@ -1,31 +1,24 @@
 package gay.beegirl.item;
 
 import gay.beegirl.SkysSkyIslands;
-import gay.beegirl.block.ModBlock;
 import gay.beegirl.entity.ModEntityType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BoatItem;
-import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SignItem;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
 public class ModItem {
     public static final Item RAW_ALEXANDRITE = registerItem("raw_alexandrite", properties -> new Item(properties));
 
-    public static final Item ALEXANDRITE = registerItem("alexandrite", properties -> new Item(properties));
+    public static final Item ALEXANDRITE = registerItem("alexandrite", properties -> new Item(properties)); //TODO: trimMaterial()
 
-    public static final Item GLIDER = registerItem("glider", properties -> new ModGliderItem(properties));
+    public static final Item GLIDER = registerItem("glider", properties -> new ModGliderItem(properties.stacksTo(1)));
 
     public static final Item GOLDENLEAF_BOAT = registerItem("goldenleaf_boat", properties -> new BoatItem(ModEntityType.GOLDENLEAF_BOAT, properties.stacksTo(1)));
     public static final Item GOLDENLEAF_CHEST_BOAT = registerItem("goldenleaf_chest_boat", properties -> new BoatItem(ModEntityType.GOLDENLEAF_CHEST_BOAT, properties.stacksTo(1)));
@@ -46,7 +39,7 @@ public class ModItem {
         return Registry.register(BuiltInRegistries.ITEM, resourceKey, item);
     }
 
-    public static  void registerModItems() {
+    public static  void registerItems() {
         SkysSkyIslands.LOGGER.info("Registering Items for " + SkysSkyIslands.MOD_ID);
     }
 }

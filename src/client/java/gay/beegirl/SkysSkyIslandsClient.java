@@ -14,6 +14,7 @@ public class SkysSkyIslandsClient implements ClientModInitializer {
         //TODO: LevelRenderer line 470
         //TODO: DimensionType line 111
 
+        BlockRenderLayerMap.putBlock(ModBlock.POINTED_CLOUDSHALE, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlock.GOLDENLEAF_LEAVES, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlock.GOLDENLEAF_SAPLING, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlock.POTTED_GOLDENLEAF_SAPLING, ChunkSectionLayer.CUTOUT);

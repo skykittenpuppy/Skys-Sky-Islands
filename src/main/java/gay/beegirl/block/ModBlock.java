@@ -1,12 +1,14 @@
 package gay.beegirl.block;
 
 import gay.beegirl.SkysSkyIslands;
+import gay.beegirl.worldgen.ModTreeGrower;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +17,6 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -216,6 +217,17 @@ public class ModBlock {
                         .ignitedByLava()
                         .noOcclusion()
         ));
+        StrippableBlockRegistry.register(log, strippedLog);
+        StrippableBlockRegistry.register(wood, strippedWood);
+        FlammableBlockRegistry.getDefaultInstance().add(log, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(wood, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(strippedLog, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(strippedWood, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(FENCE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(FENCE_GATE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(SLAB, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(STAIRS, 5, 20);
         return new WoodSetBlocks(log, wood, strippedLog, strippedWood, PLANKS, BUTTON, DOOR, FENCE, FENCE_GATE, STANDING_SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN, SLAB, STAIRS, PRESSURE_PLATE, TRAPDOOR);
     }
     private static WoodSetBlocks registerWoodSetBlocks(WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
@@ -255,7 +267,7 @@ public class ModBlock {
         return registerWoodSetBlocks(LOG, WOOD, STRIPPED_LOG, STRIPPED_WOOD, woodType, blockSetType, noteBlockInstrument, soundType, mapColor, mapColor2);
     }
 
-    public static  void registerModBlocks() {
+    public static  void registerBlocks() {
         SkysSkyIslands.LOGGER.info("Registering Blocks for " + SkysSkyIslands.MOD_ID);
     }
 
@@ -274,6 +286,20 @@ public class ModBlock {
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
                     .sound(SoundType.GRASS)
+    ));
+    public static final Block POINTED_CLOUDSHALE = registerBlock("pointed_cloudshale", properties -> new ModPointedCloudshaleBlock(
+            properties
+                    .mapColor(MapColor.COLOR_MAGENTA)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .strength(1.5F, 3.0F)
+                    .sound(SoundType.POINTED_DRIPSTONE)
+                    .randomTicks()
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .dynamicShape()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor(Blocks::never)
     ));
     public static final StoneSetBlocks CLOUDSHALE = registerStoneSetBlocks("cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
     public static final BlockFamily CLOUDSHALE_FAMILY = new BlockFamily.Builder(CLOUDSHALE.base)
@@ -378,7 +404,7 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final Block GOLDENLEAF_SAPLING = registerBlock("goldenleaf_sapling", properties -> new SaplingBlock(TreeGrower.OAK,
+    public static final Block GOLDENLEAF_SAPLING = registerBlock("goldenleaf_sapling", properties -> new SaplingBlock(ModTreeGrower.GOLDEANLEAF,
             properties
                     .mapColor(MapColor.PLANT) //TODO
                     .instrument(NoteBlockInstrument.HARP)
@@ -424,7 +450,7 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final Block SAKURA_SAPLING = registerBlock("sakura_sapling", properties -> new SaplingBlock(TreeGrower.OAK,
+    public static final Block SAKURA_SAPLING = registerBlock("sakura_sapling", properties -> new SaplingBlock(ModTreeGrower.SAKURA,
             properties
                     .mapColor(MapColor.PLANT) //TODO
                     .instrument(NoteBlockInstrument.HARP)
@@ -470,7 +496,7 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final Block FRIGID_SAPLING = registerBlock("frigid_sapling", properties -> new SaplingBlock(TreeGrower.OAK,
+    public static final Block FRIGID_SAPLING = registerBlock("frigid_sapling", properties -> new SaplingBlock(ModTreeGrower.FRIGID,
             properties
                     .mapColor(MapColor.PLANT) //TODO
                     .instrument(NoteBlockInstrument.HARP)
@@ -534,7 +560,7 @@ public class ModBlock {
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
-    public static final Block ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new ModCactusFruitBlock(TreeGrower.OAK,
+    public static final Block ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new ModCactusFruitBlock(ModTreeGrower.ARBOREAL_CACTUS,
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)

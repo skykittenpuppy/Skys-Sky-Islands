@@ -6,6 +6,8 @@ import gay.beegirl.util.ModTag;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -28,6 +30,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         add(ModBlock.CLOUDSHALE_GRASS, block -> createSingleItemTableWithSilkTouch(block, ModBlock.COBBLED_CLOUDSHALE.base()));
         add(ModBlock.CLOUDSHALE_CHERRY_GRASS, block -> createSingleItemTableWithSilkTouch(block, ModBlock.COBBLED_CLOUDSHALE.base()));
+        dropSelf(ModBlock.POINTED_CLOUDSHALE);
         add(ModBlock.CLOUDSHALE.base(), block -> createSingleItemTableWithSilkTouch(block, ModBlock.COBBLED_CLOUDSHALE.base()));
         dropSelf(ModBlock.CLOUDSHALE.button());
         dropSelf(ModBlock.CLOUDSHALE.wall());

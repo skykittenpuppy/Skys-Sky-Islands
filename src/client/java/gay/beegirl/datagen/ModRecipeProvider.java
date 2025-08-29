@@ -64,6 +64,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModBlock.ALEXANDRITE_BLOCK), has(ModBlock.ALEXANDRITE_BLOCK))
                         .save(recipeOutput);
 
+                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlock.CLOUDSHALE.base(), ModBlock.POINTED_CLOUDSHALE);
                 generateRecipes(ModBlock.CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
                 generateRecipes(ModBlock.COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
                 generateRecipes(ModBlock.MOSSY_COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));

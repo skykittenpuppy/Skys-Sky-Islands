@@ -69,6 +69,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlock.FRIGID_PLANKS.hangingWallSign())
                 .add(ModBlock.ARBOREAL_CACTUS_PLANKS.hangingWallSign());
 
+        valueLookupBuilder(BlockTags.HAPPY_GHAST_AVOIDS)
+                .add(ModBlock.ARBOREAL_CACTUS_PLANKS.log(), ModBlock.ARBOREAL_CACTUS_PLANKS.wood())
+                .add(ModBlock.POINTED_CLOUDSHALE);
+
+        valueLookupBuilder(ModTag.Blocks.CLOUDSHALE_ORE_REPLACEABLE)
+                .add(ModBlock.CLOUDSHALE.base(), ModBlock.COBBLED_CLOUDSHALE.base(), ModBlock.MOSSY_COBBLED_CLOUDSHALE.base(), ModBlock.CHERRY_COBBLED_CLOUDSHALE.base());
+
         valueLookupBuilder(ModTag.Blocks.GOLDENLEAF_LOGS)
                 .add(ModBlock.GOLDENLEAF_PLANKS.log(), ModBlock.GOLDENLEAF_PLANKS.wood(), ModBlock.GOLDENLEAF_PLANKS.strippedLog(), ModBlock.GOLDENLEAF_PLANKS.strippedWood());
         valueLookupBuilder(ModTag.Blocks.SAKURA_LOGS)
