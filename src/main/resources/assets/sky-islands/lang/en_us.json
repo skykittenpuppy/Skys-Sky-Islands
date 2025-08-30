@@ -136,10 +136,23 @@
   "item.sky-islands.alexandrite": "Alexandrite",
   "item.sky-islands.glider": "Glider",
 
+  "item.sky-islands.testing_armor_trim_smithing_template": "Testing Armor Trim",
+  "item.sky-islands.sewing_template": "Sewing Template",
+  "item.sky-islands.sewing_template.applies_to": "Applies to:",
+  "item.sky-islands.sewing_template.glider_pattern.applies_to": "Gliders",
+  "item.sky-islands.sewing_template.glider_pattern.base_slot_description": "Add a glider",
+  "item.sky-islands.sewing_template.pattern": "Pattern: ",
+  "item.sky-islands.testing_glider_pattern_sewing_template": "Testing Glider Design",
+
   "itemGroup.sky-islands.sky_islands": "Sky's Sky Islands",
 
+  "tag.item.sky-islands.glider_repair_materials": "Glider Repair Materials",
   "tag.item.sky-islands.goldenleaf_logs": "Goldenleaf Logs",
   "tag.item.sky-islands.sakura_logs": "Sakura Logs",
   "tag.item.sky-islands.frigid_logs": "Frigid Logs",
-  "tag.item.sky-islands.arboreal_cactus_stems": "Arboreal Cactus Stems"
+  "tag.item.sky-islands.arboreal_cactus_stems": "Arboreal Cactus Stems",
+
+  "glider_design.sky-islands.testing": "Testing Glider Design",
+  "trim_material.sky-islands.alexandrite": "Alexandrite Material",
+  "trim_pattern.sky-islands.testing": "Testing Armor Trim"
 }

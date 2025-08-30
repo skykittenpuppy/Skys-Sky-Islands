@@ -1,7 +1,7 @@
 package gay.beegirl.block;
 
 import com.mojang.serialization.MapCodec;
-import gay.beegirl.util.ModTag;
+import gay.beegirl.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -63,7 +63,7 @@ public class ModCactusFruitBlock extends HorizontalDirectionalBlock implements B
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         if (blockState.getValue(HANGING)) {
             BlockState blockState2 = levelReader.getBlockState(blockPos.relative(blockState.getValue(FACING)));
-            return blockState2.is(ModTag.Blocks.ARBOREAL_CACTUS_STEMS);
+            return blockState2.is(ModTags.Blocks.ARBOREAL_CACTUS_STEMS);
         } else {
             BlockState blockState2 = levelReader.getBlockState(blockPos.below());
             return blockState2.is(BlockTags.DIRT) || blockState.is(Blocks.FARMLAND) || blockState.is(BlockTags.SAND);

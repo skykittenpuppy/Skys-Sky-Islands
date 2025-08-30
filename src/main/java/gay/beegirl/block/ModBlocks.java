@@ -2,6 +2,8 @@ package gay.beegirl.block;
 
 import gay.beegirl.SkysSkyIslands;
 import gay.beegirl.worldgen.ModTreeGrower;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Direction;
@@ -26,13 +28,12 @@ import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Function;
 
-public class ModBlock {
+public class ModBlocks {
     public record StoneSetBlocks(Block base, Block button, Block wall, Block slab, Block stairs, Block pressurePlate) {}
     public record WoodSetBlocks(Block log, Block wood, Block strippedLog, Block strippedWood, Block planks, Block button, Block door, Block fence, Block fenceGate, Block standingSign, Block wallSign, Block hangingSign, Block hangingWallSign, Block slab, Block stairs, Block pressurePlate, Block trapdoor) {}
 
     private static Block registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, Block> function) {
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, name);
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, resourceLocation);
+        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, name));
         Block block = function.apply(BlockBehaviour.Properties.of().setId(resourceKey));
         return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
     }
@@ -95,8 +96,7 @@ public class ModBlock {
         ));
         return new StoneSetBlocks(BASE, BUTTON, WALL, SLAB, STAIRS, PRESSURE_PLATE);
     }
-    private static WoodSetBlocks registerWoodSetBlocks(Block log, Block wood, Block strippedLog, Block strippedWood, WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
-        String name = woodType.name();
+    private static WoodSetBlocks registerWoodSetBlocks(Block log, Block wood, Block strippedLog, Block strippedWood, String name, WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
         Block PLANKS = registerBlock(name+"_planks", properties -> new Block(
                 properties
                         .mapColor(mapColor)
@@ -230,8 +230,7 @@ public class ModBlock {
         FlammableBlockRegistry.getDefaultInstance().add(STAIRS, 5, 20);
         return new WoodSetBlocks(log, wood, strippedLog, strippedWood, PLANKS, BUTTON, DOOR, FENCE, FENCE_GATE, STANDING_SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN, SLAB, STAIRS, PRESSURE_PLATE, TRAPDOOR);
     }
-    private static WoodSetBlocks registerWoodSetBlocks(WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
-        String name = woodType.name();
+    private static WoodSetBlocks registerWoodSetBlocks(String name, WoodType woodType, BlockSetType blockSetType, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor mapColor, MapColor mapColor2) {
         Block LOG = registerBlock(name+"_log", properties -> new RotatedPillarBlock(
                 properties
                         .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2)
@@ -264,11 +263,15 @@ public class ModBlock {
                         .sound(soundType)
                         .ignitedByLava()
         ));
-        return registerWoodSetBlocks(LOG, WOOD, STRIPPED_LOG, STRIPPED_WOOD, woodType, blockSetType, noteBlockInstrument, soundType, mapColor, mapColor2);
+        return registerWoodSetBlocks(LOG, WOOD, STRIPPED_LOG, STRIPPED_WOOD, name, woodType, blockSetType, noteBlockInstrument, soundType, mapColor, mapColor2);
     }
 
     public static  void registerBlocks() {
         SkysSkyIslands.LOGGER.info("Registering Blocks for " + SkysSkyIslands.MOD_ID);
+
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.GOLDENLEAF_LEAVES, 30, 60);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SAKURA_LEAVES, 30, 60);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.FRIGID_LEAVES, 30, 60);
     }
 
     public static final Block CLOUDSHALE_GRASS = registerBlock("cloudshale_grass", properties -> new Block(
@@ -375,7 +378,7 @@ public class ModBlock {
                     .sound(SoundType.METAL)
     ));
 
-    public static final WoodSetBlocks GOLDENLEAF_PLANKS = registerWoodSetBlocks(ModWoodType.GOLDENLEAF, ModBlockSetType.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW, MapColor.COLOR_GREEN); //TODO
+    public static final WoodSetBlocks GOLDENLEAF_PLANKS = registerWoodSetBlocks("goldenleaf", ModWoodType.GOLDENLEAF, ModBlockSetType.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW, MapColor.COLOR_GREEN); //TODO
     public static final BlockFamily GOLDENLEAF_PLANKS_FAMILY = new BlockFamily.Builder(GOLDENLEAF_PLANKS.planks)
             .button(GOLDENLEAF_PLANKS.button)
             .door(GOLDENLEAF_PLANKS.door)
@@ -421,7 +424,7 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final WoodSetBlocks SAKURA_PLANKS = registerWoodSetBlocks(ModWoodType.SAKURA, ModBlockSetType.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY); //TODO
+    public static final WoodSetBlocks SAKURA_PLANKS = registerWoodSetBlocks("sakura", ModWoodType.SAKURA, ModBlockSetType.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY); //TODO
     public static final BlockFamily SAKURA_PLANKS_FAMILY = new BlockFamily.Builder(SAKURA_PLANKS.planks)
             .button(SAKURA_PLANKS.button)
             .door(SAKURA_PLANKS.door)
@@ -467,7 +470,7 @@ public class ModBlock {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final WoodSetBlocks FRIGID_PLANKS = registerWoodSetBlocks(ModWoodType.FRIGID, ModBlockSetType.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO
+    public static final WoodSetBlocks FRIGID_PLANKS = registerWoodSetBlocks("frigid", ModWoodType.FRIGID, ModBlockSetType.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO
     public static final BlockFamily FRIGID_PLANKS_FAMILY = new BlockFamily.Builder(FRIGID_PLANKS.planks)
             .button(FRIGID_PLANKS.button)
             .door(FRIGID_PLANKS.door)
@@ -546,7 +549,7 @@ public class ModBlock {
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
     ));
-    public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks(ARBOREAL_CACTUS_STEM, ARBOREAL_CACTUS_HYPHAE, STRIPPED_ARBOREAL_CACTUS_STEM, STRIPPED_ARBOREAL_CACTUS_HYPHAE, ModWoodType.ARBOREAL_CACTUS, ModBlockSetType.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_BLACK, MapColor.COLOR_LIGHT_GREEN); //TODO
+    public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks(ARBOREAL_CACTUS_STEM, ARBOREAL_CACTUS_HYPHAE, STRIPPED_ARBOREAL_CACTUS_STEM, STRIPPED_ARBOREAL_CACTUS_HYPHAE, "arboreal_cactus", ModWoodType.ARBOREAL_CACTUS, ModBlockSetType.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_BLACK, MapColor.COLOR_LIGHT_GREEN); //TODO
     public static final BlockFamily ARBOREAL_CACTUS_PLANKS_FAMILY = new BlockFamily.Builder(ARBOREAL_CACTUS_PLANKS.planks)
             .button(ARBOREAL_CACTUS_PLANKS.button)
             .door(ARBOREAL_CACTUS_PLANKS.door)
@@ -578,16 +581,16 @@ public class ModBlock {
     ));
 
     public static class ModBlockSetType {
-        public static final BlockSetType CLOUDSHALE = BlockSetType.register(new BlockSetType("cloudshale", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-        public static final BlockSetType GOLDENLEAF = BlockSetType.register(new BlockSetType("goldenleaf"));
-        public static final BlockSetType SAKURA = BlockSetType.register(new BlockSetType("sakura", true, true, true, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.CHERRY_WOOD, SoundEvents.CHERRY_WOOD_DOOR_CLOSE, SoundEvents.CHERRY_WOOD_DOOR_OPEN, SoundEvents.CHERRY_WOOD_TRAPDOOR_CLOSE, SoundEvents.CHERRY_WOOD_TRAPDOOR_OPEN, SoundEvents.CHERRY_WOOD_PRESSURE_PLATE_CLICK_OFF, SoundEvents.CHERRY_WOOD_PRESSURE_PLATE_CLICK_ON, SoundEvents.CHERRY_WOOD_BUTTON_CLICK_OFF, SoundEvents.CHERRY_WOOD_BUTTON_CLICK_ON));
-        public static final BlockSetType FRIGID = BlockSetType.register(new BlockSetType("frigid"));
-        public static final BlockSetType ARBOREAL_CACTUS = BlockSetType.register(new BlockSetType("arboreal_cactus"));
+        public static final BlockSetType CLOUDSHALE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "cloudshale"));
+        public static final BlockSetType GOLDENLEAF = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "goldenleaf"));
+        public static final BlockSetType SAKURA = BlockSetTypeBuilder.copyOf(BlockSetType.CHERRY).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "sakura"));
+        public static final BlockSetType FRIGID = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "frigid"));
+        public static final BlockSetType ARBOREAL_CACTUS = BlockSetTypeBuilder.copyOf(BlockSetType.CRIMSON).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "arboreal_cactus"));
     }
     public static class ModWoodType {
-        public static final WoodType GOLDENLEAF = WoodType.register(new WoodType("goldenleaf", ModBlockSetType.GOLDENLEAF));
-        public static final WoodType SAKURA = WoodType.register(new WoodType("sakura", ModBlockSetType.SAKURA, SoundType.CHERRY_WOOD, SoundType.CHERRY_WOOD_HANGING_SIGN, SoundEvents.CHERRY_WOOD_FENCE_GATE_CLOSE, SoundEvents.CHERRY_WOOD_FENCE_GATE_OPEN));
-        public static final WoodType FRIGID = WoodType.register(new WoodType("frigid", ModBlockSetType.FRIGID));
-        public static final WoodType ARBOREAL_CACTUS = WoodType.register(new WoodType("arboreal_cactus", ModBlockSetType.ARBOREAL_CACTUS));
+        public static final WoodType GOLDENLEAF = WoodTypeBuilder.copyOf(WoodType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "goldenleaf"), ModBlockSetType.GOLDENLEAF);
+        public static final WoodType SAKURA = WoodTypeBuilder.copyOf(WoodType.CHERRY).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "sakura"), ModBlockSetType.SAKURA);
+        public static final WoodType FRIGID = WoodTypeBuilder.copyOf(WoodType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "frigid"), ModBlockSetType.FRIGID);
+        public static final WoodType ARBOREAL_CACTUS = WoodTypeBuilder.copyOf(WoodType.CRIMSON).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "arboreal_cactus"), ModBlockSetType.ARBOREAL_CACTUS);
     }
 }

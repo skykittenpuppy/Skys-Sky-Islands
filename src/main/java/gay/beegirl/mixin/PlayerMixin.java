@@ -1,26 +1,16 @@
 package gay.beegirl.mixin;
 
-import gay.beegirl.SkysSkyIslands;
-import gay.beegirl.item.ModItem;
+import gay.beegirl.item.ModItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -69,7 +59,7 @@ public class PlayerMixin extends EntityMixin{
                         !thisObject.isPassenger() &&
                         !thisObject.isSwimming() &&
                         !thisObject.onGround() &&
-                        thisObject.isHolding(ModItem.GLIDER) &&
+                        thisObject.isHolding(ModItems.GLIDER) &&
                         thisObject.fallDistance > glideMinimumDistance
         );
         if (getSkyIslandFlag(FLAG_GLIDING)) {

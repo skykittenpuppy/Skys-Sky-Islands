@@ -1,16 +1,13 @@
 package gay.beegirl.worldgen;
 
 import gay.beegirl.SkysSkyIslands;
-import gay.beegirl.block.ModBlock;
+import gay.beegirl.block.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -33,9 +30,9 @@ public class ModPlacedFeatures {
         register(bootstrapContext, LAND_ALEXANDRITE_ORE, configuredFeatures.getOrThrow(ModConfiguredFeatures.LAND_ALEXANDRITE_ORE), rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.absolute(256))));
         register(bootstrapContext, SKY_ALEXANDRITE_ORE, configuredFeatures.getOrThrow(ModConfiguredFeatures.SKY_ALEXANDRITE_ORE), commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(256), VerticalAnchor.TOP)));
 
-        register(bootstrapContext, SAKURA, configuredFeatures.getOrThrow(ModConfiguredFeatures.SAKURA), List.of(PlacementUtils.filteredByBlockSurvival(ModBlock.SAKURA_SAPLING)));
-        register(bootstrapContext, SAKURA_BEES_005, configuredFeatures.getOrThrow(ModConfiguredFeatures.SAKURA_BEES_005), List.of(PlacementUtils.filteredByBlockSurvival(ModBlock.SAKURA_SAPLING)));
-        register(bootstrapContext, ARBOREAL_CACTUS, configuredFeatures.getOrThrow(ModConfiguredFeatures.ARBOREAL_CACTUS), List.of(PlacementUtils.filteredByBlockSurvival(ModBlock.ARBOREAL_CACTUS_FRUIT)));
+        register(bootstrapContext, SAKURA, configuredFeatures.getOrThrow(ModConfiguredFeatures.SAKURA), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.SAKURA_SAPLING)));
+        register(bootstrapContext, SAKURA_BEES_005, configuredFeatures.getOrThrow(ModConfiguredFeatures.SAKURA_BEES_005), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.SAKURA_SAPLING)));
+        register(bootstrapContext, ARBOREAL_CACTUS, configuredFeatures.getOrThrow(ModConfiguredFeatures.ARBOREAL_CACTUS), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.ARBOREAL_CACTUS_FRUIT)));
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

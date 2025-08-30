@@ -1,12 +1,11 @@
 package gay.beegirl.datagen;
 
-import gay.beegirl.block.ModBlock;
-import gay.beegirl.item.ModItem;
-import gay.beegirl.util.ModTag;
+import gay.beegirl.block.ModBlocks;
+import gay.beegirl.item.ModItems;
+import gay.beegirl.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -19,48 +18,51 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         valueLookupBuilder(ItemTags.BEACON_PAYMENT_ITEMS)
-                .add(ModItem.RAW_ALEXANDRITE, ModItem.ALEXANDRITE);
+                .add(ModItems.RAW_ALEXANDRITE, ModItems.ALEXANDRITE);
 
         valueLookupBuilder(ItemTags.LOGS_THAT_BURN)
-                .addTag(ModTag.Items.GOLDENLEAF_LOGS)
-                .addTag(ModTag.Items.SAKURA_LOGS)
-                .addTag(ModTag.Items.FRIGID_LOGS)
-                .addTag(ModTag.Items.ARBOREAL_CACTUS_STEMS);
+                .addTag(ModTags.Items.GOLDENLEAF_LOGS)
+                .addTag(ModTags.Items.SAKURA_LOGS)
+                .addTag(ModTags.Items.FRIGID_LOGS)
+                .addTag(ModTags.Items.ARBOREAL_CACTUS_STEMS);
 
         valueLookupBuilder(ItemTags.PLANKS)
-                .add(ModBlock.GOLDENLEAF_PLANKS.planks().asItem())
-                .add(ModBlock.SAKURA_PLANKS.planks().asItem())
-                .add(ModBlock.FRIGID_PLANKS.planks().asItem())
-                .add(ModBlock.ARBOREAL_CACTUS_PLANKS.planks().asItem());
+                .add(ModBlocks.GOLDENLEAF_PLANKS.planks().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.planks().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.planks().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().asItem());
         valueLookupBuilder(ItemTags.SIGNS)
-                .add(ModBlock.GOLDENLEAF_PLANKS.standingSign().asItem())
-                .add(ModBlock.SAKURA_PLANKS.standingSign().asItem())
-                .add(ModBlock.FRIGID_PLANKS.standingSign().asItem())
-                .add(ModBlock.ARBOREAL_CACTUS_PLANKS.standingSign().asItem());
+                .add(ModBlocks.GOLDENLEAF_PLANKS.standingSign().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.standingSign().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.standingSign().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign().asItem());
         valueLookupBuilder(ItemTags.HANGING_SIGNS)
-                .add(ModBlock.GOLDENLEAF_PLANKS.hangingSign().asItem())
-                .add(ModBlock.SAKURA_PLANKS.hangingSign().asItem())
-                .add(ModBlock.FRIGID_PLANKS.hangingSign().asItem())
-                .add(ModBlock.ARBOREAL_CACTUS_PLANKS.hangingSign().asItem());
+                .add(ModBlocks.GOLDENLEAF_PLANKS.hangingSign().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.hangingSign().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.hangingSign().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign().asItem());
 
         valueLookupBuilder(ItemTags.BOATS)
-                .add(ModItem.GOLDENLEAF_BOAT)
-                .add(ModItem.SAKURA_BOAT)
-                .add(ModItem.FRIGID_BOAT)
-                .add(ModItem.ARBOREAL_CACTUS_BOAT);
+                .add(ModItems.GOLDENLEAF_BOAT)
+                .add(ModItems.SAKURA_BOAT)
+                .add(ModItems.FRIGID_BOAT)
+                .add(ModItems.ARBOREAL_CACTUS_BOAT);
         valueLookupBuilder(ItemTags.CHEST_BOATS)
-                .add(ModItem.GOLDENLEAF_CHEST_BOAT)
-                .add(ModItem.SAKURA_CHEST_BOAT)
-                .add(ModItem.FRIGID_CHEST_BOAT)
-                .add(ModItem.ARBOREAL_CACTUS_CHEST_BOAT);
+                .add(ModItems.GOLDENLEAF_CHEST_BOAT)
+                .add(ModItems.SAKURA_CHEST_BOAT)
+                .add(ModItems.FRIGID_CHEST_BOAT)
+                .add(ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
 
-        valueLookupBuilder(ModTag.Items.GOLDENLEAF_LOGS)
-                .add(ModBlock.GOLDENLEAF_PLANKS.log().asItem(), ModBlock.GOLDENLEAF_PLANKS.wood().asItem(), ModBlock.GOLDENLEAF_PLANKS.strippedLog().asItem(), ModBlock.GOLDENLEAF_PLANKS.strippedWood().asItem());
-        valueLookupBuilder(ModTag.Items.SAKURA_LOGS)
-                .add(ModBlock.SAKURA_PLANKS.log().asItem(), ModBlock.SAKURA_PLANKS.wood().asItem(), ModBlock.SAKURA_PLANKS.strippedLog().asItem(), ModBlock.SAKURA_PLANKS.strippedWood().asItem());
-        valueLookupBuilder(ModTag.Items.FRIGID_LOGS)
-                .add(ModBlock.FRIGID_PLANKS.log().asItem(), ModBlock.FRIGID_PLANKS.wood().asItem(), ModBlock.FRIGID_PLANKS.strippedLog().asItem(), ModBlock.FRIGID_PLANKS.strippedWood().asItem());
-        valueLookupBuilder(ModTag.Items.ARBOREAL_CACTUS_STEMS)
-                .add(ModBlock.ARBOREAL_CACTUS_PLANKS.log().asItem(), ModBlock.ARBOREAL_CACTUS_PLANKS.wood().asItem(), ModBlock.ARBOREAL_CACTUS_PLANKS.strippedLog().asItem(), ModBlock.ARBOREAL_CACTUS_PLANKS.strippedWood().asItem());
+        valueLookupBuilder(ItemTags.TRIM_MATERIALS)
+                .add(ModItems.ALEXANDRITE);
+
+        valueLookupBuilder(ModTags.Items.GOLDENLEAF_LOGS)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.log().asItem(), ModBlocks.GOLDENLEAF_PLANKS.wood().asItem(), ModBlocks.GOLDENLEAF_PLANKS.strippedLog().asItem(), ModBlocks.GOLDENLEAF_PLANKS.strippedWood().asItem());
+        valueLookupBuilder(ModTags.Items.SAKURA_LOGS)
+                .add(ModBlocks.SAKURA_PLANKS.log().asItem(), ModBlocks.SAKURA_PLANKS.wood().asItem(), ModBlocks.SAKURA_PLANKS.strippedLog().asItem(), ModBlocks.SAKURA_PLANKS.strippedWood().asItem());
+        valueLookupBuilder(ModTags.Items.FRIGID_LOGS)
+                .add(ModBlocks.FRIGID_PLANKS.log().asItem(), ModBlocks.FRIGID_PLANKS.wood().asItem(), ModBlocks.FRIGID_PLANKS.strippedLog().asItem(), ModBlocks.FRIGID_PLANKS.strippedWood().asItem());
+        valueLookupBuilder(ModTags.Items.ARBOREAL_CACTUS_STEMS)
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.wood().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood().asItem());
     }
 }

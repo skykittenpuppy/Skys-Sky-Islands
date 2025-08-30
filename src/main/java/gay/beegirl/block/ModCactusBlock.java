@@ -54,7 +54,7 @@ public class ModCactusBlock extends RotatedPillarBlock {
 
             boolean grewFruit = false;
             for(Direction direction : Direction.Plane.HORIZONTAL) {
-                ModCactusFruitBlock fruit = (ModCactusFruitBlock)ModBlock.ARBOREAL_CACTUS_FRUIT;
+                ModCactusFruitBlock fruit = (ModCactusFruitBlock) ModBlocks.ARBOREAL_CACTUS_FRUIT;
                 if (j >= ATTEMPT_GROW_CACTUS_FRUIT_AGE && fruit.canSurvive(fruit.defaultBlockState(), serverLevel, blockPos.relative(direction))) {
                     double d = i >= MAX_CACTUS_GROWING_HEIGHT ? ATTEMPT_GROW_CACTUS_FRUIT_TALL_CACTUS_CHANCE : ATTEMPT_GROW_CACTUS_FRUIT_SMALL_CACTUS_CHANCE;
                     if (randomSource.nextDouble() <= d) {

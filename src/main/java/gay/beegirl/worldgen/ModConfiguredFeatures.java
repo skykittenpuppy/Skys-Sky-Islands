@@ -1,15 +1,14 @@
 package gay.beegirl.worldgen;
 
 import gay.beegirl.SkysSkyIslands;
-import gay.beegirl.block.ModBlock;
-import gay.beegirl.util.ModTag;
+import gay.beegirl.block.ModBlocks;
+import gay.beegirl.util.ModTags;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -38,17 +37,17 @@ public class ModConfiguredFeatures {
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext){
         List<OreConfiguration.TargetBlockState> landAlexandriteOres =
-                List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), ModBlock.STONE_ALEXANDRITE_ORE.defaultBlockState()),
-                        OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), ModBlock.DEEPSLATE_ALEXANDRITE_ORE.defaultBlockState()));
+                List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), ModBlocks.STONE_ALEXANDRITE_ORE.defaultBlockState()),
+                        OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.defaultBlockState()));
         register(bootstrapContext, LAND_ALEXANDRITE_ORE, Feature.ORE, new OreConfiguration(landAlexandriteOres, 4));
         List<OreConfiguration.TargetBlockState> skyAlexandriteOres =
-                List.of(OreConfiguration.target(new TagMatchTest(ModTag.Blocks.CLOUDSHALE_ORE_REPLACEABLE), ModBlock.CLOUDSHALE_ALEXANDRITE_ORE.defaultBlockState()));
+                List.of(OreConfiguration.target(new TagMatchTest(ModTags.Blocks.CLOUDSHALE_ORE_REPLACEABLE), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.defaultBlockState()));
         register(bootstrapContext, SKY_ALEXANDRITE_ORE, Feature.ORE, new OreConfiguration(skyAlexandriteOres, 12));
 
         register(bootstrapContext, SAKURA, Feature.TREE, sakura().build());
         register(bootstrapContext, SAKURA_BEES_005, Feature.TREE, sakura().decorators(List.of(new BeehiveDecorator(0.05F))).build());
         register(bootstrapContext, ARBOREAL_CACTUS, Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
-                List.of(BlockColumnConfiguration.layer(BiasedToBottomInt.of(1, 3), BlockStateProvider.simple(ModBlock.ARBOREAL_CACTUS_PLANKS.log()))),
+                List.of(BlockColumnConfiguration.layer(BiasedToBottomInt.of(1, 3), BlockStateProvider.simple(ModBlocks.ARBOREAL_CACTUS_PLANKS.log()))),
                 Direction.UP,
                 BlockPredicate.ONLY_IN_AIR_PREDICATE,
                 false));
@@ -63,9 +62,9 @@ public class ModConfiguredFeatures {
 
     private static TreeConfiguration.TreeConfigurationBuilder sakura() {
         return (new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlock.SAKURA_PLANKS.log()),
+                BlockStateProvider.simple(ModBlocks.SAKURA_PLANKS.log()),
                 new CherryTrunkPlacer(7, 1, 0, ConstantInt.of(1), UniformInt.of(2, 4), UniformInt.of(-4, -3), UniformInt.of(-1, 0)),
-                BlockStateProvider.simple(ModBlock.SAKURA_LEAVES),
+                BlockStateProvider.simple(ModBlocks.SAKURA_LEAVES),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), ConstantInt.of(5), 0.25F, 0.5F, 0.16666667F, 0.33333334F),
                 new TwoLayersFeatureSize(1, 0, 2))).ignoreVines();
     }

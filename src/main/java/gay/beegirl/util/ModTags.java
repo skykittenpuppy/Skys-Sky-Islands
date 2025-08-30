@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
-public class ModTag {
+public class ModTags {
     public static class Biomes {
         public static final TagKey<Biome> SKY_ISLANDS = createTag("sky_islands");
 
@@ -28,6 +28,7 @@ public class ModTag {
         }
     }
     public static class Items {
+        public static final TagKey<Item> GLIDER_REPAIR_MATERIALS = createTag("glider_repair_materials");
         public static final TagKey<Item> GOLDENLEAF_LOGS = createTag("goldenleaf_logs");
         public static final TagKey<Item> SAKURA_LOGS = createTag("sakura_logs");
         public static final TagKey<Item> FRIGID_LOGS = createTag("frigid_logs");

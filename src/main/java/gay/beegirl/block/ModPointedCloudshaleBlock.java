@@ -335,7 +335,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     }
 
     private static void createDripstone(LevelAccessor levelAccessor, BlockPos blockPos, Direction direction, DripstoneThickness dripstoneThickness) {
-        BlockState blockState = ModBlock.POINTED_CLOUDSHALE.defaultBlockState().setValue(TIP_DIRECTION, direction).setValue(THICKNESS, dripstoneThickness).setValue(WATERLOGGED, levelAccessor.getFluidState(blockPos).getType() == Fluids.WATER);
+        BlockState blockState = ModBlocks.POINTED_CLOUDSHALE.defaultBlockState().setValue(TIP_DIRECTION, direction).setValue(THICKNESS, dripstoneThickness).setValue(WATERLOGGED, levelAccessor.getFluidState(blockPos).getType() == Fluids.WATER);
         levelAccessor.setBlock(blockPos, blockState, 3);
     }
 
@@ -370,7 +370,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
             return blockPos;
         } else {
             Direction direction = blockState.getValue(TIP_DIRECTION);
-            BiPredicate<BlockPos, BlockState> biPredicate = (blockPosx, blockStatex) -> blockStatex.is(ModBlock.POINTED_CLOUDSHALE) && blockStatex.getValue(TIP_DIRECTION) == direction;
+            BiPredicate<BlockPos, BlockState> biPredicate = (blockPosx, blockStatex) -> blockStatex.is(ModBlocks.POINTED_CLOUDSHALE) && blockStatex.getValue(TIP_DIRECTION) == direction;
             return findBlockVertical(levelAccessor, blockPos, direction.getAxisDirection(), biPredicate, (blockStatex) -> isTip(blockStatex, bl), i).orElse(null);
         }
     }
@@ -426,8 +426,8 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
 
     private static Optional<BlockPos> findRootBlock(Level level, BlockPos blockPos, BlockState blockState, int i) {
         Direction direction = blockState.getValue(TIP_DIRECTION);
-        BiPredicate<BlockPos, BlockState> biPredicate = (blockPosx, blockStatex) -> blockStatex.is(ModBlock.POINTED_CLOUDSHALE) && blockStatex.getValue(TIP_DIRECTION) == direction;
-        return findBlockVertical(level, blockPos, direction.getOpposite().getAxisDirection(), biPredicate, (blockStatex) -> !blockStatex.is(ModBlock.POINTED_CLOUDSHALE), i);
+        BiPredicate<BlockPos, BlockState> biPredicate = (blockPosx, blockStatex) -> blockStatex.is(ModBlocks.POINTED_CLOUDSHALE) && blockStatex.getValue(TIP_DIRECTION) == direction;
+        return findBlockVertical(level, blockPos, direction.getOpposite().getAxisDirection(), biPredicate, (blockStatex) -> !blockStatex.is(ModBlocks.POINTED_CLOUDSHALE), i);
     }
 
     private static boolean isValidPointedDripstonePlacement(LevelReader levelReader, BlockPos blockPos, Direction direction) {
@@ -437,7 +437,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     }
 
     private static boolean isTip(BlockState blockState, boolean bl) {
-        if (!blockState.is(ModBlock.POINTED_CLOUDSHALE)) {
+        if (!blockState.is(ModBlocks.POINTED_CLOUDSHALE)) {
             return false;
         } else {
             DripstoneThickness dripstoneThickness = blockState.getValue(THICKNESS);
@@ -458,7 +458,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     }
 
     private static boolean isStalactiteStartPos(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return isStalactite(blockState) && !levelReader.getBlockState(blockPos.above()).is(ModBlock.POINTED_CLOUDSHALE);
+        return isStalactite(blockState) && !levelReader.getBlockState(blockPos.above()).is(ModBlocks.POINTED_CLOUDSHALE);
     }
 
     protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
@@ -466,7 +466,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     }
 
     private static boolean isPointedDripstoneWithDirection(BlockState blockState, Direction direction) {
-        return blockState.is(ModBlock.POINTED_CLOUDSHALE) && blockState.getValue(TIP_DIRECTION) == direction;
+        return blockState.is(ModBlocks.POINTED_CLOUDSHALE) && blockState.getValue(TIP_DIRECTION) == direction;
     }
 
     @Nullable
@@ -506,7 +506,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     }
 
     private static boolean canGrow(BlockState blockState, BlockState blockState2) {
-        return blockState.is(ModBlock.CLOUDSHALE.base()) && blockState2.is(Blocks.WATER) && blockState2.getFluidState().isSource();
+        return blockState.is(ModBlocks.CLOUDSHALE.base()) && blockState2.is(Blocks.WATER) && blockState2.getFluidState().isSource();
     }
 
     private static Fluid getDripFluid(Level level, Fluid fluid) {
