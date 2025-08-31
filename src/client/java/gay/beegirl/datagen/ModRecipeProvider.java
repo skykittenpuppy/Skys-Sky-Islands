@@ -7,7 +7,7 @@ import gay.beegirl.item.ModItems;
 import gay.beegirl.recipe.SewingDesignRecipeBuilder;
 import gay.beegirl.registry.ModRegistryResourceKeys;
 import gay.beegirl.registry.armor_trim.ModTrimPatterns;
-import gay.beegirl.registry.glider_pattern.GliderDesigns;
+import gay.beegirl.registry.glider_pattern.ModGliderDesigns;
 import gay.beegirl.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -77,7 +77,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                 copySmithingTemplate(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE, ModBlocks.CLOUDSHALE.base());
                 smithingTrim(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE, ModTrimPatterns.TESTING);
-                sewingTrim(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE, GliderDesigns.TESTING);
+                sewingTrim(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE, ModGliderDesigns.TESTING);
 
                 twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CLOUDSHALE.base(), ModBlocks.POINTED_CLOUDSHALE);
                 generateRecipes(ModBlocks.CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));

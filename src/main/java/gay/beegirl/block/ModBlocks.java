@@ -1,7 +1,7 @@
 package gay.beegirl.block;
 
 import gay.beegirl.SkysSkyIslands;
-import gay.beegirl.worldgen.ModTreeGrower;
+import gay.beegirl.worldgen.ModConfiguredFeatures;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -14,11 +14,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 public class ModBlocks {
@@ -272,12 +273,14 @@ public class ModBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.GOLDENLEAF_LEAVES, 30, 60);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SAKURA_LEAVES, 30, 60);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.FRIGID_LEAVES, 30, 60);
+
+        //TODO: Custom Cloudshale SoundType?
     }
 
     public static final Block CLOUDSHALE_GRASS = registerBlock("cloudshale_grass", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
                     .sound(SoundType.GRASS)
@@ -285,12 +288,12 @@ public class ModBlocks {
     public static final Block CLOUDSHALE_CHERRY_GRASS = registerBlock("cloudshale_cherry_grass", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
                     .sound(SoundType.GRASS)
     ));
-    public static final Block POINTED_CLOUDSHALE = registerBlock("pointed_cloudshale", properties -> new ModPointedCloudshaleBlock(
+    public static final Block POINTED_CLOUDSHALE = registerBlock("pointed_cloudshale", properties -> new PointedCloudshaleBlock(
             properties
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
@@ -304,7 +307,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final StoneSetBlocks CLOUDSHALE = registerStoneSetBlocks("cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final StoneSetBlocks CLOUDSHALE = registerStoneSetBlocks("cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO: tweak MapColors
     public static final BlockFamily CLOUDSHALE_FAMILY = new BlockFamily.Builder(CLOUDSHALE.base)
             .button(CLOUDSHALE.button)
             .wall(CLOUDSHALE.wall)
@@ -312,7 +315,7 @@ public class ModBlocks {
             .stairs(CLOUDSHALE.stairs)
             .pressurePlate(CLOUDSHALE.pressurePlate)
             .getFamily();
-    public static final StoneSetBlocks COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final StoneSetBlocks COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO: tweak MapColors
     public static final BlockFamily COBBLED_CLOUDSHALE_FAMILY = new BlockFamily.Builder(COBBLED_CLOUDSHALE.base)
             .button(COBBLED_CLOUDSHALE.button)
             .wall(COBBLED_CLOUDSHALE.wall)
@@ -320,7 +323,7 @@ public class ModBlocks {
             .stairs(COBBLED_CLOUDSHALE.stairs)
             .pressurePlate(COBBLED_CLOUDSHALE.pressurePlate)
             .getFamily();
-    public static final StoneSetBlocks MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final StoneSetBlocks MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO: tweak MapColors
     public static final BlockFamily MOSSY_COBBLED_CLOUDSHALE_FAMILY = new BlockFamily.Builder(MOSSY_COBBLED_CLOUDSHALE.base)
             .button(MOSSY_COBBLED_CLOUDSHALE.button)
             .wall(MOSSY_COBBLED_CLOUDSHALE.wall)
@@ -328,7 +331,7 @@ public class ModBlocks {
             .stairs(MOSSY_COBBLED_CLOUDSHALE.stairs)
             .pressurePlate(MOSSY_COBBLED_CLOUDSHALE.pressurePlate)
             .getFamily();
-    public static final StoneSetBlocks CHERRY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("cherry_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO
+    public static final StoneSetBlocks CHERRY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("cherry_cobbled_cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA); //TODO: tweak MapColors
     public static final BlockFamily CHERRY_COBBLED_CLOUDSHALE_FAMILY = new BlockFamily.Builder(CHERRY_COBBLED_CLOUDSHALE.base)
             .button(CHERRY_COBBLED_CLOUDSHALE.button)
             .wall(CHERRY_COBBLED_CLOUDSHALE.wall)
@@ -356,15 +359,15 @@ public class ModBlocks {
     public static final Block CLOUDSHALE_ALEXANDRITE_ORE = registerBlock("cloudshale_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
                     .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(2.0F, 3.0F)
-                    .sound(SoundType.STONE) //TODO
+                    .sound(SoundType.TUFF_BRICKS)
     ));
     public static final Block RAW_ALEXANDRITE_BLOCK = registerBlock("raw_alexandrite_block", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(5.0F, 6.0F)
                     .sound(SoundType.STONE)
@@ -372,13 +375,13 @@ public class ModBlocks {
     public static final Block ALEXANDRITE_BLOCK = registerBlock("alexandrite_block", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .strength(5.0F, 6.0F)
                     .sound(SoundType.METAL)
     ));
 
-    public static final WoodSetBlocks GOLDENLEAF_PLANKS = registerWoodSetBlocks("goldenleaf", ModWoodType.GOLDENLEAF, ModBlockSetType.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW, MapColor.COLOR_GREEN); //TODO
+    public static final WoodSetBlocks GOLDENLEAF_PLANKS = registerWoodSetBlocks("goldenleaf", ModWoodTypes.GOLDENLEAF, ModBlockSetTypes.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW, MapColor.COLOR_GREEN); //TODO: tweak MapColors
     public static final BlockFamily GOLDENLEAF_PLANKS_FAMILY = new BlockFamily.Builder(GOLDENLEAF_PLANKS.planks)
             .button(GOLDENLEAF_PLANKS.button)
             .door(GOLDENLEAF_PLANKS.door)
@@ -394,7 +397,7 @@ public class ModBlocks {
             .getFamily();
     public static final Block GOLDENLEAF_LEAVES = registerBlock("goldenleaf_leaves", properties -> new TintedParticleLeavesBlock(0.1F,
             properties
-                    .mapColor(MapColor.PLANT) //TODO
+                    .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .strength(0.2F)
                     .sound(SoundType.GRASS)
@@ -407,9 +410,9 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final Block GOLDENLEAF_SAPLING = registerBlock("goldenleaf_sapling", properties -> new SaplingBlock(ModTreeGrower.GOLDEANLEAF,
+    public static final Block GOLDENLEAF_SAPLING = registerBlock("goldenleaf_sapling", properties -> new SaplingBlock(ModTreeGrowers.GOLDENLEAF,
             properties
-                    .mapColor(MapColor.PLANT) //TODO
+                    .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .sound(SoundType.GRASS)
                     .noCollission()
@@ -424,7 +427,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final WoodSetBlocks SAKURA_PLANKS = registerWoodSetBlocks("sakura", ModWoodType.SAKURA, ModBlockSetType.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY); //TODO
+    public static final WoodSetBlocks SAKURA_PLANKS = registerWoodSetBlocks("sakura", ModWoodTypes.SAKURA, ModBlockSetTypes.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY); //TODO: tweak MapColors
     public static final BlockFamily SAKURA_PLANKS_FAMILY = new BlockFamily.Builder(SAKURA_PLANKS.planks)
             .button(SAKURA_PLANKS.button)
             .door(SAKURA_PLANKS.door)
@@ -440,7 +443,7 @@ public class ModBlocks {
             .getFamily();
     public static final Block SAKURA_LEAVES = registerBlock("sakura_leaves", properties -> new UntintedParticleLeavesBlock(0.1F, ParticleTypes.CHERRY_LEAVES,
             properties
-                    .mapColor(MapColor.PLANT) //TODO
+                    .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .strength(0.2F)
                     .sound(SoundType.GRASS)
@@ -453,9 +456,9 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final Block SAKURA_SAPLING = registerBlock("sakura_sapling", properties -> new SaplingBlock(ModTreeGrower.SAKURA,
+    public static final Block SAKURA_SAPLING = registerBlock("sakura_sapling", properties -> new SaplingBlock(ModTreeGrowers.SAKURA,
             properties
-                    .mapColor(MapColor.PLANT) //TODO
+                    .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .sound(SoundType.GRASS)
                     .noCollission()
@@ -470,7 +473,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final WoodSetBlocks FRIGID_PLANKS = registerWoodSetBlocks("frigid", ModWoodType.FRIGID, ModBlockSetType.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO
+    public static final WoodSetBlocks FRIGID_PLANKS = registerWoodSetBlocks("frigid", ModWoodTypes.FRIGID, ModBlockSetTypes.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO: tweak MapColors
     public static final BlockFamily FRIGID_PLANKS_FAMILY = new BlockFamily.Builder(FRIGID_PLANKS.planks)
             .button(FRIGID_PLANKS.button)
             .door(FRIGID_PLANKS.door)
@@ -486,7 +489,7 @@ public class ModBlocks {
             .getFamily();
     public static final Block FRIGID_LEAVES = registerBlock("frigid_leaves", properties -> new TintedParticleLeavesBlock(0.1F,
             properties
-                    .mapColor(MapColor.PLANT) //TODO
+                    .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .strength(0.2F)
                     .sound(SoundType.GRASS)
@@ -499,9 +502,9 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final Block FRIGID_SAPLING = registerBlock("frigid_sapling", properties -> new SaplingBlock(ModTreeGrower.FRIGID,
+    public static final Block FRIGID_SAPLING = registerBlock("frigid_sapling", properties -> new SaplingBlock(ModTreeGrowers.FRIGID,
             properties
-                    .mapColor(MapColor.PLANT) //TODO
+                    .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)
                     .sound(SoundType.GRASS)
                     .noCollission()
@@ -518,7 +521,7 @@ public class ModBlocks {
 
     private static final Block ARBOREAL_CACTUS_STEM = registerBlock("arboreal_cactus_stem", properties -> new RotatedPillarBlock(
             properties
-                    .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLACK : MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLACK : MapColor.COLOR_MAGENTA) //TODO: tweak MapColors
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F)
                     .sound(SoundType.WOOD)
@@ -527,7 +530,7 @@ public class ModBlocks {
     )); //TODO: Fix this to use ModCactusBlock
     private static final Block ARBOREAL_CACTUS_HYPHAE = registerBlock("arboreal_cactus_hyphae", properties -> new RotatedPillarBlock(
             properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F)
                     .sound(SoundType.WOOD)
@@ -535,7 +538,7 @@ public class ModBlocks {
     )); //TODO: Fix this to use ModCactusBlock
     private static final Block STRIPPED_ARBOREAL_CACTUS_STEM = registerBlock("stripped_arboreal_cactus_stem", properties -> new RotatedPillarBlock(
             properties
-                    .mapColor(MapColor.COLOR_BLACK) //TODO
+                    .mapColor(MapColor.COLOR_BLACK) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F)
                     .sound(SoundType.WOOD)
@@ -543,13 +546,13 @@ public class ModBlocks {
     ));
     private static final Block STRIPPED_ARBOREAL_CACTUS_HYPHAE = registerBlock("stripped_arboreal_cactus_hyphae", properties -> new RotatedPillarBlock(
             properties
-                    .mapColor(MapColor.COLOR_BLACK) //TODO
+                    .mapColor(MapColor.COLOR_BLACK) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F)
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
     ));
-    public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks(ARBOREAL_CACTUS_STEM, ARBOREAL_CACTUS_HYPHAE, STRIPPED_ARBOREAL_CACTUS_STEM, STRIPPED_ARBOREAL_CACTUS_HYPHAE, "arboreal_cactus", ModWoodType.ARBOREAL_CACTUS, ModBlockSetType.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_BLACK, MapColor.COLOR_LIGHT_GREEN); //TODO
+    public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks(ARBOREAL_CACTUS_STEM, ARBOREAL_CACTUS_HYPHAE, STRIPPED_ARBOREAL_CACTUS_STEM, STRIPPED_ARBOREAL_CACTUS_HYPHAE, "arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_BLACK, MapColor.COLOR_LIGHT_GREEN); //TODO: tweak MapColors
     public static final BlockFamily ARBOREAL_CACTUS_PLANKS_FAMILY = new BlockFamily.Builder(ARBOREAL_CACTUS_PLANKS.planks)
             .button(ARBOREAL_CACTUS_PLANKS.button)
             .door(ARBOREAL_CACTUS_PLANKS.door)
@@ -563,7 +566,7 @@ public class ModBlocks {
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
-    public static final Block ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new ModCactusFruitBlock(ModTreeGrower.ARBOREAL_CACTUS,
+    public static final Block ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new CactusFruitBlock(ModTreeGrowers.ARBOREAL_CACTUS,
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)
@@ -580,17 +583,24 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static class ModBlockSetType {
+    public static class ModBlockSetTypes {
         public static final BlockSetType CLOUDSHALE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "cloudshale"));
         public static final BlockSetType GOLDENLEAF = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "goldenleaf"));
         public static final BlockSetType SAKURA = BlockSetTypeBuilder.copyOf(BlockSetType.CHERRY).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "sakura"));
         public static final BlockSetType FRIGID = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "frigid"));
         public static final BlockSetType ARBOREAL_CACTUS = BlockSetTypeBuilder.copyOf(BlockSetType.CRIMSON).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "arboreal_cactus"));
     }
-    public static class ModWoodType {
-        public static final WoodType GOLDENLEAF = WoodTypeBuilder.copyOf(WoodType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "goldenleaf"), ModBlockSetType.GOLDENLEAF);
-        public static final WoodType SAKURA = WoodTypeBuilder.copyOf(WoodType.CHERRY).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "sakura"), ModBlockSetType.SAKURA);
-        public static final WoodType FRIGID = WoodTypeBuilder.copyOf(WoodType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "frigid"), ModBlockSetType.FRIGID);
-        public static final WoodType ARBOREAL_CACTUS = WoodTypeBuilder.copyOf(WoodType.CRIMSON).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "arboreal_cactus"), ModBlockSetType.ARBOREAL_CACTUS);
+    public static class ModWoodTypes {
+        public static final WoodType GOLDENLEAF = WoodTypeBuilder.copyOf(WoodType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "goldenleaf"), ModBlockSetTypes.GOLDENLEAF);
+        public static final WoodType SAKURA = WoodTypeBuilder.copyOf(WoodType.CHERRY).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "sakura"), ModBlockSetTypes.SAKURA);
+        public static final WoodType FRIGID = WoodTypeBuilder.copyOf(WoodType.OAK).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "frigid"), ModBlockSetTypes.FRIGID);
+        public static final WoodType ARBOREAL_CACTUS = WoodTypeBuilder.copyOf(WoodType.CRIMSON).register(ResourceLocation.fromNamespaceAndPath(SkysSkyIslands.MOD_ID, "arboreal_cactus"), ModBlockSetTypes.ARBOREAL_CACTUS);
+    }
+    public static class ModTreeGrowers {
+        public static final TreeGrower GOLDENLEAF = new TreeGrower("goldenleaf", Optional.empty(), Optional.of(ModConfiguredFeatures.GOLDENLEAF), Optional.of(ModConfiguredFeatures.GOLDENLEAF_BEES_005));
+        public static final TreeGrower SAKURA = new TreeGrower("sakura", Optional.empty(), Optional.of(ModConfiguredFeatures.SAKURA), Optional.of(ModConfiguredFeatures.SAKURA_BEES_005));
+        public static final TreeGrower FRIGID = new TreeGrower("frigid", Optional.empty(), Optional.of(ModConfiguredFeatures.FRIGID), Optional.of(ModConfiguredFeatures.FRIGID_BEES_005));
+        public static final TreeGrower ARBOREAL_CACTUS = new TreeGrower("arboreal_cactus", Optional.empty(), Optional.of(ModConfiguredFeatures.ARBOREAL_CACTUS), Optional.empty());
+
     }
 }

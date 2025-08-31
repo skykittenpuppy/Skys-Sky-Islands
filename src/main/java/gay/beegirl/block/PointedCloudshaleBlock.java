@@ -39,8 +39,8 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-public class ModPointedCloudshaleBlock extends Block implements Fallable, SimpleWaterloggedBlock {
-    public static final MapCodec<ModPointedCloudshaleBlock> CODEC = simpleCodec(ModPointedCloudshaleBlock::new);
+public class PointedCloudshaleBlock extends Block implements Fallable, SimpleWaterloggedBlock {
+    public static final MapCodec<PointedCloudshaleBlock> CODEC = simpleCodec(PointedCloudshaleBlock::new);
     public static final EnumProperty<Direction> TIP_DIRECTION;
     public static final EnumProperty<DripstoneThickness> THICKNESS;
     public static final BooleanProperty WATERLOGGED;
@@ -71,11 +71,11 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     private static final float MAX_HORIZONTAL_OFFSET;
     private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK;
 
-    public @NotNull MapCodec<ModPointedCloudshaleBlock> codec() {
+    public @NotNull MapCodec<PointedCloudshaleBlock> codec() {
         return CODEC;
     }
 
-    public ModPointedCloudshaleBlock(BlockBehaviour.Properties properties) {
+    public PointedCloudshaleBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState((((this.stateDefinition.any()).setValue(TIP_DIRECTION, Direction.UP)).setValue(THICKNESS, DripstoneThickness.TIP)).setValue(WATERLOGGED, false));
     }
@@ -166,7 +166,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     public static void maybeTransferFluid(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, float f) {
         if (!(f > LAVA_TRANSFER_PROBABILITY_PER_RANDOM_TICK) || !(f > WATER_TRANSFER_PROBABILITY_PER_RANDOM_TICK)) {
             if (isStalactiteStartPos(blockState, serverLevel, blockPos)) {
-                Optional<ModPointedCloudshaleBlock.FluidInfo> optional = getFluidAboveStalactite(serverLevel, blockPos, blockState);
+                Optional<PointedCloudshaleBlock.FluidInfo> optional = getFluidAboveStalactite(serverLevel, blockPos, blockState);
                 if (optional.isPresent()) {
                     Fluid fluid = (optional.get()).fluid;
                     float g = 0.0f;
@@ -479,14 +479,14 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
     @Nullable
     public static BlockPos findStalactiteTipAboveCauldron(Level level, BlockPos blockPos) {
         BiPredicate<BlockPos, BlockState> biPredicate = (blockPosx, blockState) -> canDripThrough(level, blockPosx, blockState);
-        return findBlockVertical(level, blockPos, Direction.UP.getAxisDirection(), biPredicate, ModPointedCloudshaleBlock::canDrip, MAX_SEARCH_LENGTH_BETWEEN_STALACTITE_TIP_AND_CAULDRON).orElse(null);
+        return findBlockVertical(level, blockPos, Direction.UP.getAxisDirection(), biPredicate, PointedCloudshaleBlock::canDrip, MAX_SEARCH_LENGTH_BETWEEN_STALACTITE_TIP_AND_CAULDRON).orElse(null);
     }
 
     public static Fluid getCauldronFillFluidType(ServerLevel serverLevel, BlockPos blockPos) {
-        return getFluidAboveStalactite(serverLevel, blockPos, serverLevel.getBlockState(blockPos)).map((fluidInfo) -> fluidInfo.fluid).filter(ModPointedCloudshaleBlock::canFillCauldron).orElse(Fluids.EMPTY);
+        return getFluidAboveStalactite(serverLevel, blockPos, serverLevel.getBlockState(blockPos)).map((fluidInfo) -> fluidInfo.fluid).filter(PointedCloudshaleBlock::canFillCauldron).orElse(Fluids.EMPTY);
     }
 
-    private static Optional<ModPointedCloudshaleBlock.FluidInfo> getFluidAboveStalactite(Level level, BlockPos blockPos, BlockState blockState) {
+    private static Optional<PointedCloudshaleBlock.FluidInfo> getFluidAboveStalactite(Level level, BlockPos blockPos, BlockState blockState) {
         return !isStalactite(blockState) ? Optional.empty() : findRootBlock(level, blockPos, blockState, MAX_SEARCH_LENGTH_WHEN_CHECKING_DRIP_TYPE).map((blockPosx) -> {
             BlockPos blockPos2 = blockPosx.above();
             BlockState blockState2 = level.getBlockState(blockPos2);
@@ -497,7 +497,7 @@ public class ModPointedCloudshaleBlock extends Block implements Fallable, Simple
                 fluid = level.getFluidState(blockPos2).getType();
             }
 
-            return new ModPointedCloudshaleBlock.FluidInfo(blockPos2, fluid, blockState2);
+            return new PointedCloudshaleBlock.FluidInfo(blockPos2, fluid, blockState2);
         });
     }
 

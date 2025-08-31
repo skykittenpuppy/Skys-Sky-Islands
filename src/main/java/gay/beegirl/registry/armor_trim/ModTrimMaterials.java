@@ -22,8 +22,13 @@ public class ModTrimMaterials {
     public static final MaterialAssetGroup ALEXANDRITE_GROUP = MaterialAssetGroup.create("alexandrite");
     public static final ResourceKey<TrimMaterial> ALEXANDRITE = registerKey("alexandrite");
 
+    public static void registerTrimMaterials() {
+        SkysSkyIslands.LOGGER.info("Registering Trim Materials for " + SkysSkyIslands.MOD_ID);
+    }
+
     public static void bootstrap(BootstrapContext<TrimMaterial> bootstrapContext) {
-        register(bootstrapContext, ALEXANDRITE, Style.EMPTY.withColor(0), ALEXANDRITE_GROUP);
+        SkysSkyIslands.LOGGER.info("Trim Material Bootstrap for " + SkysSkyIslands.MOD_ID);
+        register(bootstrapContext, ALEXANDRITE, Style.EMPTY.withColor(0), ALEXANDRITE_GROUP); //TODO: Alexandrite Colour
     }
 
     public static ResourceKey<TrimMaterial> registerKey(String name) {

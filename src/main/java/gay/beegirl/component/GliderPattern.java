@@ -29,7 +29,7 @@ public record GliderPattern(Holder<GliderDesign> design) implements TooltipProvi
 
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
         consumer.accept(PATTERN_TITLE);
-        consumer.accept(CommonComponents.space().append(this.design.value().description()));
+        consumer.accept(CommonComponents.space().append(this.design.value().description()).withStyle(ChatFormatting.GRAY));
     }
 
     public ResourceLocation layerAssetId(String string, ResourceKey<EquipmentAsset> resourceKey) {

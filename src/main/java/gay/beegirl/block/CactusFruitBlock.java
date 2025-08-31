@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class ModCactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
+public class CactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
     public static final MapCodec<CocoaBlock> CODEC = simpleCodec(CocoaBlock::new);
     private static final Map<Direction, VoxelShape> BUDDING_SHAPE;
     private static final Map<Direction, VoxelShape> HANGING_SHAPE;
@@ -41,7 +41,7 @@ public class ModCactusFruitBlock extends HorizontalDirectionalBlock implements B
         return CODEC;
     }
 
-    public ModCactusFruitBlock(TreeGrower treeGrower, Properties properties) {
+    public CactusFruitBlock(TreeGrower treeGrower, Properties properties) {
         super(properties);
         this.treeGrower = treeGrower;
         this.registerDefaultState((((this.stateDefinition.any())

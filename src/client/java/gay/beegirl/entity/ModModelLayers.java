@@ -21,6 +21,8 @@ public class ModModelLayers {
     }
 
     public static void registerModModelLayers() {
+        SkysSkyIslands.LOGGER.info("Registering Model Layers for " + SkysSkyIslands.MOD_ID);
+
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GOLDENLEAF_BOAT, BoatModel::createBoatModel);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GOLDENLEAF_CHEST_BOAT, BoatModel::createChestBoatModel);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SAKURA_BOAT, BoatModel::createBoatModel);

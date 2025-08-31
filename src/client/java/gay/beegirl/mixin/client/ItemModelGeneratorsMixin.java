@@ -14,11 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(ItemModelGenerators.class)
-public class ItemModelGeneratorsMixin {
-    @Mutable
+public abstract class ItemModelGeneratorsMixin {
     @Shadow
-    @Final
-    public static List<TrimMaterialData> TRIM_MATERIAL_MODELS;
+    @Mutable
+    public static @Final List<TrimMaterialData> TRIM_MATERIAL_MODELS;
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void modifyTrimMaterialModels(CallbackInfo ci){

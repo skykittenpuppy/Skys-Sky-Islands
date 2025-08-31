@@ -23,7 +23,12 @@ import java.util.Optional;
 public class ModTrimPatterns {
     public static final ResourceKey<TrimPattern> TESTING = registerKey("testing");
 
+    public static void registerTrimPatterns() {
+        SkysSkyIslands.LOGGER.info("Registering Trim Patterns for " + SkysSkyIslands.MOD_ID);
+    }
+
     public static void bootstrap(BootstrapContext<TrimPattern> bootstrapContext) {
+        SkysSkyIslands.LOGGER.info("Trim Pattern Bootstrap for " + SkysSkyIslands.MOD_ID);
         register(bootstrapContext, TESTING);
     }
 

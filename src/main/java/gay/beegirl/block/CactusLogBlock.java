@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class ModCactusBlock extends RotatedPillarBlock {
+public class CactusLogBlock extends RotatedPillarBlock {
     public static final IntegerProperty AGE;
     public static final EnumProperty<Direction.Axis> AXIS;
 
@@ -33,7 +33,7 @@ public class ModCactusBlock extends RotatedPillarBlock {
     private static final double ATTEMPT_GROW_CACTUS_FRUIT_SMALL_CACTUS_CHANCE = 0.1F;
     private static final double ATTEMPT_GROW_CACTUS_FRUIT_TALL_CACTUS_CHANCE = 0.25F;
 
-    public ModCactusBlock(Properties properties) {
+    public CactusLogBlock(Properties properties) {
         super(properties);
         this.registerDefaultState((this.stateDefinition.any()).setValue(AGE, 0));
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
@@ -54,11 +54,11 @@ public class ModCactusBlock extends RotatedPillarBlock {
 
             boolean grewFruit = false;
             for(Direction direction : Direction.Plane.HORIZONTAL) {
-                ModCactusFruitBlock fruit = (ModCactusFruitBlock) ModBlocks.ARBOREAL_CACTUS_FRUIT;
+                CactusFruitBlock fruit = (CactusFruitBlock) ModBlocks.ARBOREAL_CACTUS_FRUIT;
                 if (j >= ATTEMPT_GROW_CACTUS_FRUIT_AGE && fruit.canSurvive(fruit.defaultBlockState(), serverLevel, blockPos.relative(direction))) {
                     double d = i >= MAX_CACTUS_GROWING_HEIGHT ? ATTEMPT_GROW_CACTUS_FRUIT_TALL_CACTUS_CHANCE : ATTEMPT_GROW_CACTUS_FRUIT_SMALL_CACTUS_CHANCE;
                     if (randomSource.nextDouble() <= d) {
-                        serverLevel.setBlockAndUpdate(blockPos.relative(direction), fruit.defaultBlockState().setValue(ModCactusFruitBlock.HANGING, true).setValue(ModCactusFruitBlock.FACING, direction.getOpposite()));
+                        serverLevel.setBlockAndUpdate(blockPos.relative(direction), fruit.defaultBlockState().setValue(CactusFruitBlock.HANGING, true).setValue(CactusFruitBlock.FACING, direction.getOpposite()));
                         grewFruit = true;
                         break;
                     }

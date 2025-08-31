@@ -14,11 +14,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderers.class)
-public class EntityRenderersMixin {
-
+public abstract class EntityRenderersMixin {
     @Shadow
-    private static <T extends Entity> void register(EntityType<? extends T> entityType, EntityRendererProvider<T> entityRendererProvider) {
-    }
+    private static <T extends Entity> void register(EntityType<? extends T> entityType, EntityRendererProvider<T> entityRendererProvider) {}
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void injected(CallbackInfo ci) {

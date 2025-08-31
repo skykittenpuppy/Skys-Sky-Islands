@@ -9,10 +9,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-public class GliderDesigns {
+public class ModGliderDesigns {
     public static final ResourceKey<GliderDesign> TESTING = registerKey("testing");
 
+    public static void registerGliderDesigns() {
+        SkysSkyIslands.LOGGER.info("Registering Glider Designs for " + SkysSkyIslands.MOD_ID);
+    }
+
     public static void bootstrap(BootstrapContext<GliderDesign> bootstrapContext) {
+        SkysSkyIslands.LOGGER.info("Glider Design Bootstrap for " + SkysSkyIslands.MOD_ID);
+
         register(bootstrapContext, TESTING);
     }
 

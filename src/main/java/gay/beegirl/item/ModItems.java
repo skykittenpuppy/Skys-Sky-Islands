@@ -6,15 +6,20 @@ import gay.beegirl.entity.ModEntityTypes;
 import gay.beegirl.registry.armor_trim.ModTrimMaterials;
 import gay.beegirl.util.ModTags;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SmithingTemplateItem;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.Equippable;
 
 import java.util.function.Function;
 
@@ -33,7 +38,14 @@ public class ModItems {
 
     public static final Item ALEXANDRITE = registerItem("alexandrite", properties -> new Item(properties.trimMaterial(ModTrimMaterials.ALEXANDRITE)));
 
-    public static final Item GLIDER = registerItem("glider", properties -> new Item(properties.rarity(Rarity.RARE).component(ModDataComponents.HANG_GLIDER, Unit.INSTANCE).repairable(ModTags.Items.GLIDER_REPAIR_MATERIALS).stacksTo(1)));
+    public static final Item GLIDER = registerItem("glider", properties -> new Item(
+            properties
+                    .rarity(Rarity.RARE)
+                    .component(ModDataComponents.HANG_GLIDER, Unit.INSTANCE)
+                    .component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.MAINHAND).setDamageOnHurt(false).build())
+                    .repairable(ModTags.Items.GLIDER_REPAIR_MATERIALS)
+                    .stacksTo(1)
+    ));
 
     public static final Item TESTING_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("testing_armor_trim_smithing_template", properties -> SmithingTemplateItem.createArmorTrimTemplate(properties.trimMaterial(ModTrimMaterials.ALEXANDRITE)));
     public static final Item TESTING_GLIDER_PATTERN_SEWING_TEMPLATE = registerItem("testing_glider_pattern_sewing_template", properties -> new SewingTemplateItem(properties.rarity(Rarity.UNCOMMON)));
