@@ -3,6 +3,7 @@
   "package": "gay.beegirl.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "DimensionTypeMixin",
     "EntityMixin",
     "LivingEntityMixin",
     "PlayerMixin",
