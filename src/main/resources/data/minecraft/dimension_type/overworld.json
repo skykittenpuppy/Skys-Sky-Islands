@@ -2,6 +2,16 @@
   "ambient_light": 0.0,
   "bed_works": true,
   "cloud_height": 192,
+  "cloud_layers": [
+    {
+      "height": 192
+    },
+    {
+      "height": 224,
+      "x_offset": 0.5,
+      "y_offset": 0.5
+    }
+  ],
   "coordinate_scale": 1.0,
   "effects": "minecraft:overworld",
   "has_ceiling": false,

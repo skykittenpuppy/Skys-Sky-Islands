@@ -6,6 +6,7 @@ import gay.beegirl.entity.ModAttributes;
 import gay.beegirl.entity.ModEntityTypes;
 import gay.beegirl.item.ModCreativeModeTabs;
 import gay.beegirl.item.ModItems;
+import gay.beegirl.particle.ModParticleTypes;
 import gay.beegirl.recipe.ModRecipeSerializers;
 import gay.beegirl.recipe.ModRecipeTypes;
 import gay.beegirl.registry.ModRegistries;
@@ -37,6 +38,8 @@ public class SkysSkyIslands implements ModInitializer {
 
         ModCreativeModeTabs.registerCreativeModeTabs();
         ModItems.registerItems();
+
+        ModParticleTypes.registerParticleTypes();
 
         ModRecipeSerializers.registerRecipeSerializers();
         ModRecipeTypes.registerRecipeTypes();

@@ -3,3 +3,5 @@ accessWidener v2 named
 accessible method net/minecraft/world/entity/EntityType boatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/world/entity/EntityType$EntityFactory;
 accessible method net/minecraft/world/entity/EntityType chestBoatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/world/entity/EntityType$EntityFactory;
 accessible method net/minecraft/world/level/block/AbstractCauldronBlock canReceiveStalactiteDrip (Lnet/minecraft/world/level/material/Fluid;)Z
+accessible method net/minecraft/client/particle/FallingLeavesParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/client/particle/SpriteSet;FFZZFF)V
+accessible method net/minecraft/core/particles/SimpleParticleType <init> (Z)V

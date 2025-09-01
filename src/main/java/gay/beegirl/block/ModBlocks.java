@@ -1,6 +1,7 @@
 package gay.beegirl.block;
 
 import gay.beegirl.SkysSkyIslands;
+import gay.beegirl.particle.ModParticleTypes;
 import gay.beegirl.worldgen.ModConfiguredFeatures;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
@@ -8,7 +9,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
@@ -441,7 +441,7 @@ public class ModBlocks {
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
-    public static final Block SAKURA_LEAVES = registerBlock("sakura_leaves", properties -> new UntintedParticleLeavesBlock(0.1F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block SAKURA_LEAVES = registerBlock("sakura_leaves", properties -> new UntintedParticleLeavesBlock(0.1F, ModParticleTypes.SAKURA_PETALS,
             properties
                     .mapColor(MapColor.PLANT) //TODO: tweak MapColor
                     .instrument(NoteBlockInstrument.HARP)

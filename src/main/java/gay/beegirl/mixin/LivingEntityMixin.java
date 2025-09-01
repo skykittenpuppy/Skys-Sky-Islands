@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import gay.beegirl.SkysSkyIslands;
 import gay.beegirl.component.ModDataComponents;
 import gay.beegirl.entity.ModAttributes;
+import gay.beegirl.entity.StaminaHolder;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -18,9 +19,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -32,15 +38,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends EntityMixin {
+public abstract class LivingEntityMixin extends EntityMixin implements StaminaHolder {
     @Shadow
-    private void travelFallFlying(Vec3 vec3) {}
-    @Shadow
-    public AttributeInstance getAttribute(Holder<Attribute> holder) { return null; }
-
+    protected abstract void travelFallFlying(Vec3 vec3);
     @Shadow
     protected abstract void travelInAir(Vec3 vec3);
+    @Shadow
+    public abstract double getAttributeValue(Holder<Attribute> holder);
 
+    @Unique
+    public float staminaHideDelay = 0;
     @Unique
     protected boolean canRegenStamina = true;
     @Unique
@@ -53,6 +60,8 @@ public abstract class LivingEntityMixin extends EntityMixin {
     protected double minFallDistanceForFreefall = 5;
     @Unique
     private static final EntityDataAccessor<Integer> DATA_STAMINA_TICKS_ID;
+    @Unique
+    private static final String TAG_STAMINA = SkysSkyIslands.MOD_ID+":Stamina";
     @Unique
     private static final int baseMaxStaminaTicks = 400;
     @Unique
@@ -68,31 +77,36 @@ public abstract class LivingEntityMixin extends EntityMixin {
         else if (isHangGliding) {
             travelInAir(vec3);
             Vec3 deltaMovement = thisObject.getDeltaMovement();
-            if (deltaMovement.y < -0.25) deltaMovement = deltaMovement.lerp(new Vec3(deltaMovement.x, -0.25, deltaMovement.z), 0.5);
-            if (deltaMovement.y > -0.33) thisObject.fallDistance = Math.min(thisObject.fallDistance, 0.1f);
+            SkysSkyIslands.LOGGER.info(deltaMovement.y+"");
+            if (deltaMovement.y < -0.25) {
+                deltaMovement = deltaMovement.lerp(new Vec3(deltaMovement.x, -0.25, deltaMovement.z), 0.5);
+                SkysSkyIslands.LOGGER.info(deltaMovement.y+"");
+                if (deltaMovement.y > -0.33) {
+                    SkysSkyIslands.LOGGER.info("slow enough to avoid fall damage");
+                    thisObject.fallDistance = Math.min(thisObject.fallDistance, 0.1f);
+                }
+            }
             thisObject.setDeltaMovement(deltaMovement);
         }
         else if (isDiving)  {
             travelInAir(vec3);
             Vec3 deltaMovement = thisObject.getDeltaMovement();
-            deltaMovement = deltaMovement.lerp(new Vec3(deltaMovement.x, -2.0, deltaMovement.z), 0.5);
+            deltaMovement = deltaMovement.lerp(new Vec3(deltaMovement.x, -2.00, deltaMovement.z), 0.5);
             thisObject.setDeltaMovement(deltaMovement);
         }
         else if (isFreefalling)  {
             travelInAir(vec3);
             Vec3 deltaMovement = thisObject.getDeltaMovement();
-            if (deltaMovement.y < -0.75) deltaMovement = deltaMovement.lerp(new Vec3(deltaMovement.x, -0.75, deltaMovement.z), 0.5);
+            if (deltaMovement.y < -0.75) deltaMovement = deltaMovement.lerp(new Vec3(deltaMovement.x, -1.00, deltaMovement.z), 0.5);
             thisObject.setDeltaMovement(deltaMovement);
         }
     }
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isSleeping()Z", shift =  At.Shift.BEFORE))
     protected void tick(CallbackInfo ci) {
-        int curStaminaTicks = entityData.get(DATA_STAMINA_TICKS_ID);
+        int curStaminaTicks = getStamina();
         if (canRegenStamina) {
-            AttributeInstance attributeInstance = this.getAttribute(ModAttributes.STAMINA_BONUS);
-            int bonus = attributeInstance != null ? (int)attributeInstance.getValue() : 0;
-            curStaminaTicks = Math.min(++curStaminaTicks, baseMaxStaminaTicks + bonus);
+            curStaminaTicks = Math.min(++curStaminaTicks, getMaxStamina());
         }
 
         if (isHangGliding) {
@@ -101,7 +115,9 @@ public abstract class LivingEntityMixin extends EntityMixin {
             hangGlideTicks++;
         }
         else hangGlideTicks = 0;
-        entityData.set(DATA_STAMINA_TICKS_ID, curStaminaTicks);
+
+        setStamina(curStaminaTicks);
+        if (curStaminaTicks == getMaxStamina()) staminaHideDelay = Math.clamp(staminaHideDelay - 0.05f, 0, 1);
     }
 
     @Inject(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getBoundingBox()Lnet/minecraft/world/phys/AABB;", shift = At.Shift.BEFORE))
@@ -138,7 +154,7 @@ public abstract class LivingEntityMixin extends EntityMixin {
             isDiving = false;
             isFreefalling = false;
             for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) {
-                if (canHangGlideUsing(thisObject.getItemBySlot(equipmentSlot), equipmentSlot) && entityData.get(DATA_STAMINA_TICKS_ID) > 0) {
+                if (canHangGlideUsing(thisObject.getItemBySlot(equipmentSlot), equipmentSlot) && getStamina() > 0) {
                     isHangGliding = true;
                     return;
                 }
@@ -171,10 +187,37 @@ public abstract class LivingEntityMixin extends EntityMixin {
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     private static void defineSynchedData(CallbackInfo ci, @Local SynchedEntityData.Builder builder){
-        builder.define(DATA_STAMINA_TICKS_ID, 400);
+        builder.define(DATA_STAMINA_TICKS_ID, 0);
     }
 
     static {
         DATA_STAMINA_TICKS_ID = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.INT);
+    }
+
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    private void addAdditionalSaveData(CallbackInfo ci, @Local ValueOutput valueOutput){
+        valueOutput.putInt(TAG_STAMINA, getStamina());
+    }
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    private void readAdditionalSaveData(CallbackInfo ci, @Local ValueInput valueInput){
+        setStamina(valueInput.getIntOr(TAG_STAMINA, getMaxStamina()));
+    }
+    @Inject(method = "<init>", at = @At("TAIL"))
+    public void init(CallbackInfo ci) {
+        setStamina(getMaxStamina());
+    }
+
+    public int getStamina() {
+        return entityData.get(DATA_STAMINA_TICKS_ID);
+    }
+    public int getMaxStamina() {
+        return baseMaxStaminaTicks + (int)getAttributeValue(ModAttributes.STAMINA_BONUS);
+    }
+    public void setStamina(int stamina) {
+        entityData.set(DATA_STAMINA_TICKS_ID, stamina);
+        if (stamina != getMaxStamina()) staminaHideDelay = 1;
+    }
+    public float getStaminaHideDelay() {
+        return staminaHideDelay;
     }
 }
