@@ -1,14 +1,18 @@
 package gay.beegirl.mixin;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import gay.beegirl.SkysSkyIslands;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
@@ -16,47 +20,36 @@ public abstract class PlayerMixin extends LivingEntityMixin{
     @Shadow
     private @Final Abilities abilities;
 
-    @Unique
-    private static final int FLAG_HANG_GLIDING = 0; //Protected
-    @Unique
-    private static final int FLAG_DIVING = 1; //Protected
-    @Unique
-    private static final int FLAG_FREEFALLING = 2; //Protected
-
-    @Inject(method = "getDesiredPose", at = @At("HEAD"), cancellable = true)
-    private void getDesiredPose(CallbackInfoReturnable<Pose> cir) {
-        if (isHangGliding()) {
-            cir.setReturnValue(Pose.FALL_FLYING); //TODO: Poses?
+    protected void canHangGlideOrDiveOrFreefall() {
+        super.canHangGlideOrDiveOrFreefall();
+        if (this.abilities.flying) {
+            this.isHangGliding = false;
+            this.isDiving = false;
+            this.isFreefalling = false;
         }
-    } //TODO: this feels janky
-
-    protected boolean canHangGlide() {
-        return !this.abilities.flying && super.canHangGlide();
     }
 
-    @Unique
-    public boolean tryToStartHangGliding() {
+    @ModifyExpressionValue(method = "getDesiredPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isFallFlying()Z"))
+    private boolean getDesiredPose$isFallFlyingOrHangGlidingOrDivingOrFreefalling(boolean original) {
+        return original || this.isHangGliding || this.isDiving || this.isFreefalling;
+    }
+    @ModifyReturnValue(method = "getDesiredPose", at = @At("RETURN"))
+    private Pose getDesiredPose$fallFlyingOrHangGlidingPose(Pose original){
         Player thisObject = (Player)(Object)this;
-
-        if (!isHangGliding() && canHangGlide() && !thisObject.isInWater()) {
-            startHangGliding();
-            return true;
-        } else {
-            return false;
-        }
+        if (thisObject.isFallFlying()) return original;
+        else if (this.isHangGliding) return Pose.STANDING; //TODO: Custom poses?
+        else if (this.isDiving) return Pose.SPIN_ATTACK;
+        else if (this.isFreefalling) return Pose.SWIMMING;
+        else return original;
     }
 
-    @Unique
-    public void startHangGliding() {
-        this.setSkyIslandFlag(FLAG_HANG_GLIDING, true);
-    }
+    @ModifyExpressionValue(method = "getBlockSpeedFactor", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isFallFlying()Z"))
+    private boolean getBlockSpeedFactor$isFallFlyingOrHangGlidingOrDivingOrFreefalling(boolean original) {
+        return original || this.isHangGliding || this.isDiving || this.isFreefalling;
+    } //NOTE: ORs due to the entire value being negated and ANDed
 
-    @Inject(method = "getBlockSpeedFactor", at = @At("HEAD"), cancellable = true)
-    protected void getBlockSpeedFactor(CallbackInfoReturnable<Float> cir) {
-        if (isHangGliding()) {
-            cir.setReturnValue(1.0F);
-        }
-    } //TODO: this feels janky
-
-    //TODO: getRopeHoldPosition()
+    @ModifyExpressionValue(method = "getRopeHoldPosition", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isFallFlying()Z"))
+    private boolean getRopeHoldPosition$isFallFlyingOrHangGlidingOrDivingOrFreefalling(boolean original) {
+        return original || this.isHangGliding || this.isDiving || this.isFreefalling;
+    } //NOTE: ORs due to the entire value being negated and ANDed
 }

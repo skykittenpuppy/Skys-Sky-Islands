@@ -2,6 +2,7 @@ package gay.beegirl;
 
 import gay.beegirl.block.ModBlocks;
 import gay.beegirl.component.ModDataComponents;
+import gay.beegirl.entity.ModAttributes;
 import gay.beegirl.entity.ModEntityTypes;
 import gay.beegirl.item.ModCreativeModeTabs;
 import gay.beegirl.item.ModItems;
@@ -31,6 +32,7 @@ public class SkysSkyIslands implements ModInitializer {
 
         ModDataComponents.registerDataComponents();
 
+        ModAttributes.registerAttributes();
         ModEntityTypes.registerEntityTypes();
 
         ModCreativeModeTabs.registerCreativeModeTabs();

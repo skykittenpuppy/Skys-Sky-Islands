@@ -1,4 +1,6 @@
 {
+  "attribute.sky-islands.stamina_bonus": "Stamina Bonus",
+
   "block.sky-islands.goldenleaf_log": "Goldenleaf Log",
   "block.sky-islands.goldenleaf_wood": "Goldenleaf Wood",
   "block.sky-islands.stripped_goldenleaf_log": "Stripped Goldenleaf Log",
