@@ -1,0 +1,13 @@
+{
+  "itemGroup.skyislands": "Example Mod Tab",
+  "block.skyislands.example_block": "Example Block",
+  "item.skyislands.example_item": "Example Item",
+
+  "skyislands.configuration.title": "Sky's Sky Islands Configs",
+  "skyislands.configuration.section.skyislands.common.toml": "Sky's Sky Islands Configs",
+  "skyislands.configuration.section.skyislands.common.toml.title": "Sky's Sky Islands Configs",
+  "skyislands.configuration.items": "Item List",
+  "skyislands.configuration.logDirtBlock": "Log Dirt Block",
+  "skyislands.configuration.magicNumberIntroduction": "Magic Number Text",
+  "skyislands.configuration.magicNumber": "Magic Number"
+}
