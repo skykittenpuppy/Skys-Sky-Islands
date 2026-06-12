@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "skyislands:raw_alexandrite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "skyislands:raw_alexandrite"
+  }
+}

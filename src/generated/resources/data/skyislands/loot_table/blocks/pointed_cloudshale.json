@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "skyislands:pointed_cloudshale"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "skyislands:blocks/pointed_cloudshale"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "z": {
+      "item": "skyislands:alexandrite"
+    }
+  },
+  "pattern": [
+    "zzz",
+    "zzz",
+    "zzz"
+  ],
+  "result": {
+    "count": 1,
+    "id": "skyislands:alexandrite_block"
+  }
+}
