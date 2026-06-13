@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Set;
 
@@ -39,21 +40,21 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         createWoodTypeLootTables(ModBlocks.GOLDENLEAF_PLANKS);
         add(ModBlocks.GOLDENLEAF_LEAVES.get(), createLeavesDrops(ModBlocks.GOLDENLEAF_LEAVES.get(), ModBlocks.GOLDENLEAF_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.GOLDENLEAF_SAPLING.get());
-        add(ModBlocks.POTTED_GOLDENLEAF_SAPLING.get(), createPotFlowerItemTable(ModBlocks.GOLDENLEAF_SAPLING.asItem()));
+        add(ModBlocks.POTTED_GOLDENLEAF_SAPLING.get(), createPotFlowerItemTable(ModBlocks.GOLDENLEAF_SAPLING.get()));
 
         createWoodTypeLootTables(ModBlocks.SAKURA_PLANKS);
         add(ModBlocks.SAKURA_LEAVES.get(), createLeavesDrops(ModBlocks.SAKURA_LEAVES.get(), ModBlocks.SAKURA_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.SAKURA_SAPLING.get());
-        add(ModBlocks.POTTED_SAKURA_SAPLING.get(), createPotFlowerItemTable(ModBlocks.SAKURA_SAPLING.asItem()));
+        add(ModBlocks.POTTED_SAKURA_SAPLING.get(), createPotFlowerItemTable(ModBlocks.SAKURA_SAPLING.get()));
 
         createWoodTypeLootTables(ModBlocks.FRIGID_PLANKS);
         add(ModBlocks.FRIGID_LEAVES.get(), createLeavesDrops(ModBlocks.FRIGID_LEAVES.get(), ModBlocks.FRIGID_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.FRIGID_SAPLING.get());
-        add(ModBlocks.POTTED_FRIGID_SAPLING.get(), createPotFlowerItemTable(ModBlocks.FRIGID_SAPLING.asItem()));
+        add(ModBlocks.POTTED_FRIGID_SAPLING.get(), createPotFlowerItemTable(ModBlocks.FRIGID_SAPLING.get()));
 
-        //createWoodTypeLootTables(ModBlocks.ARBOREAL_CACTUS_PLANKS);
-        //add(ModBlock.ARBOREAL_CACTUS_FRUIT, createCropDrops(ModBlock.ARBOREAL_CACTUS_FRUIT, ModBlock.ARBOREAL_CACTUS_FRUIT.asItem(), ModBlock.ARBOREAL_CACTUS_FRUIT.asItem(), LootItemCondition.DIRECT_CODEC.));
-        //add(ModBlocks.POTTED_ARBOREAL_CACTUS, createPotFlowerItemTable(ModBlocks.ARBOREAL_CACTUS_FRUIT.asItem()));
+        createWoodTypeLootTables(ModBlocks.ARBOREAL_CACTUS_PLANKS);
+        dropSelf(ModBlocks.ARBOREAL_CACTUS_FRUIT.get());
+        add(ModBlocks.POTTED_ARBOREAL_CACTUS.get(), createPotFlowerItemTable(ModBlocks.ARBOREAL_CACTUS_FRUIT.get()));
     }
 
     private void createStoneTypeLootTables(ModBlocks.StoneSetBlocks stoneSetBlocks) {

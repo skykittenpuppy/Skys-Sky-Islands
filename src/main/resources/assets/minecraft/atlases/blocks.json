@@ -19,7 +19,7 @@
         "quartz": "minecraft:trims/color_palettes/quartz",
         "redstone": "minecraft:trims/color_palettes/redstone",
         "resin": "minecraft:trims/color_palettes/resin",
-        "alexandrite": "sky-islands:trims/color_palettes/alexandrite"
+        "alexandrite": "skyislands:trims/color_palettes/alexandrite"
       },
       "textures": [
         "minecraft:trims/items/helmet_trim",

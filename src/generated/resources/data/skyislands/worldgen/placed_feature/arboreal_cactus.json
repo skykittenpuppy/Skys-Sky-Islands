@@ -1,0 +1,19 @@
+{
+  "feature": "skyislands:arboreal_cactus",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "skyislands:arboreal_cactus_fruit",
+          "Properties": {
+            "facing": "north",
+            "hanging": "false",
+            "stage": "0"
+          }
+        }
+      }
+    }
+  ]
+}

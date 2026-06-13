@@ -2,8 +2,15 @@ package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.registry.ModRegistries;
+import gay.beegirl.skyislands.registry.armor_trim.ModArmorTrimMaterials;
+import gay.beegirl.skyislands.registry.armor_trim.ModArmorTrimPatterns;
+import gay.beegirl.skyislands.registry.glider_pattern.ModGliderPatternDesigns;
+import gay.beegirl.skyislands.worldgen.ModBiomeModifiers;
+import gay.beegirl.skyislands.worldgen.ModConfiguredFeatures;
+import gay.beegirl.skyislands.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -11,11 +18,14 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = SkysSkyIslands.MOD_ID)
@@ -43,5 +53,13 @@ public class ModDataGenerator {
         generator.addProvider(event.includeClient(), new ModParticleDescriptionProvider(packOutput, existingFileHelper));
         //Recipe
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
+        //DatapackRegistries
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, new RegistrySetBuilder()
+                .add(Registries.TRIM_MATERIAL, ModArmorTrimMaterials::bootstrap)
+                .add(Registries.TRIM_PATTERN, ModArmorTrimPatterns::bootstrap)
+                /*.add(ModRegistries.GLIDER_DESIGN, ModGliderPatternDesigns::bootstrap)*/
+                .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+                .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+                .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
     }
 }

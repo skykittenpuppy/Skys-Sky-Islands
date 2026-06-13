@@ -492,39 +492,39 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    /*private static final DeferredBlock<Block> ARBOREAL_CACTUS_STEM = registerBlock("arboreal_cactus_stem", properties -> new CactusLogBlock(
-            properties
-                    .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLACK : MapColor.COLOR_MAGENTA) //TODO: tweak MapColors
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .randomTicks()
-                    .ignitedByLava()
-    ));
-    private static final DeferredBlock<Block> ARBOREAL_CACTUS_HYPHAE = registerBlock("arboreal_cactus_hyphae", properties -> new CactusLogBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    private static final DeferredBlock<Block> STRIPPED_ARBOREAL_CACTUS_STEM = registerBlock("stripped_arboreal_cactus_stem", properties -> new CactusLogBlock(
-            properties
-                    .mapColor(MapColor.COLOR_BLACK) //TODO: tweak MapColor
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));
-    private static final DeferredBlock<Block> STRIPPED_ARBOREAL_CACTUS_HYPHAE = registerBlock("stripped_arboreal_cactus_hyphae", properties -> new CactusLogBlock(
-            properties
-                    .mapColor(MapColor.COLOR_BLACK) //TODO: tweak MapColor
-                    .instrument(NoteBlockInstrument.BASS)
-                    .strength(2.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-    ));*/
+    //private static final DeferredBlock<Block> ARBOREAL_CACTUS_STEM = registerBlock("arboreal_cactus_stem", properties -> new CactusLogBlock(
+    //        properties
+    //                .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLACK : MapColor.COLOR_MAGENTA) //TODO: tweak MapColors
+    //                .instrument(NoteBlockInstrument.BASS)
+    //                .strength(2.0F)
+    //                .sound(SoundType.WOOD)
+    //                .randomTicks()
+    //                .ignitedByLava()
+    //));
+    //private static final DeferredBlock<Block> ARBOREAL_CACTUS_HYPHAE = registerBlock("arboreal_cactus_hyphae", properties -> new CactusLogBlock(
+    //        properties
+    //                .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColor
+    //                .instrument(NoteBlockInstrument.BASS)
+    //                .strength(2.0F)
+    //                .sound(SoundType.WOOD)
+    //                .ignitedByLava()
+    //));
+    //private static final DeferredBlock<Block> STRIPPED_ARBOREAL_CACTUS_STEM = registerBlock("stripped_arboreal_cactus_stem", properties -> new CactusLogBlock(
+    //        properties
+    //                .mapColor(MapColor.COLOR_BLACK) //TODO: tweak MapColor
+    //                .instrument(NoteBlockInstrument.BASS)
+    //                .strength(2.0F)
+    //                .sound(SoundType.WOOD)
+    //                .ignitedByLava()
+    //));
+    //private static final DeferredBlock<Block> STRIPPED_ARBOREAL_CACTUS_HYPHAE = registerBlock("stripped_arboreal_cactus_hyphae", properties -> new CactusLogBlock(
+    //        properties
+    //                .mapColor(MapColor.COLOR_BLACK) //TODO: tweak MapColor
+    //                .instrument(NoteBlockInstrument.BASS)
+    //                .strength(2.0F)
+    //                .sound(SoundType.WOOD)
+    //                .ignitedByLava()
+    //));
     //public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks(ARBOREAL_CACTUS_STEM, ARBOREAL_CACTUS_HYPHAE, STRIPPED_ARBOREAL_CACTUS_STEM, STRIPPED_ARBOREAL_CACTUS_HYPHAE, "arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_BLACK, MapColor.COLOR_LIGHT_GREEN); //TODO: tweak MapColors
     //public static final BlockFamily ARBOREAL_CACTUS_PLANKS_FAMILY = new BlockFamily.Builder(ARBOREAL_CACTUS_PLANKS.planks.get())
     //        .button(ARBOREAL_CACTUS_PLANKS.button.get())
@@ -539,7 +539,8 @@ public class ModBlocks {
     //        .recipeGroupPrefix("wooden")
     //        .recipeUnlockedBy("has_planks")
     //        .getFamily();
-    /*public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new CactusFruitBlock(ModTreeGrowers.ARBOREAL_CACTUS,
+    public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO: tweak MapColors
+    public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new CactusFruitBlock(ModTreeGrowers.ARBOREAL_CACTUS,
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)
@@ -549,12 +550,12 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_ARBOREAL_CACTUS = registerBlock("potted_arboreal_cactus", properties -> new FlowerPotBlock(ARBOREAL_CACTUS_FRUIT,
+    public static final DeferredBlock<Block> POTTED_ARBOREAL_CACTUS = registerBlock("potted_arboreal_cactus", properties -> new FlowerPotBlock(ARBOREAL_CACTUS_FRUIT.get(),
             properties
                     .instabreak()
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-    ));*/
+    ));
 
     public static class ModBlockSetTypes {
         public static final BlockSetType CLOUDSHALE = BlockSetType.register(new BlockSetType("cloudshale", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));

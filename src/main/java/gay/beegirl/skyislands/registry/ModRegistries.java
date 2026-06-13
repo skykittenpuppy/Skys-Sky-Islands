@@ -8,9 +8,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 
 public class ModRegistries {
-    public static void registerRegistries() {
-        SkysSkyIslands.LOGGER.info("Registering Registries for " + SkysSkyIslands.MOD_ID);
+    public static final ResourceKey<Registry<GliderDesign>> GLIDER_DESIGN = ResourceKey.createRegistryKey(SkysSkyIslands.createId("glider_design"));
 
-        DynamicRegistries.registerSynced(ModRegistryResourceKeys.GLIDER_DESIGN, GliderDesign.DIRECT_CODEC);
+    @SubscribeEvent
+    public static void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(GLIDER_DESIGN, GliderDesign.DIRECT_CODEC, GliderDesign.DIRECT_CODEC);
     }
 }

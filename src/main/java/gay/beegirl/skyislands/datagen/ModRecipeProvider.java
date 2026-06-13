@@ -3,6 +3,7 @@ package gay.beegirl.skyislands.datagen;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.block.ModBlocks;
 import gay.beegirl.skyislands.item.ModItems;
+import gay.beegirl.skyislands.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
@@ -68,13 +69,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         //generateRecipes(recipeOutput, ModBlocks.MOSSY_COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
         //generateRecipes(recipeOutput, ModBlocks.CHERRY_COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
 
-        //createWoodTypeRecipes(ModTags.Items.GOLDENLEAF_LOGS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT, ModBlocks.GOLDENLEAF_PLANKS, ModBlocks.GOLDENLEAF_PLANKS_FAMILY);
-
-        //createWoodTypeRecipes(ModTags.Items.SAKURA_LOGS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT, ModBlocks.SAKURA_PLANKS, ModBlocks.SAKURA_PLANKS_FAMILY);
-
-        //createWoodTypeRecipes(ModTags.Items.FRIGID_LOGS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT, ModBlocks.FRIGID_PLANKS, ModBlocks.FRIGID_PLANKS_FAMILY);
-
-        //createWoodTypeRecipes(ModTags.Items.ARBOREAL_CACTUS_STEMS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModBlocks.ARBOREAL_CACTUS_PLANKS_FAMILY);
+        //createWoodTypeRecipes(recipeOutput, ModTags.Items.GOLDENLEAF_LOGS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT, ModBlocks.GOLDENLEAF_PLANKS, ModBlocks.GOLDENLEAF_PLANKS_FAMILY);
+//
+        //createWoodTypeRecipes(recipeOutput, ModTags.Items.SAKURA_LOGS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT, ModBlocks.SAKURA_PLANKS, ModBlocks.SAKURA_PLANKS_FAMILY);
+//
+        //createWoodTypeRecipes(recipeOutput, ModTags.Items.FRIGID_LOGS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT, ModBlocks.FRIGID_PLANKS, ModBlocks.FRIGID_PLANKS_FAMILY);
+//
+        //createWoodTypeRecipes(recipeOutput, ModTags.Items.ARBOREAL_CACTUS_STEMS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModBlocks.ARBOREAL_CACTUS_PLANKS_FAMILY);
     }
 
     protected static void oreSmelting(RecipeOutput recipeOutput, List<ItemLike> ingredients, RecipeCategory category, ItemLike result, float experience, int cookingTime, String group) {

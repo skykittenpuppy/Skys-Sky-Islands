@@ -1,0 +1,8 @@
+{
+  "asset_id": "skyislands:testing",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.skyislands.testing"
+  },
+  "template_item": "skyislands:testing_armor_trim_smithing_template"
+}

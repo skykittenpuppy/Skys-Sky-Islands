@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "sky-islands:block/arboreal_cactus_fruit0",
-		"particle": "sky-islands:block/arboreal_cactus_fruit0"
+		"0": "skyislands:block/arboreal_cactus_fruit0",
+		"particle": "skyislands:block/arboreal_cactus_fruit0"
 	},
 	"elements": [
 		{

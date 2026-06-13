@@ -34,29 +34,29 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.planks().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.planks().asItem())
-                .add(ModBlocks.FRIGID_PLANKS.planks().asItem());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().asItem());
+                .add(ModBlocks.FRIGID_PLANKS.planks().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().asItem());
         tag(ItemTags.SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.standingSign().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.standingSign().asItem())
-                .add(ModBlocks.FRIGID_PLANKS.standingSign().asItem());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign().asItem());
+                .add(ModBlocks.FRIGID_PLANKS.standingSign().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign().asItem());
         tag(ItemTags.HANGING_SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.hangingSign().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.hangingSign().asItem())
-                .add(ModBlocks.FRIGID_PLANKS.hangingSign().asItem());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign().asItem());
+                .add(ModBlocks.FRIGID_PLANKS.hangingSign().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign().asItem());
 
-        //tag(ItemTags.BOATS)
-        //        .add(ModItems.GOLDENLEAF_BOAT)
-        //        .add(ModItems.SAKURA_BOAT)
-        //        .add(ModItems.FRIGID_BOAT)
-        //        .add(ModItems.ARBOREAL_CACTUS_BOAT);
-        //tag(ItemTags.CHEST_BOATS)
-        //        .add(ModItems.GOLDENLEAF_CHEST_BOAT)
-        //        .add(ModItems.SAKURA_CHEST_BOAT)
-        //        .add(ModItems.FRIGID_CHEST_BOAT)
-        //        .add(ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
+        tag(ItemTags.BOATS)
+                .add(ModItems.GOLDENLEAF_BOAT.asItem())
+                .add(ModItems.SAKURA_BOAT.asItem())
+                .add(ModItems.FRIGID_BOAT.asItem())
+                .add(ModItems.ARBOREAL_CACTUS_BOAT.asItem());
+        tag(ItemTags.CHEST_BOATS)
+                .add(ModItems.GOLDENLEAF_CHEST_BOAT.asItem())
+                .add(ModItems.SAKURA_CHEST_BOAT.asItem())
+                .add(ModItems.FRIGID_CHEST_BOAT.asItem())
+                .add(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.asItem());
 
         tag(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.ALEXANDRITE.get());
@@ -67,7 +67,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModBlocks.SAKURA_PLANKS.log().asItem(), ModBlocks.SAKURA_PLANKS.wood().asItem(), ModBlocks.SAKURA_PLANKS.strippedLog().asItem(), ModBlocks.SAKURA_PLANKS.strippedWood().asItem());
         tag(ModTags.Items.FRIGID_LOGS)
                 .add(ModBlocks.FRIGID_PLANKS.log().asItem(), ModBlocks.FRIGID_PLANKS.wood().asItem(), ModBlocks.FRIGID_PLANKS.strippedLog().asItem(), ModBlocks.FRIGID_PLANKS.strippedWood().asItem());
-        //tag(ModTags.Items.ARBOREAL_CACTUS_STEMS)
-        //        .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.wood().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood().asItem());
+        tag(ModTags.Items.ARBOREAL_CACTUS_STEMS)
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.wood().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood().asItem());
     }
 }

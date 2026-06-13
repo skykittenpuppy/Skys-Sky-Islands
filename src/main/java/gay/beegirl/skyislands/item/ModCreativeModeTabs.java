@@ -17,28 +17,131 @@ public class ModCreativeModeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SKY_ISLANDS = CREATIVE_MODE_TABS.register("sky_islands", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.skyislands.sky_islands"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(Items.COOKED_BEEF::getDefaultInstance)
+            .icon(ModItems.ALEXANDRITE.get()::getDefaultInstance)
             .displayItems((parameters, output) -> {
-                output.accept(ModBlocks.GOLDENLEAF_PLANKS.log().get());
-                //output.accept(ModItems.GOLDENLEAF_BOAT.get());
-                //output.accept(ModItems.GOLDENLEAF_CHEST_BOAT.get());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.log());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.wood());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.strippedLog());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.strippedWood());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.planks());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.stairs());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.slab());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.fence());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.fenceGate());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.door());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.trapdoor());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.pressurePlate());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.button());
+                output.accept(ModBlocks.GOLDENLEAF_LEAVES);
+                output.accept(ModBlocks.GOLDENLEAF_SAPLING);
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.standingSign());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.hangingSign());
+                output.accept(ModItems.GOLDENLEAF_BOAT);
+                output.accept(ModItems.GOLDENLEAF_CHEST_BOAT);
 
-                //output.accept(ModItems.SAKURA_BOAT.get());
-                //output.accept(ModItems.SAKURA_CHEST_BOAT.get());
+                output.accept(ModBlocks.SAKURA_PLANKS.log());
+                output.accept(ModBlocks.SAKURA_PLANKS.wood());
+                output.accept(ModBlocks.SAKURA_PLANKS.strippedLog());
+                output.accept(ModBlocks.SAKURA_PLANKS.strippedWood());
+                output.accept(ModBlocks.SAKURA_PLANKS.planks());
+                output.accept(ModBlocks.SAKURA_PLANKS.stairs());
+                output.accept(ModBlocks.SAKURA_PLANKS.slab());
+                output.accept(ModBlocks.SAKURA_PLANKS.fence());
+                output.accept(ModBlocks.SAKURA_PLANKS.fenceGate());
+                output.accept(ModBlocks.SAKURA_PLANKS.door());
+                output.accept(ModBlocks.SAKURA_PLANKS.trapdoor());
+                output.accept(ModBlocks.SAKURA_PLANKS.pressurePlate());
+                output.accept(ModBlocks.SAKURA_PLANKS.button());
+                output.accept(ModBlocks.SAKURA_LEAVES);
+                output.accept(ModBlocks.SAKURA_SAPLING);
+                output.accept(ModBlocks.SAKURA_PLANKS.standingSign());
+                output.accept(ModBlocks.SAKURA_PLANKS.hangingSign());
+                output.accept(ModItems.SAKURA_BOAT);
+                output.accept(ModItems.SAKURA_CHEST_BOAT);
 
-                //output.accept(ModItems.FRIGID_BOAT.get());
-                //output.accept(ModItems.FRIGID_CHEST_BOAT.get());
+                output.accept(ModBlocks.FRIGID_PLANKS.log());
+                output.accept(ModBlocks.FRIGID_PLANKS.wood());
+                output.accept(ModBlocks.FRIGID_PLANKS.strippedLog());
+                output.accept(ModBlocks.FRIGID_PLANKS.strippedWood());
+                output.accept(ModBlocks.FRIGID_PLANKS.planks());
+                output.accept(ModBlocks.FRIGID_PLANKS.stairs());
+                output.accept(ModBlocks.FRIGID_PLANKS.slab());
+                output.accept(ModBlocks.FRIGID_PLANKS.fence());
+                output.accept(ModBlocks.FRIGID_PLANKS.fenceGate());
+                output.accept(ModBlocks.FRIGID_PLANKS.door());
+                output.accept(ModBlocks.FRIGID_PLANKS.trapdoor());
+                output.accept(ModBlocks.FRIGID_PLANKS.pressurePlate());
+                output.accept(ModBlocks.FRIGID_PLANKS.button());
+                output.accept(ModBlocks.FRIGID_LEAVES);
+                output.accept(ModBlocks.FRIGID_SAPLING);
+                output.accept(ModBlocks.FRIGID_PLANKS.standingSign());
+                output.accept(ModBlocks.FRIGID_PLANKS.hangingSign());
+                output.accept(ModItems.FRIGID_BOAT);
+                output.accept(ModItems.FRIGID_CHEST_BOAT);
 
-                //output.accept(ModItems.ARBOREAL_CACTUS_BOAT.get());
-                //output.accept(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.log());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.wood());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.stairs());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.slab());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.fence());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.fenceGate());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.door());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.trapdoor());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.pressurePlate());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.button());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_FRUIT);
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign());
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign());
+                output.accept(ModItems.ARBOREAL_CACTUS_BOAT);
+                output.accept(ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
 
-                output.accept(ModItems.RAW_ALEXANDRITE.get());
-                output.accept(ModItems.ALEXANDRITE.get());
+                output.accept(ModBlocks.CLOUDSHALE_GRASS);
+                output.accept(ModBlocks.CLOUDSHALE_CHERRY_GRASS);
 
-                output.accept(ModItems.GLIDER.get());
+                output.accept(ModBlocks.POINTED_CLOUDSHALE);
+                output.accept(ModBlocks.CLOUDSHALE.base());
+                output.accept(ModBlocks.CLOUDSHALE.stairs());
+                output.accept(ModBlocks.CLOUDSHALE.slab());
+                output.accept(ModBlocks.CLOUDSHALE.wall());
+                output.accept(ModBlocks.CLOUDSHALE.pressurePlate());
+                output.accept(ModBlocks.CLOUDSHALE.button());
 
-                //output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
-                output.accept(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+                output.accept(ModBlocks.COBBLED_CLOUDSHALE.base());
+                output.accept(ModBlocks.COBBLED_CLOUDSHALE.stairs());
+                output.accept(ModBlocks.COBBLED_CLOUDSHALE.slab());
+                output.accept(ModBlocks.COBBLED_CLOUDSHALE.wall());
+                output.accept(ModBlocks.COBBLED_CLOUDSHALE.pressurePlate());
+                output.accept(ModBlocks.COBBLED_CLOUDSHALE.button());
+
+                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base());
+                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.stairs());
+                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.slab());
+                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall());
+                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.pressurePlate());
+                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.button());
+
+                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base());
+                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.stairs());
+                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.slab());
+                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall());
+                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.pressurePlate());
+                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.button());
+
+                output.accept(ModBlocks.ALEXANDRITE_BLOCK);
+                output.accept(ModBlocks.STONE_ALEXANDRITE_ORE);
+                output.accept(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE);
+                output.accept(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE);
+                output.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
+                output.accept(ModItems.RAW_ALEXANDRITE);
+                output.accept(ModItems.ALEXANDRITE);
+
+                output.accept(ModItems.GLIDER);
+
+                output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
+                output.accept(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE);
             }).build());
 
     public static void registerCreativeModeTabs(IEventBus modEventBus) {

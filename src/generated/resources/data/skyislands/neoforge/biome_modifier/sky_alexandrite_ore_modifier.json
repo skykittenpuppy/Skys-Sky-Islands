@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#skyislands:sky_islands",
+  "features": "skyislands:sky_alexandrite_ore",
+  "step": "underground_ores"
+}

@@ -1,27 +1,16 @@
 package gay.beegirl.skyislands.component;
 
-import gay.beegirl.skyislands.SkysSkyIslands;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.Unit;
 
 import java.util.function.UnaryOperator;
 
 public class ModDataComponents {
-    private static <T> DataComponentType<T> registerDataComponent(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
-        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE,
-                ResourceKey.create(Registries.DATA_COMPONENT_TYPE, SkysSkyIslands.createId(name)),
-                builderOperator.apply(DataComponentType.builder()).build());
-    }
+    public static final DataComponentType<GliderPattern> PATTERN = register("pattern", (p_341838_) ->
+            p_341838_.persistent(GliderPattern.CODEC).networkSynchronized(GliderPattern.STREAM_CODEC).cacheEncoding());
 
-    public static void registerDataComponents() {
-        SkysSkyIslands.LOGGER.info("Registering Data Components for " + SkysSkyIslands.MOD_ID);
-        ComponentTooltipAppenderRegistry.addAfter(DataComponents.TRIM, GLIDER_PATTERN);
+    private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
+        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, name, (builder.apply(DataComponentType.builder())).build());
     }
-    public static final DataComponentType<Unit> HANG_GLIDER = registerDataComponent("hang_glider", unitBuilder -> unitBuilder.persistent(Unit.CODEC).networkSynchronized(Unit.STREAM_CODEC));
-    public static final DataComponentType<GliderPattern> GLIDER_PATTERN = registerDataComponent("glider_pattern", unitBuilder -> unitBuilder.persistent(GliderPattern.CODEC).networkSynchronized(GliderPattern.STREAM_CODEC).cacheEncoding());
 }

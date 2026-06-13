@@ -32,44 +32,44 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.FLOWER_POTS)
                 .add(ModBlocks.POTTED_GOLDENLEAF_SAPLING.get())
                 .add(ModBlocks.POTTED_SAKURA_SAPLING.get())
-                .add(ModBlocks.POTTED_FRIGID_SAPLING.get());
-                //.add(ModBlocks.POTTED_ARBOREAL_CACTUS.get());
+                .add(ModBlocks.POTTED_FRIGID_SAPLING.get())
+                .add(ModBlocks.POTTED_ARBOREAL_CACTUS.get());
 
         tag(BlockTags.PLANKS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.planks().get())
                 .add(ModBlocks.SAKURA_PLANKS.planks().get())
-                .add(ModBlocks.FRIGID_PLANKS.planks().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().get());
+                .add(ModBlocks.FRIGID_PLANKS.planks().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().get());
         tag(BlockTags.FENCES)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.fence().get())
                 .add(ModBlocks.SAKURA_PLANKS.fence().get())
-                .add(ModBlocks.FRIGID_PLANKS.fence().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.fence().get());
+                .add(ModBlocks.FRIGID_PLANKS.fence().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.fence().get());
         tag(BlockTags.FENCE_GATES)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.fenceGate().get())
                 .add(ModBlocks.SAKURA_PLANKS.fenceGate().get())
-                .add(ModBlocks.FRIGID_PLANKS.fenceGate().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.fenceGate());
+                .add(ModBlocks.FRIGID_PLANKS.fenceGate().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.fenceGate().get());
         tag(BlockTags.STANDING_SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.standingSign().get())
                 .add(ModBlocks.SAKURA_PLANKS.standingSign().get())
-                .add(ModBlocks.FRIGID_PLANKS.standingSign().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign());
+                .add(ModBlocks.FRIGID_PLANKS.standingSign().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign().get());
         tag(BlockTags.WALL_SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.wallSign().get())
                 .add(ModBlocks.SAKURA_PLANKS.wallSign().get())
-                .add(ModBlocks.FRIGID_PLANKS.wallSign().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.wallSign());
+                .add(ModBlocks.FRIGID_PLANKS.wallSign().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.wallSign().get());
         tag(BlockTags.CEILING_HANGING_SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.hangingSign().get())
                 .add(ModBlocks.SAKURA_PLANKS.hangingSign().get())
-                .add(ModBlocks.FRIGID_PLANKS.hangingSign().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign());
+                .add(ModBlocks.FRIGID_PLANKS.hangingSign().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign().get());
         tag(BlockTags.WALL_HANGING_SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.hangingWallSign().get())
                 .add(ModBlocks.SAKURA_PLANKS.hangingWallSign().get())
-                .add(ModBlocks.FRIGID_PLANKS.hangingWallSign().get());
-                //.add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingWallSign());
+                .add(ModBlocks.FRIGID_PLANKS.hangingWallSign().get())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingWallSign().get());
 
         tag(ModTags.Blocks.CLOUDSHALE_ORE_REPLACEABLE)
                 .add(ModBlocks.CLOUDSHALE.base().get(), ModBlocks.COBBLED_CLOUDSHALE.base().get(), ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base().get(), ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base().get());
@@ -80,7 +80,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SAKURA_PLANKS.log().get(), ModBlocks.SAKURA_PLANKS.wood().get(), ModBlocks.SAKURA_PLANKS.strippedLog().get(), ModBlocks.SAKURA_PLANKS.strippedWood().get());
         tag(ModTags.Blocks.FRIGID_LOGS)
                 .add(ModBlocks.FRIGID_PLANKS.log().get(), ModBlocks.FRIGID_PLANKS.wood().get(), ModBlocks.FRIGID_PLANKS.strippedLog().get(), ModBlocks.FRIGID_PLANKS.strippedWood().get());
-        //tag(ModTags.Blocks.ARBOREAL_CACTUS_STEMS)
-        //        .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().get(), ModBlocks.ARBOREAL_CACTUS_PLANKS.wood().get(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog().get(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood().get());
+        tag(ModTags.Blocks.ARBOREAL_CACTUS_STEMS)
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().get(), ModBlocks.ARBOREAL_CACTUS_PLANKS.wood().get(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog().get(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood().get());
     }
 }

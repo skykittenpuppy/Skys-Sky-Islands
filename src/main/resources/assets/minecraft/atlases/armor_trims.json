@@ -19,7 +19,7 @@
         "quartz": "minecraft:trims/color_palettes/quartz",
         "redstone": "minecraft:trims/color_palettes/redstone",
         "resin": "minecraft:trims/color_palettes/resin",
-        "alexandrite": "sky-islands:trims/color_palettes/alexandrite"
+        "alexandrite": "skyislands:trims/color_palettes/alexandrite"
       },
       "textures": [
         "minecraft:trims/entity/humanoid/sentry",
@@ -58,8 +58,8 @@
         "minecraft:trims/entity/humanoid_leggings/flow",
         "minecraft:trims/entity/humanoid/bolt",
         "minecraft:trims/entity/humanoid_leggings/bolt",
-        "sky-islands:trims/entity/humanoid/testing",
-        "sky-islands:trims/entity/humanoid_leggings/testing"
+        "skyislands:trims/entity/humanoid/testing",
+        "skyislands:trims/entity/humanoid_leggings/testing"
       ]
     }
   ]

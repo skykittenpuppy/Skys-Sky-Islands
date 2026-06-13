@@ -1,5 +1,7 @@
 package gay.beegirl.skyislands.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -10,10 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -29,7 +28,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public abstract class CactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
+public class CactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
+    public static final MapCodec<CactusFruitBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            TreeGrower.CODEC.fieldOf("tree").forGetter((block) -> block.treeGrower),
+            propertiesCodec()).apply(instance, CactusFruitBlock::new));
     private static final VoxelShape EAST_BUDDING_SHAPE;
     private static final VoxelShape WEST_BUDDING_SHAPE;
     private static final VoxelShape NORTH_BUDDING_SHAPE;
@@ -42,6 +44,9 @@ public abstract class CactusFruitBlock extends HorizontalDirectionalBlock implem
     public static final BooleanProperty HANGING;
     public static final IntegerProperty STAGE;
     protected final TreeGrower treeGrower;
+
+    @Override
+    protected MapCodec<CactusFruitBlock> codec() { return CODEC; }
 
     public CactusFruitBlock(TreeGrower treeGrower, Properties properties) {
         super(properties);
