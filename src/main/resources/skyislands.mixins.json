@@ -1,12 +1,23 @@
 {
   "required": true,
+  "minVersion": "0.8",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  },
   "package": "gay.beegirl.skyislands.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "client": [
+    "client.PlayerModelMixin",
+    "client.PlayerRendererMixin"
+  ]
 }
