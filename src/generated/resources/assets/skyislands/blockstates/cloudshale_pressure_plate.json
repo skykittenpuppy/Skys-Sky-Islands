@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "skyislands:block/cloudshale_pressure_plate"
+    },
+    "powered=true": {
+      "model": "skyislands:block/cloudshale_pressure_plate_down"
+    }
+  }
+}

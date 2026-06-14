@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "skyislands:block/stripped_sakura_log",
+    "side": "skyislands:block/stripped_sakura_log"
+  }
+}

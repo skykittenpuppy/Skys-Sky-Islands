@@ -38,14 +38,14 @@ public class SkysSkyIslands {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public SkysSkyIslands(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::commonSetup);
+        //modEventBus.addListener(this::commonSetup);
 
         ModBlocks.registerBlocks(modEventBus);
         ModItems.registerItems(modEventBus);
         ModCreativeModeTabs.registerCreativeModeTabs(modEventBus);
         ModParticleTypes.registerParticleTypes(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "skyislands:block/cloudshale",
+    "side": "skyislands:block/cloudshale_cherry_grass_side",
+    "top": "skyislands:block/cloudshale_cherry_grass"
+  }
+}

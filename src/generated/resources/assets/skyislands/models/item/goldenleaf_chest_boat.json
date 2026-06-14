@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "skyislands:item/goldenleaf_chest_boat"
+  }
+}

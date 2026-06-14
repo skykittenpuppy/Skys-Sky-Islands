@@ -4,6 +4,7 @@ import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.block.ModBlocks;
 import net.minecraft.client.renderer.block.model.MultiVariant;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -15,12 +16,11 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.data.models.model.TexturedModel;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
-import net.neoforged.neoforge.client.model.generators.BlockModelProvider;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -31,92 +31,90 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        //WHY ARE YOU NOT BLOCKMODELGENERATORS GRAHHH
-        BlockModelProvider aaaa  = models();
-        blockWithItem(ModBlocks.RAW_ALEXANDRITE_BLOCK);
-        blockWithItem(ModBlocks.ALEXANDRITE_BLOCK);
-        blockWithItem(ModBlocks.STONE_ALEXANDRITE_ORE);
-        blockWithItem(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE);
-        blockWithItem(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE);
-        createCloudshaleGrassBlock(blockModelGenerators, ModBlocks.CLOUDSHALE_GRASS);
-        createCloudshaleGrassBlock(blockModelGenerators, ModBlocks.CLOUDSHALE_CHERRY_GRASS);
-        createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
-        //blockModelGenerators.family(ModBlocks.CLOUDSHALE.base()).generateFor(ModBlocks.CLOUDSHALE_FAMILY);
-        //blockModelGenerators.family(ModBlocks.COBBLED_CLOUDSHALE.base()).generateFor(ModBlocks.COBBLED_CLOUDSHALE_FAMILY);
-        //blockModelGenerators.family(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base()).generateFor(ModBlocks.MOSSY_COBBLED_CLOUDSHALE_FAMILY);
-        //blockModelGenerators.family(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base()).generateFor(ModBlocks.CHERRY_COBBLED_CLOUDSHALE_FAMILY);
+        simpleBlockWithItem(ModBlocks.RAW_ALEXANDRITE_BLOCK.get());
+        simpleBlockWithItem(ModBlocks.ALEXANDRITE_BLOCK.get());
+        simpleBlockWithItem(ModBlocks.STONE_ALEXANDRITE_ORE.get());
+        simpleBlockWithItem(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get());
+        simpleBlockWithItem(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
 
-        //createWoodTypeModels(blockModelGenerators, ModBlocks.GOLDENLEAF_PLANKS, ModBlocks.GOLDENLEAF_PLANKS_FAMILY);
-        blockModelGenerators.createTintedLeaves(ModBlocks.GOLDENLEAF_LEAVES, TexturedModel.LEAVES, 0);
-        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.GOLDENLEAF_SAPLING, ModBlocks.POTTED_GOLDENLEAF_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        grassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
+        grassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
+        //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
+        stoneSet(ModBlocks.CLOUDSHALE);
+        stoneSet(ModBlocks.COBBLED_CLOUDSHALE);
+        stoneSet(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
+        stoneSet(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        //createWoodTypeModels(blockModelGenerators, ModBlocks.SAKURA_PLANKS, ModBlocks.SAKURA_PLANKS_FAMILY);
-        blockModelGenerators.createTrivialBlock(ModBlocks.SAKURA_LEAVES, TexturedModel.LEAVES);
-        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.SAKURA_SAPLING, ModBlocks.POTTED_SAKURA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        woodSet(ModBlocks.GOLDENLEAF_PLANKS, true);
+        simpleBlockWithItem(ModBlocks.GOLDENLEAF_LEAVES.get());
+        plantAndPot(ModBlocks.GOLDENLEAF_SAPLING.get(), ModBlocks.POTTED_GOLDENLEAF_SAPLING.get());
 
-        //createWoodTypeModels(blockModelGenerators, ModBlocks.FRIGID_PLANKS, ModBlocks.FRIGID_PLANKS_FAMILY);
-        blockModelGenerators.createTintedLeaves(ModBlocks.FRIGID_LEAVES, TexturedModel.LEAVES, 0);
-        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.FRIGID_SAPLING, ModBlocks.POTTED_FRIGID_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        woodSet(ModBlocks.SAKURA_PLANKS, true);
+        simpleBlockWithItem(ModBlocks.SAKURA_LEAVES.get());
+        plantAndPot(ModBlocks.SAKURA_SAPLING.get(), ModBlocks.POTTED_SAKURA_SAPLING.get());
 
-        //createWoodTypeModels(blockModelGenerators, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModBlocks.ARBOREAL_CACTUS_PLANKS_FAMILY);
-        blockModelGenerators.createNonTemplateModelBlock(ModBlocks.POTTED_ARBOREAL_CACTUS);
+        woodSet(ModBlocks.FRIGID_PLANKS, true);
+        simpleBlockWithItem(ModBlocks.FRIGID_LEAVES.get());
+        plantAndPot(ModBlocks.FRIGID_SAPLING.get(), ModBlocks.POTTED_FRIGID_SAPLING.get());
+
+        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS, false);
     }
 
-    private void blockWithItem(DeferredBlock<?> deferredBlock) {
-        simpleBlockWithItem(deferredBlock.get(), cubeAll(deferredBlock.get()));
+    private void simpleBlockWithItem(Block block) {
+        simpleBlockWithItem(block, cubeAll(block));
     }
 
-    public final void createCloudshaleGrassBlock(BlockModelGenerators blockModelGenerators, Block block) {
-        TextureMapping textureMapping = (new TextureMapping()).put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.CLOUDSHALE.base().get())).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block)).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
-        blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, textureMapping, blockModelGenerators.modelOutput))));
+    public final void grassLikeBlock(Block block, Block baseBlock) {
+        simpleBlockWithItem(block, models().cubeBottomTop(name(block),
+                extend(blockTexture(block), "_side"),
+                blockTexture(baseBlock),
+                blockTexture(block)));
     }
 
-    private void createPointedBlock(BlockModelGenerators blockModelGenerators, Block block) {
-        PropertyDispatch.C2<MultiVariant, Direction, DripstoneThickness> c2 = PropertyDispatch.initial(BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS);
+    public final void plantAndPot(Block plant, Block pottedPlant) {
+        simpleBlock(plant, models().cross(name(plant), blockTexture(plant)));
+        simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)));
+    }
 
-        for(DripstoneThickness dripstoneThickness : DripstoneThickness.values()) {
-            c2.select(Direction.UP, dripstoneThickness, createPointedBlockVariant(blockModelGenerators, block, Direction.UP, dripstoneThickness));
+    public final void stoneSet(ModBlocks.StoneSetBlocks stoneSet){
+        simpleBlock(stoneSet.base().get());
+        buttonBlock((ButtonBlock) stoneSet.button().get(), blockTexture(stoneSet.base().get()));
+        wallBlock((WallBlock) stoneSet.wall().get(), blockTexture(stoneSet.base().get()));
+        slabBlock((SlabBlock) stoneSet.slab().get(), blockTexture(stoneSet.base().get()), blockTexture(stoneSet.base().get()));
+        stairsBlock((StairBlock) stoneSet.stairs().get(), blockTexture(stoneSet.base().get()));
+        pressurePlateBlock((PressurePlateBlock) stoneSet.pressurePlate().get(), blockTexture(stoneSet.base().get()));
+    }
+
+    public final void woodSet(ModBlocks.WoodSetBlocks woodSet, boolean withLogs) {
+        if (withLogs) {
+            logBlock((RotatedPillarBlock) woodSet.log().get());
+            axisBlock((RotatedPillarBlock) woodSet.wood().get(), blockTexture(woodSet.log().get()), blockTexture(woodSet.log().get()));
+            logBlock((RotatedPillarBlock) woodSet.strippedLog().get());
+            axisBlock((RotatedPillarBlock) woodSet.strippedWood().get(), blockTexture(woodSet.strippedLog().get()), blockTexture(woodSet.strippedLog().get()));
         }
-
-        for(DripstoneThickness dripstoneThickness : DripstoneThickness.values()) {
-            c2.select(Direction.DOWN, dripstoneThickness, createPointedBlockVariant(blockModelGenerators, block, Direction.DOWN, dripstoneThickness));
-        }
-
-        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(c2));
-    }
-    private void createPointedDripstone() {
-        BlockModelGenerators.skipAutoItemBlock(Blocks.POINTED_DRIPSTONE);
-        PropertyDispatch.C2<Direction, DripstoneThickness> c2 = PropertyDispatch.properties(
-                BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS
-        );
-
-        for (DripstoneThickness dripstonethickness : DripstoneThickness.values()) {
-            c2.select(Direction.UP, dripstonethickness, this.createPointedDripstoneVariant(Direction.UP, dripstonethickness));
-        }
-
-        for (DripstoneThickness dripstonethickness1 : DripstoneThickness.values()) {
-            c2.select(Direction.DOWN, dripstonethickness1, this.createPointedDripstoneVariant(Direction.DOWN, dripstonethickness1));
-        }
-
-        BlockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(Blocks.POINTED_DRIPSTONE).with(c2));
-    }
-    public final MultiVariant createPointedBlockVariant(BlockModelGenerators blockModelGenerators, Block block, Direction direction, DripstoneThickness dripstoneThickness) {
-        String var10000 = direction.getSerializedName();
-        String string = "_" + var10000 + "_" + dripstoneThickness.getSerializedName();
-        TextureMapping textureMapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, string));
-        return BlockModelGenerators.plainVariant(ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, string, textureMapping, blockModelGenerators.modelOutput));
-    }
-    private Variant createPointedDripstoneVariant(Direction direction, DripstoneThickness dripstoneThickness) {
-        String s = "_" + direction.getSerializedName() + "_" + dripstoneThickness.getSerializedName();
-        TextureMapping texturemapping = TextureMapping.cross(TextureMapping.getBlockTexture(Blocks.POINTED_DRIPSTONE, s));
-        return Variant.variant()
-                .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(Blocks.POINTED_DRIPSTONE, s, texturemapping, BlockModelGenerators.modelOutput));
+        simpleBlock(woodSet.planks().get());
+        buttonBlock((ButtonBlock) woodSet.button().get(), blockTexture(woodSet.planks().get()));
+        doorBlock((DoorBlock) woodSet.door().get(), extend(blockTexture(woodSet.door().get()), "_bottom"), extend(blockTexture(woodSet.door().get()), "_top"));
+        fenceBlock((FenceBlock) woodSet.fence().get(), blockTexture(woodSet.planks().get()));
+        fenceGateBlock((FenceGateBlock) woodSet.fenceGate().get(), blockTexture(woodSet.planks().get()));
+        //signBlock((StandingSignBlock) woodSet.standingSign().get(), (WallSignBlock) woodSet.wallSign().get(), blockTexture(woodSet.planks().get()));
+        //hangingSignBlock((CeilingHangingSignBlock) woodSet.hangingSign().get(), (WallHangingSignBlock) woodSet.hangingWallSign().get(), blockTexture(woodSet.planks().get()));
+        slabBlock((SlabBlock) woodSet.slab().get(), blockTexture(woodSet.planks().get()), blockTexture(woodSet.planks().get()));
+        stairsBlock((StairBlock) woodSet.stairs().get(), blockTexture(woodSet.planks().get()));
+        pressurePlateBlock((PressurePlateBlock) woodSet.pressurePlate().get(), blockTexture(woodSet.planks().get()));
+        trapdoorBlock((TrapDoorBlock) woodSet.trapdoor().get(), blockTexture(woodSet.trapdoor().get()), true);
     }
 
-    private void createWoodTypeModels(BlockModelGenerators blockModelGenerators, ModBlocks.WoodSetBlocks woodSetBlocks, BlockFamily family) {
-        blockModelGenerators.woodProvider(woodSetBlocks.log()).log(woodSetBlocks.log()).wood(woodSetBlocks.wood());
-        blockModelGenerators.woodProvider(woodSetBlocks.strippedLog()).log(woodSetBlocks.strippedLog()).wood(woodSetBlocks.strippedWood());
-        blockModelGenerators.createHangingSign(woodSetBlocks.strippedLog(), woodSetBlocks.hangingSign(), woodSetBlocks.hangingWallSign());
-        blockModelGenerators.family(woodSetBlocks.planks()).generateFor(family);
+    // Copied from BlockStateProvider
+    private ResourceLocation key(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
+    }
+    private String name(Block block) {
+        return this.key(block).getPath();
+    }
+    private ResourceLocation extend(ResourceLocation rl, String suffix) {
+        String namespace = rl.getNamespace();
+        String path = rl.getPath();
+        return ResourceLocation.fromNamespaceAndPath(namespace, path + suffix);
     }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "skyislands:block/goldenleaf_log_top",
+    "side": "skyislands:block/goldenleaf_log"
+  }
+}

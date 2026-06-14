@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "skyislands:block/cobbled_cloudshale_slab"
+    },
+    "type=double": {
+      "model": "skyislands:block/cobbled_cloudshale"
+    },
+    "type=top": {
+      "model": "skyislands:block/cobbled_cloudshale_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "skyislands:block/goldenleaf_planks",
+    "side": "skyislands:block/goldenleaf_planks",
+    "top": "skyislands:block/goldenleaf_planks"
+  }
+}

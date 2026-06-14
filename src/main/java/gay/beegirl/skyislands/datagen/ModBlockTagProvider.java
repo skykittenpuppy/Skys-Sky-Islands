@@ -40,7 +40,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SAKURA_PLANKS.planks().get())
                 .add(ModBlocks.FRIGID_PLANKS.planks().get())
                 .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().get());
-        tag(BlockTags.FENCES)
+        tag(BlockTags.WOODEN_FENCES)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.fence().get())
                 .add(ModBlocks.SAKURA_PLANKS.fence().get())
                 .add(ModBlocks.FRIGID_PLANKS.fence().get())
@@ -73,6 +73,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         tag(ModTags.Blocks.CLOUDSHALE_ORE_REPLACEABLE)
                 .add(ModBlocks.CLOUDSHALE.base().get(), ModBlocks.COBBLED_CLOUDSHALE.base().get(), ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base().get(), ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base().get());
+
+        tag(BlockTags.WALLS)
+                .add(ModBlocks.CLOUDSHALE.wall().get())
+                .add(ModBlocks.COBBLED_CLOUDSHALE.wall().get())
+                .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall().get())
+                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall().get());
 
         tag(ModTags.Blocks.GOLDENLEAF_LOGS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.log().get(), ModBlocks.GOLDENLEAF_PLANKS.wood().get(), ModBlocks.GOLDENLEAF_PLANKS.strippedLog().get(), ModBlocks.GOLDENLEAF_PLANKS.strippedWood().get());

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "skyislands:block/arboreal_cactus_planks",
+    "side": "skyislands:block/arboreal_cactus_planks",
+    "top": "skyislands:block/arboreal_cactus_planks"
+  }
+}

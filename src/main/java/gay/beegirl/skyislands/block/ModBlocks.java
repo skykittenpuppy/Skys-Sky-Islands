@@ -1,10 +1,13 @@
 package gay.beegirl.skyislands.block;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -14,6 +17,8 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,8 +29,31 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(SkysSkyIslands.MOD_ID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(SkysSkyIslands.MOD_ID);
 
-    public record StoneSetBlocks(DeferredBlock<Block> base, DeferredBlock<Block> button, DeferredBlock<Block> wall, DeferredBlock<Block> slab, DeferredBlock<Block> stairs, DeferredBlock<Block> pressurePlate) {}
-    public record WoodSetBlocks(DeferredBlock<Block> log, DeferredBlock<Block> wood, DeferredBlock<Block> strippedLog, DeferredBlock<Block> strippedWood, DeferredBlock<Block> planks, DeferredBlock<Block> button, DeferredBlock<Block> door, DeferredBlock<Block> fence, DeferredBlock<Block> fenceGate, DeferredBlock<Block> standingSign, DeferredBlock<Block> wallSign, DeferredBlock<Block> hangingSign, DeferredBlock<Block> hangingWallSign, DeferredBlock<Block> slab, DeferredBlock<Block> stairs, DeferredBlock<Block> pressurePlate, DeferredBlock<Block> trapdoor) {}
+    public record StoneSetBlocks(
+            DeferredBlock<Block> base,
+            DeferredBlock<Block> button,
+            DeferredBlock<Block> wall,
+            DeferredBlock<Block> slab,
+            DeferredBlock<Block> stairs,
+            DeferredBlock<Block> pressurePlate) {}
+    public record WoodSetBlocks(
+            DeferredBlock<Block> log,
+            DeferredBlock<Block> wood,
+            DeferredBlock<Block> strippedLog,
+            DeferredBlock<Block> strippedWood,
+            DeferredBlock<Block> planks,
+            DeferredBlock<Block> button,
+            DeferredBlock<Block> door,
+            DeferredBlock<Block> fence,
+            DeferredBlock<Block> fenceGate,
+            DeferredBlock<Block> standingSign,
+            DeferredBlock<Block> wallSign,
+            DeferredBlock<Block> hangingSign,
+            DeferredBlock<Block> hangingWallSign,
+            DeferredBlock<Block> slab,
+            DeferredBlock<Block> stairs,
+            DeferredBlock<Block> pressurePlate,
+            DeferredBlock<Block> trapdoor) {}
 
     private static DeferredBlock<Block> registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, Block> function) {
         return BLOCKS.registerBlock(name, function);
@@ -576,6 +604,12 @@ public class ModBlocks {
         public static final TreeGrower SAKURA = TreeGrower.CHERRY;//new TreeGrower("sakura", Optional.empty(), Optional.of(ModConfiguredFeatures.SAKURA), Optional.of(ModConfiguredFeatures.SAKURA_BEES_005));
         public static final TreeGrower FRIGID = TreeGrower.OAK;//new TreeGrower("frigid", Optional.empty(), Optional.of(ModConfiguredFeatures.FRIGID), Optional.of(ModConfiguredFeatures.FRIGID_BEES_005));
         public static final TreeGrower ARBOREAL_CACTUS = TreeGrower.OAK;//new TreeGrower("arboreal_cactus", Optional.empty(), Optional.of(ModConfiguredFeatures.ARBOREAL_CACTUS), Optional.empty());
+    }
+    @SubscribeEvent
+    public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
+        event.register((state, level, pos, tintIndex) ->
+                level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor(),
+                CLOUDSHALE_GRASS.get());
     }
 
     public static void registerBlocks(IEventBus modEventBus) {

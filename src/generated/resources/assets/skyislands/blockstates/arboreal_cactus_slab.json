@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "skyislands:block/arboreal_cactus_slab"
+    },
+    "type=double": {
+      "model": "skyislands:block/arboreal_cactus_planks"
+    },
+    "type=top": {
+      "model": "skyislands:block/arboreal_cactus_slab_top"
+    }
+  }
+}

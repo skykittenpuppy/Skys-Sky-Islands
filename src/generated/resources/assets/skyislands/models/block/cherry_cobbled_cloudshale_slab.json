@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "skyislands:block/cherry_cobbled_cloudshale",
+    "side": "skyislands:block/cherry_cobbled_cloudshale",
+    "top": "skyislands:block/cherry_cobbled_cloudshale"
+  }
+}

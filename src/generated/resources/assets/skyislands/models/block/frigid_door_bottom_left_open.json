@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "textures": {
+    "bottom": "skyislands:block/frigid_door_bottom",
+    "top": "skyislands:block/frigid_door_top"
+  }
+}

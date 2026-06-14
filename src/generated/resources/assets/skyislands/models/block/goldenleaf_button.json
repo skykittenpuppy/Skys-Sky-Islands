@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "skyislands:block/goldenleaf_planks"
+  }
+}

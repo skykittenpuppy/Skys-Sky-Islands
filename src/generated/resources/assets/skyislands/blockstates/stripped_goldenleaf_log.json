@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "skyislands:block/stripped_goldenleaf_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "skyislands:block/stripped_goldenleaf_log"
+    },
+    "axis=z": {
+      "model": "skyislands:block/stripped_goldenleaf_log_horizontal",
+      "x": 90
+    }
+  }
+}

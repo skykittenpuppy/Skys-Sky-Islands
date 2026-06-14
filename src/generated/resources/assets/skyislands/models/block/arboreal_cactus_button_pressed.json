@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "skyislands:block/arboreal_cactus_planks"
+  }
+}

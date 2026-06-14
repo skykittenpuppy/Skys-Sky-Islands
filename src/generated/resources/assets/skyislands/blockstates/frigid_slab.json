@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "skyislands:block/frigid_slab"
+    },
+    "type=double": {
+      "model": "skyislands:block/frigid_planks"
+    },
+    "type=top": {
+      "model": "skyislands:block/frigid_slab_top"
+    }
+  }
+}
