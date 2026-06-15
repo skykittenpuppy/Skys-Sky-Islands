@@ -94,6 +94,9 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
         }
     }
 
+    //@ModifyExpressionValue(method = "setYBodyRot", at = @At(value = "INVOKE", target = ""))
+    //private void islands$smoothBodyYawWhileGliding() {}
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void islands$setModStates(CallbackInfo ci) {
         this.setData(ModDataAttachments.IS_GLIDING, (this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.GLIDER) || this.getItemInHand(InteractionHand.OFF_HAND).is(ModItems.GLIDER)) && !this.onGround() && !this.isShiftKeyDown()); // TODO: Replace with proper glide trigger
@@ -116,7 +119,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
             this.islands$diveTicks = 0;
         }
         if (this.islands$isGliding()) {
-            this.setYBodyRot(this.getYRot()); // TODO: Make Smooth:tm:
+            this.setYBodyRot(this.getYHeadRot()); // TODO: Make Smooth:tm:
             ++this.islands$glideTicks;
         } else {
             this.islands$glideTicks = 0;
