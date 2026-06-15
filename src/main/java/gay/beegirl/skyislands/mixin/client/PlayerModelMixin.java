@@ -66,16 +66,6 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             this.leftSleeve.copyFrom(this.leftArm);
             this.rightSleeve.copyFrom(this.rightArm);
         } else if (entity.getData(ModDataAttachments.IS_GLIDING)) { // Gliding anim
-            this.head.yRot = 0F;
-
-            this.leftArm.xRot = 180F * ((float)Math.PI / 180F);
-            this.rightArm.xRot = 180F * ((float)Math.PI / 180F);
-            this.leftArm.yRot = 0F * ((float)Math.PI / 180F);
-            this.rightArm.yRot = 0F * ((float)Math.PI / 180F);
-            this.leftArm.zRot = 0F * ((float)Math.PI / 180F);
-            this.rightArm.zRot = 0F * ((float)Math.PI / 180F);
-            //this.leftArm.yRot = -180F * ((float)Math.PI / 180F);
-
             Vec3 world = entity.getDeltaMovement();
             //float facing = -entity.getYRot();
             //float sin = Mth.sin(facing * ((float)Math.PI / 180F));
@@ -87,21 +77,38 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
 
 
             //float zValue = (float) (local.z * 100.0F);
-            //float zValue = SkysSkyIslands.rotate2d(new Vec2((float) world.x, (float) world.z), -entity.getYRot() * ((float)Math.PI / 180F)).y * 100;
+            //float zRadians = SkysSkyIslands.rotate2d(new Vec2((float) world.x, (float) world.z), -entity.getYRot() * ((float)Math.PI / 180F)).y * 100;
             Vec3 localMovement = SkysSkyIslands.rotate3dY(world, entity.getYRot() * ((float)Math.PI / 180F));
-            //float xValue = entity.getXRot() / 2; // Value between -90 and 90
-            float xRadians = (float) (Mth.clamp(localMovement.z * 100, -45, 45) * (float)Math.PI / 180F);
-            float zRadians = (float) (Mth.clamp(localMovement.x * 100, -45, 45) * (float)Math.PI / 180F);
+            //float xRadians = (float) (Mth.clamp(localMovement.z * 100, -45, 45) * (float)Math.PI / 180F);
+            //float zRadians = (float) (Mth.clamp(localMovement.x * 100, -45, 45) * (float)Math.PI / 180F);
+            float xRadians = (float) (Mth.clamp(entity.getXRot(), -45, 45) * (float)Math.PI / 180F);
+            float zRadians = (float) (Mth.clamp(entity.getXRot(), -45, 45) * (float)Math.PI / 180F);
 
+            // Head/Body
+            this.head.yRot = 0F;
             this.body.xRot = xRadians;
             this.body.yRot = 0.0F;
             this.body.zRot = zRadians;
 
-            //this.leftArm.xRot += (float) Mth.clamp(((zValue * 2) * ((float)Math.PI / 180F)) * 0.167, -90, 90);
+            // Left Arm
+            this.leftArm.xRot = 180F * ((float)Math.PI / 180F);
+            this.rightArm.xRot = 180F * ((float)Math.PI / 180F);
+            this.leftArm.yRot = 0F * ((float)Math.PI / 180F);
+            this.rightArm.yRot = 0F * ((float)Math.PI / 180F);
+            this.leftArm.zRot = 10F * ((float)Math.PI / 180F);
+            this.rightArm.zRot = -10F * ((float)Math.PI / 180F);
+
+            this.leftArm.xRot += xRadians;
+            Vec3 leftArmOffset = new Vec3(5, 2, 0);
+            leftArmOffset = SkysSkyIslands.rotate3dX(leftArmOffset, xRadians);
+            leftArmOffset = SkysSkyIslands.rotate3dZ(leftArmOffset, zRadians);
+            this.leftArm.x = (float) leftArmOffset.x;
+            this.leftArm.y = (float) leftArmOffset.y;
+            this.leftArm.z = (float) leftArmOffset.z;
             //this.leftArm.y = Mth.sin(((90-zValue) * ((float)Math.PI / 180F))) * 2;
             //this.leftArm.z = Mth.cos(((90-zValue) * ((float)Math.PI / 180F))) * 2;
 
-            //Both
+            // Left Leg
             this.leftLeg.xRot = xRadians * 2;
             this.leftLeg.zRot = zRadians * (zRadians < 0 ? 1.6f : 1.9f);
             Vec3 leftLegOffset = new Vec3(2, 12, 0);
@@ -111,7 +118,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             this.leftLeg.y = (float) leftLegOffset.y;
             this.leftLeg.z = (float) leftLegOffset.z;
 
-            //Both
+            // Right Leg
             this.rightLeg.xRot = xRadians * 2;
             this.rightLeg.zRot = zRadians * (zRadians < 0 ? 1.6f : 1.9f);
             Vec3 rightLegOffset = new Vec3(-2, 12, 0);
@@ -121,6 +128,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             this.rightLeg.y = (float) rightLegOffset.y;
             this.rightLeg.z = (float) rightLegOffset.z;
 
+            // Sync Layers
             this.leftPants.copyFrom(this.leftLeg);
             this.rightPants.copyFrom(this.rightLeg);
             this.leftSleeve.copyFrom(this.leftArm);
