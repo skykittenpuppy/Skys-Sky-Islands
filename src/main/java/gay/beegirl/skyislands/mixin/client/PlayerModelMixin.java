@@ -43,8 +43,11 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
         } else if (entity.getData(ModDataAttachments.IS_FREEFALLING)) { // Free fall anim
             this.head.xRot = (-(float)Math.PI / 4F);
 
-            this.leftArm.zRot = -105F * ((float)Math.PI / 180F);
+            this.leftArm.xRot = 175F * ((float)Math.PI / 180F);
+            this.leftArm.zRot = 65F * ((float)Math.PI / 180F);
             //this.leftArm.yRot = -180F * ((float)Math.PI / 180F);
+            this.rightArm.xRot = 175F * ((float)Math.PI / 180F);
+            this.rightArm.zRot = -65F * ((float)Math.PI / 180F);
 
             this.leftLeg.xRot = 5F * ((float)Math.PI / 180F);
             this.leftLeg.zRot = -5F * ((float)Math.PI / 180F);

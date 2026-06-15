@@ -20,8 +20,8 @@ public abstract class PlayerMixin extends LivingEntity {
     @WrapOperation(method = "updatePlayerPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setPose(Lnet/minecraft/world/entity/Pose;)V", ordinal = 1))
     private void islands$setPose(Player instance, Pose pose, Operation<Void> original) {
         Pose pose1;
-        if (instance.getData(ModDataAttachments.IS_FREEFALLING)) pose1 = Pose.SPIN_ATTACK;
-        else if (instance.getData(ModDataAttachments.IS_DIVING)) pose1 = Pose.FALL_FLYING;
+        if (instance.getData(ModDataAttachments.IS_FREEFALLING)) pose1 = Pose.STANDING;
+        else if (instance.getData(ModDataAttachments.IS_DIVING)) pose1 = Pose.STANDING;
         else if (instance.getData(ModDataAttachments.IS_GLIDING)) pose1 = Pose.STANDING;
         else pose1 = pose;
         original.call(instance, pose1);
