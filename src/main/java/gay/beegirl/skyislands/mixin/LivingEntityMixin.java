@@ -83,7 +83,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
             double xVel = args.get(0);
             double yVel = args.get(1);
             double zVel = args.get(2);
-            this.move(MoverType.SELF, new Vec3(0.15F * xVel, -(0.05 * yVel), 0.15F * zVel))
+            this.move(MoverType.SELF, new Vec3(0.15F * xVel, -(0.05 * yVel), 0.15F * zVel));
         } else if (this.islands$isGliding()) {
             double xVel = args.get(0);
             double yVel = args.get(1);
