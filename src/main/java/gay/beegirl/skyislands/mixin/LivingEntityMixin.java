@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements Attackable, ILivingEntityExtension, LivingEntityAccess {
+    @Unique private static final float FALL_DISTANCE_TILL_CAN_GLIDE = 2.5F; // TODO: Replace with gamerule/config/attribute
     @Unique private static final float FALL_DISTANCE_TILL_FREE_FALL = 8.0F; // TODO: Replace with gamerule/config/attribute
     @Shadow
     public abstract ItemStack getItemInHand(InteractionHand hand);
@@ -99,7 +100,13 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void islands$setModStates(CallbackInfo ci) {
-        this.setData(ModDataAttachments.IS_GLIDING, (this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.GLIDER) || this.getItemInHand(InteractionHand.OFF_HAND).is(ModItems.GLIDER)) && !this.onGround() && !this.isShiftKeyDown()); // TODO: Replace with proper glide trigger
+        this.setData(ModDataAttachments.IS_GLIDING,
+                (this.fallDistance > FALL_DISTANCE_TILL_CAN_GLIDE ||
+                this.islands$isGliding) && // INFO: Prevents instant gliding
+                (this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.GLIDER) ||
+                this.getItemInHand(InteractionHand.OFF_HAND).is(ModItems.GLIDER)) &&
+                !this.onGround() &&
+                !this.isShiftKeyDown()); // TODO: Replace with proper glide trigger
         this.setData(ModDataAttachments.IS_FREEFALLING, this.fallDistance > FALL_DISTANCE_TILL_FREE_FALL); // not slowfalling, not levitation, is player, isnt gliding, not shift key down,,, etc
         //this.setData(ModDataAttachments.IS_FREEFALLING, this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE));
         this.setData(ModDataAttachments.IS_DIVING, this.islands$isFreeFalling() && this.isShiftKeyDown());
