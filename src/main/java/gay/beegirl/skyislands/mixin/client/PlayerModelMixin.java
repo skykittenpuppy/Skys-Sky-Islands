@@ -7,7 +7,6 @@ import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -67,7 +66,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             this.leftSleeve.copyFrom(this.leftArm);
             this.rightSleeve.copyFrom(this.rightArm);
         } else if (entity.getData(ModDataAttachments.IS_GLIDING)) { // Gliding anim
-            //this.head.xRot = (-(float)Math.PI / 4F);
+            this.head.yRot = 0F;
 
             this.leftArm.xRot = 180F * ((float)Math.PI / 180F);
             this.rightArm.xRot = 180F * ((float)Math.PI / 180F);
@@ -95,6 +94,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             float zRadians = (float) (Mth.clamp(localMovement.x * 100, -45, 45) * (float)Math.PI / 180F);
 
             this.body.xRot = xRadians;
+            this.body.yRot = 0.0F;
             this.body.zRot = zRadians;
 
             //this.leftArm.xRot += (float) Mth.clamp(((zValue * 2) * ((float)Math.PI / 180F)) * 0.167, -90, 90);

@@ -17,6 +17,8 @@
     "requireAnnotations": true
   },
   "client": [
+    "client.LivingEntityRendererMixin",
+    "client.PlayerItemInHandLayerMixin",
     "client.PlayerModelMixin",
     "client.PlayerRendererMixin"
   ]

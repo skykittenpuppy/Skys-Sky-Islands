@@ -95,9 +95,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
         }
     }
 
-    //@ModifyExpressionValue(method = "setYBodyRot", at = @At(value = "INVOKE", target = ""))
-    //private void islands$smoothBodyYawWhileGliding() {}
-
     @Inject(method = "tick", at = @At("HEAD"))
     private void islands$setModStates(CallbackInfo ci) {
         this.setData(ModDataAttachments.IS_GLIDING,
