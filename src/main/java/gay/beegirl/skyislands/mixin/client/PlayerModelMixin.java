@@ -2,6 +2,7 @@ package gay.beegirl.skyislands.mixin.client;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.entity.ModDataAttachments;
+import gay.beegirl.skyislands.util.LivingEntityAccess;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -81,8 +82,19 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             Vec3 localMovement = SkysSkyIslands.rotate3dY(world, entity.getYRot() * ((float)Math.PI / 180F));
             //float xRadians = (float) (Mth.clamp(localMovement.z * 100, -45, 45) * (float)Math.PI / 180F);
             //float zRadians = (float) (Mth.clamp(localMovement.x * 100, -45, 45) * (float)Math.PI / 180F);
-            float xRadians = (float) (Mth.clamp(entity.getXRot(), -45, 45) * (float)Math.PI / 180F);
-            float zRadians = (float) (Mth.clamp(entity.getXRot(), -45, 45) * (float)Math.PI / 180F);
+            int glideTicks = ((LivingEntityAccess)entity).islands$getGlideTicks();
+            float xRadians = (glideTicks < 21 ?
+                (glideTicks < 6 ?
+                    Mth.clamp(-(glideTicks * 7), -45, 45) :
+                    Mth.clamp(Mth.lerp((float) (glideTicks - 5) / 15, -35.0F, (float)(localMovement.z * 100)), -45, 45)) :
+                Mth.clamp((float)(localMovement.z * 100), -45, 45))
+                * ((float) Math.PI / 180F);
+            float zRadians = (glideTicks < 20 ?
+                (glideTicks < 6 ?
+                    0.0F :
+                    Mth.clamp(Mth.lerp((float) (glideTicks - 5) / 15, 0.0F, (float)(localMovement.x * 100)), -45, 45)) :
+                Mth.clamp((float)localMovement.x * 100, -45, 45))
+                * ((float) Math.PI / 180F);
 
             // Head/Body
             this.head.yRot = 0F;

@@ -123,7 +123,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
             this.islands$diveTicks = 0;
         }
         if (this.islands$isGliding()) {
-            this.setYBodyRot(this.getYHeadRot()); // TODO: Make Smooth:tm:
             ++this.islands$glideTicks;
         } else {
             this.islands$glideTicks = 0;
