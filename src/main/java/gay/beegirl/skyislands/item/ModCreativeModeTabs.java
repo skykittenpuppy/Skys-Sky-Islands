@@ -6,7 +6,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -19,11 +18,11 @@ public class ModCreativeModeTabs {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(ModItems.ALEXANDRITE.get()::getDefaultInstance)
             .displayItems((parameters, output) -> {
-                output.accept(ModBlocks.GOLDENLEAF_PLANKS.log());
-                output.accept(ModBlocks.GOLDENLEAF_PLANKS.wood());
-                output.accept(ModBlocks.GOLDENLEAF_PLANKS.strippedLog());
-                output.accept(ModBlocks.GOLDENLEAF_PLANKS.strippedWood());
-                output.accept(ModBlocks.GOLDENLEAF_PLANKS.planks());
+                output.accept(ModBlocks.GOLDENLEAF_LOGS.log());
+                output.accept(ModBlocks.GOLDENLEAF_LOGS.wood());
+                output.accept(ModBlocks.GOLDENLEAF_LOGS.strippedLog());
+                output.accept(ModBlocks.GOLDENLEAF_LOGS.strippedWood());
+                output.accept(ModBlocks.GOLDENLEAF_PLANKS.base());
                 output.accept(ModBlocks.GOLDENLEAF_PLANKS.stairs());
                 output.accept(ModBlocks.GOLDENLEAF_PLANKS.slab());
                 output.accept(ModBlocks.GOLDENLEAF_PLANKS.fence());
@@ -39,11 +38,11 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.GOLDENLEAF_BOAT);
                 output.accept(ModItems.GOLDENLEAF_CHEST_BOAT);
 
-                output.accept(ModBlocks.SAKURA_PLANKS.log());
-                output.accept(ModBlocks.SAKURA_PLANKS.wood());
-                output.accept(ModBlocks.SAKURA_PLANKS.strippedLog());
-                output.accept(ModBlocks.SAKURA_PLANKS.strippedWood());
-                output.accept(ModBlocks.SAKURA_PLANKS.planks());
+                output.accept(ModBlocks.SAKURA_LOGS.log());
+                output.accept(ModBlocks.SAKURA_LOGS.wood());
+                output.accept(ModBlocks.SAKURA_LOGS.strippedLog());
+                output.accept(ModBlocks.SAKURA_LOGS.strippedWood());
+                output.accept(ModBlocks.SAKURA_PLANKS.base());
                 output.accept(ModBlocks.SAKURA_PLANKS.stairs());
                 output.accept(ModBlocks.SAKURA_PLANKS.slab());
                 output.accept(ModBlocks.SAKURA_PLANKS.fence());
@@ -59,11 +58,11 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.SAKURA_BOAT);
                 output.accept(ModItems.SAKURA_CHEST_BOAT);
 
-                output.accept(ModBlocks.FRIGID_PLANKS.log());
-                output.accept(ModBlocks.FRIGID_PLANKS.wood());
-                output.accept(ModBlocks.FRIGID_PLANKS.strippedLog());
-                output.accept(ModBlocks.FRIGID_PLANKS.strippedWood());
-                output.accept(ModBlocks.FRIGID_PLANKS.planks());
+                output.accept(ModBlocks.FRIGID_LOGS.log());
+                output.accept(ModBlocks.FRIGID_LOGS.wood());
+                output.accept(ModBlocks.FRIGID_LOGS.strippedLog());
+                output.accept(ModBlocks.FRIGID_LOGS.strippedWood());
+                output.accept(ModBlocks.FRIGID_PLANKS.base());
                 output.accept(ModBlocks.FRIGID_PLANKS.stairs());
                 output.accept(ModBlocks.FRIGID_PLANKS.slab());
                 output.accept(ModBlocks.FRIGID_PLANKS.fence());
@@ -79,11 +78,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.FRIGID_BOAT);
                 output.accept(ModItems.FRIGID_CHEST_BOAT);
 
-                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.log());
-                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.wood());
-                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog());
-                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood());
-                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks());
+                output.accept(ModBlocks.ARBOREAL_CACTUS);
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.base());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.stairs());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.slab());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.fence());

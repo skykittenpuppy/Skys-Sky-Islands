@@ -67,11 +67,11 @@ public class ModConfiguredFeatures {
     }
 
     private static TreeConfiguration.TreeConfigurationBuilder createGoldenleaf() {
-        return TreeFeatures.createStraightBlobTree(ModBlocks.GOLDENLEAF_PLANKS.log().get(), ModBlocks.GOLDENLEAF_LEAVES.get(), 4, 2, 0, 2).ignoreVines();
+        return TreeFeatures.createStraightBlobTree(ModBlocks.GOLDENLEAF_LOGS.log().get(), ModBlocks.GOLDENLEAF_LEAVES.get(), 4, 2, 0, 2).ignoreVines();
     } //TODO: tweak TreeConfiguration
     private static TreeConfiguration.TreeConfigurationBuilder createSakura() {
         return (new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.SAKURA_PLANKS.log().get()),
+                BlockStateProvider.simple(ModBlocks.SAKURA_LOGS.log().get()),
                 new CherryTrunkPlacer(7, 1, 0, ConstantInt.of(1), UniformInt.of(2, 4), UniformInt.of(-4, -3), UniformInt.of(-1, 0)),
                 //new CherryTrunkPlacer(7, 1, 0, new WeightedListInt(WeightedList.builder().add(ConstantInt.of(1), 1).add(ConstantInt.of(2), 1).add(ConstantInt.of(3), 1).build()), UniformInt.of(2, 4), UniformInt.of(-4, -3), UniformInt.of(-1, 0)),
                 //TODO: re-insert this?
@@ -80,11 +80,11 @@ public class ModConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 2))).ignoreVines();
     } //TODO: tweak TreeConfiguration
     private static TreeConfiguration.TreeConfigurationBuilder createFrigid() {
-        return TreeFeatures.createStraightBlobTree(ModBlocks.FRIGID_PLANKS.log().get(), ModBlocks.FRIGID_LEAVES.get(), 4, 2, 0, 2).ignoreVines();
+        return TreeFeatures.createStraightBlobTree(ModBlocks.FRIGID_LOGS.log().get(), ModBlocks.FRIGID_LEAVES.get(), 4, 2, 0, 2).ignoreVines();
     } //TODO: tweak TreeConfiguration
     private static BlockColumnConfiguration createArborealCactus() {
         return new BlockColumnConfiguration(
-                List.of(BlockColumnConfiguration.layer(BiasedToBottomInt.of(1, 5), BlockStateProvider.simple(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().get()))),
+                List.of(BlockColumnConfiguration.layer(BiasedToBottomInt.of(1, 5), BlockStateProvider.simple(ModBlocks.ARBOREAL_CACTUS.get()))),
                 Direction.UP,
                 BlockPredicate.ONLY_IN_AIR_PREDICATE,
                 false);

@@ -61,10 +61,7 @@
   "block.skyislands.frigid_hanging_sign": "Frigid Hanging Sign",
   "block.skyislands.frigid_wall_hanging_sign": "Frigid Wall Hanging Sign",
 
-  "block.skyislands.arboreal_cactus_stem": "Arboreal Cactus Stem",
-  "block.skyislands.arboreal_cactus_hyphae": "Arboreal Cactus Hyphae",
-  "block.skyislands.stripped_arboreal_cactus_stem": "Stripped Arboreal Cactus Stem",
-  "block.skyislands.stripped_arboreal_cactus_hyphae": "Stripped Arboreal Cactus Hyphae",
+  "block.skyislands.arboreal_cactus": "Arboreal Cactus",
   "block.skyislands.arboreal_cactus_planks": "Arboreal Cactus Planks",
   "block.skyislands.arboreal_cactus_stairs": "Arboreal Cactus Stairs",
   "block.skyislands.arboreal_cactus_slab": "Arboreal Cactus Slab",

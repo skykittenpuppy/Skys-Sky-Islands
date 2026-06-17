@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "skyislands:arboreal_cactus_log"
+          "name": "skyislands:arboreal_cactus"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "skyislands:blocks/arboreal_cactus_log"
+  "random_sequence": "skyislands:blocks/arboreal_cactus"
 }

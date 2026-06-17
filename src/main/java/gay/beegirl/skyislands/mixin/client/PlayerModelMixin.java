@@ -74,6 +74,10 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
 
 	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("TAIL"))
 	private void islands$setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
+		this.body.zRot =		0;
+		this.leftLeg.x =		2;
+		this.rightLeg.x =		-2;
+
 		if (entity.getData(ModDataAttachments.IS_DIVING)) { // Diving anim
 			islands$resetPose();
 

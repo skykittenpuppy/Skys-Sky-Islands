@@ -21,17 +21,15 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Map;
 
-public class CactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
-    public static final MapCodec<CactusFruitBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+public class IslandsCactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
+    public static final MapCodec<IslandsCactusFruitBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             TreeGrower.CODEC.fieldOf("tree").forGetter((block) -> block.treeGrower),
-            propertiesCodec()).apply(instance, CactusFruitBlock::new));
+            propertiesCodec()).apply(instance, IslandsCactusFruitBlock::new));
     private static final VoxelShape EAST_BUDDING_SHAPE;
     private static final VoxelShape WEST_BUDDING_SHAPE;
     private static final VoxelShape NORTH_BUDDING_SHAPE;
@@ -46,9 +44,9 @@ public class CactusFruitBlock extends HorizontalDirectionalBlock implements Bone
     protected final TreeGrower treeGrower;
 
     @Override
-    protected MapCodec<CactusFruitBlock> codec() { return CODEC; }
+    protected MapCodec<IslandsCactusFruitBlock> codec() { return CODEC; }
 
-    public CactusFruitBlock(TreeGrower treeGrower, Properties properties) {
+    public IslandsCactusFruitBlock(TreeGrower treeGrower, Properties properties) {
         super(properties);
         this.treeGrower = treeGrower;
         this.registerDefaultState((((this.stateDefinition.any())
@@ -69,9 +67,8 @@ public class CactusFruitBlock extends HorizontalDirectionalBlock implements Bone
 
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         if (blockState.getValue(HANGING)) {
-            return true;
-            //BlockState blockState2 = levelReader.getBlockState(blockPos.relative(blockState.getValue(FACING)));
-            //return blockState2.is(ModTags.Blocks.ARBOREAL_CACTUS_STEMS);
+            BlockState blockState2 = levelReader.getBlockState(blockPos.relative(blockState.getValue(FACING)));
+            return blockState2.is(ModBlocks.ARBOREAL_CACTUS);
         } else {
             BlockState blockState2 = levelReader.getBlockState(blockPos.below());
             return blockState2.is(BlockTags.DIRT) || blockState.is(Blocks.FARMLAND) || blockState.is(BlockTags.SAND);

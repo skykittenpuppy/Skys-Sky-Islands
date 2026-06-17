@@ -42,8 +42,8 @@ public class GliderLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<A
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         PartDefinition franeRoot = partdefinition.addOrReplaceChild("frame_root", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -16.0F, -8.0F, 16.0F, 3.0F, 16.0F), PartPose.ZERO);
-        franeRoot.addOrReplaceChild("leftHandle", CubeListBuilder.create().texOffs(0, 0).addBox(-7.5F, -8.0F, -4.0F, 2.0F, 2.0F, 8.0F), PartPose.ZERO);
-        franeRoot.addOrReplaceChild("rightHandle", CubeListBuilder.create().texOffs(0, 0).addBox(5.5F, -8.0F, -4.0F, 2.0F, 2.0F, 8.0F), PartPose.ZERO);
+        franeRoot.addOrReplaceChild("left_handle", CubeListBuilder.create().texOffs(0, 0).addBox(-7.5F, -8.0F, -4.0F, 2.0F, 2.0F, 8.0F), PartPose.ZERO);
+        franeRoot.addOrReplaceChild("right_handle", CubeListBuilder.create().texOffs(0, 0).addBox(5.5F, -8.0F, -4.0F, 2.0F, 2.0F, 8.0F), PartPose.ZERO);
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 

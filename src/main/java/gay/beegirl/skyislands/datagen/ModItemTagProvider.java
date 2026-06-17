@@ -29,13 +29,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .addTag(ModTags.Items.GOLDENLEAF_LOGS)
                 .addTag(ModTags.Items.SAKURA_LOGS)
                 .addTag(ModTags.Items.FRIGID_LOGS)
-                .addTag(ModTags.Items.ARBOREAL_CACTUS_STEMS);
+                .add(ModBlocks.ARBOREAL_CACTUS.asItem());
 
         tag(ItemTags.PLANKS)
-                .add(ModBlocks.GOLDENLEAF_PLANKS.planks().asItem())
-                .add(ModBlocks.SAKURA_PLANKS.planks().asItem())
-                .add(ModBlocks.FRIGID_PLANKS.planks().asItem())
-                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.planks().asItem());
+                .add(ModBlocks.GOLDENLEAF_PLANKS.base().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.base().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.base().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.base().asItem());
         tag(ItemTags.SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.standingSign().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.standingSign().asItem())
@@ -62,12 +62,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.ALEXANDRITE.get());
 
         tag(ModTags.Items.GOLDENLEAF_LOGS)
-                .add(ModBlocks.GOLDENLEAF_PLANKS.log().asItem(), ModBlocks.GOLDENLEAF_PLANKS.wood().asItem(), ModBlocks.GOLDENLEAF_PLANKS.strippedLog().asItem(), ModBlocks.GOLDENLEAF_PLANKS.strippedWood().asItem());
+                .add(ModBlocks.GOLDENLEAF_LOGS.log().asItem(), ModBlocks.GOLDENLEAF_LOGS.wood().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedLog().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedWood().asItem());
         tag(ModTags.Items.SAKURA_LOGS)
-                .add(ModBlocks.SAKURA_PLANKS.log().asItem(), ModBlocks.SAKURA_PLANKS.wood().asItem(), ModBlocks.SAKURA_PLANKS.strippedLog().asItem(), ModBlocks.SAKURA_PLANKS.strippedWood().asItem());
+                .add(ModBlocks.SAKURA_LOGS.log().asItem(), ModBlocks.SAKURA_LOGS.wood().asItem(), ModBlocks.SAKURA_LOGS.strippedLog().asItem(), ModBlocks.SAKURA_LOGS.strippedWood().asItem());
         tag(ModTags.Items.FRIGID_LOGS)
-                .add(ModBlocks.FRIGID_PLANKS.log().asItem(), ModBlocks.FRIGID_PLANKS.wood().asItem(), ModBlocks.FRIGID_PLANKS.strippedLog().asItem(), ModBlocks.FRIGID_PLANKS.strippedWood().asItem());
-        tag(ModTags.Items.ARBOREAL_CACTUS_STEMS)
-                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.log().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.wood().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedLog().asItem(), ModBlocks.ARBOREAL_CACTUS_PLANKS.strippedWood().asItem());
+                .add(ModBlocks.FRIGID_LOGS.log().asItem(), ModBlocks.FRIGID_LOGS.wood().asItem(), ModBlocks.FRIGID_LOGS.strippedLog().asItem(), ModBlocks.FRIGID_LOGS.strippedWood().asItem());
     }
 }

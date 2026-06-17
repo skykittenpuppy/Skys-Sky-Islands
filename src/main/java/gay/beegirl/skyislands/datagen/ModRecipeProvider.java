@@ -13,7 +13,9 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -92,13 +94,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     }
 
-    private void createWoodTypeRecipes(RecipeOutput recipeOutput, TagKey<Item> logs, ItemLike boat, ItemLike chestBoat, ModBlocks.WoodSetBlocks woodSetBlocks, BlockFamily family) {
-        woodFromLogs(recipeOutput, woodSetBlocks.wood(), woodSetBlocks.log());
-        woodFromLogs(recipeOutput, woodSetBlocks.strippedWood(), woodSetBlocks.strippedLog());
-        planksFromLogs(recipeOutput, woodSetBlocks.planks(), logs, 4);
-        generateRecipes(recipeOutput, family, FeatureFlagSet.of(FeatureFlags.VANILLA));
-        hangingSign(recipeOutput, woodSetBlocks.hangingSign(), woodSetBlocks.strippedLog());
-        woodenBoat(recipeOutput, boat, woodSetBlocks.planks());
+    private void createWoodTypeRecipes(RecipeOutput recipeOutput, TagKey<Item> logs, ItemLike boat, ItemLike chestBoat, ModBlocks.LogBlockSet logSetBlocks, ModBlocks.WoodBlockSet woodSetBlocks) {
+        woodFromLogs(recipeOutput, logSetBlocks.wood(), logSetBlocks.log());
+        woodFromLogs(recipeOutput, logSetBlocks.strippedWood(), logSetBlocks.strippedLog());
+        planksFromLogs(recipeOutput, woodSetBlocks.base(), logs, 4);
+        //generateRecipes(recipeOutput, family, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        hangingSign(recipeOutput, woodSetBlocks.hangingSign(), logSetBlocks.strippedLog());
+        woodenBoat(recipeOutput, boat, woodSetBlocks.base());
+        chestBoat(recipeOutput, chestBoat, boat);
+    }
+    private void createWoodTypeRecipes(RecipeOutput recipeOutput, TagKey<Item> logs, ItemLike boat, ItemLike chestBoat, DeferredBlock<Block> logLikeBlock, ModBlocks.WoodBlockSet woodSetBlocks) {
+        planksFromLogs(recipeOutput, woodSetBlocks.base(), logs, 4);
+        //generateRecipes(recipeOutput, family, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        hangingSign(recipeOutput, woodSetBlocks.hangingSign(), logLikeBlock);
+        woodenBoat(recipeOutput, boat, woodSetBlocks.base());
         chestBoat(recipeOutput, chestBoat, boat);
     }
 

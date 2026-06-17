@@ -32,26 +32,29 @@ public class ModItemModelProvider extends ItemModelProvider {
         stoneSet(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
         stoneSet(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        woodSet(ModBlocks.GOLDENLEAF_PLANKS, true);
+        logSet(ModBlocks.GOLDENLEAF_LOGS);
+        woodSet(ModBlocks.GOLDENLEAF_PLANKS);
         uncheckedBlockItem(ModBlocks.GOLDENLEAF_LEAVES.get());
         flatBlockItem(ModBlocks.GOLDENLEAF_SAPLING.get());
         basicItem(ModItems.GOLDENLEAF_BOAT.get());
         basicItem(ModItems.GOLDENLEAF_CHEST_BOAT.get());
 
-        woodSet(ModBlocks.SAKURA_PLANKS, true);
+        logSet(ModBlocks.SAKURA_LOGS);
+        woodSet(ModBlocks.SAKURA_PLANKS);
         uncheckedBlockItem(ModBlocks.SAKURA_LEAVES.get());
         flatBlockItem(ModBlocks.SAKURA_SAPLING.get());
         basicItem(ModItems.SAKURA_BOAT.get());
         basicItem(ModItems.SAKURA_CHEST_BOAT.get());
 
-        woodSet(ModBlocks.FRIGID_PLANKS, true);
+        logSet(ModBlocks.FRIGID_LOGS);
+        woodSet(ModBlocks.FRIGID_PLANKS);
         uncheckedBlockItem(ModBlocks.FRIGID_LEAVES.get());
         flatBlockItem(ModBlocks.FRIGID_SAPLING.get());
         basicItem(ModItems.FRIGID_BOAT.get());
         basicItem(ModItems.FRIGID_CHEST_BOAT.get());
 
-        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS, false);
         uncheckedBlockItem(ModBlocks.ARBOREAL_CACTUS.get());
+        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS);
         basicItem(ModBlocks.ARBOREAL_CACTUS_FRUIT.get().asItem());
         basicItem(ModItems.ARBOREAL_CACTUS_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
@@ -76,7 +79,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(blockLoc.getNamespace(), "block/" + blockLoc.getPath() + suffix)));
     }
 
-    public final void stoneSet(ModBlocks.StoneSetBlocks stoneSet){
+    public final void stoneSet(ModBlocks.StoneBlockSet stoneSet){
         uncheckedBlockItem(stoneSet.base().get());
         uncheckedBlockItem(stoneSet.button().get(), "_inventory");
         uncheckedBlockItem(stoneSet.wall().get(), "_inventory");
@@ -84,15 +87,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         uncheckedBlockItem(stoneSet.stairs().get());
         uncheckedBlockItem(stoneSet.pressurePlate().get());
     }
-
-    public final void woodSet(ModBlocks.WoodSetBlocks woodSet, boolean withLogs) {
-        if (withLogs) {
-            uncheckedBlockItem(woodSet.log().get());
-            uncheckedBlockItem(woodSet.wood().get());
-            uncheckedBlockItem(woodSet.strippedLog().get());
-            uncheckedBlockItem(woodSet.strippedWood().get());
-        }
-        uncheckedBlockItem(woodSet.planks().get());
+    public final void logSet(ModBlocks.LogBlockSet logSet) {
+        uncheckedBlockItem(logSet.log().get());
+        uncheckedBlockItem(logSet.wood().get());
+        uncheckedBlockItem(logSet.strippedLog().get());
+        uncheckedBlockItem(logSet.strippedWood().get());
+    }
+    public final void woodSet(ModBlocks.WoodBlockSet woodSet) {
+        uncheckedBlockItem(woodSet.base().get());
         uncheckedBlockItem(woodSet.button().get(), "_inventory");
         basicItem(woodSet.door().get().asItem());
         uncheckedBlockItem(woodSet.fence().get(), "_inventory");

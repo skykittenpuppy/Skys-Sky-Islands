@@ -16,10 +16,7 @@
         "provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "skyislands:arboreal_cactus_log",
-            "Properties": {
-              "axis": "y"
-            }
+            "Name": "skyislands:arboreal_cactus"
           }
         }
       }

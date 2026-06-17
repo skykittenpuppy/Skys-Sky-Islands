@@ -1,43 +1,60 @@
 package gay.beegirl.skyislands.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.util.TriState;
 import org.jetbrains.annotations.NotNull;
 
-public class CactusLogBlock extends RotatedPillarBlock {
+public class IslandsCactusBlock extends Block {
+    public static final MapCodec<IslandsCactusBlock> CODEC = simpleCodec(IslandsCactusBlock::new);
     public static final IntegerProperty AGE;
-    public static final EnumProperty<Direction.Axis> AXIS;
-
-    private static final VoxelShape SHAPE_COLLISION;
-    private static final VoxelShape SHAPE;
-
     public static final int MAX_AGE = 15;
-    private static final int MAX_CACTUS_GROWING_HEIGHT = 5;
-    private static final int ATTEMPT_GROW_CACTUS_FRUIT_AGE = 8;
-    private static final double ATTEMPT_GROW_CACTUS_FRUIT_SMALL_CACTUS_CHANCE = 0.1F;
-    private static final double ATTEMPT_GROW_CACTUS_FRUIT_TALL_CACTUS_CHANCE = 0.25F;
+    protected static final int MAX_CACTUS_GROWING_HEIGHT = 5;
+    protected static final int ATTEMPT_GROW_CACTUS_FRUIT_AGE = 8;
+    protected static final double ATTEMPT_GROW_CACTUS_FRUIT_SMALL_CACTUS_CHANCE = 0.1F;
+    protected static final double ATTEMPT_GROW_CACTUS_FRUIT_TALL_CACTUS_CHANCE = 0.25F;
+    protected static final VoxelShape COLLISION_SHAPE;
+    protected static final VoxelShape OUTLINE_SHAPE;
 
-    public CactusLogBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState((this.stateDefinition.any()).setValue(AGE, 0));
-        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
+    public MapCodec<IslandsCactusBlock> codec() {
+        return CODEC;
     }
 
+    public IslandsCactusBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
+    }
+
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (level.isAreaLoaded(pos, 1)) {
+            if (!state.canSurvive(level, pos)) {
+                level.destroyBlock(pos, true);
+            }
+
+        }
+    }
+
+    // TODO:
     protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         BlockPos blockPos2 = blockPos.above();
         if (serverLevel.isEmptyBlock(blockPos2)) {
@@ -77,12 +94,25 @@ public class CactusLogBlock extends RotatedPillarBlock {
         }
     }
 
-    protected @NotNull VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SHAPE_COLLISION;
+    protected VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return COLLISION_SHAPE;
     }
 
-    protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SHAPE;
+    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return OUTLINE_SHAPE;
+    }
+
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (!state.canSurvive(level, currentPos)) {
+            level.scheduleTick(currentPos, this, 1);
+        }
+
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+    }
+
+    // TODO:
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return true;
     }
 
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
@@ -93,14 +123,13 @@ public class CactusLogBlock extends RotatedPillarBlock {
         builder.add(AGE);
     }
 
-    protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
     static {
         AGE = BlockStateProperties.AGE_15;
-        AXIS = BlockStateProperties.AXIS;
-        SHAPE_COLLISION = Block.box(1.0F, 0.0F, 0.0F, 15.0F, 0.0F, 15.0F);
-        SHAPE = Block.box(1.0F, 0.0F, 0.0F, 15.0F, 0.0F, 16.0F);
+        COLLISION_SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 15.0F, 15.0F);
+        OUTLINE_SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 16.0F, 15.0F);
     }
 }
