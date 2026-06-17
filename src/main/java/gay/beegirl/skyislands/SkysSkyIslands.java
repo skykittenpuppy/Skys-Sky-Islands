@@ -3,11 +3,10 @@ package gay.beegirl.skyislands;
 import gay.beegirl.skyislands.block.ModBlocks;
 import gay.beegirl.skyislands.entity.ModDataAttachments;
 import gay.beegirl.skyislands.item.ModCreativeModeTabs;
+import gay.beegirl.skyislands.item.ModDataComponents;
 import gay.beegirl.skyislands.item.ModItems;
 import gay.beegirl.skyislands.particle.ModParticleTypes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -23,6 +22,7 @@ public class SkysSkyIslands {
 
     public SkysSkyIslands(IEventBus modEventBus, ModContainer modContainer) {
         ModDataAttachments.registerDataAttachments(modEventBus);
+        ModDataComponents.registerDataComponents(modEventBus);
         ModBlocks.registerBlocks(modEventBus);
         ModItems.registerItems(modEventBus);
         ModCreativeModeTabs.registerCreativeModeTabs(modEventBus);

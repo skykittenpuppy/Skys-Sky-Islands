@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.entity.ModDataAttachments;
+import gay.beegirl.skyislands.item.ModDataComponents;
+import gay.beegirl.skyislands.item.ModItems;
 import gay.beegirl.skyislands.util.HelperFunctions;
 import gay.beegirl.skyislands.util.LivingEntityAccess;
 import net.minecraft.client.model.PlayerModel;
@@ -72,7 +74,8 @@ public class GliderLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<A
             this.frameRoot.x = -6 * zRadians;
 			this.frameRoot.render(poseStack, hvertexconsumer, i, OverlayTexture.NO_OVERLAY);
 
-			VertexConsumer cvertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(CLOTH_TEXTURE));
+            ResourceLocation clothTexture = entity.getMainHandItem().is(ModItems.GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
+			VertexConsumer cvertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(clothTexture != null ? ResourceLocation.fromNamespaceAndPath(clothTexture.getNamespace(), "textures/entity/glider/"+clothTexture.getPath()+".png") : CLOTH_TEXTURE));
             this.clothRoot.zRot = 0.8F * zRadians;
             this.clothRoot.x = -6 * zRadians;
 			this.clothRoot.render(poseStack, cvertexconsumer, i, OverlayTexture.NO_OVERLAY);
