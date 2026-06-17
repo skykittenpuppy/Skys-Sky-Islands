@@ -7,7 +7,6 @@ import gay.beegirl.skyislands.item.ModItems;
 import gay.beegirl.skyislands.particle.ModParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 
