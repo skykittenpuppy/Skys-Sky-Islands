@@ -568,6 +568,15 @@ public class ModBlocks {
     //        .recipeUnlockedBy("has_planks")
     //        .getFamily();
     public static final WoodSetBlocks ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE); //TODO: tweak MapColors
+    public static final DeferredBlock<Block> ARBOREAL_CACTUS = registerBlock("arboreal_cactus", properties -> new CactusLogBlock(
+                    properties
+                            .mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLACK : MapColor.COLOR_MAGENTA) //TODO: tweak MapColors
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .randomTicks()
+                            .ignitedByLava()
+    ));
     public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new CactusFruitBlock(ModTreeGrowers.ARBOREAL_CACTUS,
             properties
                     .mapColor(MapColor.CRIMSON_STEM)

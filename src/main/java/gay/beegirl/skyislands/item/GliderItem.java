@@ -1,6 +1,6 @@
 package gay.beegirl.skyislands.item;
 
-import gay.beegirl.skyislands.util.ModTags;
+import gay.beegirl.skyislands.tags.ModTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 

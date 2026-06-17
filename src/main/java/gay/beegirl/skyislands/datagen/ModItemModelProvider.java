@@ -32,25 +32,26 @@ public class ModItemModelProvider extends ItemModelProvider {
         stoneSet(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
         stoneSet(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        woodSet(ModBlocks.GOLDENLEAF_PLANKS);
+        woodSet(ModBlocks.GOLDENLEAF_PLANKS, true);
         uncheckedBlockItem(ModBlocks.GOLDENLEAF_LEAVES.get());
         flatBlockItem(ModBlocks.GOLDENLEAF_SAPLING.get());
         basicItem(ModItems.GOLDENLEAF_BOAT.get());
         basicItem(ModItems.GOLDENLEAF_CHEST_BOAT.get());
 
-        woodSet(ModBlocks.SAKURA_PLANKS);
+        woodSet(ModBlocks.SAKURA_PLANKS, true);
         uncheckedBlockItem(ModBlocks.SAKURA_LEAVES.get());
         flatBlockItem(ModBlocks.SAKURA_SAPLING.get());
         basicItem(ModItems.SAKURA_BOAT.get());
         basicItem(ModItems.SAKURA_CHEST_BOAT.get());
 
-        woodSet(ModBlocks.FRIGID_PLANKS);
+        woodSet(ModBlocks.FRIGID_PLANKS, true);
         uncheckedBlockItem(ModBlocks.FRIGID_LEAVES.get());
         flatBlockItem(ModBlocks.FRIGID_SAPLING.get());
         basicItem(ModItems.FRIGID_BOAT.get());
         basicItem(ModItems.FRIGID_CHEST_BOAT.get());
 
-        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS);
+        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS, false);
+        uncheckedBlockItem(ModBlocks.ARBOREAL_CACTUS.get());
         basicItem(ModBlocks.ARBOREAL_CACTUS_FRUIT.get().asItem());
         basicItem(ModItems.ARBOREAL_CACTUS_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
@@ -84,11 +85,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         uncheckedBlockItem(stoneSet.pressurePlate().get());
     }
 
-    public final void woodSet(ModBlocks.WoodSetBlocks woodSet) {
-        uncheckedBlockItem(woodSet.log().get());
-        uncheckedBlockItem(woodSet.wood().get());
-        uncheckedBlockItem(woodSet.strippedLog().get());
-        uncheckedBlockItem(woodSet.strippedWood().get());
+    public final void woodSet(ModBlocks.WoodSetBlocks woodSet, boolean withLogs) {
+        if (withLogs) {
+            uncheckedBlockItem(woodSet.log().get());
+            uncheckedBlockItem(woodSet.wood().get());
+            uncheckedBlockItem(woodSet.strippedLog().get());
+            uncheckedBlockItem(woodSet.strippedWood().get());
+        }
         uncheckedBlockItem(woodSet.planks().get());
         uncheckedBlockItem(woodSet.button().get(), "_inventory");
         basicItem(woodSet.door().get().asItem());

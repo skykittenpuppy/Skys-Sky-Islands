@@ -3,7 +3,7 @@ package gay.beegirl.skyislands.datagen;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.block.ModBlocks;
 import gay.beegirl.skyislands.item.ModItems;
-import gay.beegirl.skyislands.util.ModTags;
+import gay.beegirl.skyislands.tags.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;

@@ -2,7 +2,7 @@ package gay.beegirl.skyislands.worldgen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.block.ModBlocks;
-import gay.beegirl.skyislands.util.ModTags;
+import gay.beegirl.skyislands.tags.ModTags;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
