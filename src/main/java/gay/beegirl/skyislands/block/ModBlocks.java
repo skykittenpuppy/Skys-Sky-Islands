@@ -40,6 +40,9 @@ public class ModBlocks {
             DeferredBlock<Block> wood,
             DeferredBlock<Block> strippedLog,
             DeferredBlock<Block> strippedWood) {}
+    public record CactusBlockSet(
+            DeferredBlock<Block> cactus,
+            DeferredBlock<Block> despinedCactus) {}
     public record WoodBlockSet(
             DeferredBlock<Block> base,
             DeferredBlock<Block> button,
@@ -455,6 +458,16 @@ public class ModBlocks {
                     .randomTicks()
                     .ignitedByLava()
     ));
+    public static final DeferredBlock<Block> DESPINED_ARBOREAL_CACTUS = registerBlockWithItem("despined_arboreal_cactus", properties -> new IslandsCactusBlock(
+            properties
+                    .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColors
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.0F)
+                    .sound(SoundType.WOOL)
+                    .randomTicks()
+                    .ignitedByLava()
+    ));
+    public static final CactusBlockSet ARBOREAL_CACTUSES = new CactusBlockSet(ARBOREAL_CACTUS, DESPINED_ARBOREAL_CACTUS);
     public static final WoodBlockSet ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE); //TODO: tweak MapColors
     public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlockWithItem("arboreal_cactus_fruit", properties -> new IslandsCactusFruitBlock(ModTreeGrowers.ARBOREAL_CACTUS,
             properties

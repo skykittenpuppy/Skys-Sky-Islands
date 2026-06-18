@@ -57,9 +57,9 @@ public class ModDataGenerator {
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, new RegistrySetBuilder()
                 .add(Registries.TRIM_MATERIAL, ModArmorTrimMaterials::bootstrap)
                 .add(Registries.TRIM_PATTERN, ModArmorTrimPatterns::bootstrap)
-                /*.add(ModRegistries.GLIDER_DESIGN, ModGliderPatternDesigns::bootstrap)*/
-                .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
                 .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
-                .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
+                .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
+                .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+                .add(ModRegistries.GLIDER_DESIGN, ModGliderPatternDesigns::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
     }
 }

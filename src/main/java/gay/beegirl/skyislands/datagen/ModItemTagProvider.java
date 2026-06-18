@@ -29,7 +29,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .addTag(ModTags.Items.GOLDENLEAF_LOGS)
                 .addTag(ModTags.Items.SAKURA_LOGS)
                 .addTag(ModTags.Items.FRIGID_LOGS)
-                .add(ModBlocks.ARBOREAL_CACTUS.asItem());
+                .addTag(ModTags.Items.ARBOREAL_CACTUSES);
 
         tag(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.base().asItem())
@@ -67,5 +67,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModBlocks.SAKURA_LOGS.log().asItem(), ModBlocks.SAKURA_LOGS.wood().asItem(), ModBlocks.SAKURA_LOGS.strippedLog().asItem(), ModBlocks.SAKURA_LOGS.strippedWood().asItem());
         tag(ModTags.Items.FRIGID_LOGS)
                 .add(ModBlocks.FRIGID_LOGS.log().asItem(), ModBlocks.FRIGID_LOGS.wood().asItem(), ModBlocks.FRIGID_LOGS.strippedLog().asItem(), ModBlocks.FRIGID_LOGS.strippedWood().asItem());
+        tag(ModTags.Items.ARBOREAL_CACTUSES)
+                .add(ModBlocks.ARBOREAL_CACTUSES.cactus().asItem(), ModBlocks.ARBOREAL_CACTUSES.despinedCactus().asItem());
     }
 }

@@ -3,13 +3,14 @@ package gay.beegirl.skyislands.datagen;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.block.ModBlocks;
 import gay.beegirl.skyislands.item.ModItems;
+import gay.beegirl.skyislands.recipe.SewingDesignRecipeBuilder;
+import gay.beegirl.skyislands.tags.ModTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.BlockFamily;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -60,64 +61,78 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBlocks.ALEXANDRITE_BLOCK), has(ModBlocks.ALEXANDRITE_BLOCK))
                 .save(recipeOutput);
 
-        //SmithingTrimRecipeBuilder.copySmithingTemplate(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE, ModBlocks.CLOUDSHALE.base());
-        //SmithingTrimRecipeBuilder.smithingTrim(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE, ModTrimPatterns.TESTING);
-        //sewingTrim(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE, ModGliderDesigns.TESTING);
+        copySmithingTemplate(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
+        trimSmithing(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
+        copySewingTemplate(recipeOutput, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+        designSewing(recipeOutput, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
 
         twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CLOUDSHALE.base(), ModBlocks.POINTED_CLOUDSHALE);
-        //generateRecipes(recipeOutput, ModBlocks.CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
-        //generateRecipes(recipeOutput, ModBlocks.COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
-        //generateRecipes(recipeOutput, ModBlocks.MOSSY_COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
-        //generateRecipes(recipeOutput, ModBlocks.CHERRY_COBBLED_CLOUDSHALE_FAMILY, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        createStoneSetRecipes(recipeOutput, ModBlocks.CLOUDSHALE);
+        createStoneSetRecipes(recipeOutput, ModBlocks.COBBLED_CLOUDSHALE);
+        createStoneSetRecipes(recipeOutput, ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
+        createStoneSetRecipes(recipeOutput, ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        //createWoodTypeRecipes(recipeOutput, ModTags.Items.GOLDENLEAF_LOGS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT, ModBlocks.GOLDENLEAF_PLANKS, ModBlocks.GOLDENLEAF_PLANKS_FAMILY);
-//
-        //createWoodTypeRecipes(recipeOutput, ModTags.Items.SAKURA_LOGS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT, ModBlocks.SAKURA_PLANKS, ModBlocks.SAKURA_PLANKS_FAMILY);
-//
-        //createWoodTypeRecipes(recipeOutput, ModTags.Items.FRIGID_LOGS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT, ModBlocks.FRIGID_PLANKS, ModBlocks.FRIGID_PLANKS_FAMILY);
-//
-        //createWoodTypeRecipes(recipeOutput, ModTags.Items.ARBOREAL_CACTUS_STEMS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModBlocks.ARBOREAL_CACTUS_PLANKS_FAMILY);
+        createWoodSetRecipes(recipeOutput, ModBlocks.GOLDENLEAF_LOGS, ModTags.Items.GOLDENLEAF_LOGS, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT);
+        createWoodSetRecipes(recipeOutput, ModBlocks.SAKURA_LOGS, ModTags.Items.SAKURA_LOGS, ModBlocks.SAKURA_PLANKS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT);
+        createWoodSetRecipes(recipeOutput, ModBlocks.FRIGID_LOGS, ModTags.Items.FRIGID_LOGS, ModBlocks.FRIGID_PLANKS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT);
+        //createWoodSetRecipes(recipeOutput, ModBlocks.ARBOREAL_CACTUSES, ModTags.Items.ARBOREAL_CACTUSES, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
     }
 
+    private static void createStoneSetRecipes(RecipeOutput recipeOutput, ModBlocks.StoneBlockSet stoneBlockSet) {
+
+    }
+    private static void createWoodSetRecipes(RecipeOutput recipeOutput, ModBlocks.LogBlockSet logBlockSet, TagKey<Item> logs, ModBlocks.WoodBlockSet woodBlockSet, ItemLike boat, ItemLike chestBoat) {
+        woodFromLogs(recipeOutput, logBlockSet.wood(), logBlockSet.log());
+        woodFromLogs(recipeOutput, logBlockSet.strippedWood(), logBlockSet.strippedLog());
+        planksFromLogs(recipeOutput, woodBlockSet.base(), logs, 4);
+        hangingSign(recipeOutput, woodBlockSet.hangingSign(), logBlockSet.strippedLog());
+        woodenBoat(recipeOutput, boat, woodBlockSet.base());
+        chestBoat(recipeOutput, chestBoat, boat);
+    }
+    private static void createWoodSetRecipes(RecipeOutput recipeOutput, ModBlocks.CactusBlockSet cactusBlockSet, TagKey<Item> cactuses, ModBlocks.WoodBlockSet woodBlockSet, ItemLike boat, ItemLike chestBoat) {
+        planksFromLogs(recipeOutput, woodBlockSet.base(), cactuses, 4);
+        hangingSign(recipeOutput, woodBlockSet.hangingSign(), cactusBlockSet.despinedCactus());
+        woodenBoat(recipeOutput, boat, woodBlockSet.base());
+        chestBoat(recipeOutput, chestBoat, boat);
+    }
+
+    private static void trimSmithing(RecipeOutput recipeOutput, Item ingredientItem) {
+        SmithingTrimRecipeBuilder.smithingTrim(
+                        Ingredient.of(ingredientItem),
+                        Ingredient.of(ItemTags.TRIMMABLE_ARMOR),
+                        Ingredient.of(ItemTags.TRIM_MATERIALS),
+                        RecipeCategory.MISC)
+                .unlocks("has_smithing_trim_template",
+                        has(ingredientItem))
+                .save(recipeOutput,
+                        SkysSkyIslands.createId(BuiltInRegistries.ITEM.getKey(ingredientItem).getPath() + "_smithing_trim"));
+    }
+    private static void copySewingTemplate(RecipeOutput recipeOutput, ItemLike template) {
+        copySmithingTemplate(recipeOutput, template, ItemTags.WOOL);
+    }
+    private static void designSewing(RecipeOutput recipeOutput, Item ingredientItem) {
+        SewingDesignRecipeBuilder.sewingDesign(
+                        Ingredient.of(ingredientItem),
+                        Ingredient.of(ModItems.GLIDER),
+                        RecipeCategory.MISC)
+                .unlocks("has_sewing_design_template",
+                        has(ingredientItem))
+                .save(recipeOutput,
+                        SkysSkyIslands.createId(BuiltInRegistries.ITEM.getKey(ingredientItem).getPath() + "_sewing"));
+    }
+
+    // Copied* from RecipeProvider
     protected static void oreSmelting(RecipeOutput recipeOutput, List<ItemLike> ingredients, RecipeCategory category, ItemLike result, float experience, int cookingTime, String group) {
         oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, ingredients, category, result, experience, cookingTime, group, "_from_smelting");
     }
     protected static void oreBlasting(RecipeOutput recipeOutput, List<ItemLike> ingredients, RecipeCategory category, ItemLike result, float experience, int cookingTime, String group) {
         oreCooking(recipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, ingredients, category, result, experience, cookingTime, group, "_from_blasting");
     }
-
     protected static <T extends AbstractCookingRecipe> void oreCooking(RecipeOutput recipeOutput, RecipeSerializer<T> serializer, AbstractCookingRecipe.Factory<T> recipeFactory, List<ItemLike> ingredients, RecipeCategory category, ItemLike result, float experience, int cookingTime, String group, String suffix) {
         for(ItemLike itemlike : ingredients) {
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), category, result, experience, cookingTime, serializer, recipeFactory).group(group).unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(recipeOutput, SkysSkyIslands.MOD_ID + ":" + getItemName(result) + suffix + "_" + getItemName(itemlike));
+                    .save(recipeOutput, SkysSkyIslands.createId(getItemName(result) + suffix + "_" + getItemName(itemlike)));
         }
 
     }
-
-    private void createWoodTypeRecipes(RecipeOutput recipeOutput, TagKey<Item> logs, ItemLike boat, ItemLike chestBoat, ModBlocks.LogBlockSet logSetBlocks, ModBlocks.WoodBlockSet woodSetBlocks) {
-        woodFromLogs(recipeOutput, logSetBlocks.wood(), logSetBlocks.log());
-        woodFromLogs(recipeOutput, logSetBlocks.strippedWood(), logSetBlocks.strippedLog());
-        planksFromLogs(recipeOutput, woodSetBlocks.base(), logs, 4);
-        //generateRecipes(recipeOutput, family, FeatureFlagSet.of(FeatureFlags.VANILLA));
-        hangingSign(recipeOutput, woodSetBlocks.hangingSign(), logSetBlocks.strippedLog());
-        woodenBoat(recipeOutput, boat, woodSetBlocks.base());
-        chestBoat(recipeOutput, chestBoat, boat);
-    }
-    private void createWoodTypeRecipes(RecipeOutput recipeOutput, TagKey<Item> logs, ItemLike boat, ItemLike chestBoat, DeferredBlock<Block> logLikeBlock, ModBlocks.WoodBlockSet woodSetBlocks) {
-        planksFromLogs(recipeOutput, woodSetBlocks.base(), logs, 4);
-        //generateRecipes(recipeOutput, family, FeatureFlagSet.of(FeatureFlags.VANILLA));
-        hangingSign(recipeOutput, woodSetBlocks.hangingSign(), logLikeBlock);
-        woodenBoat(recipeOutput, boat, woodSetBlocks.base());
-        chestBoat(recipeOutput, chestBoat, boat);
-    }
-
-    /*public void sewingTrim(ItemLike item, ResourceKey<GliderDesign> resourceKey) {
-        SewingDesignRecipeBuilder.sewingDesign(
-                        Ingredient.of(item),
-                        Ingredient.of(ModItems.GLIDER),
-                        this.registries.lookupOrThrow(ModRegistryResourceKeys.GLIDER_DESIGN).getOrThrow(resourceKey),
-                        RecipeCategory.MISC)
-                .unlocks("has_sewing_design_template", this.has(item))
-                .save(this.output, ResourceKey.create(Registries.RECIPE, SkysSkyIslands.createId(getItemName(item) + "_sewing_design")));
-    }*/
 }

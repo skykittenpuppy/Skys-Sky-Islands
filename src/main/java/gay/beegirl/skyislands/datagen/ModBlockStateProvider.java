@@ -25,27 +25,28 @@ public class ModBlockStateProvider extends BlockStateProvider {
         grassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
         grassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
         //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
-        stoneSet(ModBlocks.CLOUDSHALE);
-        stoneSet(ModBlocks.COBBLED_CLOUDSHALE);
-        stoneSet(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        stoneSet(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
+        createStoneSetBlockStates(ModBlocks.CLOUDSHALE);
+        createStoneSetBlockStates(ModBlocks.COBBLED_CLOUDSHALE);
+        createStoneSetBlockStates(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
+        createStoneSetBlockStates(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        logSet(ModBlocks.GOLDENLEAF_LOGS);
-        woodSet(ModBlocks.GOLDENLEAF_PLANKS);
+        createLogSetBlockStates(ModBlocks.GOLDENLEAF_LOGS);
+        createWoodSetBlockStates(ModBlocks.GOLDENLEAF_PLANKS);
         simpleBlockWithItem(ModBlocks.GOLDENLEAF_LEAVES.get());
         plantAndPot(ModBlocks.GOLDENLEAF_SAPLING.get(), ModBlocks.POTTED_GOLDENLEAF_SAPLING.get());
 
-        logSet(ModBlocks.SAKURA_LOGS);
-        woodSet(ModBlocks.SAKURA_PLANKS);
+        createLogSetBlockStates(ModBlocks.SAKURA_LOGS);
+        createWoodSetBlockStates(ModBlocks.SAKURA_PLANKS);
         simpleBlockWithItem(ModBlocks.SAKURA_LEAVES.get());
         plantAndPot(ModBlocks.SAKURA_SAPLING.get(), ModBlocks.POTTED_SAKURA_SAPLING.get());
 
-        logSet(ModBlocks.FRIGID_LOGS);
-        woodSet(ModBlocks.FRIGID_PLANKS);
+        createLogSetBlockStates(ModBlocks.FRIGID_LOGS);
+        createWoodSetBlockStates(ModBlocks.FRIGID_PLANKS);
         simpleBlockWithItem(ModBlocks.FRIGID_LEAVES.get());
         plantAndPot(ModBlocks.FRIGID_SAPLING.get(), ModBlocks.POTTED_FRIGID_SAPLING.get());
 
-        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS);
+        createCactusSetBlockStates(ModBlocks.ARBOREAL_CACTUSES);
+        createWoodSetBlockStates(ModBlocks.ARBOREAL_CACTUS_PLANKS);
     }
 
     private void simpleBlockWithItem(Block block) {
@@ -64,7 +65,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)));
     }
 
-    public final void stoneSet(ModBlocks.StoneBlockSet stoneSet){
+    public final void createStoneSetBlockStates(ModBlocks.StoneBlockSet stoneSet){
         simpleBlock(stoneSet.base().get());
         buttonBlock((ButtonBlock) stoneSet.button().get(), blockTexture(stoneSet.base().get()));
         wallBlock((WallBlock) stoneSet.wall().get(), blockTexture(stoneSet.base().get()));
@@ -72,13 +73,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock((StairBlock) stoneSet.stairs().get(), blockTexture(stoneSet.base().get()));
         pressurePlateBlock((PressurePlateBlock) stoneSet.pressurePlate().get(), blockTexture(stoneSet.base().get()));
     }
-    public final void logSet(ModBlocks.LogBlockSet logSet) {
+    public final void createLogSetBlockStates(ModBlocks.LogBlockSet logSet) {
         logBlock((RotatedPillarBlock) logSet.log().get());
         axisBlock((RotatedPillarBlock) logSet.wood().get(), blockTexture(logSet.log().get()), blockTexture(logSet.log().get()));
         logBlock((RotatedPillarBlock) logSet.strippedLog().get());
         axisBlock((RotatedPillarBlock) logSet.strippedWood().get(), blockTexture(logSet.strippedLog().get()), blockTexture(logSet.strippedLog().get()));
     }
-    public final void woodSet(ModBlocks.WoodBlockSet woodSet) {
+    public final void createCactusSetBlockStates(ModBlocks.CactusBlockSet cactusSet) {
+    }
+    public final void createWoodSetBlockStates(ModBlocks.WoodBlockSet woodSet) {
         simpleBlock(woodSet.base().get());
         buttonBlock((ButtonBlock) woodSet.button().get(), blockTexture(woodSet.base().get()));
         doorBlock((DoorBlock) woodSet.door().get(), extend(blockTexture(woodSet.door().get()), "_bottom"), extend(blockTexture(woodSet.door().get()), "_top"));

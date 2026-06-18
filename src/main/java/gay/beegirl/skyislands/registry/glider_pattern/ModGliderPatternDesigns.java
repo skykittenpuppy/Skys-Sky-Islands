@@ -25,16 +25,16 @@ public class ModGliderPatternDesigns {
         register(context, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get(), TESTING);
     }
 
+    private static ResourceKey<GliderDesign> registryKey(String name) {
+        return ResourceKey.create(ModRegistries.GLIDER_DESIGN, SkysSkyIslands.createId(name));
+    }
+
     public static Optional<Holder.Reference<GliderDesign>> getFromTemplate(HolderLookup.Provider registries, ItemStack template) {
-        return registries.lookupOrThrow(ModRegistries.GLIDER_DESIGN).listElements().filter((p_266833_) -> template.is((p_266833_.value()).templateItem())).findFirst();
+        return registries.lookupOrThrow(ModRegistries.GLIDER_DESIGN).listElements().filter((reference) -> template.is((reference.value()).templateItem())).findFirst();
     }
 
     public static void register(BootstrapContext<GliderDesign> context, Item templateItem, ResourceKey<GliderDesign> gliderDesignKey) {
         GliderDesign gliderDesign = new GliderDesign(gliderDesignKey.location(), BuiltInRegistries.ITEM.wrapAsHolder(templateItem), Component.translatable(Util.makeDescriptionId("glider_design", gliderDesignKey.location())));
         context.register(gliderDesignKey, gliderDesign);
-    }
-
-    private static ResourceKey<GliderDesign> registryKey(String name) {
-        return ResourceKey.create(ModRegistries.GLIDER_DESIGN, SkysSkyIslands.createId(name));
     }
 }

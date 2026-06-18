@@ -1,0 +1,9 @@
+{
+  "type": "skyislands:sewing_design",
+  "base": {
+    "item": "skyislands:glider"
+  },
+  "template": {
+    "item": "skyislands:testing_glider_pattern_sewing_template"
+  }
+}

@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimPattern;
 import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.Map;
@@ -59,6 +61,10 @@ public class GliderPattern implements TooltipProvider {
 
     public GliderPattern(Holder<GliderDesign> pattern) {
         this(pattern, true);
+    }
+
+    public boolean hasDesign(Holder<GliderDesign> pattern) {
+        return pattern.equals(this.design);
     }
 
     public Holder<GliderDesign> design() {

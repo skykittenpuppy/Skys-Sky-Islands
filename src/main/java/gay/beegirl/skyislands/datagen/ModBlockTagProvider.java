@@ -27,7 +27,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.GOLDENLEAF_LOGS)
                 .addTag(ModTags.Blocks.SAKURA_LOGS)
                 .addTag(ModTags.Blocks.FRIGID_LOGS)
-                .add(ModBlocks.ARBOREAL_CACTUS.get());
+                .addTag(ModTags.Blocks.ARBOREAL_CACTUSES);
 
         tag(BlockTags.FLOWER_POTS)
                 .add(ModBlocks.POTTED_GOLDENLEAF_SAPLING.get())
@@ -86,5 +86,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SAKURA_LOGS.log().get(), ModBlocks.SAKURA_LOGS.wood().get(), ModBlocks.SAKURA_LOGS.strippedLog().get(), ModBlocks.SAKURA_LOGS.strippedWood().get());
         tag(ModTags.Blocks.FRIGID_LOGS)
                 .add(ModBlocks.FRIGID_LOGS.log().get(), ModBlocks.FRIGID_LOGS.wood().get(), ModBlocks.FRIGID_LOGS.strippedLog().get(), ModBlocks.FRIGID_LOGS.strippedWood().get());
+        tag(ModTags.Blocks.ARBOREAL_CACTUSES)
+                .add(ModBlocks.ARBOREAL_CACTUSES.cactus().get(), ModBlocks.ARBOREAL_CACTUSES.despinedCactus().get());
     }
 }

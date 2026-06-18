@@ -32,35 +32,35 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.CLOUDSHALE.slab().get());
         dropSelf(ModBlocks.CLOUDSHALE.stairs().get());
         dropSelf(ModBlocks.CLOUDSHALE.pressurePlate().get());
-        createStoneTypeLootTables(ModBlocks.COBBLED_CLOUDSHALE);
-        createStoneTypeLootTables(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        createStoneTypeLootTables(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
+        createStoneSetLootTables(ModBlocks.COBBLED_CLOUDSHALE);
+        createStoneSetLootTables(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
+        createStoneSetLootTables(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        createLogTypeLootTables(ModBlocks.GOLDENLEAF_LOGS);
-        createWoodTypeLootTables(ModBlocks.GOLDENLEAF_PLANKS);
+        createLogSetLootTables(ModBlocks.GOLDENLEAF_LOGS);
+        createWoodSetLootTables(ModBlocks.GOLDENLEAF_PLANKS);
         add(ModBlocks.GOLDENLEAF_LEAVES.get(), createLeavesDrops(ModBlocks.GOLDENLEAF_LEAVES.get(), ModBlocks.GOLDENLEAF_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.GOLDENLEAF_SAPLING.get());
         add(ModBlocks.POTTED_GOLDENLEAF_SAPLING.get(), createPotFlowerItemTable(ModBlocks.GOLDENLEAF_SAPLING.get()));
 
-        createLogTypeLootTables(ModBlocks.SAKURA_LOGS);
-        createWoodTypeLootTables(ModBlocks.SAKURA_PLANKS);
+        createLogSetLootTables(ModBlocks.SAKURA_LOGS);
+        createWoodSetLootTables(ModBlocks.SAKURA_PLANKS);
         add(ModBlocks.SAKURA_LEAVES.get(), createLeavesDrops(ModBlocks.SAKURA_LEAVES.get(), ModBlocks.SAKURA_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.SAKURA_SAPLING.get());
         add(ModBlocks.POTTED_SAKURA_SAPLING.get(), createPotFlowerItemTable(ModBlocks.SAKURA_SAPLING.get()));
 
-        createLogTypeLootTables(ModBlocks.FRIGID_LOGS);
-        createWoodTypeLootTables(ModBlocks.FRIGID_PLANKS);
+        createLogSetLootTables(ModBlocks.FRIGID_LOGS);
+        createWoodSetLootTables(ModBlocks.FRIGID_PLANKS);
         add(ModBlocks.FRIGID_LEAVES.get(), createLeavesDrops(ModBlocks.FRIGID_LEAVES.get(), ModBlocks.FRIGID_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.FRIGID_SAPLING.get());
         add(ModBlocks.POTTED_FRIGID_SAPLING.get(), createPotFlowerItemTable(ModBlocks.FRIGID_SAPLING.get()));
 
-        dropSelf(ModBlocks.ARBOREAL_CACTUS.get());
-        createWoodTypeLootTables(ModBlocks.ARBOREAL_CACTUS_PLANKS);
+        createCactusSetLootTables(ModBlocks.ARBOREAL_CACTUSES);
+        createWoodSetLootTables(ModBlocks.ARBOREAL_CACTUS_PLANKS);
         dropSelf(ModBlocks.ARBOREAL_CACTUS_FRUIT.get());
         add(ModBlocks.POTTED_ARBOREAL_CACTUS.get(), createPotFlowerItemTable(ModBlocks.ARBOREAL_CACTUS_FRUIT.get()));
     }
 
-    private void createStoneTypeLootTables(ModBlocks.StoneBlockSet stoneSetBlocks) {
+    private void createStoneSetLootTables(ModBlocks.StoneBlockSet stoneSetBlocks) {
         dropSelf(stoneSetBlocks.base().get());
         dropSelf(stoneSetBlocks.button().get());
         dropSelf(stoneSetBlocks.wall().get());
@@ -68,13 +68,17 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(stoneSetBlocks.stairs().get());
         dropSelf(stoneSetBlocks.pressurePlate().get());
     }
-    private void createLogTypeLootTables(ModBlocks.LogBlockSet logSetBlocks) {
+    private void createLogSetLootTables(ModBlocks.LogBlockSet logSetBlocks) {
         dropSelf(logSetBlocks.log().get());
         dropSelf(logSetBlocks.wood().get());
         dropSelf(logSetBlocks.strippedLog().get());
         dropSelf(logSetBlocks.strippedWood().get());
     }
-    private void createWoodTypeLootTables(ModBlocks.WoodBlockSet woodSetBlocks) {
+    private void createCactusSetLootTables(ModBlocks.CactusBlockSet cactusSetBlocks) {
+        dropSelf(cactusSetBlocks.cactus().get());
+        dropSelf(cactusSetBlocks.despinedCactus().get());
+    }
+    private void createWoodSetLootTables(ModBlocks.WoodBlockSet woodSetBlocks) {
         dropSelf(woodSetBlocks.base().get());
         dropSelf(woodSetBlocks.button().get());
         add(woodSetBlocks.door().get(), createDoorTable(woodSetBlocks.door().get()));

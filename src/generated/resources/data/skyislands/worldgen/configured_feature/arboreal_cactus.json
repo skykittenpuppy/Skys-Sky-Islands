@@ -16,7 +16,10 @@
         "provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "skyislands:arboreal_cactus"
+            "Name": "skyislands:arboreal_cactus",
+            "Properties": {
+              "age": "0"
+            }
           }
         }
       }

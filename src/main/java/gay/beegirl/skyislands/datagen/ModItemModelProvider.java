@@ -27,34 +27,34 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
         basicItem(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
 
-        stoneSet(ModBlocks.CLOUDSHALE);
-        stoneSet(ModBlocks.COBBLED_CLOUDSHALE);
-        stoneSet(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        stoneSet(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
+        createStoneSetItemModels(ModBlocks.CLOUDSHALE);
+        createStoneSetItemModels(ModBlocks.COBBLED_CLOUDSHALE);
+        createStoneSetItemModels(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
+        createStoneSetItemModels(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        logSet(ModBlocks.GOLDENLEAF_LOGS);
-        woodSet(ModBlocks.GOLDENLEAF_PLANKS);
+        createLogSetItemModels(ModBlocks.GOLDENLEAF_LOGS);
+        createWoodSetItemModels(ModBlocks.GOLDENLEAF_PLANKS);
         uncheckedBlockItem(ModBlocks.GOLDENLEAF_LEAVES.get());
         flatBlockItem(ModBlocks.GOLDENLEAF_SAPLING.get());
         basicItem(ModItems.GOLDENLEAF_BOAT.get());
         basicItem(ModItems.GOLDENLEAF_CHEST_BOAT.get());
 
-        logSet(ModBlocks.SAKURA_LOGS);
-        woodSet(ModBlocks.SAKURA_PLANKS);
+        createLogSetItemModels(ModBlocks.SAKURA_LOGS);
+        createWoodSetItemModels(ModBlocks.SAKURA_PLANKS);
         uncheckedBlockItem(ModBlocks.SAKURA_LEAVES.get());
         flatBlockItem(ModBlocks.SAKURA_SAPLING.get());
         basicItem(ModItems.SAKURA_BOAT.get());
         basicItem(ModItems.SAKURA_CHEST_BOAT.get());
 
-        logSet(ModBlocks.FRIGID_LOGS);
-        woodSet(ModBlocks.FRIGID_PLANKS);
+        createLogSetItemModels(ModBlocks.FRIGID_LOGS);
+        createWoodSetItemModels(ModBlocks.FRIGID_PLANKS);
         uncheckedBlockItem(ModBlocks.FRIGID_LEAVES.get());
         flatBlockItem(ModBlocks.FRIGID_SAPLING.get());
         basicItem(ModItems.FRIGID_BOAT.get());
         basicItem(ModItems.FRIGID_CHEST_BOAT.get());
 
-        uncheckedBlockItem(ModBlocks.ARBOREAL_CACTUS.get());
-        woodSet(ModBlocks.ARBOREAL_CACTUS_PLANKS);
+        createCactusSetItemModels(ModBlocks.ARBOREAL_CACTUSES);
+        createWoodSetItemModels(ModBlocks.ARBOREAL_CACTUS_PLANKS);
         basicItem(ModBlocks.ARBOREAL_CACTUS_FRUIT.get().asItem());
         basicItem(ModItems.ARBOREAL_CACTUS_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
@@ -79,7 +79,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(blockLoc.getNamespace(), "block/" + blockLoc.getPath() + suffix)));
     }
 
-    public final void stoneSet(ModBlocks.StoneBlockSet stoneSet){
+    public final void createStoneSetItemModels(ModBlocks.StoneBlockSet stoneSet){
         uncheckedBlockItem(stoneSet.base().get());
         uncheckedBlockItem(stoneSet.button().get(), "_inventory");
         uncheckedBlockItem(stoneSet.wall().get(), "_inventory");
@@ -87,13 +87,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         uncheckedBlockItem(stoneSet.stairs().get());
         uncheckedBlockItem(stoneSet.pressurePlate().get());
     }
-    public final void logSet(ModBlocks.LogBlockSet logSet) {
+    public final void createLogSetItemModels(ModBlocks.LogBlockSet logSet) {
         uncheckedBlockItem(logSet.log().get());
         uncheckedBlockItem(logSet.wood().get());
         uncheckedBlockItem(logSet.strippedLog().get());
         uncheckedBlockItem(logSet.strippedWood().get());
     }
-    public final void woodSet(ModBlocks.WoodBlockSet woodSet) {
+    public final void createCactusSetItemModels(ModBlocks.CactusBlockSet cactusSet) {
+        uncheckedBlockItem(cactusSet.cactus().get());
+        uncheckedBlockItem(cactusSet.despinedCactus().get());
+    }
+    public final void createWoodSetItemModels(ModBlocks.WoodBlockSet woodSet) {
         uncheckedBlockItem(woodSet.base().get());
         uncheckedBlockItem(woodSet.button().get(), "_inventory");
         basicItem(woodSet.door().get().asItem());

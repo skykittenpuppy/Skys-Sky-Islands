@@ -6,6 +6,7 @@ import gay.beegirl.skyislands.item.ModCreativeModeTabs;
 import gay.beegirl.skyislands.item.ModDataComponents;
 import gay.beegirl.skyislands.item.ModItems;
 import gay.beegirl.skyislands.particle.ModParticleTypes;
+import gay.beegirl.skyislands.recipe.ModRecipeSerializer;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
@@ -27,6 +28,7 @@ public class SkysSkyIslands {
         ModItems.registerItems(modEventBus);
         ModCreativeModeTabs.registerCreativeModeTabs(modEventBus);
         ModParticleTypes.registerParticleTypes(modEventBus);
+        ModRecipeSerializer.registerRecipeSerializers(modEventBus);
 
         //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

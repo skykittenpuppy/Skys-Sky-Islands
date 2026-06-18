@@ -21,6 +21,7 @@ public class ModTags {
         public static final TagKey<Block> GOLDENLEAF_LOGS = registerTag("goldenleaf_logs");
         public static final TagKey<Block> SAKURA_LOGS = registerTag("sakura_logs");
         public static final TagKey<Block> FRIGID_LOGS = registerTag("frigid_logs");
+        public static final TagKey<Block> ARBOREAL_CACTUSES = registerTag("arboreal_cactuses");
 
         public static TagKey<Block> registerTag(String name) {
             return TagKey.create(Registries.BLOCK, SkysSkyIslands.createId(name));
@@ -31,6 +32,7 @@ public class ModTags {
         public static final TagKey<Item> GOLDENLEAF_LOGS = registerTag("goldenleaf_logs");
         public static final TagKey<Item> SAKURA_LOGS = registerTag("sakura_logs");
         public static final TagKey<Item> FRIGID_LOGS = registerTag("frigid_logs");
+        public static final TagKey<Item> ARBOREAL_CACTUSES = registerTag("arboreal_cactuses");
 
         private static TagKey<Item> registerTag(String name) {
             return TagKey.create(Registries.ITEM, SkysSkyIslands.createId(name));
