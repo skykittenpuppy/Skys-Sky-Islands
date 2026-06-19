@@ -19,7 +19,7 @@
   "client": [
     "client.model.PlayerModelMixin",
     "client.renderer.entity.LivingEntityRendererMixin",
-    "client.renderer.entity.layers.PlayerItemInHandLayerMixin",
+    "client.renderer.entity.layers.ItemInHandLayerMixin",
     "client.renderer.entity.player.PlayerRendererMixin",
     "client.screen.SmithingScreenMixin"
   ]

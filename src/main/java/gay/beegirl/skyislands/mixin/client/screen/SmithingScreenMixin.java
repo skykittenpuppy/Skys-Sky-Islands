@@ -1,6 +1,5 @@
 package gay.beegirl.skyislands.mixin.client.screen;
 
-import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
@@ -16,7 +15,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,11 +28,10 @@ public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMen
         super(menu, playerInventory, title, menuResource);
     }
 
-    @Inject(method = "slotChanged", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "slotChanged", at = @At("HEAD"))
     private void islands$slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack, CallbackInfo ci) {
-        armorStandPreview.setData(ModDataAttachments.IS_GLIDING, false); // ?
+        armorStandPreview.setData(ModDataAttachments.IS_GLIDING, false);
         if (slotInd == 3 && stack.is(ModItems.GLIDER)) {
-            ci.cancel();
             armorStandPreview.setData(ModDataAttachments.IS_GLIDING, true);
         }
     }

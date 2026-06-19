@@ -72,8 +72,13 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
                     * ((float) Math.PI / 180F);
 
             GliderThing pattern = entity.getMainHandItem().is(ModItems.GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
-            ResourceLocation clothTexture = pattern != null ? DEFAULT_CLOTH_TEXTURE : DEFAULT_CLOTH_TEXTURE;
-            // TODO: patternResourceLocation.fromNamespaceAndPath(clothTexture.getNamespace(), "textures/entity/glider/"+clothTexture.getPath()+".png")
+            ResourceLocation clothTexture;
+            if (pattern != null && pattern.design() != null) {
+                ResourceLocation patternResourceLocation = pattern.design().value().assetId();
+                clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/entity/glider/"+patternResourceLocation.getPath()+".png");
+            } else {
+                clothTexture = DEFAULT_CLOTH_TEXTURE;
+            }
 
             VertexConsumer frameVertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(FRAME_TEXTURE));
             this.frameRoot.zRot = 0.8F * zRadians;

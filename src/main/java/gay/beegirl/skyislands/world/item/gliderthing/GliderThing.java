@@ -11,27 +11,24 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class GliderThing implements TooltipProvider {
     public static final Codec<GliderThing> CODEC = RecordCodecBuilder.create(
-            p_337943_ -> p_337943_.group(
-                            ThingPattern.CODEC.fieldOf("pattern").forGetter(GliderThing::design),
-                            Codec.BOOL.optionalFieldOf("show_in_tooltip", Boolean.valueOf(true)).forGetter(p_330108_ -> p_330108_.showInTooltip)
-                    )
-                    .apply(p_337943_, GliderThing::new)
+            instance -> instance.group(
+                    ThingPattern.CODEC.fieldOf("pattern").forGetter(GliderThing::design),
+                    Codec.BOOL.optionalFieldOf("show_in_tooltip", true).forGetter(gliderThing -> gliderThing.showInTooltip)
+            ).apply(instance, GliderThing::new)
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, GliderThing> STREAM_CODEC = StreamCodec.composite(
             ThingPattern.STREAM_CODEC,
             GliderThing::design,
             ByteBufCodecs.BOOL,
-            p_330107_ -> p_330107_.showInTooltip,
+            gliderThing -> gliderThing.showInTooltip,
             GliderThing::new
     );
     private static final Component UPGRADE_TITLE = Component.translatable(
@@ -40,16 +37,6 @@ public class GliderThing implements TooltipProvider {
             .withStyle(ChatFormatting.GRAY);
     private final Holder<ThingPattern> design;
     private final boolean showInTooltip;
-
-    private GliderThing(
-            Holder<ThingPattern> design,
-            boolean showInTooltip,
-            Function<Holder<ArmorMaterial>, ResourceLocation> innerTexture,
-            Function<Holder<ArmorMaterial>, ResourceLocation> outerTexture
-    ) {
-        this.design = design;
-        this.showInTooltip = showInTooltip;
-    }
 
     public GliderThing(Holder<ThingPattern> pattern, boolean showInTooltip) {
         this.design = pattern;
