@@ -1,8 +1,8 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.block.ModBlocks;
-import gay.beegirl.skyislands.tags.ModTags;
+import gay.beegirl.skyislands.tags.ModBlockTags;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -24,10 +24,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.STONE_ALEXANDRITE_ORE.get(), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get(), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
 
         tag(BlockTags.LOGS_THAT_BURN)
-                .addTag(ModTags.Blocks.GOLDENLEAF_LOGS)
-                .addTag(ModTags.Blocks.SAKURA_LOGS)
-                .addTag(ModTags.Blocks.FRIGID_LOGS)
-                .addTag(ModTags.Blocks.ARBOREAL_CACTUSES);
+                .addTag(ModBlockTags.GOLDENLEAF_LOGS)
+                .addTag(ModBlockTags.SAKURA_LOGS)
+                .addTag(ModBlockTags.FRIGID_LOGS)
+                .addTag(ModBlockTags.ARBOREAL_CACTUSES);
 
         tag(BlockTags.FLOWER_POTS)
                 .add(ModBlocks.POTTED_GOLDENLEAF_SAPLING.get())
@@ -71,7 +71,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.FRIGID_PLANKS.hangingWallSign().get())
                 .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingWallSign().get());
 
-        tag(ModTags.Blocks.CLOUDSHALE_ORE_REPLACEABLE)
+        tag(ModBlockTags.CLOUDSHALE_ORE_REPLACEABLE)
                 .add(ModBlocks.CLOUDSHALE.base().get(), ModBlocks.COBBLED_CLOUDSHALE.base().get(), ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base().get(), ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base().get());
 
         tag(BlockTags.WALLS)
@@ -80,13 +80,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall().get())
                 .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall().get());
 
-        tag(ModTags.Blocks.GOLDENLEAF_LOGS)
+        tag(ModBlockTags.GOLDENLEAF_LOGS)
                 .add(ModBlocks.GOLDENLEAF_LOGS.log().get(), ModBlocks.GOLDENLEAF_LOGS.wood().get(), ModBlocks.GOLDENLEAF_LOGS.strippedLog().get(), ModBlocks.GOLDENLEAF_LOGS.strippedWood().get());
-        tag(ModTags.Blocks.SAKURA_LOGS)
+        tag(ModBlockTags.SAKURA_LOGS)
                 .add(ModBlocks.SAKURA_LOGS.log().get(), ModBlocks.SAKURA_LOGS.wood().get(), ModBlocks.SAKURA_LOGS.strippedLog().get(), ModBlocks.SAKURA_LOGS.strippedWood().get());
-        tag(ModTags.Blocks.FRIGID_LOGS)
+        tag(ModBlockTags.FRIGID_LOGS)
                 .add(ModBlocks.FRIGID_LOGS.log().get(), ModBlocks.FRIGID_LOGS.wood().get(), ModBlocks.FRIGID_LOGS.strippedLog().get(), ModBlocks.FRIGID_LOGS.strippedWood().get());
-        tag(ModTags.Blocks.ARBOREAL_CACTUSES)
+        tag(ModBlockTags.ARBOREAL_CACTUSES)
                 .add(ModBlocks.ARBOREAL_CACTUSES.cactus().get(), ModBlocks.ARBOREAL_CACTUSES.despinedCactus().get());
     }
 }

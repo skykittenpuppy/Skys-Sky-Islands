@@ -1,7 +1,7 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.particle.ModParticleTypes;
+import gay.beegirl.skyislands.core.particles.ModParticleTypes;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;

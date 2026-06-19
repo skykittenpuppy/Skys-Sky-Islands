@@ -7,8 +7,8 @@
   "package": "gay.beegirl.skyislands.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin",
-    "PlayerMixin"
+    "world.entity.LivingEntityMixin",
+    "world.entity.player.PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -17,9 +17,9 @@
     "requireAnnotations": true
   },
   "client": [
-    "client.LivingEntityRendererMixin",
-    "client.PlayerItemInHandLayerMixin",
-    "client.PlayerModelMixin",
-    "client.PlayerRendererMixin"
+    "client.renderer.entity.LivingEntityRendererMixin",
+    "client.renderer.entity.layers.PlayerItemInHandLayerMixin",
+    "client.model.PlayerModelMixin",
+    "client.renderer.entity.player.PlayerRendererMixin"
   ]
 }

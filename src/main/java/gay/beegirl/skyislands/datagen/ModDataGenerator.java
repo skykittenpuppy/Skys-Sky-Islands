@@ -1,13 +1,17 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.registry.ModRegistries;
-import gay.beegirl.skyislands.registry.armor_trim.ModArmorTrimMaterials;
-import gay.beegirl.skyislands.registry.armor_trim.ModArmorTrimPatterns;
-import gay.beegirl.skyislands.registry.glider_pattern.ModGliderPatternDesigns;
-import gay.beegirl.skyislands.worldgen.ModBiomeModifiers;
-import gay.beegirl.skyislands.worldgen.ModConfiguredFeatures;
-import gay.beegirl.skyislands.worldgen.ModPlacedFeatures;
+import gay.beegirl.skyislands.core.registries.ModRegistries;
+import gay.beegirl.skyislands.data.worldgen.features.ModFeatureUtils;
+import gay.beegirl.skyislands.data.worldgen.features.ModOreFeatures;
+import gay.beegirl.skyislands.data.worldgen.placements.ModOrePlacements;
+import gay.beegirl.skyislands.data.worldgen.placements.ModPlacementUtils;
+import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
+import gay.beegirl.skyislands.world.item.armortrim.ModTrimPatterns;
+import gay.beegirl.skyislands.world.item.gliderthing.ModThingPatterns;
+import gay.beegirl.skyislands.neoforge.ModBiomeModifiers;
+import gay.beegirl.skyislands.data.worldgen.features.ModTreeFeatures;
+import gay.beegirl.skyislands.data.worldgen.placements.ModTreePlacements;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -55,11 +59,11 @@ public class ModDataGenerator {
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
         //DatapackRegistries
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, new RegistrySetBuilder()
-                .add(Registries.TRIM_MATERIAL, ModArmorTrimMaterials::bootstrap)
-                .add(Registries.TRIM_PATTERN, ModArmorTrimPatterns::bootstrap)
-                .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
-                .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
+                .add(Registries.TRIM_MATERIAL, ModTrimMaterials::bootstrap)
+                .add(Registries.TRIM_PATTERN, ModTrimPatterns::bootstrap)
+                .add(Registries.CONFIGURED_FEATURE, ModFeatureUtils::bootstrap)
+                .add(Registries.PLACED_FEATURE, ModPlacementUtils::bootstrap)
                 .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
-                .add(ModRegistries.GLIDER_DESIGN, ModGliderPatternDesigns::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
+                .add(ModRegistries.GLIDER_DESIGN, ModThingPatterns::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
     }
 }

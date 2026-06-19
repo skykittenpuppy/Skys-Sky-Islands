@@ -1,8 +1,8 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.block.ModBlocks;
-import gay.beegirl.skyislands.item.ModItems;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

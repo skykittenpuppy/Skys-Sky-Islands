@@ -1,9 +1,9 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.block.ModBlocks;
-import gay.beegirl.skyislands.item.ModItems;
-import gay.beegirl.skyislands.tags.ModTags;
+import gay.beegirl.skyislands.tags.ModItemTags;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -26,10 +26,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.ALEXANDRITE.get());
 
         tag(ItemTags.LOGS_THAT_BURN)
-                .addTag(ModTags.Items.GOLDENLEAF_LOGS)
-                .addTag(ModTags.Items.SAKURA_LOGS)
-                .addTag(ModTags.Items.FRIGID_LOGS)
-                .addTag(ModTags.Items.ARBOREAL_CACTUSES);
+                .addTag(ModItemTags.GOLDENLEAF_LOGS)
+                .addTag(ModItemTags.SAKURA_LOGS)
+                .addTag(ModItemTags.FRIGID_LOGS)
+                .addTag(ModItemTags.ARBOREAL_CACTUSES);
 
         tag(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.base().asItem())
@@ -61,13 +61,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.ALEXANDRITE.get());
 
-        tag(ModTags.Items.GOLDENLEAF_LOGS)
+        tag(ModItemTags.GOLDENLEAF_LOGS)
                 .add(ModBlocks.GOLDENLEAF_LOGS.log().asItem(), ModBlocks.GOLDENLEAF_LOGS.wood().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedLog().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedWood().asItem());
-        tag(ModTags.Items.SAKURA_LOGS)
+        tag(ModItemTags.SAKURA_LOGS)
                 .add(ModBlocks.SAKURA_LOGS.log().asItem(), ModBlocks.SAKURA_LOGS.wood().asItem(), ModBlocks.SAKURA_LOGS.strippedLog().asItem(), ModBlocks.SAKURA_LOGS.strippedWood().asItem());
-        tag(ModTags.Items.FRIGID_LOGS)
+        tag(ModItemTags.FRIGID_LOGS)
                 .add(ModBlocks.FRIGID_LOGS.log().asItem(), ModBlocks.FRIGID_LOGS.wood().asItem(), ModBlocks.FRIGID_LOGS.strippedLog().asItem(), ModBlocks.FRIGID_LOGS.strippedWood().asItem());
-        tag(ModTags.Items.ARBOREAL_CACTUSES)
+        tag(ModItemTags.ARBOREAL_CACTUSES)
                 .add(ModBlocks.ARBOREAL_CACTUSES.cactus().asItem(), ModBlocks.ARBOREAL_CACTUSES.despinedCactus().asItem());
     }
 }

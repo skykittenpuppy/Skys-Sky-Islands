@@ -1,10 +1,10 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.block.ModBlocks;
-import gay.beegirl.skyislands.item.ModItems;
-import gay.beegirl.skyislands.recipe.SewingDesignRecipeBuilder;
-import gay.beegirl.skyislands.tags.ModTags;
+import gay.beegirl.skyislands.tags.ModItemTags;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import gay.beegirl.skyislands.world.item.ModItems;
+import gay.beegirl.skyislands.data.recipes.SewingDesignRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -14,9 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -72,10 +70,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         createStoneSetRecipes(recipeOutput, ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
         createStoneSetRecipes(recipeOutput, ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
 
-        createWoodSetRecipes(recipeOutput, ModBlocks.GOLDENLEAF_LOGS, ModTags.Items.GOLDENLEAF_LOGS, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT);
-        createWoodSetRecipes(recipeOutput, ModBlocks.SAKURA_LOGS, ModTags.Items.SAKURA_LOGS, ModBlocks.SAKURA_PLANKS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT);
-        createWoodSetRecipes(recipeOutput, ModBlocks.FRIGID_LOGS, ModTags.Items.FRIGID_LOGS, ModBlocks.FRIGID_PLANKS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT);
-        //createWoodSetRecipes(recipeOutput, ModBlocks.ARBOREAL_CACTUSES, ModTags.Items.ARBOREAL_CACTUSES, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
+        createWoodSetRecipes(recipeOutput, ModBlocks.GOLDENLEAF_LOGS, ModItemTags.GOLDENLEAF_LOGS, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT);
+        createWoodSetRecipes(recipeOutput, ModBlocks.SAKURA_LOGS, ModItemTags.SAKURA_LOGS, ModBlocks.SAKURA_PLANKS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT);
+        createWoodSetRecipes(recipeOutput, ModBlocks.FRIGID_LOGS, ModItemTags.FRIGID_LOGS, ModBlocks.FRIGID_PLANKS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT);
+        //createWoodSetRecipes(recipeOutput, ModBlocks.ARBOREAL_CACTUSES, ModItemTags.ARBOREAL_CACTUSES, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
     }
 
     private static void createStoneSetRecipes(RecipeOutput recipeOutput, ModBlocks.StoneBlockSet stoneBlockSet) {

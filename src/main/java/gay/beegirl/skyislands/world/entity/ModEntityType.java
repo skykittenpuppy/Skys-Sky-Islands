@@ -1,0 +1,44 @@
+package gay.beegirl.skyislands.world.entity;
+
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import gay.beegirl.skyislands.world.item.ModItems;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.Items;
+import net.neoforged.fml.common.asm.enumextension.EnumProxy;
+
+public class ModEntityType {
+    //public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, SkysSkyIslands.MOD_ID);
+
+    public static final EnumProxy<Boat.Type> GOLDENLEAF_ENUM_PROXY = new EnumProxy<>(Boat.Type.class,
+            ModBlocks.GOLDENLEAF_PLANKS.base(),
+            "goldenleaf",
+            ModItems.GOLDENLEAF_BOAT,
+            ModItems.GOLDENLEAF_CHEST_BOAT,
+            Items.STICK,
+            false
+    );
+    public static final EnumProxy<Boat.Type> SAKURA_ENUM_PROXY = new EnumProxy<>(Boat.Type.class,
+            ModBlocks.SAKURA_PLANKS.base(),
+            "sakura",
+            ModItems.SAKURA_BOAT,
+            ModItems.SAKURA_CHEST_BOAT,
+            Items.STICK,
+            false
+    );
+    public static final EnumProxy<Boat.Type> FRIGID_ENUM_PROXY = new EnumProxy<>(Boat.Type.class,
+            ModBlocks.FRIGID_PLANKS.base(),
+            "frigid",
+            ModItems.FRIGID_BOAT,
+            ModItems.FRIGID_CHEST_BOAT,
+            Items.STICK,
+            false
+    );
+    public static final EnumProxy<Boat.Type> ARBOREAL_CACTUS_ENUM_PROXY = new EnumProxy<>(Boat.Type.class,
+            ModBlocks.ARBOREAL_CACTUS_PLANKS.base(),
+            "arboreal_cactus",
+            ModItems.ARBOREAL_CACTUS_BOAT,
+            ModItems.ARBOREAL_CACTUS_CHEST_BOAT,
+            Items.STICK,
+            false
+    );
+}

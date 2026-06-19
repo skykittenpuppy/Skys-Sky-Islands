@@ -1,7 +1,7 @@
 package gay.beegirl.skyislands.datagen;
 
-import gay.beegirl.skyislands.block.ModBlocks;
-import gay.beegirl.skyislands.item.ModItems;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
