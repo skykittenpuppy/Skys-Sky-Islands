@@ -10,7 +10,7 @@ import gay.beegirl.skyislands.core.component.ModDataComponents;
 import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.util.HelperFunctions;
 import gay.beegirl.skyislands.util.LivingEntityAccess;
-import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -18,7 +18,6 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -26,15 +25,16 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
-public class GliderLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingEntity>> {
     public static final ResourceLocation FRAME_TEXTURE = SkysSkyIslands.createId("textures/entity/glider/frame.png");
     public static final ResourceLocation DEFAULT_CLOTH_TEXTURE = SkysSkyIslands.createId("textures/entity/glider/default.png");
     private final ModelPart frameRoot;
     private final ModelPart clothRoot;
 
-    public GliderLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> renderer, EntityModelSet modelSet) {
+    public GliderLayer(RenderLayerParent<LivingEntity, HumanoidModel<LivingEntity>> renderer, EntityModelSet modelSet) {
         super(renderer);
         ModelPart modelPartFrame = modelSet.bakeLayer(ModModelLayers.GLIDER);
         ModelPart modelPartCloth = modelSet.bakeLayer(ModModelLayers.GLIDER_CLOTH);
@@ -59,7 +59,7 @@ public class GliderLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<A
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, AbstractClientPlayer entity, float v, float v1, float v2, float v3, float v4, float v5) {
+    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, LivingEntity entity, float v, float v1, float v2, float v3, float v4, float v5) {
         if (entity.getData(ModDataAttachments.IS_GLIDING)) {
             int glideTicks = ((LivingEntityAccess)entity).islands$getGlideTicks();
             Vec3 localMovement = HelperFunctions.rotate3dY(entity.getDeltaMovement(), entity.getYRot() * ((float)Math.PI / 180F));
