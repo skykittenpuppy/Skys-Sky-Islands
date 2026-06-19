@@ -1,5 +1,6 @@
 package gay.beegirl.skyislands;
 
+import gay.beegirl.skyislands.client.particle.SakuraParticle;
 import gay.beegirl.skyislands.client.renderer.entity.layers.GliderLayer;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
@@ -11,7 +12,9 @@ import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.core.particles.ModParticleTypes;
 import gay.beegirl.skyislands.world.item.crafting.ModRecipeSerializer;
 import gay.beegirl.skyislands.core.registries.ModRegistries;
+import net.minecraft.client.particle.CherryParticle;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GrassColor;
 import net.neoforged.api.distmarker.Dist;
@@ -19,6 +22,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import org.slf4j.Logger;
 
@@ -54,6 +58,15 @@ public class SkysSkyIslands {
         @SubscribeEvent
         public static void addRegistries(DataPackRegistryEvent.NewRegistry event) {
             event.dataPackRegistry(ModRegistries.GLIDER_DESIGN, ThingPattern.DIRECT_CODEC, ThingPattern.DIRECT_CODEC);
+        }
+
+        @SubscribeEvent
+        public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(
+                    ModParticleTypes.SAKURA_PETALS.get(),
+                    spriteSet ->
+                            (type, level, x, y, z, xSpeed, ySpeed, zSpeed) ->
+                                    new SakuraParticle(level, x, y, z, spriteSet));
         }
 
         @SubscribeEvent
