@@ -19,16 +19,18 @@ public class SewingDesignRecipeBuilder {
 	private final RecipeCategory category;
 	private final Ingredient template;
 	private final Ingredient base;
+	private final Ingredient addition;
 	private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-	public SewingDesignRecipeBuilder(RecipeCategory category, Ingredient template, Ingredient base) {
+	public SewingDesignRecipeBuilder(RecipeCategory category, Ingredient template, Ingredient base, Ingredient addition) {
 		this.category = category;
 		this.template = template;
 		this.base = base;
+		this.addition = addition;
 	}
 
-	public static SewingDesignRecipeBuilder sewingDesign(Ingredient template, Ingredient base, RecipeCategory category) {
-		return new SewingDesignRecipeBuilder(category, template, base);
+	public static SewingDesignRecipeBuilder sewingDesign(Ingredient template, Ingredient base, Ingredient addition, RecipeCategory category) {
+		return new SewingDesignRecipeBuilder(category, template, base, addition);
 	}
 
 	public SewingDesignRecipeBuilder unlocks(String key, Criterion<?> criterion) {
@@ -41,7 +43,7 @@ public class SewingDesignRecipeBuilder {
 		Advancement.Builder advancement$builder = recipeOutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).requirements(AdvancementRequirements.Strategy.OR);
 		Objects.requireNonNull(advancement$builder);
 		this.criteria.forEach(advancement$builder::addCriterion);
-		SewingDesignRecipe sewingDesignRecipe = new SewingDesignRecipe(this.template, this.base);
+		SewingDesignRecipe sewingDesignRecipe = new SewingDesignRecipe(this.template, this.base, this.addition);
 		recipeOutput.accept(recipeId, sewingDesignRecipe, advancement$builder.build(recipeId.withPrefix("recipes/" + this.category.getFolderName() + "/")));
 	}
 

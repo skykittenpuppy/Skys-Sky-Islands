@@ -60,6 +60,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.ALEXANDRITE.get());
+        tag(ItemTags.TRIM_TEMPLATES)
+                .add(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 
         tag(ModItemTags.GOLDENLEAF_LOGS)
                 .add(ModBlocks.GOLDENLEAF_LOGS.log().asItem(), ModBlocks.GOLDENLEAF_LOGS.wood().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedLog().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedWood().asItem());

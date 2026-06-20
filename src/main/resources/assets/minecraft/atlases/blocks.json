@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "sources": [
     {
       "type": "minecraft:paletted_permutations",
@@ -18,7 +19,6 @@
         "netherite_darker": "minecraft:trims/color_palettes/netherite_darker",
         "quartz": "minecraft:trims/color_palettes/quartz",
         "redstone": "minecraft:trims/color_palettes/redstone",
-        "resin": "minecraft:trims/color_palettes/resin",
         "alexandrite": "skyislands:trims/color_palettes/alexandrite"
       },
       "textures": [
@@ -27,6 +27,11 @@
         "minecraft:trims/items/leggings_trim",
         "minecraft:trims/items/boots_trim"
       ]
+    },
+    {
+      "type": "directory",
+      "source": "patterns/items",
+      "prefix": "patterns/items/"
     }
   ]
 }

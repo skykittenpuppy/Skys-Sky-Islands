@@ -16,16 +16,11 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_ALEXANDRITE = ITEMS.registerSimpleItem("raw_alexandrite", new Item.Properties());
     public static final DeferredItem<Item> ALEXANDRITE = ITEMS.registerSimpleItem("alexandrite", new Item.Properties());
 
-    public static final DeferredItem<Item> GLIDER = ITEMS.registerItem("glider", properties -> new GliderItem(
-            properties
-                    .rarity(Rarity.RARE)
-                    //.component(ModDataComponents.HANG_GLIDER, Unit.INSTANCE)
-                    //.component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.MAINHAND).setDamageOnHurt(false).build())
-                    .stacksTo(1)
-    ));
+    public static final DeferredItem<Item> GLIDER = ITEMS.registerItem("glider", properties -> new GliderItem(properties.rarity(Rarity.RARE).stacksTo(1)));
 
     public static final DeferredItem<Item> TESTING_ARMOR_TRIM_SMITHING_TEMPLATE = ITEMS.registerItem("testing_armor_trim_smithing_template", properties -> SmithingTemplateItem.createArmorTrimTemplate(ModTrimPatterns.TESTING));
     public static final DeferredItem<Item> TESTING_GLIDER_PATTERN_SEWING_TEMPLATE = ITEMS.registerItem("testing_glider_pattern_sewing_template", properties -> new SewingTemplateItem(ModThingPatterns.TESTING));
+    public static final DeferredItem<Item> TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE = ITEMS.registerItem("testing2_glider_pattern_sewing_template", properties -> new SewingTemplateItem(ModThingPatterns.TESTING2));
 
     public static final DeferredItem<Item> GOLDENLEAF_BOAT = ITEMS.registerItem("goldenleaf_boat", properties -> new Item(properties));//new BoatItem(false, ModEntityTypes.GOLDENLEAF_ENUM_PROXY.getValue(), properties.stacksTo(1)));
     public static final DeferredItem<Item> GOLDENLEAF_CHEST_BOAT = ITEMS.registerItem("goldenleaf_chest_boat", properties -> new Item(properties));//new BoatItem(true, ModEntityTypes.GOLDENLEAF_ENUM_PROXY.getValue(), properties.stacksTo(1)));

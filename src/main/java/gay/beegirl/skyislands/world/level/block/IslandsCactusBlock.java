@@ -78,7 +78,7 @@ public class IslandsCactusBlock extends Block {
                 serverLevel.setBlockAndUpdate(blockPos2, this.defaultBlockState());
                 BlockState blockState2 = blockState.setValue(AGE, 0);
                 serverLevel.setBlock(blockPos, blockState2, 260);
-                serverLevel.neighborChanged(blockState2, blockPos2, this, null, false);
+                //serverLevel.neighborChanged(blockState2, blockPos2, this, null, false);
             }
 
             if (j < MAX_AGE) {

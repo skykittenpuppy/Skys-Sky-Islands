@@ -30,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingEntity>> {
     public static final ResourceLocation FRAME_TEXTURE = SkysSkyIslands.createId("textures/entity/glider/frame.png");
-    public static final ResourceLocation DEFAULT_CLOTH_TEXTURE = SkysSkyIslands.createId("textures/entity/glider/default.png");
+    public static final ResourceLocation DEFAULT_CLOTH_TEXTURE = SkysSkyIslands.createId("textures/patterns/entity/glider/default.png");
     private final ModelPart frameRoot;
     private final ModelPart clothRoot;
 
@@ -72,12 +72,10 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
                     * ((float) Math.PI / 180F);
 
             GliderThing pattern = entity.getMainHandItem().is(ModItems.GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
-            ResourceLocation clothTexture;
+            ResourceLocation clothTexture = DEFAULT_CLOTH_TEXTURE;
             if (pattern != null && pattern.design() != null) {
                 ResourceLocation patternResourceLocation = pattern.design().value().assetId();
-                clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/entity/glider/"+patternResourceLocation.getPath()+".png");
-            } else {
-                clothTexture = DEFAULT_CLOTH_TEXTURE;
+                clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/patterns/entity/glider/"+patternResourceLocation.getPath()+".png");
             }
 
             VertexConsumer frameVertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(FRAME_TEXTURE));

@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -63,6 +64,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         trimSmithing(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
         copySewingTemplate(recipeOutput, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
         designSewing(recipeOutput, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+        copySewingTemplate(recipeOutput, ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+        designSewing(recipeOutput, ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get());
 
         twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CLOUDSHALE.base(), ModBlocks.POINTED_CLOUDSHALE);
         createStoneSetRecipes(recipeOutput, ModBlocks.CLOUDSHALE);
@@ -112,6 +115,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         SewingDesignRecipeBuilder.sewingDesign(
                         Ingredient.of(ingredientItem),
                         Ingredient.of(ModItems.GLIDER),
+                        Ingredient.of(Items.STRING),
                         RecipeCategory.MISC)
                 .unlocks("has_sewing_design_template",
                         has(ingredientItem))

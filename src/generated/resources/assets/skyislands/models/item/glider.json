@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "skyislands:item/glider_testing",
+      "predicate": {
+        "skyislands:thing_type": -6.440824E8
+      }
+    },
+    {
+      "model": "skyislands:item/glider_testing2",
+      "predicate": {
+        "skyislands:thing_type": -3.6779136E8
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "skyislands:item/glider",
+    "layer1": "skyislands:patterns/items/default"
+  }
+}

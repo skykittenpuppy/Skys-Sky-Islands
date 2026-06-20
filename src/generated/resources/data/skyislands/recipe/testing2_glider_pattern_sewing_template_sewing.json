@@ -1,0 +1,12 @@
+{
+  "type": "skyislands:sewing_design",
+  "addition": {
+    "item": "minecraft:string"
+  },
+  "base": {
+    "item": "skyislands:glider"
+  },
+  "template": {
+    "item": "skyislands:testing2_glider_pattern_sewing_template"
+  }
+}

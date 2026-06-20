@@ -2,6 +2,7 @@ package gay.beegirl.skyislands.world.item.gliderthing;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import gay.beegirl.skyislands.SkysSkyIslands;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -10,7 +11,6 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
@@ -31,8 +31,8 @@ public class GliderThing implements TooltipProvider {
             gliderThing -> gliderThing.showInTooltip,
             GliderThing::new
     );
-    private static final Component UPGRADE_TITLE = Component.translatable(
-                    Util.makeDescriptionId("item", ResourceLocation.withDefaultNamespace("smithing_template.upgrade"))
+    private static final Component THING_TITLE = Component.translatable(
+                    Util.makeDescriptionId("item", SkysSkyIslands.createId("sewing_template.thing"))
             )
             .withStyle(ChatFormatting.GRAY);
     private final Holder<ThingPattern> design;
@@ -57,9 +57,7 @@ public class GliderThing implements TooltipProvider {
 
     @Override
     public boolean equals(Object other) {
-        return !(other instanceof GliderThing gliderPattern)
-                ? false
-                : this.showInTooltip == gliderPattern.showInTooltip && this.design.equals(gliderPattern.design);
+        return other instanceof GliderThing gliderPattern && this.showInTooltip == gliderPattern.showInTooltip && this.design.equals(gliderPattern.design);
     }
 
     @Override
@@ -71,7 +69,7 @@ public class GliderThing implements TooltipProvider {
     @Override
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltipAdder, TooltipFlag tooltipFlag) {
         if (this.showInTooltip) {
-            tooltipAdder.accept(UPGRADE_TITLE);
+            tooltipAdder.accept(THING_TITLE);
             tooltipAdder.accept(CommonComponents.space().append(this.design.value().copyWithStyle()));
         }
     }

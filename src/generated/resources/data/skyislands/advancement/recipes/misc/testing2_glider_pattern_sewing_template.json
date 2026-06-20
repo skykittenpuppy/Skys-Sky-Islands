@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_testing2_glider_pattern_sewing_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "skyislands:testing2_glider_pattern_sewing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "skyislands:testing2_glider_pattern_sewing_template"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_testing2_glider_pattern_sewing_template"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "skyislands:testing2_glider_pattern_sewing_template"
+    ]
+  }
+}

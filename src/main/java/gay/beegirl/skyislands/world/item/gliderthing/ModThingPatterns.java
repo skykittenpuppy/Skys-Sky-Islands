@@ -17,11 +17,13 @@ import java.util.Optional;
 
 public class ModThingPatterns {
     public static final ResourceKey<ThingPattern> TESTING = registryKey("testing");
+    public static final ResourceKey<ThingPattern> TESTING2 = registryKey("testing2");
 
     public static void bootstrap(BootstrapContext<ThingPattern> context) {
         SkysSkyIslands.LOGGER.info("Trim Pattern Bootstrap for " + SkysSkyIslands.MOD_ID);
 
-        register(context, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get(), TESTING);
+        register(context, TESTING, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+        register(context, TESTING2, ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get());
     }
 
     private static ResourceKey<ThingPattern> registryKey(String name) {
@@ -32,8 +34,12 @@ public class ModThingPatterns {
         return registries.lookupOrThrow(ModRegistries.GLIDER_DESIGN).listElements().filter((reference) -> template.is((reference.value()).templateItem())).findFirst();
     }
 
-    public static void register(BootstrapContext<ThingPattern> context, Item templateItem, ResourceKey<ThingPattern> gliderDesignKey) {
-        ThingPattern gliderDesign = new ThingPattern(gliderDesignKey.location(), BuiltInRegistries.ITEM.wrapAsHolder(templateItem), Component.translatable(Util.makeDescriptionId("glider_design", gliderDesignKey.location())));
+    public static void register(BootstrapContext<ThingPattern> context, ResourceKey<ThingPattern> gliderDesignKey, Item templateItem) {
+        ThingPattern gliderDesign = new ThingPattern(
+                gliderDesignKey.location(),
+                BuiltInRegistries.ITEM.wrapAsHolder(templateItem),
+                Component.translatable(Util.makeDescriptionId("glider_design", gliderDesignKey.location()))
+        );
         context.register(gliderDesignKey, gliderDesign);
     }
 }

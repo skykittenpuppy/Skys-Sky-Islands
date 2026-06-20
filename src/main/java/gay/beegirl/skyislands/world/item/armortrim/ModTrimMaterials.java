@@ -15,8 +15,7 @@ public class ModTrimMaterials {
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
         SkysSkyIslands.LOGGER.info("Trim Material Bootstrap for " + SkysSkyIslands.MOD_ID);
 
-        TrimMaterials.register(context, ALEXANDRITE, ModItems.ALEXANDRITE.get(), Style.EMPTY.withColor(0), 0.13F);
-        //TrimMaterials.register(context, IRON, Items.IRON_INGOT, Style.EMPTY.withColor(15527148), 0.2F, Map.of(ArmorMaterials.IRON, "iron_darker"));
+        TrimMaterials.register(context, ALEXANDRITE, ModItems.ALEXANDRITE.get(), Style.EMPTY.withColor(0), 0.713F);
     }
 
     private static ResourceKey<TrimMaterial> registryKey(String name) {

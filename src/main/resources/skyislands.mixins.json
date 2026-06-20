@@ -17,6 +17,7 @@
     "requireAnnotations": true
   },
   "client": [
+    "client.model.ArmorStandModelMixin",
     "client.model.PlayerModelMixin",
     "client.renderer.entity.LivingEntityRendererMixin",
     "client.renderer.entity.layers.ItemInHandLayerMixin",

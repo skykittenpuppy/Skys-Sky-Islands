@@ -18,6 +18,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.item.crafting.SmithingRecipeInput;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -25,89 +26,93 @@ import java.util.stream.Stream;
 public class SewingDesignRecipe implements SmithingRecipe {
 	final Ingredient template;
 	final Ingredient base;
+	final Ingredient addition;
 
-	public SewingDesignRecipe(Ingredient template, Ingredient base) {
+	public SewingDesignRecipe(Ingredient template, Ingredient base, Ingredient addition) {
 		this.template = template;
 		this.base = base;
+		this.addition = addition;
 	}
 
-	public boolean matches(SmithingRecipeInput input, Level level) {
-		return this.template.test(input.template()) && this.base.test(input.base());
+	public boolean matches(SmithingRecipeInput input, @NotNull Level level) {
+		return this.template.test(input.template()) && this.base.test(input.base()) && this.addition.test(input.addition());
 	}
 
-	public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider registries) {
-		ItemStack itemstack = input.base();
-		if (this.base.test(itemstack)) {
+	public @NotNull ItemStack assemble(SmithingRecipeInput input, HolderLookup.@NotNull Provider registries) {
+		ItemStack inputStack = input.base();
+		if (this.base.test(inputStack)) {
 			Optional<Holder.Reference<ThingPattern>> designHolder = ModThingPatterns.getFromTemplate(registries, input.template());
 			if (designHolder.isPresent()) {
-				GliderThing pattern = itemstack.get(ModDataComponents.SEWING_PATTERN.get());
+				GliderThing pattern = inputStack.get(ModDataComponents.SEWING_PATTERN.get());
 				if (pattern != null && pattern.hasDesign(designHolder.get())) {
 					return ItemStack.EMPTY;
 				}
 
-				ItemStack itemstack1 = itemstack.copyWithCount(1);
-				itemstack1.set(ModDataComponents.SEWING_PATTERN.get(), new GliderThing(designHolder.get()));
-				return itemstack1;
+				ItemStack outputStack = inputStack.copyWithCount(1);
+				outputStack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderThing(designHolder.get()));
+				return outputStack;
 			}
 		}
 
 		return ItemStack.EMPTY;
 	}
 
-	public ItemStack getResultItem(HolderLookup.Provider registries) {
+	public @NotNull ItemStack getResultItem(HolderLookup.Provider registries) {
 		ItemStack itemstack = new ItemStack(ModItems.GLIDER.get());
 		Optional<Holder.Reference<ThingPattern>> designHolder = registries.lookupOrThrow(ModRegistries.GLIDER_DESIGN).listElements().findFirst();
-		if (designHolder.isPresent()) {
-			itemstack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderThing(designHolder.get()));
-		}
-
+		designHolder.ifPresent(thingPatternReference -> itemstack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderThing(thingPatternReference)));
 		return itemstack;
 	}
 
-	public boolean isTemplateIngredient(ItemStack stack) {
+	public boolean isTemplateIngredient(@NotNull ItemStack stack) {
 		return this.template.test(stack);
 	}
 
-	public boolean isBaseIngredient(ItemStack stack) {
+	public boolean isBaseIngredient(@NotNull ItemStack stack) {
 		return this.base.test(stack);
 	}
 
-	public boolean isAdditionIngredient(ItemStack stack) {
-		return false;
+	public boolean isAdditionIngredient(@NotNull ItemStack stack) {
+		return this.addition.test(stack);
 	}
 
-	public RecipeSerializer<?> getSerializer() {
+	public @NotNull RecipeSerializer<?> getSerializer() {
 		return ModRecipeSerializer.SEWING_DESIGN.get();
 	}
 
 	public boolean isIncomplete() {
-		return Stream.of(this.template, this.base).anyMatch(Ingredient::hasNoItems);
+		return Stream.of(this.template, this.base, this.addition).anyMatch(Ingredient::hasNoItems);
 	}
 
 	public static class Serializer implements RecipeSerializer<SewingDesignRecipe> {
-		private static final MapCodec<SewingDesignRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(Ingredient.CODEC.fieldOf("template").forGetter((recipe) -> recipe.template), Ingredient.CODEC.fieldOf("base").forGetter((recipe) -> recipe.base)).apply(instance, SewingDesignRecipe::new));
+		private static final MapCodec<SewingDesignRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+				Ingredient.CODEC.fieldOf("template").forGetter((recipe) -> recipe.template),
+				Ingredient.CODEC.fieldOf("base").forGetter((recipe) -> recipe.base),
+				Ingredient.CODEC.fieldOf("addition").forGetter((recipe) -> recipe.addition)).apply(instance, SewingDesignRecipe::new));
 		public static final StreamCodec<RegistryFriendlyByteBuf, SewingDesignRecipe> STREAM_CODEC = StreamCodec.of(SewingDesignRecipe.Serializer::toNetwork, SewingDesignRecipe.Serializer::fromNetwork);
 
 		public Serializer() {
 		}
 
-		public MapCodec<SewingDesignRecipe> codec() {
+		public @NotNull MapCodec<SewingDesignRecipe> codec() {
 			return CODEC;
 		}
 
-		public StreamCodec<RegistryFriendlyByteBuf, SewingDesignRecipe> streamCodec() {
+		public @NotNull StreamCodec<RegistryFriendlyByteBuf, SewingDesignRecipe> streamCodec() {
 			return STREAM_CODEC;
 		}
 
 		private static SewingDesignRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
 			Ingredient template = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
 			Ingredient base = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-			return new SewingDesignRecipe(template, base);
+			Ingredient addition = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+			return new SewingDesignRecipe(template, base, addition);
 		}
 
 		private static void toNetwork(RegistryFriendlyByteBuf buffer, SewingDesignRecipe recipe) {
 			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.template);
 			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
+			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
 		}
 	}
 }

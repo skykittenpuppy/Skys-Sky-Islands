@@ -14,6 +14,7 @@ import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 
 public record ThingPattern(ResourceLocation assetId, Holder<Item> templateItem, Component description) {
     public static final Codec<ThingPattern> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "skyislands:item/glider",
+    "layer1": "skyislands:patterns/items/testing2"
+  }
+}
