@@ -5,8 +5,8 @@
 	"textures": {
 		"particle": "block/flower_pot",
 		"flowerpot": "block/flower_pot",
-		"cactus_top": "skyislands:block/arboreal_cactus_stem_top",
-		"cactus": "skyislands:block/arboreal_cactus_stem"
+		"cactus_top": "skyislands:block/arboreal_cactus_top",
+		"cactus": "skyislands:block/arboreal_cactus_side"
 	},
 	"elements": [
 		{

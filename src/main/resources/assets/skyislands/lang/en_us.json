@@ -62,6 +62,7 @@
   "block.skyislands.frigid_wall_hanging_sign": "Frigid Wall Hanging Sign",
 
   "block.skyislands.arboreal_cactus": "Arboreal Cactus",
+  "block.skyislands.despined_arboreal_cactus": "De-Spined Arboreal Cactus",
   "block.skyislands.arboreal_cactus_planks": "Arboreal Cactus Planks",
   "block.skyislands.arboreal_cactus_stairs": "Arboreal Cactus Stairs",
   "block.skyislands.arboreal_cactus_slab": "Arboreal Cactus Slab",
@@ -124,7 +125,7 @@
   "entity.skyislands.arboreal_cactus_chest_boat": "Arboreal Cactus Boat with Chest",
 
   "item.skyislands.testing_armor_trim_smithing_template": "Smithing Template",
-  "item.skyislands.testing_glider_pattern_sewing_template": "Sewing Template",
+  "item.skyislands.testing_glider_design_sewing_template": "Sewing Template",
   "item.skyislands.goldenleaf_boat": "Goldenleaf Boat",
   "item.skyislands.goldenleaf_chest_boat": "Goldenleaf Chest Boat",
   "item.skyislands.sakura_boat": "Sakura Boat",
@@ -140,10 +141,10 @@
   "item.skyislands.sewing_template": "Sewing Template",
   "item.skyislands.sewing_template.applies_to": "Applies to:",
   "item.skyislands.sewing_template.ingredients": "Ingredients:",
-  "item.skyislands.sewing_template.glider_pattern.applies_to": "Gliders",
-  "item.skyislands.sewing_template.glider_pattern.base_slot_description": "Add a glider",
-  "item.skyislands.sewing_template.glider_pattern.ingredients": "String",
-  "item.skyislands.sewing_template.glider_pattern.additions_slot_description": "Add string",
+  "item.skyislands.sewing_template.glider_design.applies_to": "Gliders",
+  "item.skyislands.sewing_template.glider_design.base_slot_description": "Add a glider",
+  "item.skyislands.sewing_template.glider_design.ingredients": "String",
+  "item.skyislands.sewing_template.glider_design.additions_slot_description": "Add string",
   "item.skyislands.sewing_template.design": "Design: ",
 
   "itemGroup.skyislands.sky_islands": "Sky's Sky Islands",

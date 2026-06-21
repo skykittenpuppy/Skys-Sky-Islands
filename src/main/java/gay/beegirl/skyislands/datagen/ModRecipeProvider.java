@@ -62,10 +62,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         copySmithingTemplate(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         trimSmithing(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
-        copySewingTemplate(recipeOutput, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
-        designSewing(recipeOutput, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
-        copySewingTemplate(recipeOutput, ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get());
-        designSewing(recipeOutput, ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+        copySewingTemplate(recipeOutput, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        designSewing(recipeOutput, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        copySewingTemplate(recipeOutput, ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        designSewing(recipeOutput, ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get());
 
         twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CLOUDSHALE.base(), ModBlocks.POINTED_CLOUDSHALE);
         createStoneSetRecipes(recipeOutput, ModBlocks.CLOUDSHALE);

@@ -38,13 +38,13 @@
       }
     },
     {
-      "model": "skyislands:item/leather_helmet_alexandrite_trim",
+      "model": "minecraft:item/leather_helmet_emerald_trim",
       "predicate": {
-        "trim_type": 0.713
+        "trim_type": 0.7
       }
     },
     {
-      "model": "minecraft:item/leather_helmet_alexandrite_trim",
+      "model": "skyislands:item/leather_helmet_alexandrite_trim",
       "predicate": {
         "trim_type": 0.713
       }

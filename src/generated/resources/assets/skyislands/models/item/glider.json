@@ -2,13 +2,13 @@
   "parent": "minecraft:item/generated",
   "overrides": [
     {
-      "model": "skyislands:item/glider_testing_pattern",
+      "model": "skyislands:item/glider_testing_design",
       "predicate": {
         "skyislands:glider_design": -6.440824E8
       }
     },
     {
-      "model": "skyislands:item/glider_testing2_pattern",
+      "model": "skyislands:item/glider_testing2_design",
       "predicate": {
         "skyislands:glider_design": -3.6779136E8
       }
@@ -16,6 +16,6 @@
   ],
   "textures": {
     "layer0": "skyislands:item/glider",
-    "layer1": "skyislands:patterns/items/default"
+    "layer1": "skyislands:designs/items/default"
   }
 }

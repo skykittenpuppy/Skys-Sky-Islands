@@ -22,8 +22,8 @@ public class ModGliderDesigns {
     public static void bootstrap(BootstrapContext<GliderDesign> context) {
         SkysSkyIslands.LOGGER.info("Trim Pattern Bootstrap for " + SkysSkyIslands.MOD_ID);
 
-        register(context, ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get(), TESTING);
-        register(context, ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get(), TESTING2);
+        register(context, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get(), TESTING);
+        register(context, ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get(), TESTING2);
     }
 
     private static ResourceKey<GliderDesign> registryKey(String name) {

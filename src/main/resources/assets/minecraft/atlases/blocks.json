@@ -30,8 +30,8 @@
     },
     {
       "type": "directory",
-      "source": "patterns/items",
-      "prefix": "patterns/items/"
+      "source": "designs/items",
+      "prefix": "designs/items/"
     }
   ]
 }

@@ -3,9 +3,9 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"cactus_top": "skyislands:block/arboreal_cactus_stem_top",
-		"particle": "skyislands:block/arboreal_cactus_stem",
-		"cactus": "skyislands:block/arboreal_cactus_stem"
+		"cactus_top": "skyislands:block/arboreal_cactus_top",
+		"particle": "skyislands:block/arboreal_cactus_side",
+		"cactus": "skyislands:block/arboreal_cactus_side"
 	},
 	"elements": [
 		{

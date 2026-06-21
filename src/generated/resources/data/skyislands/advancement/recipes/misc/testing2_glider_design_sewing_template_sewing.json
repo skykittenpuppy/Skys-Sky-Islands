@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "skyislands:testing_glider_pattern_sewing_template"
+            "items": "skyislands:testing2_glider_design_sewing_template"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "skyislands:testing_glider_pattern_sewing_template_sewing"
+        "recipe": "skyislands:testing2_glider_design_sewing_template_sewing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "skyislands:testing_glider_pattern_sewing_template_sewing"
+      "skyislands:testing2_glider_design_sewing_template_sewing"
     ]
   }
 }

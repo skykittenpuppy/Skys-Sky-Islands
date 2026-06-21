@@ -9,7 +9,7 @@
       "tag": "minecraft:wool"
     },
     "S": {
-      "item": "skyislands:testing_glider_pattern_sewing_template"
+      "item": "skyislands:testing2_glider_design_sewing_template"
     }
   },
   "pattern": [
@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 2,
-    "id": "skyislands:testing_glider_pattern_sewing_template"
+    "id": "skyislands:testing2_glider_design_sewing_template"
   }
 }

@@ -78,7 +78,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.FRIGID_BOAT);
                 output.accept(ModItems.FRIGID_CHEST_BOAT);
 
-                output.accept(ModBlocks.ARBOREAL_CACTUS);
+                output.accept(ModBlocks.ARBOREAL_CACTUSES.cactus());
+                output.accept(ModBlocks.ARBOREAL_CACTUSES.despinedCactus());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.base());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.stairs());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.slab());
@@ -137,7 +138,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.GLIDER);
 
                 output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
-                output.accept(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE);
+                output.accept(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE);
+                output.accept(ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE);
             }).build());
 
     public static void registerCreativeModeTabs(IEventBus modEventBus) {

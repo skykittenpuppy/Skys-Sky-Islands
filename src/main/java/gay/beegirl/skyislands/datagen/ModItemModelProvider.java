@@ -5,7 +5,6 @@ import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
 import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
-import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -14,15 +13,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
-import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ModItemModelProvider extends ItemModelProvider {
     private static final List<ResourceKey<TrimMaterial>> MOD_TRIM_MATERIALS = List.of(
@@ -45,129 +43,74 @@ public class ModItemModelProvider extends ItemModelProvider {
         generateGliderModelsForPatterns(MOD_GLIDER_DESIGNS);
 
         basicItem(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
-        basicItem(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
+        basicItem(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        basicItem(ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get());
 
-        createStoneSetItemModels(ModBlocks.CLOUDSHALE);
-        createStoneSetItemModels(ModBlocks.COBBLED_CLOUDSHALE);
-        createStoneSetItemModels(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        createStoneSetItemModels(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
-
-        createLogSetItemModels(ModBlocks.GOLDENLEAF_LOGS);
-        createWoodSetItemModels(ModBlocks.GOLDENLEAF_PLANKS);
-        uncheckedBlockItem(ModBlocks.GOLDENLEAF_LEAVES.get());
-        flatBlockItem(ModBlocks.GOLDENLEAF_SAPLING.get());
         basicItem(ModItems.GOLDENLEAF_BOAT.get());
         basicItem(ModItems.GOLDENLEAF_CHEST_BOAT.get());
 
-        createLogSetItemModels(ModBlocks.SAKURA_LOGS);
-        createWoodSetItemModels(ModBlocks.SAKURA_PLANKS);
-        uncheckedBlockItem(ModBlocks.SAKURA_LEAVES.get());
-        flatBlockItem(ModBlocks.SAKURA_SAPLING.get());
         basicItem(ModItems.SAKURA_BOAT.get());
         basicItem(ModItems.SAKURA_CHEST_BOAT.get());
 
-        createLogSetItemModels(ModBlocks.FRIGID_LOGS);
-        createWoodSetItemModels(ModBlocks.FRIGID_PLANKS);
-        uncheckedBlockItem(ModBlocks.FRIGID_LEAVES.get());
-        flatBlockItem(ModBlocks.FRIGID_SAPLING.get());
         basicItem(ModItems.FRIGID_BOAT.get());
         basicItem(ModItems.FRIGID_CHEST_BOAT.get());
 
-        createCactusSetItemModels(ModBlocks.ARBOREAL_CACTUSES);
-        createWoodSetItemModels(ModBlocks.ARBOREAL_CACTUS_PLANKS);
-        basicItem(ModBlocks.ARBOREAL_CACTUS_FRUIT.get().asItem());
         basicItem(ModItems.ARBOREAL_CACTUS_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
     }
 
     public void generateGliderModelsForPatterns(List<ResourceKey<GliderDesign>> gliderDesigns) {
-        ResourceLocation itemLoc = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(ModItems.GLIDER.get()));
-        ResourceLocation patternLoc = SkysSkyIslands.createId("default");
-        ItemModelBuilder modelBuilder = getBuilder(itemLoc.getPath())
+        Item glider = ModItems.GLIDER.get();
+        ItemModelBuilder modelBuilder = getBuilder(name(glider))
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
-                .texture("layer1", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "patterns/items/" + patternLoc.getPath()));
+                .texture("layer0", itemTexture(glider))
+                .texture("layer1", SkysSkyIslands.createId("designs/items/default"));
         for(ResourceKey<GliderDesign> gliderDesign : gliderDesigns) {
-            patternLoc = gliderDesign.location();
-            ItemModelBuilder patternedModel = getBuilder(itemLoc.withSuffix("_" + patternLoc.getPath()).getPath() + "_pattern")
+            ItemModelBuilder patternedModel = getBuilder(name(glider) + "_" + gliderDesign.location().getPath() + "_design")
                     .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                    .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
-                    .texture("layer1", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "patterns/items/" + patternLoc.getPath()));
+                    .texture("layer0", itemTexture(glider))
+                    .texture("layer1", designTexture(gliderDesign));
             modelBuilder.override()
                     .model(patternedModel)
-                    .predicate(ModItemProperties.GLIDER_DESIGN_PREDICATE, patternLoc.hashCode());
+                    .predicate(ModItemProperties.GLIDER_DESIGN_PREDICATE, gliderDesign.location().hashCode());
         }
     }
 
     public void generateArmorModelsForMaterials(List<ResourceKey<TrimMaterial>> trimMaterials) {
         for (ResourceKey<TrimMaterial> trimMaterial : trimMaterials) {
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/helmet_trim_").getPath()), ModelProvider.TEXTURE);
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/chestplate_trim_").getPath()), ModelProvider.TEXTURE);
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/leggings_trim_").getPath()), ModelProvider.TEXTURE);
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/boots_trim_").getPath()), ModelProvider.TEXTURE);
+            ResourceLocation patternLoc = trimMaterial.location();
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(patternLoc.withPrefix("trims/items/helmet_trim_").getPath()), ModelProvider.TEXTURE);
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(patternLoc.withPrefix("trims/items/chestplate_trim_").getPath()), ModelProvider.TEXTURE);
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(patternLoc.withPrefix("trims/items/leggings_trim_").getPath()), ModelProvider.TEXTURE);
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(patternLoc.withPrefix("trims/items/boots_trim_").getPath()), ModelProvider.TEXTURE);
         }
         for (Item item : BuiltInRegistries.ITEM) {
             if (item instanceof ArmorItem armorItem && armorItem.getType().hasTrims()) {
-                ResourceLocation itemLoc = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(armorItem));
                 for (ResourceKey<TrimMaterial> trimMaterial : trimMaterials) {
-                    ResourceLocation patternLoc = trimMaterial.location();
-                    getBuilder(itemLoc.withSuffix("_" + patternLoc.getPath()).getPath() + "_trim")
+                    getBuilder(name(armorItem) + "_" + trimMaterial.location().getPath() + "_trim")
                             .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                            .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
-                            .texture("layer1", ResourceLocation.withDefaultNamespace("trims/items/" + armorItem.getType().getName() + "_trim_" + patternLoc.getPath()));
+                            .texture("layer0", itemTexture(armorItem))
+                            .texture("layer1", trimTexture(armorItem, trimMaterial));
                 }
             }
         }
     }
 
-    public ItemModelBuilder flatBlockItem(Block block) {
-        ResourceLocation itemLoc = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(block.asItem()));
-        return getBuilder(itemLoc.toString())
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "block/" + itemLoc.getPath()));
+    public @NotNull ResourceLocation designTexture(ResourceKey<GliderDesign> gliderDesign) {
+        return ResourceLocation.fromNamespaceAndPath(gliderDesign.location().getNamespace(), "designs/items/" + gliderDesign.location().getPath());
     }
-
-    public ItemModelBuilder uncheckedBlockItem(Block block) {
-        ResourceLocation blockLoc = Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block));
-        return getBuilder(blockLoc.toString())
-                .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(blockLoc.getNamespace(), "block/" + blockLoc.getPath())));
+    public @NotNull ResourceLocation trimTexture(@NotNull ArmorItem item, ResourceKey<TrimMaterial> trimMaterial) {
+        return ResourceLocation.withDefaultNamespace("trims/items/" + item.getType().getName() + "_trim_" + trimMaterial.location().getPath());
     }
-
-    public ItemModelBuilder uncheckedBlockItem(Block block, String suffix) {
-        ResourceLocation blockLoc = Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block));
-        return getBuilder(blockLoc.toString())
-                .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(blockLoc.getNamespace(), "block/" + blockLoc.getPath() + suffix)));
+    // Copied from BlockStateProvider
+    public @NotNull ResourceLocation itemTexture(@NotNull Item item) {
+        ResourceLocation name = key(item);
+        return ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "item/" + name.getPath());
     }
-
-    public final void createStoneSetItemModels(ModBlocks.StoneBlockSet stoneSet){
-        uncheckedBlockItem(stoneSet.base().get());
-        uncheckedBlockItem(stoneSet.button().get(), "_inventory");
-        uncheckedBlockItem(stoneSet.wall().get(), "_inventory");
-        uncheckedBlockItem(stoneSet.slab().get());
-        uncheckedBlockItem(stoneSet.stairs().get());
-        uncheckedBlockItem(stoneSet.pressurePlate().get());
+    private ResourceLocation key(Item item) {
+        return BuiltInRegistries.ITEM.getKey(item);
     }
-    public final void createLogSetItemModels(ModBlocks.LogBlockSet logSet) {
-        uncheckedBlockItem(logSet.log().get());
-        uncheckedBlockItem(logSet.wood().get());
-        uncheckedBlockItem(logSet.strippedLog().get());
-        uncheckedBlockItem(logSet.strippedWood().get());
-    }
-    public final void createCactusSetItemModels(ModBlocks.CactusBlockSet cactusSet) {
-        uncheckedBlockItem(cactusSet.cactus().get());
-        uncheckedBlockItem(cactusSet.despinedCactus().get());
-    }
-    public final void createWoodSetItemModels(ModBlocks.WoodBlockSet woodSet) {
-        uncheckedBlockItem(woodSet.base().get());
-        uncheckedBlockItem(woodSet.button().get(), "_inventory");
-        basicItem(woodSet.door().get().asItem());
-        uncheckedBlockItem(woodSet.fence().get(), "_inventory");
-        uncheckedBlockItem(woodSet.fenceGate().get());
-        basicItem(woodSet.standingSign().get().asItem());
-        basicItem(woodSet.hangingSign().get().asItem());
-        uncheckedBlockItem(woodSet.slab().get());
-        uncheckedBlockItem(woodSet.stairs().get());
-        uncheckedBlockItem(woodSet.pressurePlate().get());
-        uncheckedBlockItem(woodSet.trapdoor().get(), "_bottom");
+    private String name(Item item) {
+        return key(item).getPath();
     }
 }

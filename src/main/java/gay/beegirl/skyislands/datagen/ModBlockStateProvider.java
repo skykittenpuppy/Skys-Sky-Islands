@@ -2,12 +2,17 @@ package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -22,8 +27,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get());
         simpleBlockWithItem(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
 
-        grassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
-        grassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
+        tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
+        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
         //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.COBBLED_CLOUDSHALE);
@@ -47,64 +52,171 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         createCactusSetBlockStates(ModBlocks.ARBOREAL_CACTUSES);
         createWoodSetBlockStates(ModBlocks.ARBOREAL_CACTUS_PLANKS);
+        itemModels().basicItem(ModBlocks.ARBOREAL_CACTUS_FRUIT.get().asItem());
     }
 
     private void simpleBlockWithItem(Block block) {
         simpleBlockWithItem(block, cubeAll(block));
     }
 
-    public final void grassLikeBlock(Block block, Block baseBlock) {
+    public final void untintedGrassLikeBlock(Block block, Block baseBlock) {
         simpleBlockWithItem(block, models().cubeBottomTop(name(block),
-                extend(blockTexture(block), "_side"),
+                blockTexture(block).withSuffix("_side"),
                 blockTexture(baseBlock),
-                blockTexture(block)));
+                blockTexture(block).withSuffix("_top")));
+    }
+    public final void tintedGrassLikeBlock(Block block, Block baseBlock) {
+        simpleBlockWithItem(block, models().getBuilder(name(block))
+                .parent(new ModelFile.UncheckedModelFile("block/block"))
+                .texture("particle", blockTexture(baseBlock))
+                .texture("bottom", blockTexture(baseBlock))
+                .texture("top", blockTexture(block).withSuffix("_top"))
+                .texture("side", blockTexture(block).withSuffix("_side"))
+                .texture("overlay", blockTexture(block).withSuffix("_side_overlay"))
+                .element()
+                    .allFacesExcept(
+                            (direction, faceBuilder) ->
+                                    faceBuilder
+                                            .cullface(direction)
+                                            .tintindex(0)
+                                            .texture("#overlay"),
+                            Set.of(Direction.UP, Direction.DOWN))
+                    .end()
+                .element()
+                    .face(Direction.UP)
+                        .cullface(Direction.UP)
+                        .tintindex(0)
+                        .texture("#top")
+                    .end()
+                    .face(Direction.DOWN)
+                        .cullface(Direction.DOWN)
+                        .texture("#bottom")
+                    .end()
+                    .allFacesExcept(
+                            (direction, faceBuilder) ->
+                                    faceBuilder
+                                            .cullface(direction)
+                                            .texture("#side"),
+                            Set.of(Direction.UP, Direction.DOWN))
+                    .end()
+        );
     }
 
     public final void plantAndPot(Block plant, Block pottedPlant) {
         simpleBlock(plant, models().cross(name(plant), blockTexture(plant)));
+        flatBlockItem(plant);
         simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)));
     }
 
+    public final void flatBlockItem(Block block) {
+        itemModels().getBuilder(name(block.asItem()))
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", blockTexture(block));
+    }
+    public final void uncheckedBlockItem(Block block) {
+        itemModels().getBuilder(name(block.asItem()))
+                .parent(new ModelFile.UncheckedModelFile(key(block).withPrefix("block/")));
+    }
+    public final void uncheckedBlockItem(Block block, String suffix) {
+        itemModels().getBuilder(name(block.asItem()))
+                .parent(new ModelFile.UncheckedModelFile(key(block).withPrefix("block/").withSuffix(suffix)));
+    }
+
     public final void createStoneSetBlockStates(ModBlocks.StoneBlockSet stoneSet){
-        simpleBlock(stoneSet.base().get());
+        simpleBlockWithItem(stoneSet.base().get());
+
         buttonBlock((ButtonBlock) stoneSet.button().get(), blockTexture(stoneSet.base().get()));
+        uncheckedBlockItem(stoneSet.button().get(), "_inventory");
+
         wallBlock((WallBlock) stoneSet.wall().get(), blockTexture(stoneSet.base().get()));
+        uncheckedBlockItem(stoneSet.wall().get(), "_inventory");
+
         slabBlock((SlabBlock) stoneSet.slab().get(), blockTexture(stoneSet.base().get()), blockTexture(stoneSet.base().get()));
+        uncheckedBlockItem(stoneSet.slab().get());
+
         stairsBlock((StairBlock) stoneSet.stairs().get(), blockTexture(stoneSet.base().get()));
+        uncheckedBlockItem(stoneSet.stairs().get());
+
         pressurePlateBlock((PressurePlateBlock) stoneSet.pressurePlate().get(), blockTexture(stoneSet.base().get()));
+        uncheckedBlockItem(stoneSet.pressurePlate().get());
     }
     public final void createLogSetBlockStates(ModBlocks.LogBlockSet logSet) {
         logBlock((RotatedPillarBlock) logSet.log().get());
+        uncheckedBlockItem(logSet.log().get());
+
         axisBlock((RotatedPillarBlock) logSet.wood().get(), blockTexture(logSet.log().get()), blockTexture(logSet.log().get()));
+        uncheckedBlockItem(logSet.wood().get());
+
         logBlock((RotatedPillarBlock) logSet.strippedLog().get());
+        uncheckedBlockItem(logSet.strippedLog().get());
+
         axisBlock((RotatedPillarBlock) logSet.strippedWood().get(), blockTexture(logSet.strippedLog().get()), blockTexture(logSet.strippedLog().get()));
+        uncheckedBlockItem(logSet.strippedWood().get());
     }
     public final void createCactusSetBlockStates(ModBlocks.CactusBlockSet cactusSet) {
+        // TODO:
+        simpleBlock(cactusSet.cactus().get(), models().cubeBottomTop(name(cactusSet.cactus().get()),
+                blockTexture(cactusSet.cactus().get()).withSuffix("_side"),
+                blockTexture(cactusSet.cactus().get()).withSuffix("_bottom"),
+                blockTexture(cactusSet.cactus().get()).withSuffix("_top")));
+        uncheckedBlockItem(cactusSet.cactus().get());
+
+        // TODO:
+        simpleBlock(cactusSet.despinedCactus().get(), models().cubeBottomTop(name(cactusSet.despinedCactus().get()),
+                blockTexture(cactusSet.despinedCactus().get()).withSuffix("_side"),
+                blockTexture(cactusSet.despinedCactus().get()).withSuffix("_bottom"),
+                blockTexture(cactusSet.despinedCactus().get()).withSuffix("_top")));
+        uncheckedBlockItem(cactusSet.despinedCactus().get());
     }
     public final void createWoodSetBlockStates(ModBlocks.WoodBlockSet woodSet) {
-        simpleBlock(woodSet.base().get());
+        simpleBlockWithItem(woodSet.base().get());
+
         buttonBlock((ButtonBlock) woodSet.button().get(), blockTexture(woodSet.base().get()));
-        doorBlock((DoorBlock) woodSet.door().get(), extend(blockTexture(woodSet.door().get()), "_bottom"), extend(blockTexture(woodSet.door().get()), "_top"));
+        uncheckedBlockItem(woodSet.button().get(), "_inventory");
+
+        doorBlock((DoorBlock) woodSet.door().get(), blockTexture(woodSet.door().get()).withSuffix("_bottom"), blockTexture(woodSet.door().get()).withSuffix("_top"));
+        itemModels().basicItem(woodSet.door().asItem());
+
         fenceBlock((FenceBlock) woodSet.fence().get(), blockTexture(woodSet.base().get()));
+        uncheckedBlockItem(woodSet.fence().get(), "_inventory");
+
         fenceGateBlock((FenceGateBlock) woodSet.fenceGate().get(), blockTexture(woodSet.base().get()));
-        //signBlock((StandingSignBlock) woodSet.standingSign().get(), (WallSignBlock) woodSet.wallSign().get(), blockTexture(woodSet.base().get()));
-        //hangingSignBlock((CeilingHangingSignBlock) woodSet.hangingSign().get(), (WallHangingSignBlock) woodSet.hangingWallSign().get(), blockTexture(woodSet.base().get()));
+        uncheckedBlockItem(woodSet.fenceGate().get());
+
+        signBlock((StandingSignBlock) woodSet.standingSign().get(), (WallSignBlock) woodSet.wallSign().get(), blockTexture(woodSet.base().get()));
+        itemModels().basicItem(woodSet.standingSign().asItem());
+
+        hangingSignBlock((CeilingHangingSignBlock) woodSet.hangingSign().get(), (WallHangingSignBlock) woodSet.hangingWallSign().get(), blockTexture(woodSet.base().get()));
+        itemModels().basicItem(woodSet.hangingSign().asItem());
+
         slabBlock((SlabBlock) woodSet.slab().get(), blockTexture(woodSet.base().get()), blockTexture(woodSet.base().get()));
+        uncheckedBlockItem(woodSet.slab().get());
+
         stairsBlock((StairBlock) woodSet.stairs().get(), blockTexture(woodSet.base().get()));
+        uncheckedBlockItem(woodSet.stairs().get());
+
         pressurePlateBlock((PressurePlateBlock) woodSet.pressurePlate().get(), blockTexture(woodSet.base().get()));
+        uncheckedBlockItem(woodSet.pressurePlate().get());
+
         trapdoorBlock((TrapDoorBlock) woodSet.trapdoor().get(), blockTexture(woodSet.trapdoor().get()), true);
+        uncheckedBlockItem(woodSet.trapdoor().get(), "_bottom");
     }
 
     // Copied from BlockStateProvider
+    public @NotNull ResourceLocation blockTexture(@NotNull Block block) {
+        ResourceLocation name = key(block);
+        return ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath());
+    }
     private ResourceLocation key(Block block) {
         return BuiltInRegistries.BLOCK.getKey(block);
     }
-    private String name(Block block) {
-        return this.key(block).getPath();
+    private ResourceLocation key(Item item) {
+        return BuiltInRegistries.ITEM.getKey(item);
     }
-    private ResourceLocation extend(ResourceLocation rl, String suffix) {
-        String namespace = rl.getNamespace();
-        String path = rl.getPath();
-        return ResourceLocation.fromNamespaceAndPath(namespace, path + suffix);
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+    private String name(Item item) {
+        return key(item).getPath();
     }
 }
