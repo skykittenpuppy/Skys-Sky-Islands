@@ -1,11 +1,14 @@
 package gay.beegirl.skyislands.world.item;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
+import gay.beegirl.skyislands.core.component.ModDataComponents;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -131,6 +134,12 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.ALEXANDRITE);
 
                 output.accept(ModItems.GLIDER);
+                ItemStack testing_glider = new ItemStack(ModItems.GLIDER.get());
+                testing_glider.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE, SkysSkyIslands.createId("testing"), Component.translatable("glider_design.skyislands.testing")));
+                output.accept(testing_glider);
+                ItemStack testing2_glider = new ItemStack(ModItems.GLIDER.get());
+                testing2_glider.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE, SkysSkyIslands.createId("testing2"), Component.translatable("glider_design.skyislands.testing2")));
+                output.accept(testing2_glider);
 
                 output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
                 output.accept(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE);
