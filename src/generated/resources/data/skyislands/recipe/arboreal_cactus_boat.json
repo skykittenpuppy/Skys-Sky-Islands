@@ -4,7 +4,7 @@
   "group": "boat",
   "key": {
     "#": {
-      "item": "skyislands:goldenleaf_planks"
+      "item": "skyislands:arboreal_cactus_planks"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "skyislands:goldenleaf_boat"
+    "id": "skyislands:arboreal_cactus_boat"
   }
 }

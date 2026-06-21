@@ -4,11 +4,11 @@
   "group": "planks",
   "ingredients": [
     {
-      "tag": "skyislands:arboreal_cactuses"
+      "tag": "skyislands:goldenleaf_logs"
     }
   ],
   "result": {
     "count": 4,
-    "id": "skyislands:arboreal_cactus_planks"
+    "id": "skyislands:goldenleaf_planks"
   }
 }

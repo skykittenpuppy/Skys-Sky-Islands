@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cobbled_cloudshale": {
+    "has_pointed_cloudshale": {
       "conditions": {
         "items": [
           {
-            "items": "skyislands:cobbled_cloudshale"
+            "items": "skyislands:pointed_cloudshale"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "skyislands:cloudshale"
+        "recipe": "skyislands:pointed_cloudshale_packing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cobbled_cloudshale"
+      "has_pointed_cloudshale"
     ]
   ],
   "rewards": {
     "recipes": [
-      "skyislands:cloudshale"
+      "skyislands:pointed_cloudshale_packing"
     ]
   }
 }

@@ -2,12 +2,15 @@ package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.neoforged.neoforge.client.RenderTypeGroup;
+import net.neoforged.neoforge.client.RenderTypeHelper;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +30,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get());
         simpleBlockWithItem(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
 
-        tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
-        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.base().get());
+        tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.get());
+        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.get());
+        logBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
+        uncheckedBlockItem(ModBlocks.CLOUDSHALE.get());
         //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
-        createStoneSetBlockStates(ModBlocks.CLOUDSHALE);
+
         createStoneSetBlockStates(ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
@@ -60,28 +65,25 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     public final void untintedGrassLikeBlock(Block block, Block baseBlock) {
+        ResourceLocation bottomTex = blockTexture(baseBlock);
+        if (baseBlock instanceof RotatedPillarBlock)
+            bottomTex.withSuffix("_top");
         simpleBlockWithItem(block, models().cubeBottomTop(name(block),
                 blockTexture(block).withSuffix("_side"),
-                blockTexture(baseBlock),
+                bottomTex,
                 blockTexture(block).withSuffix("_top")));
     }
     public final void tintedGrassLikeBlock(Block block, Block baseBlock) {
+        ResourceLocation bottomTex = blockTexture(baseBlock);
+        if (baseBlock instanceof RotatedPillarBlock)
+            bottomTex.withSuffix("_top");
         simpleBlockWithItem(block, models().getBuilder(name(block))
                 .parent(new ModelFile.UncheckedModelFile("block/block"))
                 .texture("particle", blockTexture(baseBlock))
-                .texture("bottom", blockTexture(baseBlock))
+                .texture("bottom", bottomTex)
                 .texture("top", blockTexture(block).withSuffix("_top"))
                 .texture("side", blockTexture(block).withSuffix("_side"))
                 .texture("overlay", blockTexture(block).withSuffix("_side_overlay"))
-                .element()
-                    .allFacesExcept(
-                            (direction, faceBuilder) ->
-                                    faceBuilder
-                                            .cullface(direction)
-                                            .tintindex(0)
-                                            .texture("#overlay"),
-                            Set.of(Direction.UP, Direction.DOWN))
-                    .end()
                 .element()
                     .face(Direction.UP)
                         .cullface(Direction.UP)
@@ -99,6 +101,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                             .texture("#side"),
                             Set.of(Direction.UP, Direction.DOWN))
                     .end()
+                .element()
+                    .allFacesExcept(
+                        (direction, faceBuilder) ->
+                                faceBuilder
+                                        .cullface(direction)
+                                        .tintindex(0)
+                                        .texture("#overlay"),
+                        Set.of(Direction.UP, Direction.DOWN))
+                    .end()
+                .renderType("minecraft:cutout")
         );
     }
 

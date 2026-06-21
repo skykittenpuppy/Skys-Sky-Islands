@@ -25,13 +25,9 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         add(ModBlocks.CLOUDSHALE_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         add(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
+        add(ModBlocks.CLOUDSHALE.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         dropSelf(ModBlocks.POINTED_CLOUDSHALE.get());
-        add(ModBlocks.CLOUDSHALE.base().get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
-        dropSelf(ModBlocks.CLOUDSHALE.button().get());
-        dropSelf(ModBlocks.CLOUDSHALE.wall().get());
-        dropSelf(ModBlocks.CLOUDSHALE.slab().get());
-        dropSelf(ModBlocks.CLOUDSHALE.stairs().get());
-        dropSelf(ModBlocks.CLOUDSHALE.pressurePlate().get());
+
         createStoneSetLootTables(ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetLootTables(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
         createStoneSetLootTables(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);

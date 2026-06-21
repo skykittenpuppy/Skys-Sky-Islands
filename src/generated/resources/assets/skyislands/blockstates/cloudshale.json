@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
+    "axis=x": {
+      "model": "skyislands:block/cloudshale_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
       "model": "skyislands:block/cloudshale"
+    },
+    "axis=z": {
+      "model": "skyislands:block/cloudshale_horizontal",
+      "x": 90
     }
   }
 }

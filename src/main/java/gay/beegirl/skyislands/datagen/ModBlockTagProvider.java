@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +19,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(@NotNull HolderLookup.Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.RAW_ALEXANDRITE_BLOCK.get(), ModBlocks.ALEXANDRITE_BLOCK.get())
                 .add(ModBlocks.STONE_ALEXANDRITE_ORE.get(), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get(), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
@@ -72,10 +73,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingWallSign().get());
 
         tag(ModBlockTags.CLOUDSHALE_ORE_REPLACEABLE)
-                .add(ModBlocks.CLOUDSHALE.base().get(), ModBlocks.COBBLED_CLOUDSHALE.base().get(), ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base().get(), ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base().get());
+                .add(ModBlocks.CLOUDSHALE.get(), ModBlocks.COBBLED_CLOUDSHALE.base().get(), ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base().get(), ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base().get());
 
         tag(BlockTags.WALLS)
-                .add(ModBlocks.CLOUDSHALE.wall().get())
                 .add(ModBlocks.COBBLED_CLOUDSHALE.wall().get())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall().get())
                 .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall().get());

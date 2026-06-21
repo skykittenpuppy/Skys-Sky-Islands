@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "skyislands:block/cloudshale",
-    "side": "skyislands:block/cloudshale",
-    "top": "skyislands:block/cloudshale"
-  }
-}

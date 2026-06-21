@@ -4,7 +4,7 @@
   "group": "hanging_sign",
   "key": {
     "#": {
-      "item": "skyislands:despined_arboreal_cactus"
+      "item": "skyislands:stripped_goldenleaf_log"
     },
     "X": {
       "item": "minecraft:chain"
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 6,
-    "id": "skyislands:arboreal_cactus_hanging_sign"
+    "id": "skyislands:goldenleaf_hanging_sign"
   }
 }

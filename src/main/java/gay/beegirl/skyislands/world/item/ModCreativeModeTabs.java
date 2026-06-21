@@ -98,13 +98,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.CLOUDSHALE_GRASS);
                 output.accept(ModBlocks.CLOUDSHALE_CHERRY_GRASS);
 
+                output.accept(ModBlocks.CLOUDSHALE);
                 output.accept(ModBlocks.POINTED_CLOUDSHALE);
-                output.accept(ModBlocks.CLOUDSHALE.base());
-                output.accept(ModBlocks.CLOUDSHALE.stairs());
-                output.accept(ModBlocks.CLOUDSHALE.slab());
-                output.accept(ModBlocks.CLOUDSHALE.wall());
-                output.accept(ModBlocks.CLOUDSHALE.pressurePlate());
-                output.accept(ModBlocks.CLOUDSHALE.button());
 
                 output.accept(ModBlocks.COBBLED_CLOUDSHALE.base());
                 output.accept(ModBlocks.COBBLED_CLOUDSHALE.stairs());

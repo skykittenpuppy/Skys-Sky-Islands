@@ -1,15 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "#": {
-      "item": "skyislands:pointed_cloudshale"
-    }
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "skyislands:cobbled_cloudshale"
   },
-  "pattern": [
-    "##",
-    "##"
-  ],
   "result": {
     "count": 1,
     "id": "skyislands:cloudshale"
