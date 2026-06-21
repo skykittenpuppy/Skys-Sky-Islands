@@ -2,9 +2,8 @@ package gay.beegirl.skyislands.world.item.crafting;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import gay.beegirl.skyislands.world.item.gliderthing.ModThingPatterns;
-import gay.beegirl.skyislands.world.item.gliderthing.ThingPattern;
-import gay.beegirl.skyislands.world.item.gliderthing.GliderThing;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
+import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
 import gay.beegirl.skyislands.core.component.ModDataComponents;
 import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.core.registries.ModRegistries;
@@ -41,15 +40,15 @@ public class SewingDesignRecipe implements SmithingRecipe {
 	public @NotNull ItemStack assemble(SmithingRecipeInput input, HolderLookup.@NotNull Provider registries) {
 		ItemStack inputStack = input.base();
 		if (this.base.test(inputStack)) {
-			Optional<Holder.Reference<ThingPattern>> designHolder = ModThingPatterns.getFromTemplate(registries, input.template());
+			Optional<Holder.Reference<GliderDesign>> designHolder = ModGliderDesigns.getFromTemplate(registries, input.template());
 			if (designHolder.isPresent()) {
-				GliderThing pattern = inputStack.get(ModDataComponents.SEWING_PATTERN.get());
-				if (pattern != null && pattern.hasDesign(designHolder.get())) {
+				GliderDesign pattern = inputStack.get(ModDataComponents.SEWING_PATTERN.get());
+				if (pattern != null && pattern.equals(designHolder.get().value())) {
 					return ItemStack.EMPTY;
 				}
 
 				ItemStack outputStack = inputStack.copyWithCount(1);
-				outputStack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderThing(designHolder.get()));
+				outputStack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(designHolder.get().value()));
 				return outputStack;
 			}
 		}
@@ -59,8 +58,9 @@ public class SewingDesignRecipe implements SmithingRecipe {
 
 	public @NotNull ItemStack getResultItem(HolderLookup.Provider registries) {
 		ItemStack itemstack = new ItemStack(ModItems.GLIDER.get());
-		Optional<Holder.Reference<ThingPattern>> designHolder = registries.lookupOrThrow(ModRegistries.GLIDER_DESIGN).listElements().findFirst();
-		designHolder.ifPresent(thingPatternReference -> itemstack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderThing(thingPatternReference)));
+		Optional<Holder.Reference<GliderDesign>> designHolder = registries.lookupOrThrow(ModRegistries.GLIDER_DESIGN).listElements().findFirst();
+		designHolder.ifPresent(
+				gliderDesignReference -> itemstack.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(gliderDesignReference.value())));
 		return itemstack;
 	}
 

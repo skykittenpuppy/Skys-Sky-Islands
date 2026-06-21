@@ -144,7 +144,7 @@
   "item.skyislands.sewing_template.glider_pattern.base_slot_description": "Add a glider",
   "item.skyislands.sewing_template.glider_pattern.ingredients": "String",
   "item.skyislands.sewing_template.glider_pattern.additions_slot_description": "Add string",
-  "item.skyislands.sewing_template.thing": "Thing: ",
+  "item.skyislands.sewing_template.design": "Design: ",
 
   "itemGroup.skyislands.sky_islands": "Sky's Sky Islands",
 
@@ -156,6 +156,6 @@
 
   "trim_material.skyislands.alexandrite": "Alexandrite Material",
   "trim_pattern.skyislands.testing": "Testing Armor Trim",
-  "glider_design.skyislands.testing": "Testing Glider Thing",
-  "glider_design.skyislands.testing2": "Testing2 Glider Thing"
+  "glider_design.skyislands.testing": "Testing Glider Design",
+  "glider_design.skyislands.testing2": "Testing2 Glider Design"
 }

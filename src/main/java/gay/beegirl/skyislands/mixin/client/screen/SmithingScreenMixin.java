@@ -5,7 +5,6 @@ import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.world.item.SewingTemplateItem;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
 import net.minecraft.client.gui.screens.inventory.SmithingScreen;
@@ -26,7 +25,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,14 +32,14 @@ import java.util.Optional;
 @OnlyIn(Dist.CLIENT)
 @Mixin(SmithingScreen.class)
 public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMenu> {
-    @Unique private static final ResourceLocation EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_THING = SkysSkyIslands.createId(
-            "item/empty_slot_sewing_template_glider_thing"
+    @Unique private static final ResourceLocation EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_DESIGN = SkysSkyIslands.createId(
+            "item/empty_slot_sewing_template_glider_design"
     );
 
     @Shadow @Final private static ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM;
     @Shadow @Final private static ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE;
     @Shadow @Final private static List<ResourceLocation> EMPTY_SLOT_SMITHING_TEMPLATES = List.of(
-            EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM, EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE,  EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_THING
+            EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM, EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE, EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_DESIGN
     );
     @Shadow @Final private CyclingSlotBackground baseIcon;
     @Shadow @Final private CyclingSlotBackground additionalIcon;

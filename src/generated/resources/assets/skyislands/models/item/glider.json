@@ -2,15 +2,15 @@
   "parent": "minecraft:item/generated",
   "overrides": [
     {
-      "model": "skyislands:item/glider_testing",
+      "model": "skyislands:item/glider_testing_pattern",
       "predicate": {
-        "skyislands:thing_type": -6.440824E8
+        "skyislands:glider_design": -6.440824E8
       }
     },
     {
-      "model": "skyislands:item/glider_testing2",
+      "model": "skyislands:item/glider_testing2_pattern",
       "predicate": {
-        "skyislands:thing_type": -3.6779136E8
+        "skyislands:glider_design": -3.6779136E8
       }
     }
   ],

@@ -1,7 +1,7 @@
 package gay.beegirl.skyislands.world.item;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.world.item.gliderthing.ThingPattern;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.CommonComponents;
@@ -27,16 +27,16 @@ public class SewingTemplateItem extends Item {
     private static final Component GLIDER_PATTERN_ADDITIONS_SLOT_DESCRIPTION;
     private static final ResourceLocation EMPTY_SLOT_GLIDER;
     private static final ResourceLocation EMPTY_SLOT_STRING;
-    private final Component thingDescription;
+    private final Component designDescription;
 
-    public SewingTemplateItem(ResourceKey<ThingPattern> key, FeatureFlag... requiredFeatures) {
+    public SewingTemplateItem(ResourceKey<GliderDesign> key, FeatureFlag... requiredFeatures) {
         super((new Item.Properties()).requiredFeatures(requiredFeatures));
-        this.thingDescription = Component.translatable(Util.makeDescriptionId("glider_design", key.location())).withStyle(TITLE_FORMAT);
+        this.designDescription = Component.translatable(Util.makeDescriptionId("glider_design", key.location())).withStyle(TITLE_FORMAT);
     }
 
     public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(thingDescription);
+        tooltipComponents.add(designDescription);
         tooltipComponents.add(CommonComponents.EMPTY);
         tooltipComponents.add(APPLIES_TO_TITLE);
         tooltipComponents.add(CommonComponents.space().append(GLIDER_PATTERN_APPLIES_TO));

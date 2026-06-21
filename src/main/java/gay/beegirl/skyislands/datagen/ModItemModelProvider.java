@@ -2,15 +2,13 @@ package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
-import gay.beegirl.skyislands.core.registries.ModRegistries;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
-import gay.beegirl.skyislands.world.item.gliderthing.ModThingPatterns;
-import gay.beegirl.skyislands.world.item.gliderthing.ThingPattern;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
+import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
@@ -22,7 +20,6 @@ import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.List;
 import java.util.Objects;
@@ -31,8 +28,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     private static final List<ResourceKey<TrimMaterial>> MOD_TRIM_MATERIALS = List.of(
             ModTrimMaterials.ALEXANDRITE
     );
-    private static final List<ResourceKey<ThingPattern>> MOD_THING_PATTERNS = List.of(
-            ModThingPatterns.TESTING, ModThingPatterns.TESTING2
+    private static final List<ResourceKey<GliderDesign>> MOD_GLIDER_DESIGNS = List.of(
+            ModGliderDesigns.TESTING, ModGliderDesigns.TESTING2
     );
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -44,20 +41,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.RAW_ALEXANDRITE.get());
         basicItem(ModItems.ALEXANDRITE.get());
 
-        gliderItem();
-        for (ResourceKey<TrimMaterial> trimMaterial : MOD_TRIM_MATERIALS) {
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/helmet_trim_").getPath()), ModelProvider.TEXTURE);
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/chestplate_trim_").getPath()), ModelProvider.TEXTURE);
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/leggings_trim_").getPath()), ModelProvider.TEXTURE);
-            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/boots_trim_").getPath()), ModelProvider.TEXTURE);
-        }
-        for (Item item : BuiltInRegistries.ITEM) {
-            if (item instanceof ArmorItem armorItem && armorItem.getType().hasTrims()) {
-                for (ResourceKey<TrimMaterial> trimMaterial : MOD_TRIM_MATERIALS) {
-                    generateTrimmedArmorModel(armorItem, trimMaterial);
-                }
-            }
-        }
+        generateArmorModelsForMaterials(MOD_TRIM_MATERIALS);
+        generateGliderModelsForPatterns(MOD_GLIDER_DESIGNS);
 
         basicItem(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
         basicItem(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get());
@@ -95,39 +80,44 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
     }
 
-    public static final List<ThingPattern> GENERATED_TRIM_MODELS = List.of(
-            new ThingPattern(ModThingPatterns.TESTING.location(), BuiltInRegistries.ITEM.wrapAsHolder(ModItems.TESTING_GLIDER_PATTERN_SEWING_TEMPLATE.get()), Component.empty()),
-            new ThingPattern(ModThingPatterns.TESTING2.location(), BuiltInRegistries.ITEM.wrapAsHolder(ModItems.TESTING2_GLIDER_PATTERN_SEWING_TEMPLATE.get()), Component.empty())
-    );
-
-    public ItemModelBuilder gliderItem() {
+    public void generateGliderModelsForPatterns(List<ResourceKey<GliderDesign>> gliderDesigns) {
         ResourceLocation itemLoc = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(ModItems.GLIDER.get()));
         ResourceLocation patternLoc = SkysSkyIslands.createId("default");
         ItemModelBuilder modelBuilder = getBuilder(itemLoc.getPath())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "patterns/items/" + patternLoc.getPath()));
-
-        for(ResourceKey<ThingPattern> thingPattern : MOD_THING_PATTERNS) {
-            patternLoc = thingPattern.location();
-            ItemModelBuilder thingModelBuilder = getBuilder(patternLoc.withPrefix(itemLoc.getPath() + "_").getPath())
+        for(ResourceKey<GliderDesign> gliderDesign : gliderDesigns) {
+            patternLoc = gliderDesign.location();
+            ItemModelBuilder patternedModel = getBuilder(itemLoc.withSuffix("_" + patternLoc.getPath()).getPath() + "_pattern")
                     .parent(new ModelFile.UncheckedModelFile("item/generated"))
                     .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
                     .texture("layer1", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "patterns/items/" + patternLoc.getPath()));
-
             modelBuilder.override()
-                    .model(thingModelBuilder)
-                    .predicate(ModItemProperties.THING_TYPE, patternLoc.hashCode());
+                    .model(patternedModel)
+                    .predicate(ModItemProperties.GLIDER_DESIGN_PREDICATE, patternLoc.hashCode());
         }
-        return modelBuilder;
     }
 
-    public ItemModelBuilder generateTrimmedArmorModel(ArmorItem armorItem, ResourceKey<TrimMaterial> trimMaterial) {
-        ResourceLocation itemLoc = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(armorItem));
-        return getBuilder(itemLoc.withSuffix("_" + trimMaterial.location().getPath()).getPath() + "_trim")
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
-                .texture("layer1", ResourceLocation.withDefaultNamespace("trims/items/" + armorItem.getType().getName() + "_trim_" + trimMaterial.location().getPath()));
+    public void generateArmorModelsForMaterials(List<ResourceKey<TrimMaterial>> trimMaterials) {
+        for (ResourceKey<TrimMaterial> trimMaterial : trimMaterials) {
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/helmet_trim_").getPath()), ModelProvider.TEXTURE);
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/chestplate_trim_").getPath()), ModelProvider.TEXTURE);
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/leggings_trim_").getPath()), ModelProvider.TEXTURE);
+            existingFileHelper.trackGenerated(ResourceLocation.withDefaultNamespace(trimMaterial.location().withPrefix("trims/items/boots_trim_").getPath()), ModelProvider.TEXTURE);
+        }
+        for (Item item : BuiltInRegistries.ITEM) {
+            if (item instanceof ArmorItem armorItem && armorItem.getType().hasTrims()) {
+                ResourceLocation itemLoc = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(armorItem));
+                for (ResourceKey<TrimMaterial> trimMaterial : trimMaterials) {
+                    ResourceLocation patternLoc = trimMaterial.location();
+                    getBuilder(itemLoc.withSuffix("_" + patternLoc.getPath()).getPath() + "_trim")
+                            .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                            .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemLoc.getNamespace(), "item/" + itemLoc.getPath()))
+                            .texture("layer1", ResourceLocation.withDefaultNamespace("trims/items/" + armorItem.getType().getName() + "_trim_" + patternLoc.getPath()));
+                }
+            }
+        }
     }
 
     public ItemModelBuilder flatBlockItem(Block block) {

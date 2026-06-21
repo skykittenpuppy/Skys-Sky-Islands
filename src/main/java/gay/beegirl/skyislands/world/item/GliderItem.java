@@ -2,7 +2,7 @@ package gay.beegirl.skyislands.world.item;
 
 import gay.beegirl.skyislands.core.component.ModDataComponents;
 import gay.beegirl.skyislands.tags.ModItemTags;
-import gay.beegirl.skyislands.world.item.gliderthing.GliderThing;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +21,7 @@ public class GliderItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        GliderThing pattern = stack.get(ModDataComponents.SEWING_PATTERN.get());
+        GliderDesign pattern = stack.get(ModDataComponents.SEWING_PATTERN.get());
         if (pattern != null) {
             pattern.addToTooltip(context, tooltipComponents::add, tooltipFlag);
         }

@@ -4,9 +4,8 @@ import gay.beegirl.skyislands.client.particle.SakuraParticle;
 import gay.beegirl.skyislands.client.renderer.entity.layers.GliderLayer;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
 import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
-import gay.beegirl.skyislands.world.item.gliderthing.GliderThing;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
-import gay.beegirl.skyislands.world.item.gliderthing.ThingPattern;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.world.item.ModCreativeModeTabs;
 import gay.beegirl.skyislands.core.component.ModDataComponents;
@@ -14,11 +13,8 @@ import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.core.particles.ModParticleTypes;
 import gay.beegirl.skyislands.world.item.crafting.ModRecipeSerializer;
 import gay.beegirl.skyislands.core.registries.ModRegistries;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.CherryParticle;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GrassColor;
 import net.neoforged.api.distmarker.Dist;
@@ -62,14 +58,14 @@ public class SkysSkyIslands {
     public static class ModEvents {
         @SubscribeEvent
         public static void addRegistries(DataPackRegistryEvent.NewRegistry event) {
-            event.dataPackRegistry(ModRegistries.GLIDER_DESIGN, ThingPattern.DIRECT_CODEC, ThingPattern.DIRECT_CODEC);
+            event.dataPackRegistry(ModRegistries.GLIDER_DESIGN, GliderDesign.CODEC, GliderDesign.CODEC);
         }
 
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
-            event.enqueueWork(() -> ItemProperties.register(ModItems.GLIDER.get(), ModItemProperties.THING_TYPE, (stack, level, entity, seed) -> {
-				GliderThing gliderThing = stack.get(ModDataComponents.SEWING_PATTERN);
-				return gliderThing != null ? gliderThing.design().value().assetId().hashCode() : Float.NEGATIVE_INFINITY;
+            event.enqueueWork(() -> ItemProperties.register(ModItems.GLIDER.get(), ModItemProperties.GLIDER_DESIGN_PREDICATE, (stack, level, entity, seed) -> {
+                GliderDesign gliderDesign = stack.get(ModDataComponents.SEWING_PATTERN);
+				return gliderDesign != null ? gliderDesign.assetId.hashCode() : Float.NEGATIVE_INFINITY;
 			}));
         }
 

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
-import gay.beegirl.skyislands.world.item.gliderthing.GliderThing;
+import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.core.component.ModDataComponents;
 import gay.beegirl.skyislands.world.item.ModItems;
@@ -71,10 +71,10 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
                     Mth.clamp((float)localMovement.x * 100, -45, 45))
                     * ((float) Math.PI / 180F);
 
-            GliderThing pattern = entity.getMainHandItem().is(ModItems.GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
+            GliderDesign pattern = entity.getMainHandItem().is(ModItems.GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
             ResourceLocation clothTexture = DEFAULT_CLOTH_TEXTURE;
-            if (pattern != null && pattern.design() != null) {
-                ResourceLocation patternResourceLocation = pattern.design().value().assetId();
+            if (pattern != null) {
+                ResourceLocation patternResourceLocation = pattern.assetId;
                 clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/patterns/entity/glider/"+patternResourceLocation.getPath()+".png");
             }
 
