@@ -77,6 +77,6 @@ public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMen
 
     //@Inject(method = "renderOnboardingTooltips(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At("HEAD"))
     //private void islands$renderOnboardingTooltips(GuiGraphics guiGraphics, int mouseX, int mouseY, CallbackInfo ci, @Local ItemStack itemstack, @Local ItemStack itemstack1) {
-    //    TODO
+    //    TODO: Implement onboarding tooltips for sewing patterns
     //}
 }

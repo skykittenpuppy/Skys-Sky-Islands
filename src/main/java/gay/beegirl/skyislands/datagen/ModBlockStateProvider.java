@@ -35,7 +35,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         naturalRotatedPillarBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
         uncheckedBlockItem(ModBlocks.CLOUDSHALE.get());
         //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
-        // TODO:
+        // TODO: Pointed Block blockstates + block models
         simpleBlock(ModBlocks.POINTED_CLOUDSHALE.get(), models().cross(
                 name(ModBlocks.POINTED_CLOUDSHALE.get()),
                 blockTexture(ModBlocks.POINTED_CLOUDSHALE.get()).withSuffix("_down_tip"))
@@ -201,7 +201,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         uncheckedBlockItem(logSet.strippedWood().get());
     }
     public final void createCactusSetBlockStates(ModBlocks.CactusBlockSet cactusSet) {
-        // TODO:
+        // TODO: Cactus blockstates
         simpleBlock(cactusSet.cactus().get(), new ModelFile.UncheckedModelFile(key(cactusSet.cactus().get()).withPrefix("block/")));
         uncheckedBlockItem(cactusSet.cactus().get());
 

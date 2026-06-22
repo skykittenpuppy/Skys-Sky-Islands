@@ -48,7 +48,7 @@ public class IslandsCactusBlock extends Block {
         }
     }
 
-    // TODO:
+    // TODO: Make cactus blocks grow and fruit correctly
     protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         BlockPos blockPos2 = blockPos.above();
         if (serverLevel.isEmptyBlock(blockPos2)) {
@@ -104,7 +104,7 @@ public class IslandsCactusBlock extends Block {
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
-    // TODO:
+    // TODO: Decide cactus base blocks
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return true;
     }

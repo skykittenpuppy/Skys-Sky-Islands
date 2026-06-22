@@ -81,7 +81,7 @@ public class IslandsCactusPlantBlock extends Block implements BonemealableBlock 
         this.advanceTree(level, pos, state, random);
     }
 
-    // TODO:
+    // TODO: Decide cactus base blocks
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return true;
     }

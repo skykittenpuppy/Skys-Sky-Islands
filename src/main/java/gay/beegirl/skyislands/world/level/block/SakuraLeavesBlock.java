@@ -11,20 +11,17 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SakuraLeavesBlock extends LeavesBlock {
-
-    // TODO: clean up obfuscation artifacts
-
-    public SakuraLeavesBlock(BlockBehaviour.Properties p_273704_) {
-        super(p_273704_);
+    public SakuraLeavesBlock(Properties properties) {
+        super(properties);
     }
 
-    public void animateTick(BlockState p_272714_, Level p_272837_, BlockPos p_273218_, RandomSource p_273360_) {
-        super.animateTick(p_272714_, p_272837_, p_273218_, p_273360_);
-        if (p_273360_.nextInt(10) == 0) {
-            BlockPos blockpos = p_273218_.below();
-            BlockState blockstate = p_272837_.getBlockState(blockpos);
-            if (!isFaceFull(blockstate.getCollisionShape(p_272837_, blockpos), Direction.UP)) {
-                ParticleUtils.spawnParticleBelow(p_272837_, p_273218_, p_273360_, ModParticleTypes.SAKURA_PETALS.get());
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        super.animateTick(state, level, pos, random);
+        if (random.nextInt(10) == 0) {
+            BlockPos blockpos = pos.below();
+            BlockState blockstate = level.getBlockState(blockpos);
+            if (!isFaceFull(blockstate.getCollisionShape(level, blockpos), Direction.UP)) {
+                ParticleUtils.spawnParticleBelow(level, pos, random, ModParticleTypes.SAKURA_PETALS.get());
             }
         }
 
