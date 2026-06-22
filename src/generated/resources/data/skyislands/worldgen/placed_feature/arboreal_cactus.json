@@ -8,9 +8,8 @@
         "state": {
           "Name": "skyislands:arboreal_cactus_fruit",
           "Properties": {
-            "facing": "north",
-            "hanging": "false",
-            "stage": "0"
+            "age": "0",
+            "facing": "north"
           }
         }
       }

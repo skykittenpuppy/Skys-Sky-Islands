@@ -1,20 +1,20 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
+import gay.beegirl.skyislands.world.level.block.IslandsCactusFruitBlock;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.client.RenderTypeGroup;
-import net.neoforged.neoforge.client.RenderTypeHelper;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Set;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -32,9 +32,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.get());
         untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.get());
-        logBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
+        naturalRotatedPillarBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
         uncheckedBlockItem(ModBlocks.CLOUDSHALE.get());
         //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
+        // TODO:
+        simpleBlock(ModBlocks.POINTED_CLOUDSHALE.get(), models().cross(
+                name(ModBlocks.POINTED_CLOUDSHALE.get()),
+                blockTexture(ModBlocks.POINTED_CLOUDSHALE.get()).withSuffix("_down_tip"))
+                .renderType("minecraft:cutout"));
 
         createStoneSetBlockStates(ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
@@ -57,42 +62,78 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         createCactusSetBlockStates(ModBlocks.ARBOREAL_CACTUSES);
         createWoodSetBlockStates(ModBlocks.ARBOREAL_CACTUS_PLANKS);
-        itemModels().basicItem(ModBlocks.ARBOREAL_CACTUS_FRUIT.get().asItem());
+        getVariantBuilder(ModBlocks.ARBOREAL_CACTUS_FRUIT.get())
+                .forAllStates(state -> ConfiguredModel.builder()
+                        .modelFile(new ModelFile.UncheckedModelFile(key(ModBlocks.ARBOREAL_CACTUS_FRUIT.get())
+                                .withPrefix("block/")
+                                .withSuffix(state.getValue(IslandsCactusFruitBlock.AGE).toString())))
+                        .rotationY((int)state.getValue(IslandsCactusFruitBlock.FACING).toYRot())
+                        .build());
+        statelessBlockWithCustomModel(ModBlocks.ARBOREAL_CACTUS_PLANT.get());
+        statelessBlockWithCustomModel(ModBlocks.POTTED_ARBOREAL_CACTUS.get());
     }
 
+    private void statelessBlockWithCustomModel(Block block) {
+        simpleBlock(block, new ModelFile.UncheckedModelFile(key(block).withPrefix("block/")));
+    }
     private void simpleBlockWithItem(Block block) {
         simpleBlockWithItem(block, cubeAll(block));
     }
+    private void simpleBlockWithItem(Block block, ConfiguredModel... models) {
+        simpleBlock(block, models);
+        uncheckedBlockItem(block);
+    }
 
+    public final void naturalRotatedPillarBlock(RotatedPillarBlock block) {
+        ModelFile model = models().cubeColumn(name(block),
+                blockTexture(block),
+                blockTexture(block).withSuffix("_top"));
+
+        getVariantBuilder(block)
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y).setModels(ConfiguredModel.allYRotations(model, 0, false))
+                // INFO: really want 4 rotations for horizontal, but it seems impossible with pre 1.21.11 blockstate format
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z).setModels(List.of(
+                        new ConfiguredModel(model, 90, 0, false, 1),
+                        new ConfiguredModel(model, 270, 0, false, 1)).toArray(ConfiguredModel[]::new))
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.X).setModels(List.of(
+                        new ConfiguredModel(model, 90, 90, false, 1),
+                        new ConfiguredModel(model, 270, 90, false, 1)).toArray(ConfiguredModel[]::new));
+        uncheckedBlockItem(block);
+    }
     public final void untintedGrassLikeBlock(Block block, Block baseBlock) {
         ResourceLocation bottomTex = blockTexture(baseBlock);
         if (baseBlock instanceof RotatedPillarBlock)
-            bottomTex.withSuffix("_top");
-        simpleBlockWithItem(block, models().cubeBottomTop(name(block),
+            bottomTex = blockTexture(baseBlock).withSuffix("_top");
+
+        ModelFile model = models().cubeBottomTop(name(block),
                 blockTexture(block).withSuffix("_side"),
                 bottomTex,
-                blockTexture(block).withSuffix("_top")));
+                blockTexture(block).withSuffix("_top")
+        ).texture("particle", blockTexture(baseBlock));
+
+        simpleBlockWithItem(block, ConfiguredModel.allYRotations(model, 0, false));
     }
     public final void tintedGrassLikeBlock(Block block, Block baseBlock) {
         ResourceLocation bottomTex = blockTexture(baseBlock);
         if (baseBlock instanceof RotatedPillarBlock)
-            bottomTex.withSuffix("_top");
-        simpleBlockWithItem(block, models().getBuilder(name(block))
-                .parent(new ModelFile.UncheckedModelFile("block/block"))
-                .texture("particle", blockTexture(baseBlock))
-                .texture("bottom", bottomTex)
-                .texture("top", blockTexture(block).withSuffix("_top"))
-                .texture("side", blockTexture(block).withSuffix("_side"))
-                .texture("overlay", blockTexture(block).withSuffix("_side_overlay"))
-                .element()
+            bottomTex = bottomTex.withSuffix("_top");
+
+        ModelFile model = models().getBuilder(name(block))
+                    .parent(new ModelFile.UncheckedModelFile("block/block"))
+                    .texture("particle", blockTexture(baseBlock))
+                    .texture("bottom", bottomTex)
+                    .texture("top", blockTexture(block).withSuffix("_top"))
+                    .texture("side", blockTexture(block).withSuffix("_side"))
+                    .texture("overlay", blockTexture(block).withSuffix("_side_overlay"))
+                    .element()
                     .face(Direction.UP)
-                        .cullface(Direction.UP)
-                        .tintindex(0)
-                        .texture("#top")
+                    .cullface(Direction.UP)
+                    .tintindex(0)
+                    .texture("#top")
                     .end()
                     .face(Direction.DOWN)
-                        .cullface(Direction.DOWN)
-                        .texture("#bottom")
+                    .cullface(Direction.DOWN)
+                    .texture("#bottom")
                     .end()
                     .allFacesExcept(
                             (direction, faceBuilder) ->
@@ -101,30 +142,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                             .texture("#side"),
                             Set.of(Direction.UP, Direction.DOWN))
                     .end()
-                .element()
+                    .element()
                     .allFacesExcept(
-                        (direction, faceBuilder) ->
-                                faceBuilder
-                                        .cullface(direction)
-                                        .tintindex(0)
-                                        .texture("#overlay"),
-                        Set.of(Direction.UP, Direction.DOWN))
+                            (direction, faceBuilder) ->
+                                    faceBuilder
+                                            .cullface(direction)
+                                            .tintindex(0)
+                                            .texture("#overlay"),
+                            Set.of(Direction.UP, Direction.DOWN))
                     .end()
-                .renderType("minecraft:cutout")
-        );
-    }
+                    .renderType("minecraft:cutout");
 
+        simpleBlockWithItem(block, ConfiguredModel.allYRotations(model, 0, false));
+    }
     public final void plantAndPot(Block plant, Block pottedPlant) {
-        simpleBlock(plant, models().cross(name(plant), blockTexture(plant)));
-        flatBlockItem(plant);
-        simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)));
+        simpleBlock(plant, models().cross(name(plant), blockTexture(plant)).renderType("minecraft:cutout"));
+        itemModels().getBuilder(name(plant.asItem()))
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", blockTexture(plant));
+        simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)).renderType("minecraft:cutout"));
     }
 
-    public final void flatBlockItem(Block block) {
-        itemModels().getBuilder(name(block.asItem()))
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", blockTexture(block));
-    }
     public final void uncheckedBlockItem(Block block) {
         itemModels().getBuilder(name(block.asItem()))
                 .parent(new ModelFile.UncheckedModelFile(key(block).withPrefix("block/")));
@@ -137,20 +175,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public final void createStoneSetBlockStates(ModBlocks.StoneBlockSet stoneSet){
         simpleBlockWithItem(stoneSet.base().get());
 
-        buttonBlock((ButtonBlock) stoneSet.button().get(), blockTexture(stoneSet.base().get()));
-        uncheckedBlockItem(stoneSet.button().get(), "_inventory");
-
         wallBlock((WallBlock) stoneSet.wall().get(), blockTexture(stoneSet.base().get()));
-        uncheckedBlockItem(stoneSet.wall().get(), "_inventory");
+        ModelFile wallInventoryModel = models().getBuilder(name(stoneSet.wall().get()) + "_inventory")
+                .parent(new ModelFile.UncheckedModelFile("block/wall_inventory"))
+                .texture("wall", blockTexture(stoneSet.base().get()));
+        simpleBlockItem(stoneSet.wall().get(), wallInventoryModel);
 
         slabBlock((SlabBlock) stoneSet.slab().get(), blockTexture(stoneSet.base().get()), blockTexture(stoneSet.base().get()));
         uncheckedBlockItem(stoneSet.slab().get());
 
         stairsBlock((StairBlock) stoneSet.stairs().get(), blockTexture(stoneSet.base().get()));
         uncheckedBlockItem(stoneSet.stairs().get());
-
-        pressurePlateBlock((PressurePlateBlock) stoneSet.pressurePlate().get(), blockTexture(stoneSet.base().get()));
-        uncheckedBlockItem(stoneSet.pressurePlate().get());
     }
     public final void createLogSetBlockStates(ModBlocks.LogBlockSet logSet) {
         logBlock((RotatedPillarBlock) logSet.log().get());
@@ -167,30 +202,32 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     public final void createCactusSetBlockStates(ModBlocks.CactusBlockSet cactusSet) {
         // TODO:
-        simpleBlock(cactusSet.cactus().get(), models().cubeBottomTop(name(cactusSet.cactus().get()),
-                blockTexture(cactusSet.cactus().get()).withSuffix("_side"),
-                blockTexture(cactusSet.cactus().get()).withSuffix("_bottom"),
-                blockTexture(cactusSet.cactus().get()).withSuffix("_top")));
+        simpleBlock(cactusSet.cactus().get(), new ModelFile.UncheckedModelFile(key(cactusSet.cactus().get()).withPrefix("block/")));
         uncheckedBlockItem(cactusSet.cactus().get());
 
-        // TODO:
-        simpleBlock(cactusSet.despinedCactus().get(), models().cubeBottomTop(name(cactusSet.despinedCactus().get()),
-                blockTexture(cactusSet.despinedCactus().get()).withSuffix("_side"),
-                blockTexture(cactusSet.despinedCactus().get()).withSuffix("_bottom"),
-                blockTexture(cactusSet.despinedCactus().get()).withSuffix("_top")));
+        getVariantBuilder(cactusSet.despinedCactus().get())
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y).modelForState().modelFile(new ModelFile.UncheckedModelFile(key(cactusSet.despinedCactus().get()).withPrefix("block/"))).addModel()
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z).modelForState().modelFile(new ModelFile.UncheckedModelFile(key(cactusSet.despinedCactus().get()).withPrefix("block/"))).rotationX(90).addModel()
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.X).modelForState().modelFile(new ModelFile.UncheckedModelFile(key(cactusSet.despinedCactus().get()).withPrefix("block/"))).rotationX(90).rotationY(90).addModel();
         uncheckedBlockItem(cactusSet.despinedCactus().get());
     }
     public final void createWoodSetBlockStates(ModBlocks.WoodBlockSet woodSet) {
         simpleBlockWithItem(woodSet.base().get());
 
         buttonBlock((ButtonBlock) woodSet.button().get(), blockTexture(woodSet.base().get()));
-        uncheckedBlockItem(woodSet.button().get(), "_inventory");
+        ModelFile buttonInventoryModel = models().getBuilder(name(woodSet.button().get()) + "_inventory")
+                .parent(new ModelFile.UncheckedModelFile("block/button_inventory"))
+                .texture("texture", blockTexture(woodSet.base().get()));
+        simpleBlockItem(woodSet.button().get(), buttonInventoryModel);
 
-        doorBlock((DoorBlock) woodSet.door().get(), blockTexture(woodSet.door().get()).withSuffix("_bottom"), blockTexture(woodSet.door().get()).withSuffix("_top"));
+        doorBlockWithRenderType((DoorBlock) woodSet.door().get(), blockTexture(woodSet.door().get()).withSuffix("_bottom"), blockTexture(woodSet.door().get()).withSuffix("_top"), "minecraft:cutout");
         itemModels().basicItem(woodSet.door().asItem());
 
         fenceBlock((FenceBlock) woodSet.fence().get(), blockTexture(woodSet.base().get()));
-        uncheckedBlockItem(woodSet.fence().get(), "_inventory");
+        ModelFile fenceInventoryModel = models().getBuilder(name(woodSet.fence().get()) + "_inventory")
+                .parent(new ModelFile.UncheckedModelFile("block/fence_inventory"))
+                .texture("texture", blockTexture(woodSet.base().get()));
+        simpleBlockItem(woodSet.fence().get(), fenceInventoryModel);
 
         fenceGateBlock((FenceGateBlock) woodSet.fenceGate().get(), blockTexture(woodSet.base().get()));
         uncheckedBlockItem(woodSet.fenceGate().get());
@@ -210,7 +247,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock((PressurePlateBlock) woodSet.pressurePlate().get(), blockTexture(woodSet.base().get()));
         uncheckedBlockItem(woodSet.pressurePlate().get());
 
-        trapdoorBlock((TrapDoorBlock) woodSet.trapdoor().get(), blockTexture(woodSet.trapdoor().get()), true);
+        trapdoorBlockWithRenderType((TrapDoorBlock) woodSet.trapdoor().get(), blockTexture(woodSet.trapdoor().get()), true, "minecraft:cutout");
         uncheckedBlockItem(woodSet.trapdoor().get(), "_bottom");
     }
 

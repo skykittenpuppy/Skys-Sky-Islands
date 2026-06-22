@@ -3,6 +3,8 @@ package gay.beegirl.skyislands.world.item;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimPatterns;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SmithingTemplateItem;
@@ -33,6 +35,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> ARBOREAL_CACTUS_BOAT = ITEMS.registerItem("arboreal_cactus_boat", properties -> new Item(properties));//new BoatItem(false, ModEntityTypes.ARBOREAL_CACTUS, properties.stacksTo(1)));
     public static final DeferredItem<Item> ARBOREAL_CACTUS_CHEST_BOAT = ITEMS.registerItem("arboreal_cactus_chest_boat", properties -> new Item(properties));//new BoatItem(true, ModEntityTypes.ARBOREAL_CACTUS, properties.stacksTo(1)));
+    public static final DeferredItem<Item> ARBOREAL_CACTUS_FRUIT = ITEMS.registerItem("arboreal_cactus_fruit", properties -> new BlockItem(ModBlocks.ARBOREAL_CACTUS_PLANT.get(), properties));
 
     public static void registerItems(IEventBus modEventBus) {
         SkysSkyIslands.LOGGER.info("Registering Items for " + SkysSkyIslands.MOD_ID);

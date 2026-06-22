@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
+    "axis=x": {
+      "model": "skyislands:block/despined_arboreal_cactus",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
       "model": "skyislands:block/despined_arboreal_cactus"
+    },
+    "axis=z": {
+      "model": "skyislands:block/despined_arboreal_cactus",
+      "x": 90
     }
   }
 }

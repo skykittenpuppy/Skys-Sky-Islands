@@ -92,7 +92,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.trapdoor());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.pressurePlate());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.button());
-                output.accept(ModBlocks.ARBOREAL_CACTUS_FRUIT);
+                output.accept(ModItems.ARBOREAL_CACTUS_FRUIT);
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign());
                 output.accept(ModItems.ARBOREAL_CACTUS_BOAT);
@@ -108,22 +108,16 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.COBBLED_CLOUDSHALE.stairs());
                 output.accept(ModBlocks.COBBLED_CLOUDSHALE.slab());
                 output.accept(ModBlocks.COBBLED_CLOUDSHALE.wall());
-                output.accept(ModBlocks.COBBLED_CLOUDSHALE.pressurePlate());
-                output.accept(ModBlocks.COBBLED_CLOUDSHALE.button());
 
                 output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.base());
                 output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.stairs());
                 output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.slab());
                 output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall());
-                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.pressurePlate());
-                output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.button());
 
                 output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base());
                 output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.stairs());
                 output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.slab());
                 output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall());
-                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.pressurePlate());
-                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.button());
 
                 output.accept(ModBlocks.ALEXANDRITE_BLOCK);
                 output.accept(ModBlocks.STONE_ALEXANDRITE_ORE);

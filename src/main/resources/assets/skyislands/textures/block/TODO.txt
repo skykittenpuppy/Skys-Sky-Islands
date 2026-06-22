@@ -1,0 +1,13 @@
+alexandrite block
+arboreal cactus door
+arboreal cactus trapdoor
+arboreal cactus fruit
+arboreal cactus plant + plant pot
+cherry cobbled cloudshale
+cloudshale alexandrite ore
+cloudshale cherry grass
+deepslate alexandrite ore
+mossy cobbled cloudshale
+pointed cloudshale
+raw alexandrite block
+stone alexandrite ore

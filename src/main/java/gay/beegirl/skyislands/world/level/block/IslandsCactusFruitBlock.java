@@ -1,7 +1,7 @@
 package gay.beegirl.skyislands.world.level.block;
 
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import gay.beegirl.skyislands.tags.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -13,23 +13,24 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.util.TriState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 public class IslandsCactusFruitBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
-    public static final MapCodec<IslandsCactusFruitBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            TreeGrower.CODEC.fieldOf("tree").forGetter((block) -> block.treeGrower),
-            propertiesCodec()).apply(instance, IslandsCactusFruitBlock::new));
+    public static final MapCodec<IslandsCactusFruitBlock> CODEC = simpleCodec(IslandsCactusFruitBlock::new);
+    public static final int MAX_AGE = 2;
+    public static final IntegerProperty AGE;
     private static final VoxelShape EAST_BUDDING_SHAPE;
     private static final VoxelShape WEST_BUDDING_SHAPE;
     private static final VoxelShape NORTH_BUDDING_SHAPE;
@@ -38,74 +39,63 @@ public class IslandsCactusFruitBlock extends HorizontalDirectionalBlock implemen
     private static final VoxelShape WEST_HANGING_SHAPE;
     private static final VoxelShape NORTH_HANGING_SHAPE;
     private static final VoxelShape SOUTH_HANGING_SHAPE;
-    private static final VoxelShape SHAPE;
-    public static final BooleanProperty HANGING;
-    public static final IntegerProperty STAGE;
-    protected final TreeGrower treeGrower;
 
     @Override
-    protected MapCodec<IslandsCactusFruitBlock> codec() { return CODEC; }
+    protected @NotNull MapCodec<IslandsCactusFruitBlock> codec() { return CODEC; }
 
-    public IslandsCactusFruitBlock(TreeGrower treeGrower, Properties properties) {
+    public IslandsCactusFruitBlock(Properties properties) {
         super(properties);
-        this.treeGrower = treeGrower;
-        this.registerDefaultState((((this.stateDefinition.any())
-                .setValue(FACING, Direction.NORTH))
-                .setValue(HANGING, false))
-                .setValue(STAGE, 0));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(AGE, 0));
     }
 
-    protected boolean isRandomlyTicking(BlockState blockState) {
-        return !blockState.getValue(HANGING) || blockState.getValue(STAGE) < 1;
+    protected boolean isRandomlyTicking(BlockState state) {
+        return (Integer)state.getValue(AGE) < MAX_AGE;
     }
 
-    protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if (serverLevel.random.nextInt(7) == 0) {
-            performBonemeal(serverLevel, randomSource, blockPos, blockState);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        int i = state.getValue(AGE);
+        if (i < 2 && CommonHooks.canCropGrow(level, pos, state, level.random.nextInt(5) == 0)) {
+            level.setBlock(pos, state.setValue(AGE, i + 1), 2);
+            CommonHooks.fireCropGrowPost(level, pos, state);
         }
+
     }
 
-    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        if (blockState.getValue(HANGING)) {
-            BlockState blockState2 = levelReader.getBlockState(blockPos.relative(blockState.getValue(FACING)));
-            return blockState2.is(ModBlocks.ARBOREAL_CACTUS);
-        } else {
-            BlockState blockState2 = levelReader.getBlockState(blockPos.below());
-            return blockState2.is(BlockTags.DIRT) || blockState.is(Blocks.FARMLAND) || blockState.is(BlockTags.SAND);
-        }
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        BlockState blockstate = level.getBlockState(pos.relative(state.getValue(FACING)));
+        TriState soilDecision = blockstate.canSustainPlant(level, pos.relative(state.getValue(FACING)), state.getValue(FACING).getOpposite(), state);
+        return !soilDecision.isDefault() ? soilDecision.isTrue() : blockstate.is(ModBlockTags.ARBOREAL_CACTUSES);
     }
 
-    protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        if (!blockState.getValue(HANGING)) {
-            return SHAPE;
-        } else if (blockState.getValue(STAGE) < 1) {
-            return switch (blockState.getValue(FACING)) {
-                default -> NORTH_BUDDING_SHAPE;
-                case EAST -> EAST_BUDDING_SHAPE;
-                case SOUTH -> SOUTH_BUDDING_SHAPE;
-                case WEST -> WEST_BUDDING_SHAPE;
-            };
-        } else {
-            return switch (blockState.getValue(FACING)) {
-                default -> NORTH_HANGING_SHAPE;
-                case EAST -> EAST_HANGING_SHAPE;
-                case SOUTH -> SOUTH_HANGING_SHAPE;
-                case WEST -> WEST_HANGING_SHAPE;
-            };
-        }
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SOUTH_BUDDING_SHAPE;
+        //int i = (Integer)state.getValue(AGE);
+        //switch ((Direction)state.getValue(FACING)) {
+        //    case SOUTH:
+        //        //return SOUTH_AABB[i];
+        //    case NORTH:
+        //    default:
+        //        //return NORTH_AABB[i];
+        //    case WEST:
+        //        //return WEST_AABB[i];
+        //    case EAST:
+        //        //return EAST_AABB[i];
+        //}
     }
 
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        BlockState blockState = this.defaultBlockState();
-        LevelReader levelReader = blockPlaceContext.getLevel();
-        BlockPos blockPos = blockPlaceContext.getClickedPos();
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState blockstate = this.defaultBlockState();
+        LevelReader levelreader = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
 
-        for(Direction direction : blockPlaceContext.getNearestLookingDirections()) {
+        for(Direction direction : context.getNearestLookingDirections()) {
             if (direction.getAxis().isHorizontal()) {
-                blockState = blockState.setValue(FACING, direction);
-                if (blockState.canSurvive(levelReader, blockPos)) {
-                    return blockState;
+                blockstate = blockstate.setValue(FACING, direction);
+                if (blockstate.canSurvive(levelreader, blockpos)) {
+                    return blockstate;
                 }
             }
         }
@@ -117,31 +107,28 @@ public class IslandsCactusFruitBlock extends HorizontalDirectionalBlock implemen
         return facing == state.getValue(FACING) && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
-        return !blockState.getValue(HANGING) || blockState.getValue(STAGE) < 1;
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        return state.getValue(AGE) < MAX_AGE;
     }
 
-    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
 
-    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        if (blockState.getValue(STAGE) == 0) {
-            serverLevel.setBlock(blockPos, blockState.cycle(STAGE), 260);
-        } else if (!blockState.getValue(HANGING)) {
-            this.treeGrower.growTree(serverLevel, serverLevel.getChunkSource().getGenerator(), blockPos, blockState, randomSource);
-        }
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        level.setBlock(pos, state.setValue(AGE, state.getValue(AGE) + 1), 2);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, STAGE, HANGING);
+        builder.add(FACING, AGE);
     }
 
-    protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
     static {
+        AGE = BlockStateProperties.AGE_2;
         EAST_BUDDING_SHAPE = Block.box(6.0F, 6.0F, -2.0F, 10.0F, 10.0F, 4.0F);
         WEST_BUDDING_SHAPE = Block.box(6.0F, 6.0F, -2.0F, 10.0F, 10.0F, 4.0F);
         NORTH_BUDDING_SHAPE = Block.box(6.0F, 6.0F, -2.0F, 10.0F, 10.0F, 4.0F);
@@ -150,8 +137,5 @@ public class IslandsCactusFruitBlock extends HorizontalDirectionalBlock implemen
         WEST_HANGING_SHAPE = Block.box(5.0F, 5.0F, -2.0F, 11.0F, 11.0F, 6.0F);
         NORTH_HANGING_SHAPE = Block.box(5.0F, 5.0F, -2.0F, 11.0F, 11.0F, 6.0F);
         SOUTH_HANGING_SHAPE = Block.box(5.0F, 5.0F, -2.0F, 11.0F, 11.0F, 6.0F);
-        SHAPE = Block.box(4.0F, 0.0F, 4.0F, 12.0F, 10.0F, 12.0F);
-        HANGING = BlockStateProperties.HANGING;
-        STAGE = BlockStateProperties.STAGE;
     }
 }

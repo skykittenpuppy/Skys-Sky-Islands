@@ -1,16 +1,43 @@
 {
   "variants": {
-    "axis=x": {
-      "model": "skyislands:block/cloudshale_horizontal",
-      "x": 90,
-      "y": 90
-    },
-    "axis=y": {
-      "model": "skyislands:block/cloudshale"
-    },
-    "axis=z": {
-      "model": "skyislands:block/cloudshale_horizontal",
-      "x": 90
-    }
+    "axis=x": [
+      {
+        "model": "skyislands:block/cloudshale",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "skyislands:block/cloudshale",
+        "x": 270,
+        "y": 90
+      }
+    ],
+    "axis=y": [
+      {
+        "model": "skyislands:block/cloudshale"
+      },
+      {
+        "model": "skyislands:block/cloudshale",
+        "y": 90
+      },
+      {
+        "model": "skyislands:block/cloudshale",
+        "y": 180
+      },
+      {
+        "model": "skyislands:block/cloudshale",
+        "y": 270
+      }
+    ],
+    "axis=z": [
+      {
+        "model": "skyislands:block/cloudshale",
+        "x": 90
+      },
+      {
+        "model": "skyislands:block/cloudshale",
+        "x": 270
+      }
+    ]
   }
 }

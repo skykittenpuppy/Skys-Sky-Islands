@@ -77,7 +77,7 @@
   ],
   "render_type": "minecraft:cutout",
   "textures": {
-    "bottom": "skyislands:block/cloudshale",
+    "bottom": "skyislands:block/cloudshale_top",
     "overlay": "skyislands:block/cloudshale_grass_side_overlay",
     "particle": "skyislands:block/cloudshale",
     "side": "skyislands:block/cloudshale_grass_side",

@@ -1,7 +1,6 @@
 {
-	"format_version": "1.21.6",
-	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
+    "parent": "block/block",
+    "render_type": "minecraft:cutout",
 	"textures": {
 		"particle": "block/flower_pot",
 		"flowerpot": "block/flower_pot",

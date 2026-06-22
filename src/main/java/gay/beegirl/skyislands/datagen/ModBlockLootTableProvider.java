@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -52,17 +53,16 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         createCactusSetLootTables(ModBlocks.ARBOREAL_CACTUSES);
         createWoodSetLootTables(ModBlocks.ARBOREAL_CACTUS_PLANKS);
-        dropSelf(ModBlocks.ARBOREAL_CACTUS_FRUIT.get());
+        dropOther(ModBlocks.ARBOREAL_CACTUS_FRUIT.get(), ModItems.ARBOREAL_CACTUS_FRUIT);
+        dropOther(ModBlocks.ARBOREAL_CACTUS_PLANT.get(), ModItems.ARBOREAL_CACTUS_FRUIT);
         add(ModBlocks.POTTED_ARBOREAL_CACTUS.get(), createPotFlowerItemTable(ModBlocks.ARBOREAL_CACTUS_FRUIT.get()));
     }
 
     private void createStoneSetLootTables(ModBlocks.StoneBlockSet stoneSetBlocks) {
         dropSelf(stoneSetBlocks.base().get());
-        dropSelf(stoneSetBlocks.button().get());
         dropSelf(stoneSetBlocks.wall().get());
         dropSelf(stoneSetBlocks.slab().get());
         dropSelf(stoneSetBlocks.stairs().get());
-        dropSelf(stoneSetBlocks.pressurePlate().get());
     }
     private void createLogSetLootTables(ModBlocks.LogBlockSet logSetBlocks) {
         dropSelf(logSetBlocks.log().get());

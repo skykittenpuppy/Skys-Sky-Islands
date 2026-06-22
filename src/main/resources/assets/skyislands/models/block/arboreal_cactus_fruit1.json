@@ -1,7 +1,5 @@
 {
-	"format_version": "1.21.6",
-	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
+    "parent": "block/block",
 	"textures": {
 		"0": "skyislands:block/arboreal_cactus_fruit1",
 		"particle": "skyislands:block/arboreal_cactus_fruit1"

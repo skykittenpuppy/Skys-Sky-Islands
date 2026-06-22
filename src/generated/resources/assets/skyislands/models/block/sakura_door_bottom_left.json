@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_bottom_left",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "skyislands:block/sakura_door_bottom",
     "top": "skyislands:block/sakura_door_top"

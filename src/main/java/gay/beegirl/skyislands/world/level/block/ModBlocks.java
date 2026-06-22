@@ -26,11 +26,9 @@ public class ModBlocks {
 
     public record StoneBlockSet(
             DeferredBlock<Block> base,
-            DeferredBlock<Block> button,
             DeferredBlock<Block> wall,
             DeferredBlock<Block> slab,
-            DeferredBlock<Block> stairs,
-            DeferredBlock<Block> pressurePlate) {}
+            DeferredBlock<Block> stairs) {}
     public record LogBlockSet(
             DeferredBlock<Block> log,
             DeferredBlock<Block> wood,
@@ -71,14 +69,6 @@ public class ModBlocks {
                         .strength(1.5F, 3.0F)
                         .sound(soundType)
         ));
-        DeferredBlock<Block> BUTTON = registerBlockWithItem(name+"_button", properties -> new ButtonBlock(blockSetType, 20,
-                properties
-                        .mapColor(mapColor)
-                        .instrument(noteBlockInstrument)
-                        .strength(1.5F, 3.0F)
-                        .sound(soundType)
-                        .noCollission()
-        ));
         DeferredBlock<Block> WALL = registerBlockWithItem(name+"_wall", properties -> new WallBlock(
                 properties
                         .mapColor(mapColor)
@@ -100,15 +90,7 @@ public class ModBlocks {
                         .strength(1.5F, 3.0F)
                         .sound(soundType)
         ));
-        DeferredBlock<Block> PRESSURE_PLATE = registerBlockWithItem(name+"_pressure_plate", properties -> new PressurePlateBlock(blockSetType,
-                properties
-                        .mapColor(mapColor)
-                        .instrument(noteBlockInstrument)
-                        .strength(1.5F, 3.0F)
-                        .sound(soundType)
-                        .noCollission()
-        ));
-        return new StoneBlockSet(BASE, BUTTON, WALL, SLAB, STAIRS, PRESSURE_PLATE);
+        return new StoneBlockSet(BASE, WALL, SLAB, STAIRS);
     }
     private static LogBlockSet registerLogSetBlocks(String name, NoteBlockInstrument noteBlockInstrument, SoundType soundType, MapColor barkMapColor, MapColor woodMapColor) {
         DeferredBlock<Block> LOG = registerBlockWithItem(name+"_log", properties -> new RotatedPillarBlock(
@@ -378,7 +360,7 @@ public class ModBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_GOLDENLEAF_SAPLING = registerBlockWithItem("potted_goldenleaf_sapling", properties -> new FlowerPotBlock(GOLDENLEAF_SAPLING.get(),
+    public static final DeferredBlock<Block> POTTED_GOLDENLEAF_SAPLING = registerBlock("potted_goldenleaf_sapling", properties -> new FlowerPotBlock(GOLDENLEAF_SAPLING.get(),
             properties
                     .instabreak()
                     .noOcclusion()
@@ -412,7 +394,7 @@ public class ModBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_SAKURA_SAPLING = registerBlockWithItem("potted_sakura_sapling", properties -> new FlowerPotBlock(SAKURA_SAPLING.get(),
+    public static final DeferredBlock<Block> POTTED_SAKURA_SAPLING = registerBlock("potted_sakura_sapling", properties -> new FlowerPotBlock(SAKURA_SAPLING.get(),
             properties
                     .instabreak()
                     .noOcclusion()
@@ -446,7 +428,7 @@ public class ModBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_FRIGID_SAPLING = registerBlockWithItem("potted_frigid_sapling", properties -> new FlowerPotBlock(FRIGID_SAPLING.get(),
+    public static final DeferredBlock<Block> POTTED_FRIGID_SAPLING = registerBlock("potted_frigid_sapling", properties -> new FlowerPotBlock(FRIGID_SAPLING.get(),
             properties
                     .instabreak()
                     .noOcclusion()
@@ -462,7 +444,7 @@ public class ModBlocks {
                     .randomTicks()
                     .ignitedByLava()
     ));
-    public static final DeferredBlock<Block> DESPINED_ARBOREAL_CACTUS = registerBlockWithItem("despined_arboreal_cactus", properties -> new IslandsCactusBlock(
+    public static final DeferredBlock<Block> DESPINED_ARBOREAL_CACTUS = registerBlockWithItem("despined_arboreal_cactus", properties -> new IslandsDespinedCactusBlock(
             properties
                     .mapColor(MapColor.COLOR_MAGENTA) //TODO: tweak MapColors
                     .instrument(NoteBlockInstrument.BASS)
@@ -473,7 +455,7 @@ public class ModBlocks {
     ));
     public static final CactusBlockSet ARBOREAL_CACTUSES = new CactusBlockSet(ARBOREAL_CACTUS, DESPINED_ARBOREAL_CACTUS);
     public static final WoodBlockSet ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE); //TODO: tweak MapColors
-    public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlockWithItem("arboreal_cactus_fruit", properties -> new IslandsCactusFruitBlock(ModTreeGrowers.ARBOREAL_CACTUS,
+    public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new IslandsCactusFruitBlock(
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)
@@ -483,7 +465,17 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_ARBOREAL_CACTUS = registerBlockWithItem("potted_arboreal_cactus", properties -> new FlowerPotBlock(ARBOREAL_CACTUS_FRUIT.get(),
+    public static final DeferredBlock<Block> ARBOREAL_CACTUS_PLANT = registerBlock("arboreal_cactus_plant", properties -> new IslandsCactusPlantBlock(ModTreeGrowers.ARBOREAL_CACTUS,
+            properties
+                    .mapColor(MapColor.CRIMSON_STEM)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(0.2F, 3.0F)
+                    .sound(SoundType.WOOL)
+                    .randomTicks()
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+    ));
+    public static final DeferredBlock<Block> POTTED_ARBOREAL_CACTUS = registerBlock("potted_arboreal_cactus", properties -> new FlowerPotBlock(ARBOREAL_CACTUS_FRUIT.get(),
             properties
                     .instabreak()
                     .noOcclusion()

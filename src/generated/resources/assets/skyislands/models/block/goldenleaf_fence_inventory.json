@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "skyislands:block/goldenleaf_planks"
+  }
+}

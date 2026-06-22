@@ -57,6 +57,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         basicItem(ModItems.ARBOREAL_CACTUS_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
+        basicItem(ModItems.ARBOREAL_CACTUS_FRUIT.get());
     }
 
     public void generateGliderModelsForPatterns(List<ResourceKey<GliderDesign>> gliderDesigns) {
