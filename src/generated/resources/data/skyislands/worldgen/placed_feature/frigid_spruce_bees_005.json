@@ -1,12 +1,12 @@
 {
-  "feature": "skyislands:goldenleaf_bees_005",
+  "feature": "skyislands:frigid_spruce_bees_005",
   "placement": [
     {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "skyislands:goldenleaf_sapling",
+          "Name": "skyislands:frigid_sapling",
           "Properties": {
             "stage": "0"
           }

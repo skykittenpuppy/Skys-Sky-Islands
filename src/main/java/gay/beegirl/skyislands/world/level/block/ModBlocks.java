@@ -1,12 +1,13 @@
 package gay.beegirl.skyislands.world.level.block;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
-import gay.beegirl.skyislands.data.worldgen.features.ModTreeFeatures;
+import gay.beegirl.skyislands.world.level.block.grower.ModTreeGrower;
+import gay.beegirl.skyislands.world.level.block.state.properties.ModBlockSetType;
+import gay.beegirl.skyislands.world.level.block.state.properties.ModWoodType;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -18,7 +19,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Optional;
 import java.util.function.Function;
 
 public class ModBlocks {
@@ -289,9 +289,9 @@ public class ModBlocks {
                     .sound(SoundType.TUFF_BRICKS)
     ));
 
-    public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet CHERRY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("cherry_cobbled_cloudshale", ModBlockSetTypes.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet CHERRY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("cherry_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
 
     public static final DeferredBlock<Block> STONE_ALEXANDRITE_ORE = registerBlockWithItem("stone_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
@@ -335,7 +335,7 @@ public class ModBlocks {
     ));
 
     public static final LogBlockSet GOLDENLEAF_LOGS = registerLogSetBlocks("goldenleaf", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW, MapColor.COLOR_GREEN);
-    public static final WoodBlockSet GOLDENLEAF_PLANKS = registerWoodSetBlocks("goldenleaf", ModWoodTypes.GOLDENLEAF, ModBlockSetTypes.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW);
+    public static final WoodBlockSet GOLDENLEAF_PLANKS = registerWoodSetBlocks("goldenleaf", ModWoodType.GOLDENLEAF, ModBlockSetType.GOLDENLEAF, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_YELLOW);
     public static final DeferredBlock<Block> GOLDENLEAF_LEAVES = registerBlockWithItem("goldenleaf_leaves", properties -> new LeavesBlock(
             properties
                     .mapColor(MapColor.PLANT)
@@ -351,7 +351,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final DeferredBlock<Block> GOLDENLEAF_SAPLING = registerBlockWithItem("goldenleaf_sapling", properties -> new SaplingBlock(ModTreeGrowers.GOLDENLEAF,
+    public static final DeferredBlock<Block> GOLDENLEAF_SAPLING = registerBlockWithItem("goldenleaf_sapling", properties -> new SaplingBlock(ModTreeGrower.GOLDENLEAF,
             properties
                     .mapColor(MapColor.PLANT)
                     .instrument(NoteBlockInstrument.HARP)
@@ -369,7 +369,7 @@ public class ModBlocks {
     ));
 
     public static final LogBlockSet SAKURA_LOGS = registerLogSetBlocks("sakura", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY);
-    public static final WoodBlockSet SAKURA_PLANKS = registerWoodSetBlocks("sakura", ModWoodTypes.SAKURA, ModBlockSetTypes.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE);
+    public static final WoodBlockSet SAKURA_PLANKS = registerWoodSetBlocks("sakura", ModWoodType.SAKURA, ModBlockSetType.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE);
     public static final DeferredBlock<Block> SAKURA_LEAVES = registerBlockWithItem("sakura_leaves", properties -> new SakuraLeavesBlock(
             properties
                     .mapColor(MapColor.PLANT)
@@ -385,7 +385,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final DeferredBlock<Block> SAKURA_SAPLING = registerBlockWithItem("sakura_sapling", properties -> new SaplingBlock(ModTreeGrowers.SAKURA,
+    public static final DeferredBlock<Block> SAKURA_SAPLING = registerBlockWithItem("sakura_sapling", properties -> new SaplingBlock(ModTreeGrower.SAKURA,
             properties
                     .mapColor(MapColor.PLANT)
                     .instrument(NoteBlockInstrument.HARP)
@@ -403,7 +403,7 @@ public class ModBlocks {
     ));
 
     public static final LogBlockSet FRIGID_LOGS = registerLogSetBlocks("frigid", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE);
-    public static final WoodBlockSet FRIGID_PLANKS = registerWoodSetBlocks("frigid", ModWoodTypes.FRIGID, ModBlockSetTypes.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE);
+    public static final WoodBlockSet FRIGID_PLANKS = registerWoodSetBlocks("frigid", ModWoodType.FRIGID, ModBlockSetType.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE);
     public static final DeferredBlock<Block> FRIGID_LEAVES = registerBlockWithItem("frigid_leaves", properties -> new LeavesBlock(
             properties
                     .mapColor(MapColor.PLANT)
@@ -419,7 +419,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(Blocks::never)
     ));
-    public static final DeferredBlock<Block> FRIGID_SAPLING = registerBlockWithItem("frigid_sapling", properties -> new SaplingBlock(ModTreeGrowers.FRIGID,
+    public static final DeferredBlock<Block> FRIGID_SAPLING = registerBlockWithItem("frigid_sapling", properties -> new SaplingBlock(ModTreeGrower.FRIGID,
             properties
                     .mapColor(MapColor.PLANT)
                     .instrument(NoteBlockInstrument.HARP)
@@ -436,26 +436,26 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final DeferredBlock<Block> ARBOREAL_CACTUS = registerBlockWithItem("arboreal_cactus", properties -> new IslandsCactusBlock(
+    private static final DeferredBlock<Block> ARBOREAL_CACTUS = registerBlockWithItem("arboreal_cactus", properties -> new IslandsCactusBlock(
             properties
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F)
-                    .sound(SoundType.WOOL)
+                    .sound(SoundType.WOOD)
                     .randomTicks()
                     .ignitedByLava()
     ));
-    public static final DeferredBlock<Block> DESPINED_ARBOREAL_CACTUS = registerBlockWithItem("despined_arboreal_cactus", properties -> new IslandsDespinedCactusBlock(
+    private static final DeferredBlock<Block> DESPINED_ARBOREAL_CACTUS = registerBlockWithItem("despined_arboreal_cactus", properties -> new IslandsDespinedCactusBlock(
             properties
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F)
-                    .sound(SoundType.WOOL)
+                    .sound(SoundType.WOOD)
                     .randomTicks()
                     .ignitedByLava()
     ));
     public static final CactusBlockSet ARBOREAL_CACTUSES = new CactusBlockSet(ARBOREAL_CACTUS, DESPINED_ARBOREAL_CACTUS);
-    public static final WoodBlockSet ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodTypes.ARBOREAL_CACTUS, ModBlockSetTypes.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE);
+    public static final WoodBlockSet ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodType.ARBOREAL_CACTUS, ModBlockSetType.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE);
     public static final DeferredBlock<Block> ARBOREAL_CACTUS_FRUIT = registerBlock("arboreal_cactus_fruit", properties -> new IslandsCactusFruitBlock(
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
@@ -466,7 +466,7 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> ARBOREAL_CACTUS_PLANT = registerBlock("arboreal_cactus_plant", properties -> new IslandsCactusPlantBlock(ModTreeGrowers.ARBOREAL_CACTUS,
+    public static final DeferredBlock<Block> ARBOREAL_CACTUS_PLANT = registerBlock("arboreal_cactus_plant", properties -> new IslandsCactusPlantBlock(ModTreeGrower.ARBOREAL_CACTUS,
             properties
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)
@@ -482,27 +482,6 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
-
-    public static class ModBlockSetTypes {
-        public static final BlockSetType CLOUDSHALE = BlockSetType.register(new BlockSetType("cloudshale", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-
-        public static final BlockSetType GOLDENLEAF = BlockSetType.register(new BlockSetType("goldenleaf"));
-        public static final BlockSetType SAKURA = BlockSetType.register(new BlockSetType("sakura", true, true, true, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.CHERRY_WOOD, SoundEvents.CHERRY_WOOD_DOOR_CLOSE, SoundEvents.CHERRY_WOOD_DOOR_OPEN, SoundEvents.CHERRY_WOOD_TRAPDOOR_CLOSE, SoundEvents.CHERRY_WOOD_TRAPDOOR_OPEN, SoundEvents.CHERRY_WOOD_PRESSURE_PLATE_CLICK_OFF, SoundEvents.CHERRY_WOOD_PRESSURE_PLATE_CLICK_ON, SoundEvents.CHERRY_WOOD_BUTTON_CLICK_OFF, SoundEvents.CHERRY_WOOD_BUTTON_CLICK_ON));
-        public static final BlockSetType FRIGID = BlockSetType.register(new BlockSetType("frigid"));
-        public static final BlockSetType ARBOREAL_CACTUS = BlockSetType.register(new BlockSetType("arboreal_cactus", true, true, true, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.NETHER_WOOD, SoundEvents.NETHER_WOOD_DOOR_CLOSE, SoundEvents.NETHER_WOOD_DOOR_OPEN, SoundEvents.NETHER_WOOD_TRAPDOOR_CLOSE, SoundEvents.NETHER_WOOD_TRAPDOOR_OPEN, SoundEvents.NETHER_WOOD_PRESSURE_PLATE_CLICK_OFF, SoundEvents.NETHER_WOOD_PRESSURE_PLATE_CLICK_ON, SoundEvents.NETHER_WOOD_BUTTON_CLICK_OFF, SoundEvents.NETHER_WOOD_BUTTON_CLICK_ON));
-    }
-    public static class ModWoodTypes {
-        public static final WoodType GOLDENLEAF = WoodType.register(new WoodType("goldenleaf", ModBlockSetTypes.GOLDENLEAF));
-        public static final WoodType SAKURA = WoodType.register(new WoodType("sakura", ModBlockSetTypes.SAKURA, SoundType.CHERRY_WOOD, SoundType.CHERRY_WOOD_HANGING_SIGN, SoundEvents.CHERRY_WOOD_FENCE_GATE_CLOSE, SoundEvents.CHERRY_WOOD_FENCE_GATE_OPEN));
-        public static final WoodType FRIGID = WoodType.register(new WoodType("frigid", ModBlockSetTypes.FRIGID));
-        public static final WoodType ARBOREAL_CACTUS = WoodType.register(new WoodType("arboreal_cactus", ModBlockSetTypes.ARBOREAL_CACTUS, SoundType.NETHER_WOOD, SoundType.NETHER_WOOD_HANGING_SIGN, SoundEvents.NETHER_WOOD_FENCE_GATE_CLOSE, SoundEvents.NETHER_WOOD_FENCE_GATE_OPEN));
-    }
-    public static class ModTreeGrowers {
-        public static final TreeGrower GOLDENLEAF = new TreeGrower("goldenleaf", Optional.empty(), Optional.of(ModTreeFeatures.GOLDENLEAF), Optional.of(ModTreeFeatures.GOLDENLEAF_BEES_005));
-        public static final TreeGrower SAKURA = new TreeGrower("sakura", Optional.empty(), Optional.of(ModTreeFeatures.SAKURA), Optional.of(ModTreeFeatures.SAKURA_BEES_005));
-        public static final TreeGrower FRIGID = new TreeGrower("frigid", Optional.empty(), Optional.of(ModTreeFeatures.FRIGID), Optional.of(ModTreeFeatures.FRIGID_BEES_005));
-        public static final TreeGrower ARBOREAL_CACTUS = new TreeGrower("arboreal_cactus", Optional.empty(), Optional.of(ModTreeFeatures.ARBOREAL_CACTUS), Optional.empty());
-    }
 
     public static void registerBlocks(IEventBus modEventBus) {
         SkysSkyIslands.LOGGER.info("Registering Blocks for " + SkysSkyIslands.MOD_ID);

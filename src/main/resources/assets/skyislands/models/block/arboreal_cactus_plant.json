@@ -1,22 +1,36 @@
 {
-    "parent": "block/block",
-    "render_type": "minecraft:cutout",
+	"format_version": "1.21.11",
+	"credit": "By Skykittenpuppy, made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"cactus_top": "skyislands:block/arboreal_cactus_top",
-		"particle": "skyislands:block/arboreal_cactus_side",
-		"cactus": "skyislands:block/arboreal_cactus_side"
+		"particle": "skyislands:block/arboreal_cactus_plant",
+		"cactus": "skyislands:block/arboreal_cactus_plant"
 	},
 	"elements": [
 		{
 			"from": [4, 0, 4],
 			"to": [12, 10, 12],
 			"faces": {
-				"north": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
-				"east": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
-				"south": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
-				"west": {"uv": [4, 6, 12, 16], "texture": "#cactus"},
-				"up": {"uv": [4, 4, 12, 12], "texture": "#cactus_top", "cullface": "up"},
-				"down": {"uv": [4, 4, 12, 12], "texture": "#cactus_top"}
+				"up": {"uv": [3, 3, 13, 13], "texture": "#cactus_top"},
+				"down": {"uv": [3, 3, 13, 13], "texture": "#cactus_top", "cullface": "down"}
+			}
+		},
+		{
+			"from": [3, 0, 4],
+			"to": [13, 10, 12],
+			"faces": {
+				"north": {"uv": [3, 6, 13, 16], "texture": "#cactus"},
+				"south": {"uv": [3, 6, 13, 16], "texture": "#cactus"}
+			}
+		},
+		{
+			"from": [4, 0, 3],
+			"to": [12, 10, 13],
+			"faces": {
+				"east": {"uv": [3, 6, 13, 16], "texture": "#cactus"},
+				"west": {"uv": [3, 6, 13, 16], "texture": "#cactus"}
 			}
 		}
 	]

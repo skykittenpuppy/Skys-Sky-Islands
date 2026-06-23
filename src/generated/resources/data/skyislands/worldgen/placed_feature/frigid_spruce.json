@@ -1,5 +1,5 @@
 {
-  "feature": "skyislands:frigid",
+  "feature": "skyislands:frigid_spruce",
   "placement": [
     {
       "type": "minecraft:block_predicate_filter",

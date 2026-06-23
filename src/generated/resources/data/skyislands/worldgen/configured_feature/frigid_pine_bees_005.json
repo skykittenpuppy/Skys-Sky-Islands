@@ -14,15 +14,19 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 3,
-      "offset": 0,
-      "radius": 2
+      "type": "minecraft:pine_foliage_placer",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 4,
+        "min_inclusive": 3
+      },
+      "offset": 1,
+      "radius": 1
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "skyislands:goldenleaf_leaves",
+        "Name": "skyislands:frigid_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -34,20 +38,20 @@
     "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
+      "limit": 2,
       "lower_size": 0,
-      "upper_size": 1
+      "upper_size": 2
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 4,
-      "height_rand_a": 2,
+      "base_height": 6,
+      "height_rand_a": 4,
       "height_rand_b": 0
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "skyislands:goldenleaf_log",
+        "Name": "skyislands:frigid_log",
         "Properties": {
           "axis": "y"
         }
