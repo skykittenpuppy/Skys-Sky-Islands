@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.11",
+	"format_version": "1.21.1",
 	"credit": "By Skykittenpuppy, made with Blockbench",
 	"parent": "block/block",
 	"render_type": "minecraft:cutout",
@@ -11,7 +11,7 @@
 	"elements": [
 		{
 			"from": [4, 0, 4],
-			"to": [12, 10, 12],
+			"to": [12, 12, 12],
 			"faces": {
 				"up": {"uv": [3, 3, 13, 13], "texture": "#cactus_top"},
 				"down": {"uv": [3, 3, 13, 13], "texture": "#cactus_top", "cullface": "down"}
@@ -19,18 +19,18 @@
 		},
 		{
 			"from": [3, 0, 4],
-			"to": [13, 10, 12],
+			"to": [13, 12, 12],
 			"faces": {
-				"north": {"uv": [3, 6, 13, 16], "texture": "#cactus"},
-				"south": {"uv": [3, 6, 13, 16], "texture": "#cactus"}
+				"north": {"uv": [3, 4, 13, 16], "texture": "#cactus"},
+				"south": {"uv": [3, 4, 13, 16], "texture": "#cactus"}
 			}
 		},
 		{
 			"from": [4, 0, 3],
-			"to": [12, 10, 13],
+			"to": [12, 12, 13],
 			"faces": {
-				"east": {"uv": [3, 6, 13, 16], "texture": "#cactus"},
-				"west": {"uv": [3, 6, 13, 16], "texture": "#cactus"}
+				"east": {"uv": [3, 4, 13, 16], "texture": "#cactus"},
+				"west": {"uv": [3, 4, 13, 16], "texture": "#cactus"}
 			}
 		}
 	]

@@ -96,6 +96,6 @@ public class IslandsCactusPlantBlock extends Block implements BonemealableBlock 
 
     static {
         STAGE = BlockStateProperties.STAGE;
-        SHAPE = Block.box(4.0F, 0.0F, 4.0F, 12.0F, 10.0F, 12.0F);
+        SHAPE = Block.box(4.0F, 0.0F, 4.0F, 12.0F, 12.0F, 12.0F);
     }
 }

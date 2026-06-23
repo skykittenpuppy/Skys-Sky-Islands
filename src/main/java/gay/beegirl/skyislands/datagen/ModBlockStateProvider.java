@@ -70,6 +70,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .rotationY((int)state.getValue(IslandsCactusFruitBlock.FACING).toYRot())
                         .build());
         statelessBlockWithCustomModel(ModBlocks.ARBOREAL_CACTUS_PLANT.get());
+        flatBlockItem(ModBlocks.ARBOREAL_CACTUS_PLANT.get());
         statelessBlockWithCustomModel(ModBlocks.POTTED_ARBOREAL_CACTUS.get());
     }
 
@@ -157,12 +158,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     public final void plantAndPot(Block plant, Block pottedPlant) {
         simpleBlock(plant, models().cross(name(plant), blockTexture(plant)).renderType("minecraft:cutout"));
-        itemModels().getBuilder(name(plant.asItem()))
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", blockTexture(plant));
+        flatBlockItem(plant);
         simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)).renderType("minecraft:cutout"));
     }
 
+    public final void flatBlockItem(Block block) {
+        itemModels().getBuilder(name(block.asItem()))
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", blockTexture(block));
+    }
     public final void uncheckedBlockItem(Block block) {
         itemModels().getBuilder(name(block.asItem()))
                 .parent(new ModelFile.UncheckedModelFile(key(block).withPrefix("block/")));

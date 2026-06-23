@@ -93,6 +93,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.pressurePlate());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.button());
                 output.accept(ModItems.ARBOREAL_CACTUS_FRUIT);
+                output.accept(ModBlocks.ARBOREAL_CACTUS_PLANT);
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.standingSign());
                 output.accept(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign());
                 output.accept(ModItems.ARBOREAL_CACTUS_BOAT);

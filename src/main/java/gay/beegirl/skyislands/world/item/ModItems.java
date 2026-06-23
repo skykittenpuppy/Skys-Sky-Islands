@@ -4,6 +4,7 @@ import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimPatterns;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -11,6 +12,9 @@ import net.minecraft.world.item.SmithingTemplateItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(SkysSkyIslands.MOD_ID);
@@ -35,7 +39,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> ARBOREAL_CACTUS_BOAT = ITEMS.registerItem("arboreal_cactus_boat", properties -> new Item(properties));//new BoatItem(false, ModEntityTypes.ARBOREAL_CACTUS, properties.stacksTo(1)));
     public static final DeferredItem<Item> ARBOREAL_CACTUS_CHEST_BOAT = ITEMS.registerItem("arboreal_cactus_chest_boat", properties -> new Item(properties));//new BoatItem(true, ModEntityTypes.ARBOREAL_CACTUS, properties.stacksTo(1)));
-    public static final DeferredItem<Item> ARBOREAL_CACTUS_FRUIT = ITEMS.registerItem("arboreal_cactus_fruit", properties -> new BlockItem(ModBlocks.ARBOREAL_CACTUS_PLANT.get(), properties));
+    public static final DeferredItem<Item> ARBOREAL_CACTUS_FRUIT = ITEMS.registerItem("arboreal_cactus_fruit", properties -> new Item(properties.food(new FoodProperties(4, 2.4f, false, 1.6f, Optional.empty(), List.of()))));
 
     public static void registerItems(IEventBus modEventBus) {
         SkysSkyIslands.LOGGER.info("Registering Items for " + SkysSkyIslands.MOD_ID);

@@ -1,14 +1,25 @@
 package gay.beegirl.skyislands.datagen;
 
+import gay.beegirl.skyislands.world.level.block.IslandsCactusFruitBlock;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CandleBlock;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.fml.common.Mod;
 
+import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
@@ -53,9 +64,25 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         createCactusSetLootTables(ModBlocks.ARBOREAL_CACTUSES);
         createWoodSetLootTables(ModBlocks.ARBOREAL_CACTUS_PLANKS);
-        dropOther(ModBlocks.ARBOREAL_CACTUS_FRUIT.get(), ModItems.ARBOREAL_CACTUS_FRUIT);
-        dropOther(ModBlocks.ARBOREAL_CACTUS_PLANT.get(), ModItems.ARBOREAL_CACTUS_FRUIT);
+        add(ModBlocks.ARBOREAL_CACTUS_FRUIT.get(), createCactusFruitDrops(ModBlocks.ARBOREAL_CACTUS_FRUIT.get(),
+                ModBlocks.ARBOREAL_CACTUS_PLANT.get(),
+                ModItems.ARBOREAL_CACTUS_FRUIT.get()));
+        dropSelf(ModBlocks.ARBOREAL_CACTUS_PLANT.get());
         add(ModBlocks.POTTED_ARBOREAL_CACTUS.get(), createPotFlowerItemTable(ModBlocks.ARBOREAL_CACTUS_FRUIT.get()));
+    }
+
+    private LootTable.Builder createCactusFruitDrops(Block block, ItemLike plant, ItemLike fruit) {
+        return LootTable.lootTable().withPool(
+                this.applyExplosionCondition(block,
+                        LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(plant)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(IslandsCactusFruitBlock.AGE, 1))))
+                                .add(LootItem.lootTableItem(fruit)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(IslandsCactusFruitBlock.AGE, 2))))));
     }
 
     private void createStoneSetLootTables(ModBlocks.StoneBlockSet stoneSetBlocks) {

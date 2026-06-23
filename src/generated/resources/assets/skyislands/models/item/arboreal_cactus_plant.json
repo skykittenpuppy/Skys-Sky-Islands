@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "skyislands:block/arboreal_cactus_plant"
+  }
+}

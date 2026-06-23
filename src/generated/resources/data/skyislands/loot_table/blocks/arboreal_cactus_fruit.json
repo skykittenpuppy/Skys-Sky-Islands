@@ -11,6 +11,28 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "skyislands:arboreal_cactus_fruit",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "age": "1"
+              }
+            }
+          ],
+          "name": "skyislands:arboreal_cactus_plant"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "skyislands:arboreal_cactus_fruit",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "age": "2"
+              }
+            }
+          ],
           "name": "skyislands:arboreal_cactus_fruit"
         }
       ],
