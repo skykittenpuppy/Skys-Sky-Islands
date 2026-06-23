@@ -1,10 +1,12 @@
 package gay.beegirl.skyislands.mixin.client.screen;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.world.item.SewingTemplateItem;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
 import net.minecraft.client.gui.screens.inventory.SmithingScreen;
@@ -75,8 +77,16 @@ public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMen
         }
     }
 
-    //@Inject(method = "renderOnboardingTooltips(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At("HEAD"))
-    //private void islands$renderOnboardingTooltips(GuiGraphics guiGraphics, int mouseX, int mouseY, CallbackInfo ci, @Local ItemStack itemstack, @Local ItemStack itemstack1) {
-    //    TODO: Implement onboarding tooltips for sewing patterns
-    //}
+    @Inject(method = "renderOnboardingTooltips(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;", shift = At.Shift.AFTER))
+    private void islands$renderOnboardingTooltips(GuiGraphics guiGraphics, int mouseX, int mouseY, CallbackInfo ci, @Local LocalRef<Optional<Component>> optional, @Local(ordinal = 0) ItemStack templateItemStack, @Local(ordinal = 1) ItemStack hoveredItemStack) {
+        if (templateItemStack.getItem() instanceof SewingTemplateItem sewingTemplateItem) {
+            if (hoveredItemStack.isEmpty()) {
+                if (this.hoveredSlot.index == 1) {
+                    optional.set(Optional.of(sewingTemplateItem.getBaseSlotDescription()));
+                } else if (this.hoveredSlot.index == 2) {
+                    optional.set(Optional.of(sewingTemplateItem.getAdditionSlotDescription()));
+                }
+            }
+        }
+    }
 }
