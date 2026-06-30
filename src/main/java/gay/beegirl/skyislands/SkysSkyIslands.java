@@ -48,7 +48,6 @@ public class SkysSkyIslands {
 		ModRecipeSerializer.registerRecipeSerializers(modEventBus);
 
 		//modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-		// THIS COMMENT IS JUST TO ALLOW PUSHING
 	}
 
 	public static ResourceLocation createId(String id) {
