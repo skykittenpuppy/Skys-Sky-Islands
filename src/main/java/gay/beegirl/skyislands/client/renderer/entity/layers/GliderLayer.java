@@ -130,8 +130,6 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
                 clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/designs/entity/glider/"+patternResourceLocation.getPath()+".png");
             }
 
-            VertexConsumer frameVertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(FRAME_TEXTURE));
-            VertexConsumer clothVertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(clothTexture));
 
             this.LEFT_FRAME.zRot = 0.8F * zRadians;
             this.LEFT_FRAME.x = -6 * zRadians;
@@ -151,9 +149,11 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
             this.RIGHT_CLOTH_STREAMER.zRot -= 0.1F;
             this.RIGHT_CLOTH_STREAMER.xRot = 100;
 
+            VertexConsumer frameVertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(FRAME_TEXTURE));
 			this.LEFT_FRAME.render(poseStack, frameVertexconsumer, i, OverlayTexture.NO_OVERLAY);
             this.RIGHT_FRAME.render(poseStack, frameVertexconsumer, i, OverlayTexture.NO_OVERLAY);
 
+            VertexConsumer clothVertexconsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(clothTexture));
             this.LEFT_CLOTH.render(poseStack, clothVertexconsumer, i, OverlayTexture.NO_OVERLAY);
             this.RIGHT_CLOTH.render(poseStack, clothVertexconsumer, i, OverlayTexture.NO_OVERLAY);
             this.LEFT_CLOTH_STREAMER.render(poseStack, clothVertexconsumer, i, OverlayTexture.NO_OVERLAY);
