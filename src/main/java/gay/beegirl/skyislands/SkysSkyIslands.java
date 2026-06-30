@@ -80,7 +80,7 @@ public class SkysSkyIslands {
 
 		@SubscribeEvent
 		public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(ModModelLayers.GLIDER, GliderLayer::createLayer);
+			event.registerLayerDefinition(ModModelLayers.GLIDER, GliderLayer::createFrameLayer);
 			event.registerLayerDefinition(ModModelLayers.GLIDER_CLOTH, GliderLayer::createClothLayer);
 		}
 

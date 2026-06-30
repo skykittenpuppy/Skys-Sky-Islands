@@ -4,6 +4,18 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 public class HelperFunctions {
+	public static float remapRange(float input, float origMin, float origMax, float newMin, float newMax) {
+		float origRange = origMax - origMin;
+		float newRange = newMax - newMin;
+
+		input -= origMin;
+		input /= origRange;
+		input *= newRange;
+		input += newMin;
+
+		return input;
+	}
+
 	public static Vec3 rotate3dX(Vec3 original, float radians) {
 		float sin = Mth.sin(radians);
 		float cos = Mth.cos(radians);
