@@ -8,9 +8,7 @@ import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -131,7 +129,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.STONE_CRAFTING_MATERIALS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         tag(ItemTags.DECORATED_POT_SHERDS)
-                .add(ModItems.TESTING_POTTERY_SHERD.get());
+                .add(ModItems.TESTING_POTTERY_SHERD.get())
+                .add(ModItems.TESTING2_POTTERY_SHERD.get());
         tag(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.ALEXANDRITE.get());
         tag(ItemTags.TRIM_TEMPLATES)

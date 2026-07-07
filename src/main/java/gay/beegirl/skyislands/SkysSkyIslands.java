@@ -13,6 +13,7 @@ import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.core.particles.ModParticleTypes;
 import gay.beegirl.skyislands.world.item.crafting.ModRecipeSerializer;
 import gay.beegirl.skyislands.core.registries.ModRegistries;
+import gay.beegirl.skyislands.world.level.block.entity.ModDecoratedPotPatterns;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +47,7 @@ public class SkysSkyIslands {
 		ModCreativeModeTabs.registerCreativeModeTabs(modEventBus);
 		ModParticleTypes.registerParticleTypes(modEventBus);
 		ModRecipeSerializer.registerRecipeSerializers(modEventBus);
+		ModDecoratedPotPatterns.registerPotPatterns(modEventBus);
 
 		//modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 	}

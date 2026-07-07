@@ -8,7 +8,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "world.entity.LivingEntityMixin",
-    "world.entity.player.PlayerMixin"
+    "world.entity.player.PlayerMixin",
+    "world.level.block.entity.DecoratedPotPatternsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
