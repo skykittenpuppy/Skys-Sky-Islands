@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/pink_petals_3",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "flowerbed": "skyislands:block/white_petals",
+    "stem": "skyislands:block/white_petals_stem"
+  }
+}

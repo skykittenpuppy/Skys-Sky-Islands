@@ -48,6 +48,7 @@
   "entity.skyislands.sakura_boat": "Sakura Boat",
   "item.skyislands.sakura_chest_boat": "Sakura Chest Boat",
   "entity.skyislands.sakura_chest_boat": "Sakura Boat with Chest",
+  "block.skyislands.white_petals": "White Petals",
 
   "block.skyislands.frigid_log": "Frigid Log",
   "block.skyislands.frigid_wood": "Frigid Wood",
@@ -125,9 +126,9 @@
   "item.skyislands.alexandrite": "Alexandrite",
 
   "item.skyislands.glider": "Glider",
+  "item.skyislands.testing_pottery_sherd": "Testing Pottery Sherd",
   "item.skyislands.testing_armor_trim_smithing_template": "Smithing Template",
   "item.skyislands.testing_glider_design_sewing_template": "Sewing Template",
-  "item.skyislands.testing2_glider_design_sewing_template": "Sewing Template",
 
   "item.skyislands.sewing_template": "Sewing Template",
   "item.skyislands.sewing_template.applies_to": "Applies to:",
@@ -147,7 +148,6 @@
   "trim_material.skyislands.alexandrite": "Alexandrite Material",
   "trim_pattern.skyislands.testing": "Testing Armor Trim",
   "glider_design.skyislands.testing": "Testing Glider Design",
-  "glider_design.skyislands.testing2": "Testing2 Glider Design",
 
   "container.upgrade.missing_template_tooltip": "Add Template"
 }

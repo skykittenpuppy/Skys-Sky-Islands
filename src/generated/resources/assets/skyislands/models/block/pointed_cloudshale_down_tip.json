@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/pointed_dripstone",
   "render_type": "minecraft:cutout",
   "textures": {
     "cross": "skyislands:block/pointed_cloudshale_down_tip"

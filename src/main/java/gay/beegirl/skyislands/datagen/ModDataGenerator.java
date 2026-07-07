@@ -8,6 +8,7 @@ import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimPatterns;
 import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
 import gay.beegirl.skyislands.neoforge.ModBiomeModifiers;
+import gay.beegirl.skyislands.world.level.block.entity.ModDecoratedPotPatterns;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

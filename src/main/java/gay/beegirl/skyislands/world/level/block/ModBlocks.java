@@ -421,6 +421,12 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
+    public static final DeferredBlock<Block> WHITE_PETALS = registerBlockWithItem("white_petals", properties -> new PinkPetalsBlock(
+            properties
+                    .instabreak()
+                    .noOcclusion()
+                    .noCollission()
+    ));
 
     public static final LogBlockSet FRIGID_LOGS = registerLogSetBlocks("frigid", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE);
     public static final WoodBlockSet FRIGID_PLANKS = registerWoodSetBlocks("frigid", ModWoodType.FRIGID, ModBlockSetType.FRIGID, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE);

@@ -9,6 +9,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -55,6 +56,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.SAKURA_LEAVES.get(), createLeavesDrops(ModBlocks.SAKURA_LEAVES.get(), ModBlocks.SAKURA_SAPLING.get(), 0.0625f));
         dropSelf(ModBlocks.SAKURA_SAPLING.get());
         add(ModBlocks.POTTED_SAKURA_SAPLING.get(), createPotFlowerItemTable(ModBlocks.SAKURA_SAPLING.get()));
+        add(ModBlocks.WHITE_PETALS.get(), createPetalsDrops(ModBlocks.WHITE_PETALS.get()));
 
         createLogSetLootTables(ModBlocks.FRIGID_LOGS);
         createWoodSetLootTables(ModBlocks.FRIGID_PLANKS);

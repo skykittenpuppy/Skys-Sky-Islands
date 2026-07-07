@@ -3,13 +3,20 @@ package gay.beegirl.skyislands.datagen;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.world.level.block.IslandsCactusFruitBlock;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
+import gay.beegirl.skyislands.world.level.block.PointedCloudshaleBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.models.blockstates.*;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -34,12 +41,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.get());
         naturalRotatedPillarBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
         uncheckedBlockItem(ModBlocks.CLOUDSHALE.get());
-        //createPointedBlock(blockModelGenerators, ModBlocks.POINTED_CLOUDSHALE);
-        // TODO: Pointed Block blockstates + block models
-        simpleBlock(ModBlocks.POINTED_CLOUDSHALE.get(), models().cross(
-                name(ModBlocks.POINTED_CLOUDSHALE.get()),
-                blockTexture(ModBlocks.POINTED_CLOUDSHALE.get()).withSuffix("_down_tip"))
-                .renderType("minecraft:cutout"));
+        createPointedBlock(ModBlocks.POINTED_CLOUDSHALE.get());
 
         createStoneSetBlockStates(ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
@@ -54,6 +56,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         createWoodSetBlockStates(ModBlocks.SAKURA_PLANKS);
         simpleBlockWithItem(ModBlocks.SAKURA_LEAVES.get());
         plantAndPot(ModBlocks.SAKURA_SAPLING.get(), ModBlocks.POTTED_SAKURA_SAPLING.get());
+        createFlowerBed(ModBlocks.WHITE_PETALS.get());
 
         createLogSetBlockStates(ModBlocks.FRIGID_LOGS);
         createWoodSetBlockStates(ModBlocks.FRIGID_PLANKS);
@@ -162,6 +165,122 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(pottedPlant, models().singleTexture(name(pottedPlant), mcLoc("block/flower_pot_cross"), "plant", blockTexture(plant)).renderType("minecraft:cutout"));
     }
 
+    private void createFlowerBed(Block flowerBedBlock) {
+        ModelFile mdl1 = models().withExistingParent(name(flowerBedBlock)+"_1", mcLoc("block/pink_petals_1"))
+                .texture("flowerbed", blockTexture(flowerBedBlock))
+                .texture("stem", blockTexture(flowerBedBlock).withSuffix("_stem"))
+                .renderType("minecraft:cutout");
+        ModelFile mdl2 = models().withExistingParent(name(flowerBedBlock)+"_2", mcLoc("block/pink_petals_2"))
+                .texture("flowerbed", blockTexture(flowerBedBlock))
+                .texture("stem", blockTexture(flowerBedBlock).withSuffix("_stem"))
+                .renderType("minecraft:cutout");
+        ModelFile mdl3 = models().withExistingParent(name(flowerBedBlock)+"_3", mcLoc("block/pink_petals_3"))
+                .texture("flowerbed", blockTexture(flowerBedBlock))
+                .texture("stem", blockTexture(flowerBedBlock).withSuffix("_stem"))
+                .renderType("minecraft:cutout");
+        ModelFile mdl4 = models().withExistingParent(name(flowerBedBlock)+"_4", mcLoc("block/pink_petals_4"))
+                .texture("flowerbed", blockTexture(flowerBedBlock))
+                .texture("stem", blockTexture(flowerBedBlock).withSuffix("_stem"))
+                .renderType("minecraft:cutout");
+
+        getMultipartBuilder(flowerBedBlock).part()
+                .modelFile(mdl1)
+                .rotationY(0)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.NORTH).end().part()
+                .modelFile(mdl1)
+                .rotationY(90)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.EAST).end().part()
+                .modelFile(mdl1)
+                .rotationY(180)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.SOUTH).end().part()
+                .modelFile(mdl1)
+                .rotationY(270)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.WEST).end().part()
+                .modelFile(mdl2)
+                .rotationY(0)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.NORTH).end().part()
+                .modelFile(mdl2)
+                .rotationY(90)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.EAST).end().part()
+                .modelFile(mdl2)
+                .rotationY(180)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.SOUTH).end().part()
+                .modelFile(mdl2)
+                .rotationY(270)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.WEST).end().part()
+                .modelFile(mdl3)
+                .rotationY(0)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.NORTH).end().part()
+                .modelFile(mdl3)
+                .rotationY(90)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.EAST).end().part()
+                .modelFile(mdl3)
+                .rotationY(180)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.SOUTH).end().part()
+                .modelFile(mdl3)
+                .rotationY(270)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                .condition(BlockStateProperties.FACING, Direction.WEST).end().part()
+                .modelFile(mdl4)
+                .rotationY(0)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 4)
+                .condition(BlockStateProperties.FACING, Direction.NORTH).end().part()
+                .modelFile(mdl4)
+                .rotationY(90)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 4)
+                .condition(BlockStateProperties.FACING, Direction.EAST).end().part()
+                .modelFile(mdl4)
+                .rotationY(180)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 4)
+                .condition(BlockStateProperties.FACING, Direction.SOUTH).end().part()
+                .modelFile(mdl4)
+                .rotationY(270)
+                .addModel()
+                .condition(BlockStateProperties.FLOWER_AMOUNT, 4)
+                .condition(BlockStateProperties.FACING, Direction.WEST).end();
+    }
+    private void createPointedBlock(Block pointedBlock){
+        getVariantBuilder(pointedBlock).forAllStates(state -> {
+                    Direction direction = state.getValue(PointedCloudshaleBlock.TIP_DIRECTION);
+                    DripstoneThickness dripstoneThickness = state.getValue(PointedCloudshaleBlock.THICKNESS);
+                    return ConfiguredModel.builder()
+                            .modelFile(models()
+                                    .withExistingParent(
+                                            name(pointedBlock) + "_" + direction.getSerializedName() + "_" + dripstoneThickness.getSerializedName(),
+                                            key(Blocks.POINTED_DRIPSTONE))
+                                    .texture("cross",
+                                            blockTexture(pointedBlock) + "_" + direction.getSerializedName() + "_" + dripstoneThickness.getSerializedName())
+                                    .renderType("minecraft:cutout"))
+                            .build();
+                });
+    }
+    
     public final void flatBlockItem(Block block) {
         itemModels().getBuilder(name(block.asItem()))
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))

@@ -24,9 +24,9 @@ public class ModItems {
 
     public static final DeferredItem<Item> GLIDER = ITEMS.registerItem("glider", properties -> new GliderItem(properties.rarity(Rarity.RARE).stacksTo(1)));
 
+    public static final DeferredItem<Item> TESTING_POTTERY_SHERD = ITEMS.registerItem("testing_pottery_sherd", Item::new);
     public static final DeferredItem<Item> TESTING_ARMOR_TRIM_SMITHING_TEMPLATE = ITEMS.registerItem("testing_armor_trim_smithing_template", properties -> SmithingTemplateItem.createArmorTrimTemplate(ModTrimPatterns.TESTING));
     public static final DeferredItem<Item> TESTING_GLIDER_DESIGN_SEWING_TEMPLATE = ITEMS.registerItem("testing_glider_design_sewing_template", properties -> new SewingTemplateItem(ModGliderDesigns.TESTING));
-    public static final DeferredItem<Item> TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE = ITEMS.registerItem("testing2_glider_design_sewing_template", properties -> new SewingTemplateItem(ModGliderDesigns.TESTING2));
 
     public static final DeferredItem<Item> GOLDENLEAF_BOAT = ITEMS.registerItem("goldenleaf_boat", properties -> new Item(properties));//new BoatItem(false, ModEntityTypes.GOLDENLEAF_ENUM_PROXY.getValue(), properties.stacksTo(1)));
     public static final DeferredItem<Item> GOLDENLEAF_CHEST_BOAT = ITEMS.registerItem("goldenleaf_chest_boat", properties -> new Item(properties));//new BoatItem(true, ModEntityTypes.GOLDENLEAF_ENUM_PROXY.getValue(), properties.stacksTo(1)));

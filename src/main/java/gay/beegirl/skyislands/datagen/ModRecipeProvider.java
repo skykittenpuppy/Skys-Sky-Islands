@@ -61,12 +61,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBlocks.ALEXANDRITE_BLOCK), has(ModBlocks.ALEXANDRITE_BLOCK))
                 .save(recipeOutput);
 
+
         copySmithingTemplate(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         trimSmithing(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
         copySewingTemplate(recipeOutput, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
         designSewing(recipeOutput, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
-        copySewingTemplate(recipeOutput, ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get());
-        designSewing(recipeOutput, ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get());
 
         smeltingResultFromBase(recipeOutput, ModBlocks.CLOUDSHALE, ModBlocks.COBBLED_CLOUDSHALE.base());
         twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CLOUDSHALE.get(), ModBlocks.POINTED_CLOUDSHALE);
@@ -79,6 +78,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         createWoodSetRecipes(recipeOutput, ModBlocks.SAKURA_LOGS, ModItemTags.SAKURA_LOGS, ModBlocks.SAKURA_PLANKS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT);
         createWoodSetRecipes(recipeOutput, ModBlocks.FRIGID_LOGS, ModItemTags.FRIGID_LOGS, ModBlocks.FRIGID_PLANKS, ModItems.FRIGID_BOAT, ModItems.FRIGID_CHEST_BOAT);
         createWoodSetRecipes(recipeOutput, ModBlocks.ARBOREAL_CACTUSES, ModItemTags.ARBOREAL_CACTUSES, ModBlocks.ARBOREAL_CACTUS_PLANKS, ModItems.ARBOREAL_CACTUS_BOAT, ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
+
+        oneToOneConversionRecipe(recipeOutput, Items.WHITE_DYE, ModBlocks.WHITE_PETALS.asItem(), "white_dye", 1);
     }
 
     protected static void twoByTwoPacker(RecipeOutput recipeOutput, RecipeCategory category, ItemLike packed, ItemLike unpacked) {

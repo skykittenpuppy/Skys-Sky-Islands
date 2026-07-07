@@ -13,6 +13,7 @@ public class ModPlacementUtils {
 	public static void bootstrap(BootstrapContext<PlacedFeature> context) {
 		ModOrePlacements.bootstrap(context);
 		ModTreePlacements.bootstrap(context);
+		ModVegetationPlacements.bootstrap(context);
 	}
 
 	public static ResourceKey<PlacedFeature> createKey(String key) {

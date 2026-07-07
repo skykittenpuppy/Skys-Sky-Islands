@@ -11,6 +11,7 @@ public class ModFeatureUtils {
 	public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 		ModOreFeatures.bootstrap(context);
 		ModTreeFeatures.bootstrap(context);
+		ModVegetationFeatures.bootstrap(context);
 	}
 
 	public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {

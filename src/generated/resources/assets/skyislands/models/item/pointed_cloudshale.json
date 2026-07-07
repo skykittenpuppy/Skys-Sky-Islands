@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/pointed_dripstone",
+  "textures": {
+    "layer0": "skyislands:item/pointed_cloudshale"
+  }
+}

@@ -6,12 +6,14 @@ import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
 import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
 import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
 import gay.beegirl.skyislands.world.item.ModItems;
+import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -27,7 +29,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             ModTrimMaterials.ALEXANDRITE
     );
     private static final List<ResourceKey<GliderDesign>> MOD_GLIDER_DESIGNS = List.of(
-            ModGliderDesigns.TESTING, ModGliderDesigns.TESTING2
+            ModGliderDesigns.TESTING
     );
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -39,12 +41,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.RAW_ALEXANDRITE.get());
         basicItem(ModItems.ALEXANDRITE.get());
 
+        parentedItem(ModBlocks.POINTED_CLOUDSHALE.asItem(), Items.POINTED_DRIPSTONE);
+        basicItem(ModBlocks.WHITE_PETALS.asItem());
+
         generateArmorModelsForMaterials(MOD_TRIM_MATERIALS);
         generateGliderModelsForPatterns(MOD_GLIDER_DESIGNS);
 
+        basicItem(ModItems.TESTING_POTTERY_SHERD.get());
         basicItem(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
         basicItem(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
-        basicItem(ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get());
 
         basicItem(ModItems.GOLDENLEAF_BOAT.get());
         basicItem(ModItems.GOLDENLEAF_CHEST_BOAT.get());
@@ -58,6 +63,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.ARBOREAL_CACTUS_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.get());
         basicItem(ModItems.ARBOREAL_CACTUS_FRUIT.get());
+    }
+
+    public ItemModelBuilder parentedItem(Item item, Item parent){
+        return getBuilder(name(item))
+                .parent(new ModelFile.UncheckedModelFile(itemTexture(parent)))
+                .texture("layer0", itemTexture(item));
     }
 
     public void generateGliderModelsForPatterns(List<ResourceKey<GliderDesign>> gliderDesigns) {

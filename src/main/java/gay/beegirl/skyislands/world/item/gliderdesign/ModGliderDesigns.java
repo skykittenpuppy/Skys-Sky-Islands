@@ -17,13 +17,11 @@ import java.util.Optional;
 
 public class ModGliderDesigns {
     public static final ResourceKey<GliderDesign> TESTING = registryKey("testing");
-    public static final ResourceKey<GliderDesign> TESTING2 = registryKey("testing2");
 
     public static void bootstrap(BootstrapContext<GliderDesign> context) {
         SkysSkyIslands.LOGGER.info("Trim Pattern Bootstrap for " + SkysSkyIslands.MOD_ID);
 
         register(context, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get(), TESTING);
-        register(context, ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE.get(), TESTING2);
     }
 
     private static ResourceKey<GliderDesign> registryKey(String name) {

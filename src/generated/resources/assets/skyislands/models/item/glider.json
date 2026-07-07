@@ -6,12 +6,6 @@
       "predicate": {
         "skyislands:glider_design": -6.440824E8
       }
-    },
-    {
-      "model": "skyislands:item/glider_testing2_design",
-      "predicate": {
-        "skyislands:glider_design": -3.6779136E8
-      }
     }
   ],
   "textures": {

@@ -89,6 +89,13 @@ public class SkysSkyIslands {
 			event.register((state, level, pos, tintIndex) ->
 							level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor(),
 					ModBlocks.CLOUDSHALE_GRASS.get());
+			event.register((state, level, pos, tintIndex) ->
+							level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor(),
+					ModBlocks.WHITE_PETALS.get());
+		}
+		@SubscribeEvent
+		public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
+			event.register((stack, tintIndex) -> GrassColor.getDefaultColor(), ModBlocks.CLOUDSHALE_GRASS.get());
 		}
 	}
 }

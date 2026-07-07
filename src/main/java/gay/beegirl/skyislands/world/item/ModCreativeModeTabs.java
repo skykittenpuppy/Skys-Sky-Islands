@@ -60,6 +60,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.SAKURA_PLANKS.hangingSign());
                 output.accept(ModItems.SAKURA_BOAT);
                 output.accept(ModItems.SAKURA_CHEST_BOAT);
+                output.accept(ModBlocks.WHITE_PETALS);
 
                 output.accept(ModBlocks.FRIGID_LOGS.log());
                 output.accept(ModBlocks.FRIGID_LOGS.wood());
@@ -128,17 +129,13 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.RAW_ALEXANDRITE);
                 output.accept(ModItems.ALEXANDRITE);
 
+                output.accept(ModItems.TESTING_POTTERY_SHERD);
+                output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
                 output.accept(ModItems.GLIDER);
+                output.accept(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE);
                 ItemStack testing_glider = new ItemStack(ModItems.GLIDER.get());
                 testing_glider.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE, SkysSkyIslands.createId("testing"), Component.translatable("glider_design.skyislands.testing")));
                 output.accept(testing_glider);
-                ItemStack testing2_glider = new ItemStack(ModItems.GLIDER.get());
-                testing2_glider.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE, SkysSkyIslands.createId("testing2"), Component.translatable("glider_design.skyislands.testing2")));
-                output.accept(testing2_glider);
-
-                output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
-                output.accept(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE);
-                output.accept(ModItems.TESTING2_GLIDER_DESIGN_SEWING_TEMPLATE);
             }).build());
 
     public static void registerCreativeModeTabs(IEventBus modEventBus) {

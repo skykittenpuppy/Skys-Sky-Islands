@@ -1,13 +1,16 @@
 package gay.beegirl.skyislands.datagen;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
+import gay.beegirl.skyislands.tags.ModBlockTags;
 import gay.beegirl.skyislands.tags.ModItemTags;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import gay.beegirl.skyislands.world.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -22,20 +25,31 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(ItemTags.BEACON_PAYMENT_ITEMS)
-                .add(ModItems.ALEXANDRITE.get());
-
-        tag(ItemTags.LOGS_THAT_BURN)
-                .addTag(ModItemTags.GOLDENLEAF_LOGS)
-                .addTag(ModItemTags.SAKURA_LOGS)
-                .addTag(ModItemTags.FRIGID_LOGS)
-                .addTag(ModItemTags.ARBOREAL_CACTUSES);
-
         tag(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.base().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.base().asItem())
                 .add(ModBlocks.FRIGID_PLANKS.base().asItem())
                 .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.base().asItem());
+        tag(ItemTags.WOODEN_BUTTONS)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.button().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.button().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.button().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.button().asItem());
+        tag(ItemTags.WOODEN_DOORS)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.door().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.door().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.door().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.door().asItem());
+        tag(ItemTags.WOODEN_FENCES)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.fence().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.fence().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.fence().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.fence().asItem());
+        tag(ItemTags.FENCE_GATES)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.fenceGate().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.fenceGate().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.fenceGate().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.fenceGate().asItem());
         tag(ItemTags.SIGNS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.standingSign().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.standingSign().asItem())
@@ -46,6 +60,59 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModBlocks.SAKURA_PLANKS.hangingSign().asItem())
                 .add(ModBlocks.FRIGID_PLANKS.hangingSign().asItem())
                 .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.hangingSign().asItem());
+        tag(ItemTags.WOODEN_SLABS)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.slab().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.slab().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.slab().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.slab().asItem());
+        tag(ItemTags.WOODEN_STAIRS)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.stairs().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.stairs().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.stairs().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.stairs().asItem());
+        tag(ItemTags.WOODEN_PRESSURE_PLATES)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.pressurePlate().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.pressurePlate().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.pressurePlate().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.pressurePlate().asItem());
+        tag(ItemTags.WOODEN_TRAPDOORS)
+                .add(ModBlocks.GOLDENLEAF_PLANKS.trapdoor().asItem())
+                .add(ModBlocks.SAKURA_PLANKS.trapdoor().asItem())
+                .add(ModBlocks.FRIGID_PLANKS.trapdoor().asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANKS.trapdoor().asItem());
+
+        copy(ModBlockTags.GOLDENLEAF_LOGS, ModItemTags.GOLDENLEAF_LOGS);
+        copy(ModBlockTags.SAKURA_LOGS, ModItemTags.SAKURA_LOGS);
+        copy(ModBlockTags.FRIGID_LOGS, ModItemTags.FRIGID_LOGS);
+        copy(ModBlockTags.ARBOREAL_CACTUSES, ModItemTags.ARBOREAL_CACTUSES);
+
+        tag(ItemTags.LOGS_THAT_BURN)
+                .addTag(ModItemTags.GOLDENLEAF_LOGS)
+                .addTag(ModItemTags.SAKURA_LOGS)
+                .addTag(ModItemTags.FRIGID_LOGS);
+
+        tag(ItemTags.LEAVES)
+                .add(ModBlocks.GOLDENLEAF_LEAVES.asItem())
+                .add(ModBlocks.SAKURA_LEAVES.asItem())
+                .add(ModBlocks.FRIGID_LEAVES.asItem());
+        tag(ItemTags.SAPLINGS)
+                .add(ModBlocks.GOLDENLEAF_SAPLING.asItem())
+                .add(ModBlocks.SAKURA_SAPLING.asItem())
+                .add(ModBlocks.FRIGID_SAPLING.asItem())
+                .add(ModBlocks.ARBOREAL_CACTUS_PLANT.asItem());
+
+        tag(ItemTags.WALLS)
+                .add(ModBlocks.COBBLED_CLOUDSHALE.wall().asItem())
+                .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall().asItem())
+                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall().asItem());
+        tag(ItemTags.SLABS)
+                .add(ModBlocks.COBBLED_CLOUDSHALE.slab().asItem())
+                .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.slab().asItem())
+                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.slab().asItem());
+        tag(ItemTags.STAIRS)
+                .add(ModBlocks.COBBLED_CLOUDSHALE.stairs().asItem())
+                .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.stairs().asItem())
+                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.stairs().asItem());
 
         tag(ItemTags.BOATS)
                 .add(ModItems.GOLDENLEAF_BOAT.asItem())
@@ -57,19 +124,18 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.SAKURA_CHEST_BOAT.asItem())
                 .add(ModItems.FRIGID_CHEST_BOAT.asItem())
                 .add(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.asItem());
-
+        tag(ItemTags.BEACON_PAYMENT_ITEMS)
+                .add(ModItems.ALEXANDRITE.get());
+        tag(ItemTags.STONE_TOOL_MATERIALS)
+                .add(ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
+        tag(ItemTags.STONE_CRAFTING_MATERIALS)
+                .add(ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
+        tag(ItemTags.DECORATED_POT_SHERDS)
+                .add(ModItems.TESTING_POTTERY_SHERD.get());
         tag(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.ALEXANDRITE.get());
         tag(ItemTags.TRIM_TEMPLATES)
                 .add(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 
-        tag(ModItemTags.GOLDENLEAF_LOGS)
-                .add(ModBlocks.GOLDENLEAF_LOGS.log().asItem(), ModBlocks.GOLDENLEAF_LOGS.wood().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedLog().asItem(), ModBlocks.GOLDENLEAF_LOGS.strippedWood().asItem());
-        tag(ModItemTags.SAKURA_LOGS)
-                .add(ModBlocks.SAKURA_LOGS.log().asItem(), ModBlocks.SAKURA_LOGS.wood().asItem(), ModBlocks.SAKURA_LOGS.strippedLog().asItem(), ModBlocks.SAKURA_LOGS.strippedWood().asItem());
-        tag(ModItemTags.FRIGID_LOGS)
-                .add(ModBlocks.FRIGID_LOGS.log().asItem(), ModBlocks.FRIGID_LOGS.wood().asItem(), ModBlocks.FRIGID_LOGS.strippedLog().asItem(), ModBlocks.FRIGID_LOGS.strippedWood().asItem());
-        tag(ModItemTags.ARBOREAL_CACTUSES)
-                .add(ModBlocks.ARBOREAL_CACTUSES.cactus().asItem(), ModBlocks.ARBOREAL_CACTUSES.despinedCactus().asItem());
     }
 }
