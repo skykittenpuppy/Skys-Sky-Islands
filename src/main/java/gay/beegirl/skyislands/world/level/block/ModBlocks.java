@@ -5,7 +5,6 @@ import gay.beegirl.skyislands.world.level.block.grower.ModTreeGrower;
 import gay.beegirl.skyislands.world.level.block.state.properties.ModBlockSetType;
 import gay.beegirl.skyislands.world.level.block.state.properties.ModWoodType;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -279,13 +278,13 @@ public class ModBlocks {
                     .strength(1.5F, 3.0F)
                     .sound(SoundType.GRASS)
     ));
-    public static final DeferredBlock<Block> CLOUDSHALE_CHERRY_GRASS = registerBlockWithItem("cloudshale_cherry_grass", properties -> new Block(
+    public static final DeferredBlock<Block> CLOUDSHALE_SNOW_GRASS = registerBlockWithItem("cloudshale_snow_grass", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
-                    .sound(SoundType.GRASS)
+                    .sound(SoundType.SNOW)
     ));
     public static final DeferredBlock<Block> POINTED_CLOUDSHALE = registerBlockWithItem("pointed_cloudshale", properties -> new PointedCloudshaleBlock(
             properties
@@ -309,9 +308,9 @@ public class ModBlocks {
                     .sound(SoundType.TUFF_BRICKS)
     ));
 
-    public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet CHERRY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("cherry_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet CLOUDSHALE_BRICK = registerStoneSetBlocks("cloudshale_bricks", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
 
     public static final DeferredBlock<Block> STONE_ALEXANDRITE_ORE = registerBlockWithItem("stone_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties

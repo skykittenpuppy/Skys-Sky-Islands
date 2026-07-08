@@ -15,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import java.util.List;
@@ -72,7 +71,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         createStoneSetRecipes(recipeOutput, ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetRecipes(recipeOutput, ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        createStoneSetRecipes(recipeOutput, ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
+        createStoneSetRecipes(recipeOutput, ModBlocks.CLOUDSHALE_BRICK);
 
         createWoodSetRecipes(recipeOutput, ModBlocks.GOLDENLEAF_LOGS, ModItemTags.GOLDENLEAF_LOGS, ModBlocks.GOLDENLEAF_PLANKS, ModItems.GOLDENLEAF_BOAT, ModItems.GOLDENLEAF_CHEST_BOAT);
         createWoodSetRecipes(recipeOutput, ModBlocks.SAKURA_LOGS, ModItemTags.SAKURA_LOGS, ModBlocks.SAKURA_PLANKS, ModItems.SAKURA_BOAT, ModItems.SAKURA_CHEST_BOAT);

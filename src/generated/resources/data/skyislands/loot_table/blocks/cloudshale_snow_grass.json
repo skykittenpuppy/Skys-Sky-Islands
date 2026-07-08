@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "skyislands:cloudshale_cherry_grass"
+              "name": "skyislands:cloudshale_snow_grass"
             },
             {
               "type": "minecraft:item",
@@ -43,5 +43,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "skyislands:blocks/cloudshale_cherry_grass"
+  "random_sequence": "skyislands:blocks/cloudshale_snow_grass"
 }

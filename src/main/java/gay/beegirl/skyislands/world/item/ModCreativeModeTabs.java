@@ -101,7 +101,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
 
                 output.accept(ModBlocks.CLOUDSHALE_GRASS);
-                output.accept(ModBlocks.CLOUDSHALE_CHERRY_GRASS);
+                output.accept(ModBlocks.CLOUDSHALE_SNOW_GRASS);
 
                 output.accept(ModBlocks.CLOUDSHALE);
                 output.accept(ModBlocks.POINTED_CLOUDSHALE);
@@ -116,10 +116,10 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.slab());
                 output.accept(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall());
 
-                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.base());
-                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.stairs());
-                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.slab());
-                output.accept(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall());
+                output.accept(ModBlocks.CLOUDSHALE_BRICK.base());
+                output.accept(ModBlocks.CLOUDSHALE_BRICK.stairs());
+                output.accept(ModBlocks.CLOUDSHALE_BRICK.slab());
+                output.accept(ModBlocks.CLOUDSHALE_BRICK.wall());
 
                 output.accept(ModBlocks.ALEXANDRITE_BLOCK);
                 output.accept(ModBlocks.STONE_ALEXANDRITE_ORE);

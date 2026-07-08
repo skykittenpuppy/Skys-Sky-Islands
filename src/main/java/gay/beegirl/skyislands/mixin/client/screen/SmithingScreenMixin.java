@@ -20,14 +20,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SmithingTemplateItem;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,17 +36,20 @@ public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMen
             "item/empty_slot_sewing_template_glider_design"
     );
 
-    @Shadow @Final private static ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM;
-    @Shadow @Final private static ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE;
-    @Shadow @Final private static List<ResourceLocation> EMPTY_SLOT_SMITHING_TEMPLATES = List.of(
-            EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM, EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE, EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_DESIGN
-    );
+    @Shadow @Final @Mutable
+    private static List<ResourceLocation> EMPTY_SLOT_SMITHING_TEMPLATES;
     @Shadow @Final private CyclingSlotBackground baseIcon;
     @Shadow @Final private CyclingSlotBackground additionalIcon;
     @Shadow private ArmorStand armorStandPreview;
 
     public SmithingScreenMixin(SmithingMenu menu, Inventory playerInventory, Component title, ResourceLocation menuResource) {
         super(menu, playerInventory, title, menuResource);
+    }
+
+    @Inject(method = "<clinit>", at = @At("TAIL"))
+    private static void islands$init(CallbackInfo ci) {
+        EMPTY_SLOT_SMITHING_TEMPLATES = new ArrayList<>(EMPTY_SLOT_SMITHING_TEMPLATES);
+        EMPTY_SLOT_SMITHING_TEMPLATES.add(EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_DESIGN);
     }
 
     @Unique

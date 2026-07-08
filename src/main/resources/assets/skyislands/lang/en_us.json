@@ -97,7 +97,7 @@
   "entity.skyislands.arboreal_cactus_chest_boat": "Arboreal Cactus Boat with Chest",
 
   "block.skyislands.cloudshale_grass": "Overgrown Cloudshale",
-  "block.skyislands.cloudshale_cherry_grass": "Petaled Cloudshale",
+  "block.skyislands.cloudshale_snow_grass": "Frosted Cloudshale",
   "block.skyislands.cloudshale": "Cloudshale",
   "block.skyislands.pointed_cloudshale": "Pointed Cloudshale",
   "block.skyislands.cloudshale_stairs": "Cloudshale Stairs",
@@ -112,10 +112,10 @@
   "block.skyislands.mossy_cobbled_cloudshale_slab": "Mossy Cobbled Cloudshale Slab",
   "block.skyislands.mossy_cobbled_cloudshale_wall": "Mossy Cobbled Cloudshale Wall",
 
-  "block.skyislands.cherry_cobbled_cloudshale": "Petaled Cobbled Cloudshale",
-  "block.skyislands.cherry_cobbled_cloudshale_stairs": "Petaled Cobbled Cloudshale Stairs",
-  "block.skyislands.cherry_cobbled_cloudshale_slab": "Petaled Cobbled Cloudshale Slab",
-  "block.skyislands.cherry_cobbled_cloudshale_wall": "Petaled Cobbled Cloudshale Wall",
+  "block.skyislands.cloudshale_bricks": "Cloudshale Bricks",
+  "block.skyislands.cloudshale_bricks_stairs": "Cloudshale Brick Stairs",
+  "block.skyislands.cloudshale_bricks_slab": "Cloudshale Brick Slab",
+  "block.skyislands.cloudshale_bricks_wall": "Cloudshale Brick Wall",
 
   "block.skyislands.alexandrite_block": "Alexandrite Block",
   "block.skyislands.stone_alexandrite_ore": "Alexandrite Ore",

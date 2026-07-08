@@ -102,15 +102,15 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WALLS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.wall().asItem())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall().asItem())
-                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall().asItem());
+                .add(ModBlocks.CLOUDSHALE_BRICK.wall().asItem());
         tag(ItemTags.SLABS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.slab().asItem())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.slab().asItem())
-                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.slab().asItem());
+                .add(ModBlocks.CLOUDSHALE_BRICK.slab().asItem());
         tag(ItemTags.STAIRS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.stairs().asItem())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.stairs().asItem())
-                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.stairs().asItem());
+                .add(ModBlocks.CLOUDSHALE_BRICK.stairs().asItem());
 
         tag(ItemTags.BOATS)
                 .add(ModItems.GOLDENLEAF_BOAT.asItem())
@@ -129,8 +129,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.STONE_CRAFTING_MATERIALS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         tag(ItemTags.DECORATED_POT_SHERDS)
-                .add(ModItems.TESTING_POTTERY_SHERD.get())
-                .add(ModItems.TESTING2_POTTERY_SHERD.get());
+                .add(ModItems.TESTING_POTTERY_SHERD.get());
         tag(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.ALEXANDRITE.get());
         tag(ItemTags.TRIM_TEMPLATES)

@@ -6,7 +6,6 @@ import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -126,15 +125,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.WALLS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.wall().get())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.wall().get())
-                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.wall().get());
+                .add(ModBlocks.CLOUDSHALE_BRICK.wall().get());
         tag(BlockTags.SLABS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.slab().get())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.slab().get())
-                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.slab().get());
+                .add(ModBlocks.CLOUDSHALE_BRICK.slab().get());
         tag(BlockTags.STAIRS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.stairs().get())
                 .add(ModBlocks.MOSSY_COBBLED_CLOUDSHALE.stairs().get())
-                .add(ModBlocks.CHERRY_COBBLED_CLOUDSHALE.stairs().get());
+                .add(ModBlocks.CLOUDSHALE_BRICK.stairs().get());
 
 
         tag(BlockTags.DIRT)

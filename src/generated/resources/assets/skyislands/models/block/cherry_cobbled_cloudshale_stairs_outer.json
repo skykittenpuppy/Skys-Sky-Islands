@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "skyislands:block/cherry_cobbled_cloudshale",
-    "side": "skyislands:block/cherry_cobbled_cloudshale",
-    "top": "skyislands:block/cherry_cobbled_cloudshale"
-  }
-}

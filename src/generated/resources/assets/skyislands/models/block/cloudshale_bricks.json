@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "skyislands:block/cherry_cobbled_cloudshale"
+    "all": "skyislands:block/cloudshale_bricks"
   }
 }

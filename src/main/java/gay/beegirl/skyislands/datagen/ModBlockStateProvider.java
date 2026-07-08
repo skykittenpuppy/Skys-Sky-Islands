@@ -7,16 +7,11 @@ import gay.beegirl.skyislands.world.level.block.PointedCloudshaleBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -38,14 +33,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
 
         tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.get());
-        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), ModBlocks.CLOUDSHALE.get());
+        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_SNOW_GRASS.get(), ModBlocks.CLOUDSHALE.get());
         naturalRotatedPillarBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
         uncheckedBlockItem(ModBlocks.CLOUDSHALE.get());
         createPointedBlock(ModBlocks.POINTED_CLOUDSHALE.get());
 
         createStoneSetBlockStates(ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetBlockStates(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        createStoneSetBlockStates(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
+        createStoneSetBlockStates(ModBlocks.CLOUDSHALE_BRICK);
 
         createLogSetBlockStates(ModBlocks.GOLDENLEAF_LOGS);
         createWoodSetBlockStates(ModBlocks.GOLDENLEAF_PLANKS);

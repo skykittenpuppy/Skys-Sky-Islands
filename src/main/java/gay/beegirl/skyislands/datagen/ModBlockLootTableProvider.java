@@ -9,18 +9,12 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.neoforged.fml.common.Mod;
 
-import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
@@ -37,13 +31,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get(), createOreDrop(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get(), ModItems.RAW_ALEXANDRITE.get()));
 
         add(ModBlocks.CLOUDSHALE_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
-        add(ModBlocks.CLOUDSHALE_CHERRY_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
+        add(ModBlocks.CLOUDSHALE_SNOW_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         add(ModBlocks.CLOUDSHALE.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         dropSelf(ModBlocks.POINTED_CLOUDSHALE.get());
 
         createStoneSetLootTables(ModBlocks.COBBLED_CLOUDSHALE);
         createStoneSetLootTables(ModBlocks.MOSSY_COBBLED_CLOUDSHALE);
-        createStoneSetLootTables(ModBlocks.CHERRY_COBBLED_CLOUDSHALE);
+        createStoneSetLootTables(ModBlocks.CLOUDSHALE_BRICK);
 
         createLogSetLootTables(ModBlocks.GOLDENLEAF_LOGS);
         createWoodSetLootTables(ModBlocks.GOLDENLEAF_PLANKS);
