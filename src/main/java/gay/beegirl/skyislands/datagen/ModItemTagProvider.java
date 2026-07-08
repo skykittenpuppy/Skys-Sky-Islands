@@ -11,6 +11,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -22,7 +23,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDENLEAF_PLANKS.base().asItem())
                 .add(ModBlocks.SAKURA_PLANKS.base().asItem())
@@ -124,6 +125,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.asItem());
         tag(ItemTags.BEACON_PAYMENT_ITEMS)
                 .add(ModItems.ALEXANDRITE.get());
+        tag(ModItemTags.ALEXANDRITE_ORES)
+                .add(ModBlocks.STONE_ALEXANDRITE_ORE.asItem(), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.asItem(), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.asItem());
         tag(ItemTags.STONE_TOOL_MATERIALS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         tag(ItemTags.STONE_CRAFTING_MATERIALS)
