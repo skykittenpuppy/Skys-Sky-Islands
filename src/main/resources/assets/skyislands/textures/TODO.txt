@@ -1,0 +1,22 @@
+BLOCKS:
+	alexandrite block
+	raw alexandrite block
+	stone alexandrite ore
+	deepslate alexandrite ore
+	cloudshale alexandrite ore
+	mossy cobbled cloudshale
+	arboreal cactus door
+	arboreal cactus trapdoor
+
+ITEMS:
+	alexandrite
+	raw alexandrite
+	arboreal cactus items
+	glider slot
+	sewing template slot
+	glider frame
+
+OTHER:
+	boats
+	signs
+	hanging signs
