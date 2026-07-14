@@ -3,8 +3,8 @@ package gay.beegirl.skyislands.datagen;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
-import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
-import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
+import gay.beegirl.skyislands.world.item.gliderdesign.HangGliderDesign;
+import gay.beegirl.skyislands.world.item.gliderdesign.ModHangGliderDesigns;
 import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,8 +28,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     private static final List<ResourceKey<TrimMaterial>> MOD_TRIM_MATERIALS = List.of(
             ModTrimMaterials.ZEPHYRUM
     );
-    private static final List<ResourceKey<GliderDesign>> MOD_GLIDER_DESIGNS = List.of(
-            ModGliderDesigns.TESTING
+    private static final List<ResourceKey<HangGliderDesign>> MOD_GLIDER_DESIGNS = List.of(
+            ModHangGliderDesigns.TESTING
     );
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -51,7 +51,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         basicItem(ModItems.TESTING_POTTERY_SHERD.get());
         basicItem(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
-        basicItem(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        basicItem(ModItems.TESTING_HANG_GLIDER_DESIGN_SEWING_TEMPLATE.get());
 
         basicItem(ModItems.GOLDENLEAF_BOAT.get());
         basicItem(ModItems.GOLDENLEAF_CHEST_BOAT.get());
@@ -73,20 +73,20 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", itemTexture(item));
     }
 
-    public void generateGliderModelsForPatterns(List<ResourceKey<GliderDesign>> gliderDesigns) {
-        Item glider = ModItems.GLIDER.get();
+    public void generateGliderModelsForPatterns(List<ResourceKey<HangGliderDesign>> gliderDesigns) {
+        Item glider = ModItems.HANG_GLIDER.get();
         ItemModelBuilder modelBuilder = getBuilder(name(glider))
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", itemTexture(glider))
                 .texture("layer1", SkysSkyIslands.createId("designs/items/default"));
-        for(ResourceKey<GliderDesign> gliderDesign : gliderDesigns) {
+        for(ResourceKey<HangGliderDesign> gliderDesign : gliderDesigns) {
             ItemModelBuilder patternedModel = getBuilder(name(glider) + "_" + gliderDesign.location().getPath() + "_design")
                     .parent(new ModelFile.UncheckedModelFile("item/generated"))
                     .texture("layer0", itemTexture(glider))
                     .texture("layer1", designTexture(gliderDesign));
             modelBuilder.override()
                     .model(patternedModel)
-                    .predicate(ModItemProperties.GLIDER_DESIGN_PREDICATE, gliderDesign.location().hashCode());
+                    .predicate(ModItemProperties.HANG_GLIDER_DESIGN_PREDICATE, gliderDesign.location().hashCode());
         }
     }
 
@@ -110,7 +110,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
-    public @NotNull ResourceLocation designTexture(ResourceKey<GliderDesign> gliderDesign) {
+    public @NotNull ResourceLocation designTexture(ResourceKey<HangGliderDesign> gliderDesign) {
         return ResourceLocation.fromNamespaceAndPath(gliderDesign.location().getNamespace(), "designs/items/" + gliderDesign.location().getPath());
     }
     public @NotNull ResourceLocation trimTexture(@NotNull ArmorItem item, ResourceKey<TrimMaterial> trimMaterial) {

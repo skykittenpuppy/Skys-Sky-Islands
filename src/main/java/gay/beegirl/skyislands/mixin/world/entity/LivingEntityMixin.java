@@ -100,8 +100,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, IL
         this.setData(ModDataAttachments.IS_GLIDING,
                 (this.fallDistance > FALL_DISTANCE_TILL_CAN_GLIDE ||
                 this.islands$isGliding) && // INFO: Prevents instant gliding
-                (this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.GLIDER) ||
-                this.getItemInHand(InteractionHand.OFF_HAND).is(ModItems.GLIDER)) &&
+                (this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.HANG_GLIDER) ||
+                this.getItemInHand(InteractionHand.OFF_HAND).is(ModItems.HANG_GLIDER)) &&
                 !this.onGround() &&
                 !this.isShiftKeyDown()); // TODO: Replace with proper glide trigger
         this.setData(ModDataAttachments.IS_FREEFALLING, this.fallDistance > FALL_DISTANCE_TILL_FREE_FALL); // not slowfalling, not levitation, is player, isnt gliding, not shift key down,,, etc

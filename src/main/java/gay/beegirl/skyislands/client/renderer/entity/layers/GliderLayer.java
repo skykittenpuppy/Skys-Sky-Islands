@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
-import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
+import gay.beegirl.skyislands.world.item.gliderdesign.HangGliderDesign;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.core.component.ModDataComponents;
 import gay.beegirl.skyislands.world.item.ModItems;
@@ -26,8 +26,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
 public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingEntity>> {
-    public static final ResourceLocation FRAME_TEXTURE = SkysSkyIslands.createId("textures/entity/glider/frame.png");
-    public static final ResourceLocation DEFAULT_CLOTH_TEXTURE = SkysSkyIslands.createId("textures/designs/entity/glider/default.png");
+    public static final ResourceLocation FRAME_TEXTURE = SkysSkyIslands.createId("textures/entity/hang_glider/frame.png");
+    public static final ResourceLocation DEFAULT_CLOTH_TEXTURE = SkysSkyIslands.createId("textures/designs/entity/hang_glider/default.png");
     private final ModelPart LEFT_FRAME;
     private final ModelPart RIGHT_FRAME;
     private final ModelPart LEFT_CLOTH;
@@ -37,8 +37,8 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
 
     public GliderLayer(RenderLayerParent<LivingEntity, HumanoidModel<LivingEntity>> renderer, EntityModelSet modelSet) {
         super(renderer);
-        ModelPart modelPartFrame = modelSet.bakeLayer(ModModelLayers.GLIDER);
-        ModelPart modelPartCloth = modelSet.bakeLayer(ModModelLayers.GLIDER_CLOTH);
+        ModelPart modelPartFrame = modelSet.bakeLayer(ModModelLayers.HANG_GLIDER);
+        ModelPart modelPartCloth = modelSet.bakeLayer(ModModelLayers.HANG_GLIDER_CLOTH);
 
         this.LEFT_FRAME = modelPartFrame.getChild("LEFT_FRAME");
         this.RIGHT_FRAME = modelPartFrame.getChild("RIGHT_FRAME");
@@ -125,11 +125,11 @@ public class GliderLayer extends RenderLayer<LivingEntity, HumanoidModel<LivingE
                     Mth.clamp((float)localMovement.x * 100, -45, 45))
                     * ((float) Math.PI / 180F);
 
-            GliderDesign pattern = entity.getMainHandItem().is(ModItems.GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
+            HangGliderDesign pattern = entity.getMainHandItem().is(ModItems.HANG_GLIDER) ? entity.getMainHandItem().get(ModDataComponents.SEWING_PATTERN) : entity.getOffhandItem().get(ModDataComponents.SEWING_PATTERN);
             ResourceLocation clothTexture = DEFAULT_CLOTH_TEXTURE;
             if (pattern != null) {
                 ResourceLocation patternResourceLocation = pattern.assetId;
-                clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/designs/entity/glider/"+patternResourceLocation.getPath()+".png");
+                clothTexture = ResourceLocation.fromNamespaceAndPath(patternResourceLocation.getNamespace(), "textures/designs/entity/hang_glider/"+patternResourceLocation.getPath()+".png");
             }
 
             this.LEFT_FRAME.zRot = 0.8F * zRadians;

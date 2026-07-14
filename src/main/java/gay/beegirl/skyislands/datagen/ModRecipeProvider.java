@@ -63,8 +63,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         copySmithingTemplate(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         trimSmithing(recipeOutput, ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
-        copySewingTemplate(recipeOutput, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
-        designSewing(recipeOutput, ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        copySewingTemplate(recipeOutput, ModItems.TESTING_HANG_GLIDER_DESIGN_SEWING_TEMPLATE.get());
+        designSewing(recipeOutput, ModItems.TESTING_HANG_GLIDER_DESIGN_SEWING_TEMPLATE.get());
 
         smeltingResultFromBase(recipeOutput, ModBlocks.CLOUDSHALE, ModBlocks.COBBLED_CLOUDSHALE.base());
         twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CLOUDSHALE.get(), ModBlocks.POINTED_CLOUDSHALE);
@@ -125,7 +125,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     private static void designSewing(RecipeOutput recipeOutput, Item ingredientItem) {
         SewingDesignRecipeBuilder.sewingDesign(
                         Ingredient.of(ingredientItem),
-                        Ingredient.of(ModItems.GLIDER),
+                        Ingredient.of(ModItems.HANG_GLIDER),
                         Ingredient.of(Items.STRING),
                         RecipeCategory.MISC)
                 .unlocks("has_sewing_design_template",
