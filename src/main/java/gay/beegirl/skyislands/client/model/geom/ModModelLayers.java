@@ -11,6 +11,7 @@ public class ModModelLayers {
     private static final Set<ModelLayerLocation> ALL_MODELS = Sets.newHashSet();
     public static final ModelLayerLocation GLIDER = register("glider");
     public static final ModelLayerLocation GLIDER_CLOTH = register("glider", "cloth");
+    public static final ModelLayerLocation BATTERY = register("battery");
 
     private static ModelLayerLocation register(String path) {
         return register(path, DEFAULT_LAYER);

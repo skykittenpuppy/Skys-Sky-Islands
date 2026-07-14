@@ -39,6 +39,8 @@ public class ModItems {
     public static final DeferredItem<Item> ARBOREAL_CACTUS_CHEST_BOAT = ITEMS.registerItem("arboreal_cactus_chest_boat", properties -> new Item(properties));//new BoatItem(true, ModEntityTypes.ARBOREAL_CACTUS, properties.stacksTo(1)));
     public static final DeferredItem<Item> ARBOREAL_CACTUS_FRUIT = ITEMS.registerItem("arboreal_cactus_fruit", properties -> new Item(properties.food(new FoodProperties(4, 2.4f, false, 1.6f, Optional.empty(), List.of()))));
 
+    public static final DeferredItem<Item> BATTERY = ITEMS.registerItem("battery", properties -> new BatteryItem(properties.rarity(Rarity.RARE).stacksTo(16)));
+
     public static void registerItems(IEventBus modEventBus) {
         SkysSkyIslands.LOGGER.info("Registering Items for " + SkysSkyIslands.MOD_ID);
 
