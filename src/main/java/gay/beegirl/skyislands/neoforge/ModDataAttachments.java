@@ -15,6 +15,7 @@ public class ModDataAttachments {
     public static final Supplier<AttachmentType<Boolean>> IS_FREEFALLING;
     public static final Supplier<AttachmentType<Boolean>> IS_DIVING;
     public static final Supplier<AttachmentType<Boolean>> IS_GLIDING;
+    public static final Supplier<AttachmentType<Integer>> BATTERY_COUNT;
 
 
     public static void registerDataAttachments(IEventBus modEventBus) {
@@ -27,5 +28,7 @@ public class ModDataAttachments {
         IS_FREEFALLING = ATTACHMENT_TYPES.register("is_freefalling", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("is_freefalling").codec()).build());
         IS_DIVING = ATTACHMENT_TYPES.register("is_diving", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("is_diving").codec()).build());
         IS_GLIDING = ATTACHMENT_TYPES.register("is_gliding", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("is_gliding").codec()).build());
+        BATTERY_COUNT = ATTACHMENT_TYPES.register("battery_count", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build());
+        //.fieldOf("is_gliding").codec()
     }
 }

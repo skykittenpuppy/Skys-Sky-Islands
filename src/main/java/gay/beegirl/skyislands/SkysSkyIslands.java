@@ -1,6 +1,7 @@
 package gay.beegirl.skyislands;
 
 import gay.beegirl.skyislands.client.particle.SakuraParticle;
+import gay.beegirl.skyislands.client.renderer.entity.layers.BatteryLayer;
 import gay.beegirl.skyislands.client.renderer.entity.layers.GliderLayer;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
 import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
@@ -84,6 +85,7 @@ public class SkysSkyIslands {
 		public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 			event.registerLayerDefinition(ModModelLayers.GLIDER, GliderLayer::createFrameLayer);
 			event.registerLayerDefinition(ModModelLayers.GLIDER_CLOTH, GliderLayer::createClothLayer);
+			event.registerLayerDefinition(ModModelLayers.BATTERY, BatteryLayer::createLayer);
 		}
 
 		@SubscribeEvent

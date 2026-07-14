@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import gay.beegirl.skyislands.client.renderer.entity.layers.BatteryLayer;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.util.LivingEntityAccess;
 import net.minecraft.client.model.PlayerModel;
@@ -19,6 +20,8 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
@@ -29,12 +32,12 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         super(context, model, shadowRadius);
     }
 
-    /*@Inject(method = "<init>", at = @At("TAIL"))
+    @Inject(method = "<init>", at = @At("TAIL"))
     private void islands$init(EntityRendererProvider.Context context, boolean useSlimModel, CallbackInfo ci) {
-        this.addLayer(new GliderLayer(this, context.getModelSet()));
+         this.addLayer(new BatteryLayer(this, context.getModelSet()));
     }
 
-    @Inject(method ="renderRightHand", at = @At("HEAD"), cancellable = true)
+    /*@Inject(method ="renderRightHand", at = @At("HEAD"), cancellable = true)
     private void islands$renderFirstPersonHandWhileGliding(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, AbstractClientPlayer player, CallbackInfo ci) {
         if (player.getData(ModDataAttachments.IS_GLIDING)) {
             this.renderHand(poseStack, buffer, combinedLight, player, ((PlayerModel)this.model).leftArm, ((PlayerModel)this.model).leftSleeve);
