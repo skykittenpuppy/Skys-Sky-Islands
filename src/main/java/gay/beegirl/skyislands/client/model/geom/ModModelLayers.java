@@ -9,8 +9,8 @@ import java.util.Set;
 public class ModModelLayers {
     private static final String DEFAULT_LAYER = "main";
     private static final Set<ModelLayerLocation> ALL_MODELS = Sets.newHashSet();
-    public static final ModelLayerLocation GLIDER = register("glider");
-    public static final ModelLayerLocation GLIDER_CLOTH = register("glider", "cloth");
+    public static final ModelLayerLocation HANG_GLIDER = register("hang_glider");
+    public static final ModelLayerLocation HANG_GLIDER_CLOTH = register("hang_glider", "cloth");
     public static final ModelLayerLocation BATTERY = register("battery");
 
     private static ModelLayerLocation register(String path) {

@@ -5,7 +5,7 @@ import gay.beegirl.skyislands.client.renderer.entity.layers.BatteryLayer;
 import gay.beegirl.skyislands.client.renderer.entity.layers.GliderLayer;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
 import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
-import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
+import gay.beegirl.skyislands.world.item.gliderdesign.HangGliderDesign;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.world.item.ModCreativeModeTabs;
@@ -61,13 +61,13 @@ public class SkysSkyIslands {
 	public static class ModEvents {
 		@SubscribeEvent
 		public static void addRegistries(DataPackRegistryEvent.NewRegistry event) {
-			event.dataPackRegistry(ModRegistries.GLIDER_DESIGN, GliderDesign.CODEC, GliderDesign.CODEC);
+			event.dataPackRegistry(ModRegistries.HANG_GLIDER_DESIGN, HangGliderDesign.CODEC, HangGliderDesign.CODEC);
 		}
 
 		@SubscribeEvent
 		static void onClientSetup(FMLClientSetupEvent event) {
-			event.enqueueWork(() -> ItemProperties.register(ModItems.GLIDER.get(), ModItemProperties.GLIDER_DESIGN_PREDICATE, (stack, level, entity, seed) -> {
-				GliderDesign gliderDesign = stack.get(ModDataComponents.SEWING_PATTERN);
+			event.enqueueWork(() -> ItemProperties.register(ModItems.HANG_GLIDER.get(), ModItemProperties.HANG_GLIDER_DESIGN_PREDICATE, (stack, level, entity, seed) -> {
+				HangGliderDesign gliderDesign = stack.get(ModDataComponents.SEWING_PATTERN);
 				return gliderDesign != null ? gliderDesign.assetId.hashCode() : Float.NEGATIVE_INFINITY;
 			}));
 		}
@@ -83,8 +83,8 @@ public class SkysSkyIslands {
 
 		@SubscribeEvent
 		public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(ModModelLayers.GLIDER, GliderLayer::createFrameLayer);
-			event.registerLayerDefinition(ModModelLayers.GLIDER_CLOTH, GliderLayer::createClothLayer);
+			event.registerLayerDefinition(ModModelLayers.HANG_GLIDER, GliderLayer::createFrameLayer);
+			event.registerLayerDefinition(ModModelLayers.HANG_GLIDER_CLOTH, GliderLayer::createClothLayer);
 			event.registerLayerDefinition(ModModelLayers.BATTERY, BatteryLayer::createLayer);
 		}
 
