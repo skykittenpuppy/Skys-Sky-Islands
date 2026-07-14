@@ -41,6 +41,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.RAW_ZEPHYRUM.get());
         basicItem(ModItems.ZEPHYRUM.get());
 
+        basicItem(ModItems.BATTERY.get());
+
         parentedItem(ModBlocks.POINTED_CLOUDSHALE.asItem(), Items.POINTED_DRIPSTONE);
         basicItem(ModBlocks.WHITE_PETALS.asItem());
 

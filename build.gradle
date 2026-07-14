@@ -41,9 +41,22 @@ repositories {
     mavenLocal()
 }
 
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
 dependencies {
-    api "dev.ryanhcode.sable:sable-neoforge-${project.minecraft_version}:${project.sable_version}"
-    api("dev.ryanhcode.sable-companion:sable-companion-common-${project.minecraft_version}:${project.sable_companion_version}")
+    //api "dev.ryanhcode.sable:sable-neoforge-${project.minecraft_version}:${project.sable_version}"
+    //api("dev.ryanhcode.sable-companion:sable-companion-common-${project.minecraft_version}:${project.sable_companion_version}")
+
+    compileOnly("dev.ryanhcode.sable:sable-common-${project.minecraft_version}:${project.sable_version}")
+
+    localRuntime("dev.ryanhcode.sable:sable-neoforge-${project.minecraft_version}:${project.sable_version}") {
+        exclude group: 'com.simibubi.create', module: "create-${project.minecraft_version}"
+        exclude group: 'net.createmod.ponder', module: 'ponder-neoforge'
+        exclude group: 'dev.engine-room.flywheel', module: "flywheel-neoforge-${project.minecraft_version}"
+        exclude group: 'com.tterrag.registrate', module: 'Registrate'
+    }
 }
 
 base {
@@ -130,9 +143,6 @@ neoForge {
 // This configuration should be used instead of 'runtimeOnly' to declare
 // a dependency that will be present for runtime testing but that is
 // "optional", meaning it will not be pulled by dependents of this mod.
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
 
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
