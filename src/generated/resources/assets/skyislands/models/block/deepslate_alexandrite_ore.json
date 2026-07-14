@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "skyislands:block/deepslate_alexandrite_ore"
-  }
-}

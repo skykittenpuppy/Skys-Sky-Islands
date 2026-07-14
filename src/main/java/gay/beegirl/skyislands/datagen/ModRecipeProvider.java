@@ -27,37 +27,37 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        List<ItemLike> ALEXANDRITE_SMELTING = List.of(
-                ModItems.RAW_ALEXANDRITE,
-                ModBlocks.STONE_ALEXANDRITE_ORE,
-                ModBlocks.DEEPSLATE_ALEXANDRITE_ORE,
-                ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE
+        List<ItemLike> ZEPHYRUM_SMELTING = List.of(
+                ModItems.RAW_ZEPHYRUM,
+                ModBlocks.STONE_ZEPHYRUM_ORE,
+                ModBlocks.DEEPSLATE_ZEPHYRUM_ORE,
+                ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE
         );
-        oreSmelting(recipeOutput, ALEXANDRITE_SMELTING, RecipeCategory.MISC, ModItems.ALEXANDRITE, 0.25f, 200, "alexandrite");
-        oreBlasting(recipeOutput, ALEXANDRITE_SMELTING, RecipeCategory.MISC, ModItems.ALEXANDRITE, 0.25f, 100, "alexandrite");
+        oreSmelting(recipeOutput, ZEPHYRUM_SMELTING, RecipeCategory.MISC, ModItems.ZEPHYRUM, 0.25f, 200, "zephyrum");
+        oreBlasting(recipeOutput, ZEPHYRUM_SMELTING, RecipeCategory.MISC, ModItems.ZEPHYRUM, 0.25f, 100, "zephyrum");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAW_ALEXANDRITE_BLOCK)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAW_ZEPHYRUM_BLOCK)
                 .pattern("zzz")
                 .pattern("zzz")
                 .pattern("zzz")
-                .define('z', ModItems.RAW_ALEXANDRITE)
-                .unlockedBy(getHasName(ModItems.RAW_ALEXANDRITE), has(ModItems.RAW_ALEXANDRITE))
+                .define('z', ModItems.RAW_ZEPHYRUM)
+                .unlockedBy(getHasName(ModItems.RAW_ZEPHYRUM), has(ModItems.RAW_ZEPHYRUM))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ALEXANDRITE_BLOCK)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ZEPHYRUM_BLOCK)
                 .pattern("zzz")
                 .pattern("zzz")
                 .pattern("zzz")
-                .define('z', ModItems.ALEXANDRITE)
-                .unlockedBy(getHasName(ModItems.ALEXANDRITE), has(ModItems.ALEXANDRITE))
+                .define('z', ModItems.ZEPHYRUM)
+                .unlockedBy(getHasName(ModItems.ZEPHYRUM), has(ModItems.ZEPHYRUM))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_ALEXANDRITE, 9)
-                .requires(ModBlocks.RAW_ALEXANDRITE_BLOCK)
-                .unlockedBy(getHasName(ModBlocks.RAW_ALEXANDRITE_BLOCK), has(ModBlocks.RAW_ALEXANDRITE_BLOCK))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_ZEPHYRUM, 9)
+                .requires(ModBlocks.RAW_ZEPHYRUM_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.RAW_ZEPHYRUM_BLOCK), has(ModBlocks.RAW_ZEPHYRUM_BLOCK))
                 .save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.ALEXANDRITE, 9)
-                .requires(ModBlocks.ALEXANDRITE_BLOCK)
-                .unlockedBy(getHasName(ModBlocks.ALEXANDRITE_BLOCK), has(ModBlocks.ALEXANDRITE_BLOCK))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.ZEPHYRUM, 9)
+                .requires(ModBlocks.ZEPHYRUM_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.ZEPHYRUM_BLOCK), has(ModBlocks.ZEPHYRUM_BLOCK))
                 .save(recipeOutput);
 
 

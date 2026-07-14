@@ -17,8 +17,8 @@ import java.util.Optional;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(SkysSkyIslands.MOD_ID);
 
-    public static final DeferredItem<Item> RAW_ALEXANDRITE = ITEMS.registerSimpleItem("raw_alexandrite", new Item.Properties());
-    public static final DeferredItem<Item> ALEXANDRITE = ITEMS.registerSimpleItem("alexandrite", new Item.Properties());
+    public static final DeferredItem<Item> RAW_ZEPHYRUM = ITEMS.registerSimpleItem("raw_zephyrum", new Item.Properties());
+    public static final DeferredItem<Item> ZEPHYRUM = ITEMS.registerSimpleItem("zephyrum", new Item.Properties());
 
     public static final DeferredItem<Item> GLIDER = ITEMS.registerItem("glider", properties -> new GliderItem(properties.rarity(Rarity.RARE).stacksTo(1)));
 

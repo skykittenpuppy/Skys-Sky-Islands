@@ -24,11 +24,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(ModBlocks.RAW_ALEXANDRITE_BLOCK.get());
-        dropSelf(ModBlocks.ALEXANDRITE_BLOCK.get());
-        add(ModBlocks.STONE_ALEXANDRITE_ORE.get(), createOreDrop(ModBlocks.STONE_ALEXANDRITE_ORE.get(), ModItems.RAW_ALEXANDRITE.get()));
-        add(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get(), ModItems.RAW_ALEXANDRITE.get()));
-        add(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get(), createOreDrop(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get(), ModItems.RAW_ALEXANDRITE.get()));
+        dropSelf(ModBlocks.RAW_ZEPHYRUM_BLOCK.get());
+        dropSelf(ModBlocks.ZEPHYRUM_BLOCK.get());
+        add(ModBlocks.STONE_ZEPHYRUM_ORE.get(), createOreDrop(ModBlocks.STONE_ZEPHYRUM_ORE.get(), ModItems.RAW_ZEPHYRUM.get()));
+        add(ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), ModItems.RAW_ZEPHYRUM.get()));
+        add(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get(), createOreDrop(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get(), ModItems.RAW_ZEPHYRUM.get()));
 
         add(ModBlocks.CLOUDSHALE_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         add(ModBlocks.CLOUDSHALE_SNOW_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));

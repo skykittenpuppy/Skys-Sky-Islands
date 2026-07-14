@@ -44,7 +44,7 @@
       }
     },
     {
-      "model": "skyislands:item/iron_boots_alexandrite_trim",
+      "model": "skyislands:item/iron_boots_zephyrum_trim",
       "predicate": {
         "trim_type": 0.713
       }

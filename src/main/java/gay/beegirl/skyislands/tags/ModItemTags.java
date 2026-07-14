@@ -6,7 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class ModItemTags {
-	public static final TagKey<Item> ALEXANDRITE_ORES = create("alexandrite_ores");
+	public static final TagKey<Item> ZEPHYRUM_ORES = create("zephyrum_ores");
 	public static final TagKey<Item> GLIDER_REPAIR_MATERIALS = create("glider_repair_materials");
 	public static final TagKey<Item> GOLDENLEAF_LOGS = create("goldenleaf_logs");
 	public static final TagKey<Item> SAKURA_LOGS = create("sakura_logs");

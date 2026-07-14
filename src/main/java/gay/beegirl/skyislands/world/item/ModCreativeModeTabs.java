@@ -19,7 +19,7 @@ public class ModCreativeModeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SKY_ISLANDS = CREATIVE_MODE_TABS.register("sky_islands", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.skyislands.sky_islands"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(ModItems.ALEXANDRITE.get()::getDefaultInstance)
+            .icon(ModItems.ZEPHYRUM.get()::getDefaultInstance)
             .displayItems((parameters, output) -> {
                 output.accept(ModBlocks.GOLDENLEAF_LOGS.log());
                 output.accept(ModBlocks.GOLDENLEAF_LOGS.wood());
@@ -121,13 +121,13 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.CLOUDSHALE_BRICK.slab());
                 output.accept(ModBlocks.CLOUDSHALE_BRICK.wall());
 
-                output.accept(ModBlocks.ALEXANDRITE_BLOCK);
-                output.accept(ModBlocks.STONE_ALEXANDRITE_ORE);
-                output.accept(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE);
-                output.accept(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE);
-                output.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
-                output.accept(ModItems.RAW_ALEXANDRITE);
-                output.accept(ModItems.ALEXANDRITE);
+                output.accept(ModBlocks.ZEPHYRUM_BLOCK);
+                output.accept(ModBlocks.STONE_ZEPHYRUM_ORE);
+                output.accept(ModBlocks.DEEPSLATE_ZEPHYRUM_ORE);
+                output.accept(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE);
+                output.accept(ModBlocks.RAW_ZEPHYRUM_BLOCK);
+                output.accept(ModItems.RAW_ZEPHYRUM);
+                output.accept(ModItems.ZEPHYRUM);
 
                 output.accept(ModItems.TESTING_POTTERY_SHERD);
                 output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);

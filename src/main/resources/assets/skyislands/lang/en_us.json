@@ -117,13 +117,13 @@
   "block.skyislands.cloudshale_bricks_slab": "Cloudshale Brick Slab",
   "block.skyislands.cloudshale_bricks_wall": "Cloudshale Brick Wall",
 
-  "block.skyislands.alexandrite_block": "Alexandrite Block",
-  "block.skyislands.stone_alexandrite_ore": "Alexandrite Ore",
-  "block.skyislands.deepslate_alexandrite_ore": "Deepslate Alexandrite Ore",
-  "block.skyislands.cloudshale_alexandrite_ore": "Cloudshale Alexandrite Ore",
-  "block.skyislands.raw_alexandrite_block": "Raw Alexandrite Block",
-  "item.skyislands.raw_alexandrite": "Raw Alexandrite",
-  "item.skyislands.alexandrite": "Alexandrite",
+  "block.skyislands.zephyrum_block": "Zephyrum Block",
+  "block.skyislands.stone_zephyrum_ore": "Zephyrum Ore",
+  "block.skyislands.deepslate_zephyrum_ore": "Deepslate Zephyrum Ore",
+  "block.skyislands.cloudshale_zephyrum_ore": "Cloudshale Zephyrum Ore",
+  "block.skyislands.raw_zephyrum_block": "Raw Zephyrum Block",
+  "item.skyislands.raw_zephyrum": "Raw Zephyrum",
+  "item.skyislands.zephyrum": "Zephyrum",
 
   "item.skyislands.glider": "Glider",
   "item.skyislands.testing_pottery_sherd": "Testing Pottery Sherd",
@@ -145,7 +145,7 @@
   "tag.item.skyislands.frigid_logs": "Frigid Logs",
   "tag.item.skyislands.arboreal_cactus_stems": "Arboreal Cactus Stems",
 
-  "trim_material.skyislands.alexandrite": "Alexandrite Material",
+  "trim_material.skyislands.zephyrum": "Zephyrum Material",
   "trim_pattern.skyislands.testing": "Testing Armor Trim",
   "glider_design.skyislands.testing": "Testing Glider Design",
 

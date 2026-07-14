@@ -1,16 +1,16 @@
 BLOCKS:
-	alexandrite block
-	raw alexandrite block
-	stone alexandrite ore
-	deepslate alexandrite ore
-	cloudshale alexandrite ore
+	zephyrum block
+	raw zephyrum block
+	stone zephyrum ore
+	deepslate zephyrum ore
+	cloudshale zephyrum ore
 	mossy cobbled cloudshale
 	arboreal cactus door
 	arboreal cactus trapdoor
 
 ITEMS:
-	alexandrite
-	raw alexandrite
+	zephyrum
+	raw zephyrum
 	arboreal cactus items
 	glider slot
 	sewing template slot

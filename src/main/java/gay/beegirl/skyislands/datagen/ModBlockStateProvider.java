@@ -26,11 +26,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlockWithItem(ModBlocks.RAW_ALEXANDRITE_BLOCK.get());
-        simpleBlockWithItem(ModBlocks.ALEXANDRITE_BLOCK.get());
-        simpleBlockWithItem(ModBlocks.STONE_ALEXANDRITE_ORE.get());
-        simpleBlockWithItem(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get());
-        simpleBlockWithItem(ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
+        simpleBlockWithItem(ModBlocks.RAW_ZEPHYRUM_BLOCK.get());
+        simpleBlockWithItem(ModBlocks.ZEPHYRUM_BLOCK.get());
+        simpleBlockWithItem(ModBlocks.STONE_ZEPHYRUM_ORE.get());
+        simpleBlockWithItem(ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get());
+        simpleBlockWithItem(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get());
 
         tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.get());
         untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_SNOW_GRASS.get(), ModBlocks.CLOUDSHALE.get());

@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ModItemModelProvider extends ItemModelProvider {
     private static final List<ResourceKey<TrimMaterial>> MOD_TRIM_MATERIALS = List.of(
-            ModTrimMaterials.ALEXANDRITE
+            ModTrimMaterials.ZEPHYRUM
     );
     private static final List<ResourceKey<GliderDesign>> MOD_GLIDER_DESIGNS = List.of(
             ModGliderDesigns.TESTING
@@ -38,8 +38,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ModItems.RAW_ALEXANDRITE.get());
-        basicItem(ModItems.ALEXANDRITE.get());
+        basicItem(ModItems.RAW_ZEPHYRUM.get());
+        basicItem(ModItems.ZEPHYRUM.get());
 
         parentedItem(ModBlocks.POINTED_CLOUDSHALE.asItem(), Items.POINTED_DRIPSTONE);
         basicItem(ModBlocks.WHITE_PETALS.asItem());

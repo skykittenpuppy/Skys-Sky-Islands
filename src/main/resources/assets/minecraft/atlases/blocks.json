@@ -19,7 +19,7 @@
         "netherite_darker": "minecraft:trims/color_palettes/netherite_darker",
         "quartz": "minecraft:trims/color_palettes/quartz",
         "redstone": "minecraft:trims/color_palettes/redstone",
-        "alexandrite": "skyislands:trims/color_palettes/alexandrite"
+        "zephyrum": "skyislands:trims/color_palettes/zephyrum"
       },
       "textures": [
         "minecraft:trims/items/helmet_trim",

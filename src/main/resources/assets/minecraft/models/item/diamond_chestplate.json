@@ -44,7 +44,7 @@
       }
     },
     {
-      "model": "skyislands:item/diamond_chestplate_alexandrite_trim",
+      "model": "skyislands:item/diamond_chestplate_zephyrum_trim",
       "predicate": {
         "trim_type": 0.713
       }

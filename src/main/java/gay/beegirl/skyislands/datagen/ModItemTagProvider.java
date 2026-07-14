@@ -124,9 +124,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.FRIGID_CHEST_BOAT.asItem())
                 .add(ModItems.ARBOREAL_CACTUS_CHEST_BOAT.asItem());
         tag(ItemTags.BEACON_PAYMENT_ITEMS)
-                .add(ModItems.ALEXANDRITE.get());
-        tag(ModItemTags.ALEXANDRITE_ORES)
-                .add(ModBlocks.STONE_ALEXANDRITE_ORE.asItem(), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.asItem(), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.asItem());
+                .add(ModItems.ZEPHYRUM.get());
+        tag(ModItemTags.ZEPHYRUM_ORES)
+                .add(ModBlocks.STONE_ZEPHYRUM_ORE.asItem(), ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.asItem(), ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.asItem());
         tag(ItemTags.STONE_TOOL_MATERIALS)
                 .add(ModBlocks.COBBLED_CLOUDSHALE.base().asItem());
         tag(ItemTags.STONE_CRAFTING_MATERIALS)
@@ -134,7 +134,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.DECORATED_POT_SHERDS)
                 .add(ModItems.TESTING_POTTERY_SHERD.get());
         tag(ItemTags.TRIM_MATERIALS)
-                .add(ModItems.ALEXANDRITE.get());
+                .add(ModItems.ZEPHYRUM.get());
         tag(ItemTags.TRIM_TEMPLATES)
                 .add(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 

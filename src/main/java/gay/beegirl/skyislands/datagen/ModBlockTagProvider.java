@@ -141,22 +141,22 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.FLOWERS)
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.BEACON_BASE_BLOCKS)
-                .add(ModBlocks.ALEXANDRITE_BLOCK.get());
-        tag(ModBlockTags.ALEXANDRITE_ORES)
-                .add(ModBlocks.STONE_ALEXANDRITE_ORE.get(), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get(), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
+                .add(ModBlocks.ZEPHYRUM_BLOCK.get());
+        tag(ModBlockTags.ZEPHYRUM_ORES)
+                .add(ModBlocks.STONE_ZEPHYRUM_ORE.get(), ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get());
         tag(BlockTags.BASE_STONE_OVERWORLD)
                 .add(ModBlocks.CLOUDSHALE.get());
         tag(ModBlockTags.CLOUDSHALE_ORE_REPLACEABLE)
                 .add(ModBlocks.CLOUDSHALE.get());
         tag(BlockTags.CRYSTAL_SOUND_BLOCKS)
-                .add(ModBlocks.RAW_ALEXANDRITE_BLOCK.get(), ModBlocks.ALEXANDRITE_BLOCK.get());
+                .add(ModBlocks.RAW_ZEPHYRUM_BLOCK.get(), ModBlocks.ZEPHYRUM_BLOCK.get());
         tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS)
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.RAW_ALEXANDRITE_BLOCK.get(), ModBlocks.ALEXANDRITE_BLOCK.get())
-                .add(ModBlocks.STONE_ALEXANDRITE_ORE.get(), ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get(), ModBlocks.CLOUDSHALE_ALEXANDRITE_ORE.get());
+                .add(ModBlocks.RAW_ZEPHYRUM_BLOCK.get(), ModBlocks.ZEPHYRUM_BLOCK.get())
+                .add(ModBlocks.STONE_ZEPHYRUM_ORE.get(), ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get());
         tag(BlockTags.SWORD_EFFICIENT)
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.ANIMALS_SPAWNABLE_ON)

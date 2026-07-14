@@ -1,9 +1,9 @@
 {
   "values": [
-    "skyislands:raw_alexandrite_block",
-    "skyislands:alexandrite_block",
-    "skyislands:stone_alexandrite_ore",
-    "skyislands:deepslate_alexandrite_ore",
-    "skyislands:cloudshale_alexandrite_ore"
+    "skyislands:raw_zephyrum_block",
+    "skyislands:zephyrum_block",
+    "skyislands:stone_zephyrum_ore",
+    "skyislands:deepslate_zephyrum_ore",
+    "skyislands:cloudshale_zephyrum_ore"
   ]
 }

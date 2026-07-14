@@ -1,9 +1,0 @@
-{
-  "asset_name": "alexandrite",
-  "description": {
-    "color": "#000000",
-    "translate": "trim_material.skyislands.alexandrite"
-  },
-  "ingredient": "skyislands:alexandrite",
-  "item_model_index": 0.713
-}

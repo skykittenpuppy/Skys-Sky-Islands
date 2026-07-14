@@ -312,7 +312,7 @@ public class ModBlocks {
     public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF, MapColor.COLOR_MAGENTA);
     public static final StoneBlockSet CLOUDSHALE_BRICK = registerStoneSetBlocks("cloudshale_bricks", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
 
-    public static final DeferredBlock<Block> STONE_ALEXANDRITE_ORE = registerBlockWithItem("stone_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
+    public static final DeferredBlock<Block> STONE_ZEPHYRUM_ORE = registerBlockWithItem("stone_zephyrum_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.STONE)
@@ -320,7 +320,7 @@ public class ModBlocks {
                     .strength(3.0F, 3.0F)
                     .sound(SoundType.STONE)
     ));
-    public static final DeferredBlock<Block> DEEPSLATE_ALEXANDRITE_ORE = registerBlockWithItem("deepslate_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
+    public static final DeferredBlock<Block> DEEPSLATE_ZEPHYRUM_ORE = registerBlockWithItem("deepslate_zephyrum_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.DEEPSLATE)
@@ -328,7 +328,7 @@ public class ModBlocks {
                     .strength(4.5F, 3.0F)
                     .sound(SoundType.DEEPSLATE)
     ));
-    public static final DeferredBlock<Block> CLOUDSHALE_ALEXANDRITE_ORE = registerBlockWithItem("cloudshale_alexandrite_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
+    public static final DeferredBlock<Block> CLOUDSHALE_ZEPHYRUM_ORE = registerBlockWithItem("cloudshale_zephyrum_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.COLOR_MAGENTA)
@@ -336,7 +336,7 @@ public class ModBlocks {
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.TUFF_BRICKS)
     ));
-    public static final DeferredBlock<Block> RAW_ALEXANDRITE_BLOCK = registerBlockWithItem("raw_alexandrite_block", properties -> new Block(
+    public static final DeferredBlock<Block> RAW_ZEPHYRUM_BLOCK = registerBlockWithItem("raw_zephyrum_block", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.COLOR_MAGENTA)
@@ -344,7 +344,7 @@ public class ModBlocks {
                     .strength(5.0F, 6.0F)
                     .sound(SoundType.STONE)
     ));
-    public static final DeferredBlock<Block> ALEXANDRITE_BLOCK = registerBlockWithItem("alexandrite_block", properties -> new Block(
+    public static final DeferredBlock<Block> ZEPHYRUM_BLOCK = registerBlockWithItem("zephyrum_block", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.COLOR_MAGENTA)
