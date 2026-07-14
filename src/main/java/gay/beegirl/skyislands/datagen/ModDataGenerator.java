@@ -6,9 +6,8 @@ import gay.beegirl.skyislands.data.worldgen.features.ModFeatureUtils;
 import gay.beegirl.skyislands.data.worldgen.placements.ModPlacementUtils;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimMaterials;
 import gay.beegirl.skyislands.world.item.armortrim.ModTrimPatterns;
-import gay.beegirl.skyislands.world.item.gliderdesign.ModGliderDesigns;
+import gay.beegirl.skyislands.world.item.gliderdesign.ModHangGliderDesigns;
 import gay.beegirl.skyislands.neoforge.ModBiomeModifiers;
-import gay.beegirl.skyislands.world.level.block.entity.ModDecoratedPotPatterns;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -61,6 +60,6 @@ public class ModDataGenerator {
                 .add(Registries.CONFIGURED_FEATURE, ModFeatureUtils::bootstrap)
                 .add(Registries.PLACED_FEATURE, ModPlacementUtils::bootstrap)
                 .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
-                .add(ModRegistries.GLIDER_DESIGN, ModGliderDesigns::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
+                .add(ModRegistries.HANG_GLIDER_DESIGN, ModHangGliderDesigns::bootstrap), Set.of(SkysSkyIslands.MOD_ID)));
     }
 }

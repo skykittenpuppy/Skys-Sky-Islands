@@ -32,7 +32,7 @@ import java.util.Optional;
 @OnlyIn(Dist.CLIENT)
 @Mixin(SmithingScreen.class)
 public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMenu> {
-    @Unique private static final ResourceLocation EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_DESIGN = SkysSkyIslands.createId(
+    @Unique private static final ResourceLocation EMPTY_SLOT_SEWING_TEMPLATE = SkysSkyIslands.createId(
             "item/empty_slot_sewing_template_glider_design"
     );
 
@@ -49,7 +49,7 @@ public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMen
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void islands$init(CallbackInfo ci) {
         EMPTY_SLOT_SMITHING_TEMPLATES = new ArrayList<>(EMPTY_SLOT_SMITHING_TEMPLATES);
-        EMPTY_SLOT_SMITHING_TEMPLATES.add(EMPTY_SLOT_SEWING_TEMPLATE_GLIDER_DESIGN);
+        EMPTY_SLOT_SMITHING_TEMPLATES.add(EMPTY_SLOT_SEWING_TEMPLATE);
     }
 
     @Unique
@@ -73,7 +73,7 @@ public abstract class SmithingScreenMixin extends ItemCombinerScreen<SmithingMen
     @Inject(method = "slotChanged", at = @At("HEAD"))
     private void islands$slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack, CallbackInfo ci) {
         armorStandPreview.setData(ModDataAttachments.IS_GLIDING, false);
-        if (slotInd == 3 && stack.is(ModItems.GLIDER)) {
+        if (slotInd == 3 && stack.is(ModItems.HANG_GLIDER)) {
             armorStandPreview.setData(ModDataAttachments.IS_GLIDING, true);
         }
     }

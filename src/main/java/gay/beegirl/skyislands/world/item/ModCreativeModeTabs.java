@@ -2,7 +2,7 @@ package gay.beegirl.skyislands.world.item;
 
 import gay.beegirl.skyislands.SkysSkyIslands;
 import gay.beegirl.skyislands.core.component.ModDataComponents;
-import gay.beegirl.skyislands.world.item.gliderdesign.GliderDesign;
+import gay.beegirl.skyislands.world.item.gliderdesign.HangGliderDesign;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -131,10 +131,10 @@ public class ModCreativeModeTabs {
 
                 output.accept(ModItems.TESTING_POTTERY_SHERD);
                 output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
-                output.accept(ModItems.GLIDER);
-                output.accept(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE);
-                ItemStack testing_glider = new ItemStack(ModItems.GLIDER.get());
-                testing_glider.set(ModDataComponents.SEWING_PATTERN.get(), new GliderDesign(ModItems.TESTING_GLIDER_DESIGN_SEWING_TEMPLATE, SkysSkyIslands.createId("testing"), Component.translatable("glider_design.skyislands.testing")));
+                output.accept(ModItems.HANG_GLIDER);
+                output.accept(ModItems.TESTING_HANG_GLIDER_DESIGN_SEWING_TEMPLATE);
+                ItemStack testing_glider = new ItemStack(ModItems.HANG_GLIDER.get());
+                testing_glider.set(ModDataComponents.SEWING_PATTERN.get(), new HangGliderDesign(ModItems.TESTING_HANG_GLIDER_DESIGN_SEWING_TEMPLATE, SkysSkyIslands.createId("testing"), Component.translatable("hang_glider_design.skyislands.testing")));
                 output.accept(testing_glider);
             }).build());
 

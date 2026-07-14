@@ -21,21 +21,21 @@ import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
 
-public class GliderDesign implements TooltipProvider {
-	public static final Codec<GliderDesign> CODEC = RecordCodecBuilder.create(
+public class HangGliderDesign implements TooltipProvider {
+	public static final Codec<HangGliderDesign> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
 					RegistryFixedCodec.create(Registries.ITEM).fieldOf("template_item").forGetter(gliderDesign -> gliderDesign.templateItem),
 					ResourceLocation.CODEC.fieldOf("asset_id").forGetter(gliderDesign -> gliderDesign.assetId),
 					ComponentSerialization.CODEC.fieldOf("description").forGetter(gliderDesign -> gliderDesign.description),
 					Codec.BOOL.optionalFieldOf("show_in_tooltip", true).forGetter(gliderDesign -> gliderDesign.showInTooltip)
-			).apply(instance, GliderDesign::new)
+			).apply(instance, HangGliderDesign::new)
 	);
-	public static final StreamCodec<RegistryFriendlyByteBuf, GliderDesign> STREAM_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, HangGliderDesign> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.holderRegistry(Registries.ITEM), gliderDesign -> gliderDesign.templateItem,
 			ResourceLocation.STREAM_CODEC, gliderDesign -> gliderDesign.assetId,
 			ComponentSerialization.STREAM_CODEC, gliderDesign -> gliderDesign.description,
 			ByteBufCodecs.BOOL, gliderDesign -> gliderDesign.showInTooltip,
-			GliderDesign::new
+			HangGliderDesign::new
 	);
 
 	private static final Component DESIGN_TITLE = Component.translatable(
@@ -48,19 +48,19 @@ public class GliderDesign implements TooltipProvider {
 	public final Component description;
 	private final boolean showInTooltip;
 
-	public GliderDesign(GliderDesign other){
+	public HangGliderDesign(HangGliderDesign other){
 		this.templateItem = other.templateItem;
 		this.assetId = other.assetId;
 		this.description = other.description;
 		this.showInTooltip = other.showInTooltip;
 	}
-	public GliderDesign(Holder<Item> templateItem, ResourceLocation assetId, Component description) {
+	public HangGliderDesign(Holder<Item> templateItem, ResourceLocation assetId, Component description) {
 		this.templateItem = templateItem;
 		this.assetId = assetId;
 		this.description = description;
 		this.showInTooltip = true;
 	}
-	public GliderDesign(Holder<Item> templateItem, ResourceLocation assetId, Component description, boolean showInTooltip) {
+	public HangGliderDesign(Holder<Item> templateItem, ResourceLocation assetId, Component description, boolean showInTooltip) {
 		this.templateItem = templateItem;
 		this.assetId = assetId;
 		this.description = description;
@@ -77,7 +77,7 @@ public class GliderDesign implements TooltipProvider {
 
 	@Override
 	public boolean equals(Object other) {
-		return other instanceof GliderDesign gliderPattern &&
+		return other instanceof HangGliderDesign gliderPattern &&
 				this.templateItem == gliderPattern.templateItem &&
 				this.assetId == gliderPattern.assetId &&
 				this.description == gliderPattern.description &&
@@ -90,7 +90,7 @@ public class GliderDesign implements TooltipProvider {
 		return 31 * i + (this.showInTooltip ? 1 : 0);
 	}
 
-	public GliderDesign withTooltip(boolean showInTooltip) {
-		return new GliderDesign(templateItem, assetId, description, showInTooltip);
+	public HangGliderDesign withTooltip(boolean showInTooltip) {
+		return new HangGliderDesign(templateItem, assetId, description, showInTooltip);
 	}
 }
