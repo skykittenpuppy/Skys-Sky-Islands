@@ -131,6 +131,8 @@ public class ModCreativeModeTabs {
 
                 output.accept(ModItems.BATTERY);
 
+                output.accept(ModItems.BATTERY);
+
                 output.accept(ModItems.TESTING_POTTERY_SHERD);
                 output.accept(ModItems.TESTING_ARMOR_TRIM_SMITHING_TEMPLATE);
                 output.accept(ModItems.HANG_GLIDER);
