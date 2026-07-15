@@ -4,6 +4,7 @@ import gay.beegirl.skyislands.client.particle.SakuraParticle;
 import gay.beegirl.skyislands.client.renderer.entity.layers.GliderLayer;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
 import gay.beegirl.skyislands.client.renderer.item.ModItemProperties;
+import gay.beegirl.skyislands.sounds.ModSoundEvents;
 import gay.beegirl.skyislands.world.item.gliderdesign.HangGliderDesign;
 import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
@@ -13,6 +14,7 @@ import gay.beegirl.skyislands.world.item.ModItems;
 import gay.beegirl.skyislands.core.particles.ModParticleTypes;
 import gay.beegirl.skyislands.world.item.crafting.ModRecipeSerializer;
 import gay.beegirl.skyislands.core.registries.ModRegistries;
+import gay.beegirl.skyislands.world.level.block.ModSoundType;
 import gay.beegirl.skyislands.world.level.block.entity.ModDecoratedPotPatterns;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -42,6 +44,8 @@ public class SkysSkyIslands {
 	public SkysSkyIslands(IEventBus modEventBus, ModContainer modContainer) {
 		ModDataAttachments.registerDataAttachments(modEventBus);
 		ModDataComponents.registerDataComponents(modEventBus);
+		ModSoundEvents.registerSoundEvents(modEventBus);
+		ModSoundType.createSoundTypes();
 		ModBlocks.registerBlocks(modEventBus);
 		ModItems.registerItems(modEventBus);
 		ModCreativeModeTabs.registerCreativeModeTabs(modEventBus);

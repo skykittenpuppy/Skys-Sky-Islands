@@ -276,7 +276,7 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
-                    .sound(SoundType.GRASS)
+                    .sound(ModSoundType.CLOUDSHALE_GRASS)
     ));
     public static final DeferredBlock<Block> CLOUDSHALE_SNOW_GRASS = registerBlockWithItem("cloudshale_snow_grass", properties -> new Block(
             properties
@@ -284,14 +284,15 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
-                    .sound(SoundType.SNOW)
+                    .sound(ModSoundType.CLOUDSHALE_SNOW_GRASS)
+                    .friction(0.67f)
     ));
     public static final DeferredBlock<Block> POINTED_CLOUDSHALE = registerBlockWithItem("pointed_cloudshale", properties -> new PointedCloudshaleBlock(
             properties
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
-                    .sound(SoundType.POINTED_DRIPSTONE)
+                    .sound(ModSoundType.POINTED_CLOUDSHALE)
                     .randomTicks()
                     .noOcclusion()
                     .forceSolidOn()
@@ -305,12 +306,12 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
-                    .sound(SoundType.TUFF_BRICKS)
+                    .sound(ModSoundType.CLOUDSHALE)
     ));
 
-    public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet CLOUDSHALE_BRICK = registerStoneSetBlocks("cloudshale_bricks", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, SoundType.TUFF_BRICKS, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE, MapColor.COLOR_MAGENTA);
+    public static final StoneBlockSet CLOUDSHALE_BRICK = registerStoneSetBlocks("cloudshale_bricks", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE_BRICKS, MapColor.COLOR_MAGENTA);
 
     public static final DeferredBlock<Block> STONE_ZEPHYRUM_ORE = registerBlockWithItem("stone_zephyrum_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
@@ -334,7 +335,7 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(2.0F, 3.0F)
-                    .sound(SoundType.TUFF_BRICKS)
+                    .sound(ModSoundType.CLOUDSHALE)
     ));
     public static final DeferredBlock<Block> RAW_ZEPHYRUM_BLOCK = registerBlockWithItem("raw_zephyrum_block", properties -> new Block(
             properties
@@ -342,7 +343,6 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(5.0F, 6.0F)
-                    .sound(SoundType.STONE)
     ));
     public static final DeferredBlock<Block> ZEPHYRUM_BLOCK = registerBlockWithItem("zephyrum_block", properties -> new Block(
             properties
@@ -380,12 +380,7 @@ public class ModBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_GOLDENLEAF_SAPLING = registerBlock("potted_goldenleaf_sapling", properties -> new FlowerPotBlock(GOLDENLEAF_SAPLING.get(),
-            properties
-                    .instabreak()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-    ));
+    public static final DeferredBlock<Block> POTTED_GOLDENLEAF_SAPLING = registerBlock("potted_goldenleaf_sapling", properties -> flowerPot(GOLDENLEAF_SAPLING.get()));
 
     public static final LogBlockSet SAKURA_LOGS = registerLogSetBlocks("sakura", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE, MapColor.COLOR_GRAY);
     public static final WoodBlockSet SAKURA_PLANKS = registerWoodSetBlocks("sakura", ModWoodType.SAKURA, ModBlockSetType.SAKURA, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.TERRACOTTA_WHITE);
@@ -414,17 +409,15 @@ public class ModBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_SAKURA_SAPLING = registerBlock("potted_sakura_sapling", properties -> new FlowerPotBlock(SAKURA_SAPLING.get(),
-            properties
-                    .instabreak()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-    ));
+    public static final DeferredBlock<Block> POTTED_SAKURA_SAPLING = registerBlock("potted_sakura_sapling", properties -> flowerPot(SAKURA_SAPLING.get()));
     public static final DeferredBlock<Block> WHITE_PETALS = registerBlockWithItem("white_petals", properties -> new PinkPetalsBlock(
             properties
+                    .mapColor(MapColor.PLANT)
                     .instabreak()
                     .noOcclusion()
                     .noCollission()
+                    .sound(SoundType.PINK_PETALS)
+                    .pushReaction(PushReaction.DESTROY)
     ));
 
     public static final LogBlockSet FRIGID_LOGS = registerLogSetBlocks("frigid", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_BLUE);
@@ -454,12 +447,7 @@ public class ModBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_FRIGID_SAPLING = registerBlock("potted_frigid_sapling", properties -> new FlowerPotBlock(FRIGID_SAPLING.get(),
-            properties
-                    .instabreak()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-    ));
+    public static final DeferredBlock<Block> POTTED_FRIGID_SAPLING = registerBlock("potted_frigid_sapling", properties -> flowerPot(FRIGID_SAPLING.get()));
 
     public static final CactusBlockSet ARBOREAL_CACTUSES = registerCactusSetBlocks("arboreal_cactus", NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_MAGENTA);
     public static final WoodBlockSet ARBOREAL_CACTUS_PLANKS = registerWoodSetBlocks("arboreal_cactus", ModWoodType.ARBOREAL_CACTUS, ModBlockSetType.ARBOREAL_CACTUS, NoteBlockInstrument.BASS, SoundType.WOOD, MapColor.COLOR_LIGHT_BLUE);
@@ -483,17 +471,17 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
     ));
-    public static final DeferredBlock<Block> POTTED_ARBOREAL_CACTUS = registerBlock("potted_arboreal_cactus", properties -> new FlowerPotBlock(ARBOREAL_CACTUS_FRUIT.get(),
-            properties
-                    .instabreak()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-    ));
+    public static final DeferredBlock<Block> POTTED_ARBOREAL_CACTUS = registerBlock("potted_arboreal_cactus", properties -> flowerPot(ARBOREAL_CACTUS_FRUIT.get()));
 
     public static void registerBlocks(IEventBus modEventBus) {
         SkysSkyIslands.LOGGER.info("Registering Blocks for " + SkysSkyIslands.MOD_ID);
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
+    }
+
+    // Copied from Blocks
+    private static Block flowerPot(Block potted) {
+        return new FlowerPotBlock(potted, Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
     }
 }

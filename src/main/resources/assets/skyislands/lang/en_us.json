@@ -149,5 +149,7 @@
   "trim_pattern.skyislands.testing": "Testing Armor Trim",
   "hang_glider_design.skyislands.testing": "Testing Hang Glider Design",
 
-  "container.upgrade.missing_template_tooltip": "Add Template"
+  "container.upgrade.missing_template_tooltip": "Add Template",
+
+  "subtitles.skyislands.block.zephyrum.magic": "Placeholder subtitle naming scheme example"
 }

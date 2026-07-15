@@ -15,7 +15,7 @@ public class ModTrimMaterials {
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
         SkysSkyIslands.LOGGER.info("Trim Material Bootstrap for " + SkysSkyIslands.MOD_ID);
 
-        TrimMaterials.register(context, ZEPHYRUM, ModItems.ZEPHYRUM.get(), Style.EMPTY.withColor(0), 0.713F);
+        TrimMaterials.register(context, ZEPHYRUM, ModItems.ZEPHYRUM.get(), Style.EMPTY.withColor(Integer.parseInt("F488D0", 16)), 0.713F);
     }
 
     private static ResourceKey<TrimMaterial> registryKey(String name) {

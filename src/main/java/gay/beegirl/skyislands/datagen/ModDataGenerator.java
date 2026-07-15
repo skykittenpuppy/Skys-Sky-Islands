@@ -53,6 +53,8 @@ public class ModDataGenerator {
         generator.addProvider(event.includeClient(), new ModParticleDescriptionProvider(packOutput, existingFileHelper));
         //Recipe
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
+        //Sound Definition
+        generator.addProvider(event.includeServer(), new ModSoundDefinitionProvider(packOutput, existingFileHelper));
         //DatapackRegistries
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, new RegistrySetBuilder()
                 .add(Registries.TRIM_MATERIAL, ModTrimMaterials::bootstrap)
