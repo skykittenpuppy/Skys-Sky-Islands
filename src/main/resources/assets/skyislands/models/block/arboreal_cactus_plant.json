@@ -4,8 +4,8 @@
 	"parent": "block/block",
 	"render_type": "minecraft:cutout",
 	"textures": {
+		"particle": "skyislands:block/particle/arboreal_cactus",
 		"cactus_top": "skyislands:block/arboreal_cactus_top",
-		"particle": "skyislands:block/arboreal_cactus_plant",
 		"cactus": "skyislands:block/arboreal_cactus_plant"
 	},
 	"elements": [

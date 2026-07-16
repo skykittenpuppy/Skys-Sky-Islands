@@ -29,8 +29,8 @@ public class SewingTemplateItem extends Item {
     private static final ResourceLocation EMPTY_SLOT_STRING;
     private final Component designDescription;
 
-    public SewingTemplateItem(ResourceKey<HangGliderDesign> key, FeatureFlag... requiredFeatures) {
-        super((new Item.Properties()).requiredFeatures(requiredFeatures));
+    public SewingTemplateItem(Properties properties, ResourceKey<HangGliderDesign> key) {
+        super(properties);
         this.designDescription = Component.translatable(Util.makeDescriptionId("hang_glider_design", key.location())).withStyle(TITLE_FORMAT);
     }
 

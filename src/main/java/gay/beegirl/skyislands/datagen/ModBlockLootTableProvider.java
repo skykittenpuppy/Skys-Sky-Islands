@@ -31,7 +31,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get(), createOreDrop(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get(), ModItems.RAW_ZEPHYRUM.get()));
 
         add(ModBlocks.CLOUDSHALE_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
-        add(ModBlocks.CLOUDSHALE_SNOW_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
+        add(ModBlocks.CLOUDSHALE_SNOW.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         add(ModBlocks.CLOUDSHALE.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.COBBLED_CLOUDSHALE.base().get()));
         dropSelf(ModBlocks.POINTED_CLOUDSHALE.get());
 

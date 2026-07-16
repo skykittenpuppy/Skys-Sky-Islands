@@ -278,28 +278,14 @@ public class ModBlocks {
                     .strength(1.5F, 3.0F)
                     .sound(ModSoundType.CLOUDSHALE_GRASS)
     ));
-    public static final DeferredBlock<Block> CLOUDSHALE_SNOW_GRASS = registerBlockWithItem("cloudshale_snow_grass", properties -> new Block(
+    public static final DeferredBlock<Block> CLOUDSHALE_SNOW = registerBlockWithItem("cloudshale_snow", properties -> new Block(
             properties
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(1.5F, 3.0F)
-                    .sound(ModSoundType.CLOUDSHALE_SNOW_GRASS)
+                    .sound(ModSoundType.CLOUDSHALE_SNOW)
                     .friction(0.67f)
-    ));
-    public static final DeferredBlock<Block> POINTED_CLOUDSHALE = registerBlockWithItem("pointed_cloudshale", properties -> new PointedCloudshaleBlock(
-            properties
-                    .mapColor(MapColor.COLOR_MAGENTA)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(1.5F, 3.0F)
-                    .sound(ModSoundType.POINTED_CLOUDSHALE)
-                    .randomTicks()
-                    .noOcclusion()
-                    .forceSolidOn()
-                    .dynamicShape()
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(Blocks::never)
     ));
     public static final DeferredBlock<Block> CLOUDSHALE = registerBlockWithItem("cloudshale", properties -> new RotatedPillarBlock(
             properties
@@ -308,10 +294,25 @@ public class ModBlocks {
                     .strength(1.5F, 3.0F)
                     .sound(ModSoundType.CLOUDSHALE)
     ));
+    public static final StoneBlockSet CLOUDSHALE_BRICK = registerStoneSetBlocks("cloudshale_bricks", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE_BRICKS, MapColor.COLOR_MAGENTA);
 
     public static final StoneBlockSet COBBLED_CLOUDSHALE = registerStoneSetBlocks("cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE, MapColor.COLOR_MAGENTA);
     public static final StoneBlockSet MOSSY_COBBLED_CLOUDSHALE = registerStoneSetBlocks("mossy_cobbled_cloudshale", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE, MapColor.COLOR_MAGENTA);
-    public static final StoneBlockSet CLOUDSHALE_BRICK = registerStoneSetBlocks("cloudshale_bricks", ModBlockSetType.CLOUDSHALE, NoteBlockInstrument.BASEDRUM, ModSoundType.CLOUDSHALE_BRICKS, MapColor.COLOR_MAGENTA);
+
+    public static final DeferredBlock<Block> POINTED_CLOUDSHALE = registerBlockWithItem("pointed_cloudshale", properties -> new PointedCloudshaleBlock(CLOUDSHALE.get().defaultBlockState(),
+            properties
+                    .mapColor(MapColor.COLOR_MAGENTA)
+                    .forceSolidOn()
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .noOcclusion()
+                    .sound(ModSoundType.POINTED_CLOUDSHALE)
+                    .randomTicks()
+                    .strength(1.5F, 3.0F)
+                    .dynamicShape()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor(Blocks::never)
+    ));
 
     public static final DeferredBlock<Block> STONE_ZEPHYRUM_ORE = registerBlockWithItem("stone_zephyrum_ore", properties -> new DropExperienceBlock(UniformInt.of(3, 7),
             properties
@@ -456,7 +457,7 @@ public class ModBlocks {
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(0.2F, 3.0F)
-                    .sound(SoundType.WOOL)
+                    .sound(ModSoundType.ARBOREAL_CACTUS_PLANTS)
                     .randomTicks()
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
@@ -466,7 +467,7 @@ public class ModBlocks {
                     .mapColor(MapColor.CRIMSON_STEM)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(0.2F, 3.0F)
-                    .sound(SoundType.WOOL)
+                    .sound(ModSoundType.ARBOREAL_CACTUS_PLANTS)
                     .randomTicks()
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)

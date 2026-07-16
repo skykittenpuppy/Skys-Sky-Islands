@@ -101,7 +101,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.ARBOREAL_CACTUS_CHEST_BOAT);
 
                 output.accept(ModBlocks.CLOUDSHALE_GRASS);
-                output.accept(ModBlocks.CLOUDSHALE_SNOW_GRASS);
+                output.accept(ModBlocks.CLOUDSHALE_SNOW);
 
                 output.accept(ModBlocks.CLOUDSHALE);
                 output.accept(ModBlocks.POINTED_CLOUDSHALE);

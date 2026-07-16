@@ -4,6 +4,7 @@
     "skyislands:zephyrum_block",
     "skyislands:stone_zephyrum_ore",
     "skyislands:deepslate_zephyrum_ore",
-    "skyislands:cloudshale_zephyrum_ore"
+    "skyislands:cloudshale_zephyrum_ore",
+    "#skyislands:proto_speleothems"
   ]
 }

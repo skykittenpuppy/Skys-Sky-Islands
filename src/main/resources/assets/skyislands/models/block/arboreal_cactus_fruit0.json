@@ -5,7 +5,7 @@
 	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "skyislands:block/arboreal_cactus_fruit",
-		"particle": "skyislands:block/arboreal_cactus_fruit"
+		"particle": "skyislands:block/particle/arboreal_cactus_fruit0"
 	},
 	"elements": [
 		{

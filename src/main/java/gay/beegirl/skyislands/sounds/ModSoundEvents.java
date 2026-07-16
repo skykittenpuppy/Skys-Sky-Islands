@@ -21,29 +21,16 @@ public class ModSoundEvents {
 	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_GRASS_STEP		= SOUND_EVENTS.register("block.cloudshale_grass.step",
 			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_grass.step")));
 
-	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_GRASS_BREAK	= SOUND_EVENTS.register("block.cloudshale_snow_grass.break",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow_grass.break")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_GRASS_FALL	= SOUND_EVENTS.register("block.cloudshale_snow_grass.fall",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow_grass.fall")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_GRASS_HIT	= SOUND_EVENTS.register("block.cloudshale_snow_grass.hit",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow_grass.hit")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_GRASS_PLACE	= SOUND_EVENTS.register("block.cloudshale_snow_grass.place",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow_grass.place")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_GRASS_STEP	= SOUND_EVENTS.register("block.cloudshale_snow_grass.step",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow_grass.step")));
-
-	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_BREAK		= SOUND_EVENTS.register("block.pointed_cloudshale.break",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.break")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_FALL		= SOUND_EVENTS.register("block.pointed_cloudshale.fall",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.fall")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_HIT		= SOUND_EVENTS.register("block.pointed_cloudshale.hit",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.hit")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_PLACE		= SOUND_EVENTS.register("block.pointed_cloudshale.place",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.place")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_STEP		= SOUND_EVENTS.register("block.pointed_cloudshale.step",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.step")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_LAND		= SOUND_EVENTS.register("block.pointed_cloudshale.land",
-			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.land")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_BREAK	= SOUND_EVENTS.register("block.cloudshale_snow.break",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow.break")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_FALL	= SOUND_EVENTS.register("block.cloudshale_snow.fall",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow.fall")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_HIT	= SOUND_EVENTS.register("block.cloudshale_snow.hit",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow.hit")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_PLACE	= SOUND_EVENTS.register("block.cloudshale_snow.place",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow.place")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_SNOW_STEP	= SOUND_EVENTS.register("block.cloudshale_snow.step",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_snow.step")));
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_BREAK				= SOUND_EVENTS.register("block.cloudshale.break",
 			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale.break")));
@@ -66,6 +53,19 @@ public class ModSoundEvents {
 			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_bricks.place")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> CLOUDSHALE_BRICKS_STEP		= SOUND_EVENTS.register("block.cloudshale_bricks.step",
 			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.cloudshale_bricks.step")));
+
+	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_BREAK		= SOUND_EVENTS.register("block.pointed_cloudshale.break",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.break")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_FALL		= SOUND_EVENTS.register("block.pointed_cloudshale.fall",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.fall")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_HIT		= SOUND_EVENTS.register("block.pointed_cloudshale.hit",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.hit")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_PLACE		= SOUND_EVENTS.register("block.pointed_cloudshale.place",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.place")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_STEP		= SOUND_EVENTS.register("block.pointed_cloudshale.step",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.step")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> POINTED_CLOUDSHALE_LAND		= SOUND_EVENTS.register("block.pointed_cloudshale.land",
+			() -> SoundEvent.createVariableRangeEvent(SkysSkyIslands.createId("block.pointed_cloudshale.land")));
 
 	public static void registerSoundEvents(IEventBus modEventBus) {
 		SkysSkyIslands.LOGGER.info("Registering Sound Events for " + SkysSkyIslands.MOD_ID);

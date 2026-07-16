@@ -45,15 +45,15 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     @WrapOperation(method = "setupRotations(Lnet/minecraft/client/player/AbstractClientPlayer;Lcom/mojang/blaze3d/vertex/PoseStack;FFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;setupRotations(Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFFF)V", ordinal = 2))
     private void islands$setupRotations(PlayerRenderer instance, LivingEntity entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale, Operation<Void> original) {
         if (entity instanceof AbstractClientPlayer player) {
-            if (player.getData(ModDataAttachments.IS_DIVING)) {
+            // TODO: Stuff like this should interpolate between states
+            if (player.getData(ModDataAttachments.IS_FREEFALLING)) {
                 original.call(instance, player, poseStack, bob, yBodyRot, partialTick, scale);
                 float f2 = (float)((LivingEntityAccess)entity).islands$getFreeFallTicks() + partialTick;
                 float f3 = Mth.clamp(f2 * f2 / 100.0F, 0.0F, 1.0F);
                 float f4 = Mth.clamp(f2 * f2 / 100.0F, 0.0F, 1.0F);
-                float f5 = Mth.clamp(f2 * f2 / 25.0F, 0.0F, 0.25F);
                 if (!player.isAutoSpinAttack()) {
-                    poseStack.mulPose(Axis.XP.rotationDegrees(f3 * -180.0F));
-                    poseStack.translate(0F, -f4, f5); // TODO: Move player up a tad while free falling
+                    poseStack.mulPose(Axis.XP.rotationDegrees(f3 * -90.0F));
+                    poseStack.translate(0F, -f4, 0F); // TODO: Move player up a tad while free falling
                 }
 
                 Vec3 vec3 = player.getViewVector(partialTick);
@@ -65,14 +65,15 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
                     double d3 = vec31.x * vec3.z - vec31.z * vec3.x;
                     poseStack.mulPose(Axis.YP.rotation((float)(Math.signum(d3) * Math.acos(d2))));
                 }
-            } else if (player.getData(ModDataAttachments.IS_FREEFALLING)) {
+            } else if (player.getData(ModDataAttachments.IS_DIVING)) {
                 original.call(instance, player, poseStack, bob, yBodyRot, partialTick, scale);
-                float f2 = (float)((LivingEntityAccess)entity).islands$getFreeFallTicks() + partialTick;
+                float f2 = (float)((LivingEntityAccess)entity).islands$getDiveTicks() + partialTick;
                 float f3 = Mth.clamp(f2 * f2 / 100.0F, 0.0F, 1.0F);
                 float f4 = Mth.clamp(f2 * f2 / 100.0F, 0.0F, 1.0F);
+                float f5 = Mth.clamp(f2 * f2 / 25.0F, 0.0F, 0.25F);
                 if (!player.isAutoSpinAttack()) {
-                    poseStack.mulPose(Axis.XP.rotationDegrees(f3 * -90.0F));
-                    poseStack.translate(0F, -f4, 0F);
+                    poseStack.mulPose(Axis.XP.rotationDegrees(f3 * -180.0F));
+                    poseStack.translate(0F, -f4, f5);
                 }
 
                 Vec3 vec3 = player.getViewVector(partialTick);

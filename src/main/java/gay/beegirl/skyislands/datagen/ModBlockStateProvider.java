@@ -33,7 +33,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get());
 
         tintedGrassLikeBlock(ModBlocks.CLOUDSHALE_GRASS.get(), ModBlocks.CLOUDSHALE.get());
-        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_SNOW_GRASS.get(), ModBlocks.CLOUDSHALE.get());
+        untintedGrassLikeBlock(ModBlocks.CLOUDSHALE_SNOW.get(), ModBlocks.CLOUDSHALE.get());
         naturalRotatedPillarBlock((RotatedPillarBlock) ModBlocks.CLOUDSHALE.get());
         uncheckedBlockItem(ModBlocks.CLOUDSHALE.get());
         createPointedBlock(ModBlocks.POINTED_CLOUDSHALE.get());
@@ -127,7 +127,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .element()
                     .face(Direction.UP)
                     .cullface(Direction.UP)
-                    .tintindex(0)
+                    .tintindex(1)
                     .texture("#top")
                     .end()
                     .face(Direction.DOWN)
@@ -146,7 +146,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                             (direction, faceBuilder) ->
                                     faceBuilder
                                             .cullface(direction)
-                                            .tintindex(0)
+                                            .tintindex(1)
                                             .texture("#overlay"),
                             Set.of(Direction.UP, Direction.DOWN))
                     .end()

@@ -6,6 +6,7 @@ import gay.beegirl.skyislands.world.level.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -156,10 +157,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.RAW_ZEPHYRUM_BLOCK.get(), ModBlocks.ZEPHYRUM_BLOCK.get())
-                .add(ModBlocks.STONE_ZEPHYRUM_ORE.get(), ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get());
+                .add(ModBlocks.STONE_ZEPHYRUM_ORE.get(), ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get())
+                .addTag(ModBlockTags.PROTO_SPELEOTHEMS);
         tag(BlockTags.SWORD_EFFICIENT)
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.ANIMALS_SPAWNABLE_ON)
                 .add(ModBlocks.CLOUDSHALE_GRASS.get());
+        tag(ModBlockTags.PROTO_SPELEOTHEMS)
+                .add(Blocks.POINTED_DRIPSTONE, ModBlocks.POINTED_CLOUDSHALE.get());
     }
 }

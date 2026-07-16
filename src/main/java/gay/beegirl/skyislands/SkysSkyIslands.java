@@ -45,7 +45,6 @@ public class SkysSkyIslands {
 		ModDataAttachments.registerDataAttachments(modEventBus);
 		ModDataComponents.registerDataComponents(modEventBus);
 		ModSoundEvents.registerSoundEvents(modEventBus);
-		ModSoundType.createSoundTypes();
 		ModBlocks.registerBlocks(modEventBus);
 		ModItems.registerItems(modEventBus);
 		ModCreativeModeTabs.registerCreativeModeTabs(modEventBus);
@@ -92,11 +91,15 @@ public class SkysSkyIslands {
 
 		@SubscribeEvent
 		public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
-			event.register((state, level, pos, tintIndex) ->
-							level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor(),
-					ModBlocks.CLOUDSHALE_GRASS.get());
-			event.register((state, level, pos, tintIndex) ->
-							level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor(),
+			event.register(
+					(state, level, pos, tintIndex) -> {
+						if (tintIndex != 0) {
+							return level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor();
+						} else {
+							return -1;
+						}
+					},
+					ModBlocks.CLOUDSHALE_GRASS.get(),
 					ModBlocks.WHITE_PETALS.get());
 		}
 		@SubscribeEvent

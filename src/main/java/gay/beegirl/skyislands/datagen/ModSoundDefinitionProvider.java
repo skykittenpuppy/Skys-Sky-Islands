@@ -66,115 +66,55 @@ public class ModSoundDefinitionProvider extends SoundDefinitionsProvider {
 				.subtitle("subtitles.block.generic.footsteps")
 		);
 		// Cloudshale Snow Grass
-		add(ModSoundEvents.CLOUDSHALE_SNOW_GRASS_BREAK, SoundDefinition.definition()
+		add(ModSoundEvents.CLOUDSHALE_SNOW_BREAK, SoundDefinition.definition()
 				.with(
-						sound("skyislands:block/cloudshale_snow_grass/break1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/break2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/break3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/break4", SoundDefinition.SoundType.SOUND)
+						sound("skyislands:block/cloudshale_snow/break1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/break2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/break3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/break4", SoundDefinition.SoundType.SOUND)
 				)
 				.subtitle("subtitles.block.generic.break")
 		);
-		add(ModSoundEvents.CLOUDSHALE_SNOW_GRASS_FALL, SoundDefinition.definition()
+		add(ModSoundEvents.CLOUDSHALE_SNOW_FALL, SoundDefinition.definition()
 				.with(
-						sound("skyislands:block/cloudshale_snow_grass/step1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step5", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step6", SoundDefinition.SoundType.SOUND)
+						sound("skyislands:block/cloudshale_snow/step1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step5", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step6", SoundDefinition.SoundType.SOUND)
 				)
 		);
-		add(ModSoundEvents.CLOUDSHALE_SNOW_GRASS_HIT, SoundDefinition.definition()
+		add(ModSoundEvents.CLOUDSHALE_SNOW_HIT, SoundDefinition.definition()
 				.with(
-						sound("skyislands:block/cloudshale_snow_grass/step1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step5", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step6", SoundDefinition.SoundType.SOUND)
+						sound("skyislands:block/cloudshale_snow/step1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step5", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step6", SoundDefinition.SoundType.SOUND)
 				)
 				.subtitle("subtitles.block.generic.hit")
 		);
-		add(ModSoundEvents.CLOUDSHALE_SNOW_GRASS_PLACE, SoundDefinition.definition()
+		add(ModSoundEvents.CLOUDSHALE_SNOW_PLACE, SoundDefinition.definition()
 				.with(
-						sound("skyislands:block/cloudshale_snow_grass/break1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/break2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/break3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/break4", SoundDefinition.SoundType.SOUND)
+						sound("skyislands:block/cloudshale_snow/break1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/break2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/break3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/break4", SoundDefinition.SoundType.SOUND)
 				)
 				.subtitle("subtitles.block.generic.place")
 		);
-		add(ModSoundEvents.CLOUDSHALE_SNOW_GRASS_STEP, SoundDefinition.definition()
+		add(ModSoundEvents.CLOUDSHALE_SNOW_STEP, SoundDefinition.definition()
 				.with(
-						sound("skyislands:block/cloudshale_snow_grass/step1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step5", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale_snow_grass/step6", SoundDefinition.SoundType.SOUND)
+						sound("skyislands:block/cloudshale_snow/step1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step5", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale_snow/step6", SoundDefinition.SoundType.SOUND)
 				)
 				.subtitle("subtitles.block.generic.footsteps")
-		);
-		// Pointed Cloudshale
-		add(ModSoundEvents.POINTED_CLOUDSHALE_BREAK, SoundDefinition.definition()
-				.with(
-						sound("skyislands:block/cloudshale/break1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/break2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/break3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/break4", SoundDefinition.SoundType.SOUND)
-				)
-				.subtitle("subtitles.block.generic.break")
-		);
-		add(ModSoundEvents.POINTED_CLOUDSHALE_FALL, SoundDefinition.definition()
-				.with(
-						sound("skyislands:block/cloudshale/step1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step5", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step6", SoundDefinition.SoundType.SOUND)
-				)
-		);
-		add(ModSoundEvents.POINTED_CLOUDSHALE_HIT, SoundDefinition.definition()
-				.with(
-						sound("skyislands:block/cloudshale/step1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step5", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step6", SoundDefinition.SoundType.SOUND)
-				)
-				.subtitle("subtitles.block.generic.hit")
-		);
-		add(ModSoundEvents.POINTED_CLOUDSHALE_PLACE, SoundDefinition.definition()
-				.with(
-						sound("skyislands:block/cloudshale/break1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/break2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/break3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/break4", SoundDefinition.SoundType.SOUND)
-				)
-				.subtitle("subtitles.block.generic.place")
-		);
-		add(ModSoundEvents.POINTED_CLOUDSHALE_STEP, SoundDefinition.definition()
-				.with(
-						sound("skyislands:block/cloudshale/step1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step5", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/cloudshale/step6", SoundDefinition.SoundType.SOUND)
-				)
-				.subtitle("subtitles.block.generic.footsteps")
-		);
-		add(ModSoundEvents.POINTED_CLOUDSHALE_LAND, SoundDefinition.definition()
-				.with(
-						sound("skyislands:block/pointed_cloudshale/land1", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/pointed_cloudshale/land2", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/pointed_cloudshale/land3", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/pointed_cloudshale/land4", SoundDefinition.SoundType.SOUND),
-						sound("skyislands:block/pointed_cloudshale/land5", SoundDefinition.SoundType.SOUND)
-				)
 		);
 		// Cloudshale
 		add(ModSoundEvents.CLOUDSHALE_BREAK, SoundDefinition.definition()
@@ -279,6 +219,66 @@ public class ModSoundDefinitionProvider extends SoundDefinitionsProvider {
 						sound("skyislands:block/cloudshale_bricks/step6", SoundDefinition.SoundType.SOUND)
 				)
 				.subtitle("subtitles.block.generic.footsteps")
+		);
+		// Pointed Cloudshale
+		add(ModSoundEvents.POINTED_CLOUDSHALE_BREAK, SoundDefinition.definition()
+				.with(
+						sound("skyislands:block/cloudshale/break1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/break2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/break3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/break4", SoundDefinition.SoundType.SOUND)
+				)
+				.subtitle("subtitles.block.generic.break")
+		);
+		add(ModSoundEvents.POINTED_CLOUDSHALE_FALL, SoundDefinition.definition()
+				.with(
+						sound("skyislands:block/cloudshale/step1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step5", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step6", SoundDefinition.SoundType.SOUND)
+				)
+		);
+		add(ModSoundEvents.POINTED_CLOUDSHALE_HIT, SoundDefinition.definition()
+				.with(
+						sound("skyislands:block/cloudshale/step1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step5", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step6", SoundDefinition.SoundType.SOUND)
+				)
+				.subtitle("subtitles.block.generic.hit")
+		);
+		add(ModSoundEvents.POINTED_CLOUDSHALE_PLACE, SoundDefinition.definition()
+				.with(
+						sound("skyislands:block/cloudshale/break1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/break2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/break3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/break4", SoundDefinition.SoundType.SOUND)
+				)
+				.subtitle("subtitles.block.generic.place")
+		);
+		add(ModSoundEvents.POINTED_CLOUDSHALE_STEP, SoundDefinition.definition()
+				.with(
+						sound("skyislands:block/cloudshale/step1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step5", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/cloudshale/step6", SoundDefinition.SoundType.SOUND)
+				)
+				.subtitle("subtitles.block.generic.footsteps")
+		);
+		add(ModSoundEvents.POINTED_CLOUDSHALE_LAND, SoundDefinition.definition()
+				.with(
+						sound("skyislands:block/pointed_cloudshale/land1", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/pointed_cloudshale/land2", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/pointed_cloudshale/land3", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/pointed_cloudshale/land4", SoundDefinition.SoundType.SOUND),
+						sound("skyislands:block/pointed_cloudshale/land5", SoundDefinition.SoundType.SOUND)
+				)
 		);
 	}
 }
