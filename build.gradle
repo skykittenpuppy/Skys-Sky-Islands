@@ -5,12 +5,9 @@ plugins {
     id 'idea'
 }
 
-tasks.named('wrapper', Wrapper).configure {
-    distributionType = Wrapper.DistributionType.BIN
-}
-
-version = mod_version
-group = mod_group_id
+base.archivesName = "${mod_id}"
+version = "${mod_version}+${minecraft_version}"
+group = mod_group
 
 sourceSets.main.resources {
     srcDir('src/generated/resources')
@@ -20,29 +17,57 @@ sourceSets.main.resources {
 }
 
 repositories {
-    mavenCentral()
     maven {
-        name = "RedlanceMinecraft"
-        url = "https://repo.redlance.org/public"
+        name = "NeoForged"
+        url = "https://maven.neoforged.net/releases"
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+    //mavenCentral()
+    //maven {
+    //    name = "RedlanceMinecraft"
+    //    url = "https://repo.redlance.org/public"
+    //}
 }
 
 dependencies {
-    implementation "com.zigythebird.playeranim:PlayerAnimationLibNeo:${pal_version}"
+    // INFO: Unable to pull from Redlance Gradle due to strange GSON error
+    //implementation "com.zigythebird.playeranim:PlayerAnimationLibNeo:${pal_version}"
+    implementation "maven.modrinth:ha1mEyJS:ReDTdA0C"
 }
 
-base {
-    archivesName = mod_id
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+idea.module.downloadSources = true
+idea.module.downloadJavadoc = true
 
 neoForge {
     version = project.neo_version
 
     parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
+        mappingsVersion = project.parchment_version
+        minecraftVersion = project.minecraft_version
     }
 
     accessTransformers {
@@ -86,9 +111,6 @@ neoForge {
     }
 }
 
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
@@ -121,16 +143,5 @@ publishing {
         maven {
             url "file://${project.projectDir}/repo"
         }
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
-idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
     }
 }
