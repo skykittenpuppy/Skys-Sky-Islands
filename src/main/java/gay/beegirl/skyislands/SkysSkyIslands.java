@@ -1,5 +1,9 @@
 package gay.beegirl.skyislands;
 
+import com.zigythebird.playeranim.animation.PlayerAnimationController;
+import com.zigythebird.playeranim.api.PlayerAnimationFactory;
+import com.zigythebird.playeranimcore.enums.PlayState;
+import gay.beegirl.skyislands.client.model.ModAnimationLayers;
 import gay.beegirl.skyislands.client.particle.SakuraParticle;
 import gay.beegirl.skyislands.client.renderer.entity.layers.GliderLayer;
 import gay.beegirl.skyislands.client.model.geom.ModModelLayers;
@@ -72,6 +76,10 @@ public class SkysSkyIslands {
 				HangGliderDesign gliderDesign = stack.get(ModDataComponents.SEWING_PATTERN);
 				return gliderDesign != null ? gliderDesign.assetId.hashCode() : Float.NEGATIVE_INFINITY;
 			}));
+			//event.enqueueWork(() -> PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(ModAnimationLayers.HANG_GLIDE, 2000,
+			//		player -> new PlayerAnimationController(player,
+			//				(controller, state, animSetter) -> PlayState.STOP
+			//		)));
 		}
 
 		@SubscribeEvent
