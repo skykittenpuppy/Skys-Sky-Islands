@@ -12,7 +12,7 @@ public class ModBlockTags {
 	public static final TagKey<Block> SAKURA_LOGS = create("sakura_logs");
 	public static final TagKey<Block> FRIGID_LOGS = create("frigid_logs");
 	public static final TagKey<Block> ARBOREAL_CACTUSES = create("arboreal_cactuses");
-	public static final TagKey<Block> PROTO_SPELEOTHEMS = create("proto_speleothems");
+	public static final TagKey<Block> SPELEOTHEMS = create("proto_speleothems");
 
 	public static TagKey<Block> create(String name) {
 		return TagKey.create(Registries.BLOCK, SkysSkyIslands.createId(name));

@@ -158,12 +158,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.RAW_ZEPHYRUM_BLOCK.get(), ModBlocks.ZEPHYRUM_BLOCK.get())
                 .add(ModBlocks.STONE_ZEPHYRUM_ORE.get(), ModBlocks.DEEPSLATE_ZEPHYRUM_ORE.get(), ModBlocks.CLOUDSHALE_ZEPHYRUM_ORE.get())
-                .addTag(ModBlockTags.PROTO_SPELEOTHEMS);
+                .addTag(ModBlockTags.SPELEOTHEMS);
         tag(BlockTags.SWORD_EFFICIENT)
                 .add(ModBlocks.WHITE_PETALS.get());
         tag(BlockTags.ANIMALS_SPAWNABLE_ON)
                 .add(ModBlocks.CLOUDSHALE_GRASS.get());
-        tag(ModBlockTags.PROTO_SPELEOTHEMS)
+        tag(ModBlockTags.SPELEOTHEMS)
                 .add(Blocks.POINTED_DRIPSTONE, ModBlocks.POINTED_CLOUDSHALE.get());
     }
 }

@@ -4,6 +4,18 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.zigythebird.playeranim.animation.PlayerAnimationController;
+import com.zigythebird.playeranim.animation.PlayerRawAnimationBuilder;
+import com.zigythebird.playeranim.api.PlayerAnimationAccess;
+import com.zigythebird.playeranimcore.animation.Animation;
+import com.zigythebird.playeranimcore.animation.ExtraAnimationData;
+import com.zigythebird.playeranimcore.animation.layered.PlayerAnimationFrame;
+import com.zigythebird.playeranimcore.animation.layered.modifier.AbstractFadeModifier;
+import com.zigythebird.playeranimcore.animation.layered.modifier.AbstractModifier;
+import com.zigythebird.playeranimcore.easing.EasingType;
+import com.zigythebird.playeranimcore.enums.FadeType;
+import gay.beegirl.skyislands.SkysSkyIslands;
+import gay.beegirl.skyislands.client.model.ModAnimationLayers;
 import gay.beegirl.skyislands.neoforge.ModDataAttachments;
 import gay.beegirl.skyislands.util.LivingEntityAccess;
 import net.minecraft.client.model.PlayerModel;
@@ -16,9 +28,12 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.Vector;
 
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
@@ -45,6 +60,10 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     @WrapOperation(method = "setupRotations(Lnet/minecraft/client/player/AbstractClientPlayer;Lcom/mojang/blaze3d/vertex/PoseStack;FFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;setupRotations(Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFFF)V", ordinal = 2))
     private void islands$setupRotations(PlayerRenderer instance, LivingEntity entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale, Operation<Void> original) {
         if (entity instanceof AbstractClientPlayer player) {
+            PoseStack.Pose last = poseStack.last();
+			Vector3f lastTranslation = last.pose().getTranslation(new Vector3f());
+            Vector3f newTranslation = lastTranslation;
+
             // TODO: Stuff like this should interpolate between states
             if (player.getData(ModDataAttachments.IS_FREEFALLING)) {
                 original.call(instance, player, poseStack, bob, yBodyRot, partialTick, scale);
@@ -53,7 +72,8 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
                 float f4 = Mth.clamp(f2 * f2 / 100.0F, 0.0F, 1.0F);
                 if (!player.isAutoSpinAttack()) {
                     poseStack.mulPose(Axis.XP.rotationDegrees(f3 * -90.0F));
-                    poseStack.translate(0F, -f4, 0F); // TODO: Move player up a tad while free falling
+                    newTranslation.add(0f, -f4, 0f);
+                    //poseStack.translate(0F, -f4, 0F); // TODO: Move player up a tad while free falling
                 }
 
                 Vec3 vec3 = player.getViewVector(partialTick);
@@ -73,7 +93,8 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
                 float f5 = Mth.clamp(f2 * f2 / 25.0F, 0.0F, 0.25F);
                 if (!player.isAutoSpinAttack()) {
                     poseStack.mulPose(Axis.XP.rotationDegrees(f3 * -180.0F));
-                    poseStack.translate(0F, -f4, f5);
+                    newTranslation.add(0f, -f4, f5);
+                    //poseStack.translate(0F, -f4, f5);
                 }
 
                 Vec3 vec3 = player.getViewVector(partialTick);
@@ -87,6 +108,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
                 }
             }
             else original.call(instance, entity, poseStack, bob, yBodyRot, partialTick, scale);
+            last.pose().setTranslation(lastTranslation.add(newTranslation).mul(0.5f));
         } else original.call(instance, entity, poseStack, bob, yBodyRot, partialTick, scale);
     }
 }

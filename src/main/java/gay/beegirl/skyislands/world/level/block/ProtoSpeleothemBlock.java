@@ -1,7 +1,6 @@
 package gay.beegirl.skyislands.world.level.block;
 
 import com.google.common.annotations.VisibleForTesting;
-import gay.beegirl.skyislands.sounds.ModSoundEvents;
 import gay.beegirl.skyislands.tags.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -166,7 +165,7 @@ public abstract class ProtoSpeleothemBlock extends Block implements SimpleWaterl
 	}
 
 	private static boolean isSpeleothemWithDirection(BlockState blockState, Direction tipDirection) {
-		return blockState.is(ModBlockTags.PROTO_SPELEOTHEMS) && blockState.getValue(TIP_DIRECTION) == tipDirection;
+		return blockState.is(ModBlockTags.SPELEOTHEMS) && blockState.getValue(TIP_DIRECTION) == tipDirection;
 	}
 
 	@Override
@@ -220,7 +219,7 @@ public abstract class ProtoSpeleothemBlock extends Block implements SimpleWaterl
 	}
 
 	private static boolean isTip(BlockState state, boolean includeMergedTip) {
-		if (!state.is(ModBlockTags.PROTO_SPELEOTHEMS)) {
+		if (!state.is(ModBlockTags.SPELEOTHEMS)) {
 			return false;
 		} else {
 			DripstoneThickness thickness = state.getValue(THICKNESS);
@@ -231,10 +230,13 @@ public abstract class ProtoSpeleothemBlock extends Block implements SimpleWaterl
 	@Override
 	public void onBrokenAfterFall(@NotNull Level level, @NotNull BlockPos pos, FallingBlockEntity entity) {
 		if (!entity.isSilent()) {
+			// INFO: Why the fuck would it ever use a levelEvent there's no good reason man.
+			//level.levelEvent(this.getStalactiteLandingSound(), pos, 0);
 			level.playSound(entity, pos, getStalactiteLandingSound(), SoundSource.BLOCKS, 2.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
 		}
 	}
 
+	//protected abstract int getStalactiteLandingSound();
 	protected abstract SoundEvent getStalactiteLandingSound();
 
 	@Override
