@@ -46,6 +46,22 @@ public class SkysSkyIslands {
 	public static final String MOD_ID = "skyislands";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
+	// TODO/Notes:
+	// Deepslate layer is similar to TOTK's Depths
+	// Sculk is similar to TOTK's Gloom, in design
+	// Zephyrum Construct/Golem enemies
+	// Add Broken Hearts		(-1 maxHP temporarily)
+	// Add Heart Containers		(+1 maxHP, up to a configurable limit (20 hearts))
+	// Rework Absorption		(+X temporaryHP, up to a configurable limit (+5 hearts))
+	// Add Stamina				(Expended while gliding, etc.)
+	// Add Stamina Containers	(+1/5th maxStam, up to a configurable limit (3 rings))
+	// Add Bonus Stamina		(+X temporaryStam, up to a configurable limit (+1 ring))
+	/// CONTRAPTION FORK:
+	/// Add Battery				(Expended while using devices)
+	/// Add Energy Wells		(+1/3 maxBattery, up to a configurable limit (? batteries))
+	/// Add Bonus Energy		(+X temporaryBattery, up to a configurable limit (+1 battery))
+	// Improve Gliding/Freefalling/Diving animations
+
 	public SkysSkyIslands(IEventBus modEventBus, ModContainer modContainer) {
 		ModDataAttachments.registerDataAttachments(modEventBus);
 		ModDataComponents.registerDataComponents(modEventBus);
